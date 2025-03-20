@@ -1,0 +1,119 @@
+Table Acceso {
+  ID int [pk]
+  FECHAENTRADA datetime
+  TRABAJADOR_ID int
+}
+
+Table Aviso {
+  ID int [pk]
+  EQUIPO_NUMSERIE varchar(255)
+  USUARIO_EMAIL varchar(255)
+}
+
+Table Comentario {
+  ID int [pk]
+  COMENTARIO varchar(255)
+  FECHA datetime
+  USUARIO_EMAIL varchar(255) [ref: > Usuario.EMAIL]
+}
+
+Table Equipo {
+  NUMSERIE varchar(255) [pk, unique]
+  ACTIVO tinyint(1) [default: 0]
+  ALIAS varchar(255) [unique]
+  PERIODOUSO double
+  REPARACION tinyint(1) [default: 0]
+  TIPO varchar(255)
+}
+
+Table Incidencia {
+  ID int [pk, increment]
+  FECHAINCIDENCIA datetime
+  TIEMPOINCIDENCIA double
+  TIPO_INCIDENCIA_ID int [ref: > TipoIncidencia.ID]
+  TRABAJADOR_ID int [ref: > Trabajador.ID]
+}
+
+Table ParametroEficacia {
+  ID int [pk, increment]
+  FECHAPARAMETRO datetime
+  VALOR varchar(255)
+  TIPO_PARAMETRO_ID int [ref: > TipoParametro.ID]
+}
+
+Table Permiso {
+  ID int [pk]
+  DESDE datetime
+  HASTA datetime
+  NUMUSOS int
+  PERIODOUSO double
+  EQUIPO_NUMSERIE varchar(255) [ref: > Equipo.NUMSERIE]
+  TRABAJADOR_ID int [ref: > Trabajador.ID]
+}
+
+Table SEQUENCE {
+  SEQ_NAME varchar(50) [pk]
+  SEQ_COUNT decimal(38, 0)
+}
+
+Table TipoIncidencia {
+  ID int [pk, increment]
+  CODIGO varchar(255)
+  DESCRIPCION varchar(255)
+  ELIMINADO tinyint(1) [default: 0]
+  EQUIPO_NUMSERIE varchar(255) [ref: > Equipo.NUMSERIE]
+}
+
+Table TipoParametro {
+  ID int [pk, increment]
+  CODIGO varchar(255)
+  DESCRIPCION varchar(255)
+  ELIMINADO tinyint(1) [default: 0]
+  MEDIDA varchar(255)
+  EQUIPO_NUMSERIE varchar(255) [ref: > Equipo.NUMSERIE]
+}
+
+Table Trabajador {
+  ID int [pk]
+  DNI varchar(255)
+  ACTIVO tinyint(1) [default: 0]
+  APELLIDOS varchar(255)
+  BORRADO tinyint(1) [default: 0]
+  NOMBRE varchar(255)
+  URLIMAGEN varchar(255)
+  USUARIO_NOMBRE varchar(255) [ref: > Usuario.EMAIL]
+}
+
+Table Uso {
+  ID int [pk, increment]
+  ESTADO tinyint(1) [default: 0]
+  FECHAUSO datetime
+  HORAFIN varchar(255)
+  HORAINICIO varchar(255)
+  EQUIPO_NUMSERIE varchar(255) [ref: > Equipo.NUMSERIE]
+  TRABAJADOR_ID int [ref: > Trabajador.ID]
+}
+
+Table Usuario {
+  EMAIL varchar(255) [pk]
+  ADMIN tinyint(1) [default: 0]
+  NOMBRE varchar(255)
+  PASSWORD varchar(255)
+  ROL varchar(255)
+  TOKEN varchar(255)
+}
+
+Table ValoresProduccion {
+  ID int [pk, increment]
+  FECHA datetime
+  valueA double [default: 0]
+  valueB double [default: 0]
+  valueC double [default: 0]
+  valueD double [default: 0]
+  valueE double [default: 0]
+  valueF double [default: 0]
+  EQUIPO_NUMSERIE varchar(255) [ref: > Equipo.NUMSERIE]
+}
+
+
+Ref: "Incidencia"."ID" < "Incidencia"."TRABAJADOR_ID"
