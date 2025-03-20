@@ -15,11 +15,12 @@ composer require laravel/breeze --dev
 
 php artisan breeze:install api
 
-composer require symfony/psr-http-message-bridge
+**PHP-CRUD-API:**
+- composer require symfony/psr-http-message-bridge
 
-composer require laminas/laminas-diactoros
+- composer require laminas/laminas-diactoros
 
-composer require mevdschee/php-crud-api
+- composer require mevdschee/php-crud-api
 
 
 
