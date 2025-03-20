@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('Aviso', function (Blueprint $table) {
             $table->unsignedInteger('ID')->primary();
-            $table->string('EQUIPO_NUMSERIE',255)->nullable()->unique();
-            $table->string('USUARIO_EMAIL',255)->nullable()->unique();
+            $table->string('EQUIPO_NUMSERIE',255)->nullable();
+            $table->string('USUARIO_EMAIL',255)->nullable();
+
+            $table->unique(['EQUIPO_NUMSERIE','USUARIO_EMAIL'], 'UNQ_Aviso_0');
         });
     }
 

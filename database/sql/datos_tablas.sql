@@ -21,6 +21,12 @@ INSERT INTO `Aviso` (`ID`, `EQUIPO_NUMSERIE`, `USUARIO_EMAIL`) VALUES
 (36,	'asd1324',	'mario@mail.com'),
 (12,	'1210',	'prevencion@gmail.com');
 
+INSERT INTO `Comentario` (`ID`, `COMENTARIO`, `FECHA`, `USUARIO_EMAIL`) VALUES
+(1,	'prueba comentario produccion',	'2017-03-21 11:30:00',	'produccion@gmail.com'),
+(2,	'prueba comentario',	'2017-03-23 16:29:00',	'isa@gmail.com'),
+(3,	'segundo comentario',	'2017-03-23 16:29:00',	'produccion@gmail.com');
+
+
 INSERT INTO `Equipo` (`NUMSERIE`, `ACTIVO`, `ALIAS`, `PERIODOUSO`, `REPARACION`, `TIPO`) VALUES
 ('1210',	1,	'COSECHADORA R14',	10,	0,	'CONTROL_EQUIPOS_MOTOR'),
 ('1220',	1,	'DESPALETIZADOR',	20,	0,	'CONTROL_EQUIPOS'),

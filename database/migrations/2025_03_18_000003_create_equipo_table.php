@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('Equipo', function (Blueprint $table) {
-            $table->string('NUMSERIO',255)->primary()->unique();
+            $table->string('NUMSERIE',255)->primary()->unique();
             $table->unsignedTinyInteger('ACTIVO')->default(0);
             $table->string('ALIAS',255)->unique();
             $table->double('PERIODOUSO')->nullable();

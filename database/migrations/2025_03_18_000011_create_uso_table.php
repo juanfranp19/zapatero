@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('Uso', function (Blueprint $table) {
-            $table->id();
+            $table->increments('ID');
             $table->unsignedTinyInteger('ESTADO')->default(0);
             $table->datetime('FECHAUSO');
             $table->string('HORAFIN',255)->nullable();

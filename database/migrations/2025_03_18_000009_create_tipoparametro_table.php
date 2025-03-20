@@ -12,12 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('TipoParametro', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedTinyInteger('CODIGO')->unique();
-            $table->string('DESCRIPTION',255);
+            $table->increments('ID');
+            $table->unsignedTinyInteger('CODIGO');
+            $table->string('DESCRIPCION',255);
             $table->unsignedTinyInteger('ELIMINADO')->default(0);
             $table->string('MEDIDA',255);
-            $table->string('EQUIPO_NUMSERIE',255)->nullable()->unique();
+            $table->string('EQUIPO_NUMSERIE',255)->nullable();
+
+            $table->unique(['CODIGO','EQUIPO_NUMSERIE'], 'UNQ_TipoParametro_0');
         });
     }
 

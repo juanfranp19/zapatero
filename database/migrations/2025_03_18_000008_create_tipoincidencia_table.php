@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('TipoIncidencia', function (Blueprint $table) {
-            $table->id();
-            $table->string('CODIGO',255)->unique();
-            $table->string('DESCRIPTION',255);
+            $table->increments('ID');
+            $table->string('CODIGO',255);
+            $table->string('DESCRIPCION',255);
             $table->unsignedTinyInteger('ELIMINADO')->default(0);
-            $table->string('EQUIPO_NUMSERIE',255)->nullable()->unique();
+            $table->string('EQUIPO_NUMSERIE',255)->nullable();
+
+            $table->unique(['CODIGO','EQUIPO_NUMSERIE'], 'UNQ_TipoIncidencia_0');
         });
     }
 
