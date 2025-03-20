@@ -7,6 +7,22 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Instalations
+
+composer update
+
+composer require laravel/breeze --dev
+
+php artisan breeze:install api
+
+composer require symfony/psr-http-message-bridge
+
+composer require laminas/laminas-diactoros
+
+composer require mevdschee/php-crud-api
+
+
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
