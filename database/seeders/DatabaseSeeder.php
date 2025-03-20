@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
+    // mergeprueba
     public function run()
     {
         $file = database_path('sql/datos_tablas.sql');
