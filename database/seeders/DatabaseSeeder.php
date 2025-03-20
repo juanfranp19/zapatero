@@ -13,8 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
-        $file = database_path('sql/zapatero_bbdd.sql');
+        $file = database_path('sql/datos_tablas.sql');
 
         if (!File::exists($file)) {
             echo "no hay archivo SQL\n";
@@ -23,20 +22,7 @@ class DatabaseSeeder extends Seeder
 
         $sql = File::get($file);
 
-        $sql = preg_replace('/DELIMITER\s+\S+/', '', $sql);
-
-        // Divide el archivo SQL en múltiples consultas
-        $queries = preg_split('/;\s*[\r\n]+/', $sql);
-
-        foreach ($queries as $query) {
-            if (trim($query)) {
-                try {
-                    DB::unprepared($query);
-                } catch (\Exception $e) {
-                    echo "Error ejecutando la consulta: " . $e->getMessage() . "\n";
-                }
-            }
-        }
+        DB::unprepared($sql);
 
         $this->command->info("archivo SQL ejecutado con éxito");
     }
