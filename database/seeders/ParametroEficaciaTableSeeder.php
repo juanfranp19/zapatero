@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -14,7 +13,7 @@ class ParametroEficaciaTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $file = database_path('sql/insert/paranetroeficacia_insert.sql');
+        $file = database_path('sql/insert/parametroeficacia_insert.sql');
 
         if (!File::exists($file)) {
             echo "no hay archivo SQL\n";
@@ -25,6 +24,6 @@ class ParametroEficaciaTableSeeder extends Seeder
 
         DB::unprepared($sql);
 
-        $this->command->info("archivo paranetroeficacia_insert ejecutado");
+        $this->command->info("archivo parametroeficacia_insert ejecutado");
     }
 }
