@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,17 +11,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $file = database_path('sql/datos_tablas.sql');
-
-        if (!File::exists($file)) {
-            echo "no hay archivo SQL\n";
-            return;
-        }
-
-        $sql = File::get($file);
-
-        DB::unprepared($sql);
-
-        $this->command->info("archivo SQL ejecutado con éxito");
+        $this->call(EquipoTableSeeder::class);
+        $this->call(UsuarioTableSeeder::class);
+        $this->call(ValoresProducionTableSeeder::class);
+        $this->call(TrabajadorTableSeeder::class);
+        $this->call(PermisoTableSeeder::class);
+        $this->call(UsoTableSeeder::class);
+        $this->call(TipoIncidenciaTableSeeder::class);
+        $this->call(IncidenciaTableSeeder::class);
+        $this->call(TipoParametroTableSeeder::class);
+        $this->call(ParametroEficaciaTableSeeder::class);
+        $this->call(AccesoTableSeeder::class);
+        $this->call(AvisoTableSeeder::class);
+        $this->call(ComentarioTableSeeder::class);
+        $this->call(SEQUENCETableSeeder::class);
     }
 }
