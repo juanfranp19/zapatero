@@ -13,17 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $file = database_path('sql/datos_tablas.sql');
 
-        if (!File::exists($file)) {
-            echo "no hay archivo SQL\n";
-            return;
-        }
-
-        $sql = File::get($file);
-
-        DB::unprepared($sql);
-
-        $this->command->info("archivo SQL ejecutado con éxito");
     }
 }

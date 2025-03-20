@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ParametroEficacia', function (Blueprint $table) {
-            $table->id();
+            $table->increments('ID');
             $table->datetime('FECHAPARAMETRO')->nullable();
             $table->string('VALOR',255)->nullable();
             $table->unsignedInteger('TIPO_PARAMETRO_ID')->nullable();
