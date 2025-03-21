@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Acceso extends Model
 {
+    protected $table = 'Acceso';
+
+    public $timestamps = false;
+
     protected $fillable = [
-        'ID',
         'FECHAENTRADA',
         'TRABAJADOR_ID'
     ];

@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('Acceso', function (Blueprint $table) {
-            $table->unsignedInteger('ID')->primary();
+            $table->increments('ID');
+            //$table->unsignedInteger('ID')->primary();
+
             $table->datetime('FECHAENTRADA');
             $table->unsignedInteger('TRABAJADOR_ID');
         });
