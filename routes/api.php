@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AccesoController;
 use App\Http\Controllers\API\ComentarioController;
+use App\Http\Controllers\API\IncidenciaController;
 use App\Http\Controllers\API\SequenceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,10 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('acceso', AccesoController::class);
     Route::apiResource('comentario', ComentarioController::class);
     Route::apiResource('sequence', SequenceController::class);
+    Route::apiResource('incidencia', IncidenciaController::class);
+
+    Route::get('incidencia/{incidencia}', [IncidenciaController::class, 'show']);
+
 });
 
 Route::any('/{any}', function (ServerRequestInterface $request) {

@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Incidencia extends Model
 {
+    protected $table = 'Incidencia';
+
+    public $timestamps = false;
+
     protected $fillable = [
-        'ID',
         'FECHAINCIDENCIA',
         'TIEMPOINCIDENCIA',
         'TIPO_INCIDENCIA_ID',
