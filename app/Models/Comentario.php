@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comentario extends Model
 {
+    protected $table = 'Comentario';
+
+    public $timestamps = false;
+
     protected $fillable = [
-        'ID',
         'COMENTARIO',
         'FECHA',
         'USUARIO_EMAIL'

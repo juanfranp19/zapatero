@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('Comentario', function (Blueprint $table) {
-            $table->unsignedInteger('ID')->primary();
+            $table->increments('ID');
             $table->string('COMENTARIO',255);
             $table->datetime('FECHA');
             $table->string('USUARIO_EMAIL',255);
