@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Trabajador extends Model
 {
+
+    protected $table = 'Trabajador';
+
+    public $timestamps = false;
+
     protected $fillable = [
         'ID',
         'DNI',
