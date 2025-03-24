@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AccesoController;
+use App\Http\Controllers\API\AvisoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Psr\Http\Message\ServerRequestInterface;
@@ -13,6 +14,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function(){
     Route::apiResource('acceso', AccesoController::class);
+    Route::apiResource('aviso', AvisoController::class);
 });
 
 Route::any('/{any}', function (ServerRequestInterface $request) {
