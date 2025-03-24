@@ -18,7 +18,7 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('acceso', AccesoController::class);
     Route::apiResource('aviso', AvisoController::class);
     Route::apiResource('equipo', EquipoController::class);
-    Route::apiResource('equipo', PermisoController::class);
+    Route::apiResource('permiso', PermisoController::class);
 });
 
 Route::any('/{any}', function (ServerRequestInterface $request) {
