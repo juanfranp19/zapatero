@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AccesoController;
 use App\Http\Controllers\API\AvisoController;
 use App\Http\Controllers\API\EquipoController;
+use App\Http\Controllers\API\PermisoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Psr\Http\Message\ServerRequestInterface;
@@ -17,6 +18,7 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('acceso', AccesoController::class);
     Route::apiResource('aviso', AvisoController::class);
     Route::apiResource('equipo', EquipoController::class);
+    Route::apiResource('equipo', PermisoController::class);
 });
 
 Route::any('/{any}', function (ServerRequestInterface $request) {

@@ -3,24 +3,27 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\AvisoResource;
-use App\Models\Aviso;
+use App\Http\Resources\PermisoResource;
+use App\Models\Permiso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-class AvisoController extends Controller
+class PermisoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $avisos = AvisoResource::collection(
-            Aviso::orderBy('ID')->paginate(5)
+        try {
+        $permisos = PermisoResource::collection(
+            Permiso::orderBy('ID')->paginate(5)
         );
-
-        return $avisos;
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+        return $permisos;
     }
 
     /**
@@ -29,8 +32,12 @@ class AvisoController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'DESDE' => 'required',
+            'HASTA' => 'required',
+            'NUMUSOS' => 'required',
+            'PERIODOUSO' => 'required',
             'EQUIPO_NUMSERIE' => 'required',
-            'USUARIO_EMAIL' => 'required'
+            'TRABAJADOR_ID' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -43,9 +50,13 @@ class AvisoController extends Controller
         }
 
         try {
-            $aviso = Aviso::create([
+            $permiso = Permiso::create([
+                'DESDE' => $request->DESDE,
+                'HASTA' => $request->HASTA,
+                'NUMUSOS' => $request->NUMUSOS,
+                'PERIODOUSO' => $request->PERIODOUSO,
                 'EQUIPO_NUMSERIE' => $request->EQUIPO_NUMSERIE,
-                'USUARIO_EMAIL' => $request->USUARIO_EMAIL
+                'TRABAJADOR_ID' => $request->TRABAJADOR_ID
             ]);
 
         } catch (\Exception $e) {
@@ -53,7 +64,7 @@ class AvisoController extends Controller
         }
 
         $data = [
-            'aviso' => $aviso,
+            'permiso' => $permiso,
             'status' => 201
         ];
 
@@ -63,10 +74,10 @@ class AvisoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Aviso $aviso)
+    public function show(Permiso $permiso)
     {
         $data = [
-            'aviso' => $aviso,
+            'permiso' => $permiso,
             'status' => 200
         ];
 
@@ -76,16 +87,24 @@ class AvisoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Aviso $aviso)
+    public function update(Request $request, Permiso $permiso)
     {
         $datos = [
+            'DESDE' => $request->DESDE,
+            'HASTA' => $request->HASTA,
+            'NUMUSOS' => $request->NUMUSOS,
+            'PERIODOUSO' => $request->PERIODOUSO,
             'EQUIPO_NUMSERIE' => $request->EQUIPO_NUMSERIE,
-            'USUARIO_EMAIL' => $request->USUARIO_EMAIL
+            'TRABAJADOR_ID' => $request->TRABAJADOR_ID
         ];
 
         $validator = Validator::make($request->all(), [
+            'DESDE' => 'required',
+            'HASTA' => 'required',
+            'NUMUSOS' => 'required',
+            'PERIODOUSO' => 'required',
             'EQUIPO_NUMSERIE' => 'required',
-            'USUARIO_EMAIL' => 'required'
+            'TRABAJADOR_ID' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -98,10 +117,10 @@ class AvisoController extends Controller
         }
 
         try {
-            DB::table('Aviso')
-                ->where('ID', $aviso->ID)
+            DB::table('Permiso')
+                ->where('ID', $permiso->ID)
                 ->update(
-                    ['EQUIPO_NUMSERIE' => $request->EQUIPO_NUMSERIE, 'USUARIO_EMAIL' => $request->USUARIO_EMAIL]
+                    ['DESDE' => $request->DESDE, 'HASTA' => $request->HASTA, 'NUMUSOS' => $request->NUMUSOS, 'PERIODOUSO' => $request->PERIODOUSO, 'EQUIPO_NUMSERIE' => $request->EQUIPO_NUMSERIE, 'TRABAJADOR_ID' => $request->TRABAJADOR_ID]
                 );
 
         } catch (\Exception $e) {
@@ -109,8 +128,8 @@ class AvisoController extends Controller
         }
 
         $data = [
-            'message' => 'Aviso actualizado',
-            'aviso' => $datos,
+            'message' => 'Permiso actualizado',
+            'permiso' => $datos,
             'status' => 200
         ];
 
@@ -120,11 +139,11 @@ class AvisoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Aviso $aviso)
+    public function destroy(Permiso $permiso)
     {
         try {
-            DB::table('Aviso')
-                ->where('ID', $aviso->ID)
+            DB::table('Permiso')
+                ->where('ID', $permiso->ID)
                 ->delete();
 
         } catch (\Exception $e) {
@@ -132,7 +151,7 @@ class AvisoController extends Controller
         }
 
         $data = [
-            'message' => 'Aviso eliminado',
+            'message' => 'Permiso eliminado',
             'status' => 200
         ];
 
