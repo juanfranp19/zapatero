@@ -6,6 +6,9 @@ use App\Http\Controllers\API\EquipoController;
 use App\Http\Controllers\API\PermisoController;
 use App\Http\Controllers\API\TrabajadorController;
 use App\Http\Controllers\API\UsoController;
+use App\Http\Controllers\API\UsuarioController;
+use App\Http\Resources\UsuarioResource;
+use Illuminate\Database\Query\IndexHint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Psr\Http\Message\ServerRequestInterface;
@@ -23,6 +26,9 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('permiso', PermisoController::class);
     Route::apiResource('trabajador', TrabajadorController::class);
     Route::apiResource('uso', UsoController::class);
+    Route::apiResource('usuario', UsuarioResource::class);
+    Route::get('usuario', [UsuarioController::class,'index']);
+    Route::get('usuario/{id}', [UsuarioController::class,'show']);
 });
 
 Route::any('/{any}', function (ServerRequestInterface $request) {
