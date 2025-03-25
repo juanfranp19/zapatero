@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ValoresProduccion', function (Blueprint $table) {
-            $table->increments('ID');
-            $table->dateTime('FECHA')->nullable();
-            $table->double('valueA')->default(0);
-            $table->double('valueB')->default(0);
-            $table->double('valueC')->default(0);
-            $table->double('valueD')->default(0);
-            $table->double('valueE')->default(0);
-            $table->double('valueF')->default(0);
-            $table->string('EQUIPO_NUMSERIE', 255)->nullable();
+        Schema::create('valores_produccion', function (Blueprint $table) {
+            $table->id();
+            $table->dateTime('fecha')->nullable();
+            $table->double('value_a')->default(0);
+            $table->double('value_b')->default(0);
+            $table->double('value_c')->default(0);
+            $table->double('value_d')->default(0);
+            $table->double('value_e')->default(0);
+            $table->double('value_f')->default(0);
+            $table->string('equipo_numserie', 255)->nullable();
+
+            $table->foreign('equipo_numserie')->references('numserie')->on('equipo')->onDelete('cascade');
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ValoresProduccion');
+        Schema::dropIfExists('valores_produccion');
     }
 };

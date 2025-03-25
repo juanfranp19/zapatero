@@ -11,15 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('TipoParametro', function (Blueprint $table) {
-            $table->increments('ID');
-            $table->unsignedTinyInteger('CODIGO');
-            $table->string('DESCRIPCION',255);
-            $table->unsignedTinyInteger('ELIMINADO')->default(0);
-            $table->string('MEDIDA',255);
-            $table->string('EQUIPO_NUMSERIE',255)->nullable();
+        Schema::create('tipo_parametro', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedTinyInteger('codigo')->unique();
+            $table->string('descripcion',255);
+            $table->unsignedTinyInteger('eliminado')->default(0);
+            $table->string('medida',255);
+            $table->string('equipo_numserie',255)->nullable()->unique();
 
-            $table->unique(['CODIGO','EQUIPO_NUMSERIE'], 'UNQ_TipoParametro_0');
+
+            $table->foreign('equipo_numserie')->references('numserie')->on('equipo')->onDelete('cascade');
+
+            //$table->unique(['codigo','equipo_numserie'], 'UNQ_TipoParametro_0');
         });
     }
 
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('TipoParametro');
+        Schema::dropIfExists('tipo_parametro');
     }
 };

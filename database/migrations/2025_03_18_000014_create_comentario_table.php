@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Comentario', function (Blueprint $table) {
-            $table->increments('ID');
-            $table->string('COMENTARIO',255);
-            $table->datetime('FECHA');
-            $table->string('USUARIO_EMAIL',255);
+        Schema::create('comentarios', function (Blueprint $table) {
+            $table->id();
+            $table->string('comentario',255);
+            $table->datetime('fecha');
+            $table->string('usuario_email',255);
+
+            $table->foreign('usuario_email')->references('email')->on('usuario')->onDelete('cascade');
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Comentario');
+        Schema::dropIfExists('comentarios');
     }
 };

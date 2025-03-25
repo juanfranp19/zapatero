@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Trabajador', function (Blueprint $table) {
-            $table->unsignedInteger('ID')->primary();
-            $table->string('DNI',255);
-            $table->unsignedTinyInteger('ACTIVO')->default(0);
-            $table->string('APELLIDOS',255);
-            $table->unsignedTinyInteger('BORRADO')->default(0);
-            $table->string('NOMBRE',255);
-            $table->string('URLIMAGEN',255)->nullable();
-            $table->string('USUARIO_NOMBRE',255)->nullable();
+        Schema::create('trabajador', function (Blueprint $table) {
+            $table->id();
+            $table->string('dni',255);
+            $table->unsignedTinyInteger('activo')->default(0);
+            $table->string('apellidos',255);
+            $table->unsignedTinyInteger('borrado')->default(0);
+            $table->string('nombre',255);
+            $table->string('urlimagen',255)->nullable();
+            $table->string('usuario_nombre',255)->nullable();
+
+            $table->foreign('usuario_nombre')->references('email')->on('usuario')->onDelete('cascade');
         });
     }
 
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Trabajador');
+        Schema::dropIfExists('trabajador');
     }
 };

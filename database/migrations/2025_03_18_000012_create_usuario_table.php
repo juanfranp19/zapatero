@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Usuario', function (Blueprint $table) {
-            $table->string('EMAIL',255)->primary();
-            $table->unsignedTinyInteger('ADMIN')->default(0);
-            $table->string('NOMBRE',255);
-            $table->string('PASSWORD',255);
-            $table->string('ROL',255)->nullable();
-            $table->string('TOKEN',255)->nullable();
+        Schema::create('usuario', function (Blueprint $table) {
+            $table->id();
+            $table->string('email',255);
+            $table->unsignedTinyInteger('admin')->default(0);
+            $table->string('nombre',255);
+            $table->string('password',255);
+            $table->string('rol',255)->nullable();
+            $table->string('token',255)->nullable();
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Usuario');
+        Schema::dropIfExists('usuario');
     }
 };
