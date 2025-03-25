@@ -13,6 +13,7 @@ use App\Http\Controllers\API\IncidenciaController;
 use App\Http\Controllers\API\SequenceController;
 use App\Http\Controllers\API\TipoParametroController;
 use App\Http\Controllers\API\ValorProduccionController;
+use App\Http\Controllers\API\TipoIncidenciaController;
 use App\Http\Resources\UsuarioResource;
 
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function(){
+
     Route::apiResource('acceso', AccesoController::class);
 
     Route::apiResource('aviso', AvisoController::class);
@@ -33,6 +35,12 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('permiso', PermisoController::class);
     Route::apiResource('trabajadores', TrabajadorController::class);
     Route::apiResource('uso', UsoController::class);
+
+    Route::apiResource('trabajador', TrabajadorController::class);
+
+    // Uso
+    Route::apiResource('usos', UsoController::class);
+
     Route::apiResource('usuario', UsuarioResource::class);
     Route::get('usuario', [UsuarioController::class,'index']);
     Route::get('usuario/{id}', [UsuarioController::class,'show']);
@@ -43,9 +51,16 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('incidencias', IncidenciaController::class);
 
 
+
     Route::apiResource('tipos_parametros', TipoParametroController::class);
 
     Route::apiResource('valores_produccion', ValorProduccionController::class);
+
+    // TipoIncidencias
+    Route::apiResource('tipos_incidencias', TipoIncidenciaController::class);
+
+
+
 });
 
 Route::any('/{any}', function (ServerRequestInterface $request) {

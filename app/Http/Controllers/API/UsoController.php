@@ -16,9 +16,15 @@ class UsoController extends Controller
      */
     public function index()
     {
-        $usos = UsoResource::collection(
-            Uso::orderBy('ID')->paginate(5)
-        );
+        try {
+
+            $usos = UsoResource::collection(
+                Uso::orderBy('id')->paginate(5)
+            );
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
 
         return $usos;
     }
@@ -28,129 +34,75 @@ class UsoController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'ESTADO' => 'required',
-            'FECHAUSO' => 'required',
-            'HORAFIN' => 'required',
-            'HORAINICIO' => 'required',
-            'EQUIPO_NUMSERIE' => 'required',
-            'TRABAJADOR_ID' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
-        }
-
         try {
-            $uso = Uso::create([
-                'ESTADO' => $request->EQUIPO_NUMSERIE,
-                'FECHAUSO' => $request->USUARIO_EMAIL,
-                'HORAFIN' => $request->HORAFIN,
-                'HORAINICIO' => $request->HORAINICIO,
-                'EQUIPO_NUMSERIE' => $request->EQUIPO_NUMSERIE,
-                'TRABAJADOR_ID' => $request->TRABAJADOR_ID
-            ]);
+
+            $uso = json_decode($request->getContent(), true);
+            $uso = Uso::create($uso);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        $data = [
-            'uso' => $uso,
-            'status' => 201
-        ];
-
-        return response()->json($data, 201);
+        return new UsoResource($uso);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Uso $uso)
+    public function show($id)
     {
-        $data = [
-            'uso' => $uso,
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
+        $uso = Uso::findOrFail($id);
+        return new UsoResource($uso);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Uso $uso)
+    public function update(Request $request, $id)
     {
-        $datos = [
-            'ESTADO' => $request->EQUIPO_NUMSERIE,
-            'FECHAUSO' => $request->USUARIO_EMAIL,
-            'HORAFIN' => $request->HORAFIN,
-            'HORAINICIO' => $request->HORAINICIO,
-            'EQUIPO_NUMSERIE' => $request->EQUIPO_NUMSERIE,
-            'TRABAJADOR_ID' => $request->TRABAJADOR_ID
-        ];
+        try{
+        $uso = Uso::find($id);
 
-        $validator = Validator::make($request->all(), [
-            'ESTADO' => 'required',
-            'FECHAUSO' => 'required',
-            'HORAFIN' => 'required',
-            'HORAINICIO' => 'required',
-            'EQUIPO_NUMSERIE' => 'required',
-            'TRABAJADOR_ID' => 'required'
-        ]);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
 
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de los datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
+        if ($uso) {
+
+            $request->validate([
+                'estado' => 'required',
+                'fecha_uso' => 'required',
+                'hora_fin' => 'required',
+                'hora_inicio' => 'required',
+                'equipo_numserie' => 'required',
+                'trabajador_id' => 'required'
+            ]);
+
+            $uso->estado = $request->input('estado');
+            $uso->fecha_uso = $request->input('fecha_uso');
+            $uso->hora_fin = $request->input('hora_fin');
+            $uso->hora_inicio = $request->input('hora_inicio');
+            $uso->equipo_numserie = $request->input('equipo_numserie');
+            $uso->trabajador_id = $request->input('trabajador_id');
+            $uso->save();
+
+            return response()->json(new UsoResource($uso), 200);
+
+        } else {
+            return response()->json(['message' => 'Uso no encontrado'], 404);
         }
-
-        try {
-            DB::table('Uso')
-                ->where('ID', $uso->ID)
-                ->update(
-                    ['ESTADO' => $request->EQUIPO_NUMSERIE, 'FECHAUSO' => $request->USUARIO_EMAIL, 'HORAFIN' => $request->HORAFIN, 'HORAINICIO' => $request->HORAINICIO, 'EQUIPO_NUMSERIE' => $request->EQUIPO_NUMSERIE, 'TRABAJADOR_ID' => $request->TRABAJADOR_ID]
-                );
-
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-
-        $data = [
-            'message' => 'Aviso actualizado',
-            'uso' => $datos,
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
     }
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Uso $uso)
+    public function destroy($id)
     {
-        try {
-            DB::table('Uso')
-                ->where('ID', $uso->ID)
-                ->delete();
-
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+        $uso = Uso::find($id);
+        if ($uso) {
+            $uso->delete();
+            return response()->json(['message' => 'Uso eliminado'], 200);
+        } else {
+            return response()->json(['message' => 'Uso no encontrado'], 404);
         }
-
-        $data = [
-            'message' => 'Uso eliminado',
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
     }
 }
