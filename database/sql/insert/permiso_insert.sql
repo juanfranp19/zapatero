@@ -1,4 +1,4 @@
-INSERT INTO `permisos` (`id`, `desde`, `hasta`, `num_usos`, `periodo_uso`, `equipo_num_serie`, `trabajador_id`) VALUES
+INSERT INTO `permisos` (`id`, `desde`, `hasta`, `numusos`, `periodo_uso`, `equipo_numserie`, `trabajador_id`) VALUES
 (21,	'2016-11-09 10:31:40',	'2017-03-07 00:00:00',	5,	30,	'5556033JJ',	4),
 (22,	'2017-01-04 00:00:00',	'2017-11-15 00:00:00',	30,	100,	'4454323sd',	1),
 (23,	'2016-11-09 10:31:40',	'2016-11-19 10:31:40',	10,	25,	'rr544mmj',	2),

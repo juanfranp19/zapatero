@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('equipos', function (Blueprint $table) {
-            $table->string('numSerie',255)->primary()->unique();
+            $table->id();
+            $table->string('numserie', 255)->unique();
             $table->unsignedTinyInteger('activo')->default(0);
-            $table->string('alias',255)->unique();
+            $table->string('alias', 255)->unique();
             $table->double('periodo_uso')->nullable();
             $table->unsignedTinyInteger('reparacion')->default(0);
-            $table->string('tipo',255)->nullable();
+            $table->string('tipo', 255)->nullable();
         });
     }
 

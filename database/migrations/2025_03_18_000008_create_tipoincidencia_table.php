@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipo_incidencia', function (Blueprint $table) {
+        Schema::create('tipos_incidencias', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo',255)->unique();
-            $table->string('descripcion',255);
-            $table->unsignedTinyInteger('eliminado')->default(0);
-            $table->string('equipo_numserie',255)->nullable()->unique();
+            $table->string('codigo', 255);
+            $table->string('descripcion', 255);
+            $table->unsignedInteger('eliminado')->default(0);
+            $table->string('equipo_numserie', 255)->nullable();
 
-            $table->foreign('equipo_numserie')->references('numserie')->on('equipo')->onDelete('cascade');
+            /* $table->foreign('equipo_numserie')->references('numserie')->on('equipos')->onDelete('cascade'); */
 
-            //$table->unique(['codigo','equipo_numserie'], 'UNQ_TipoIncidencia_0');
+            $table->unique(['codigo','equipo_numserie'], 'UNQ_TipoIncidencia_0');
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipo_incidencia');
+        Schema::dropIfExists('tipos_incidencias');
     }
 };

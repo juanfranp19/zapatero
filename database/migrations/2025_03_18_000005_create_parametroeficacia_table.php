@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('parametros_eficacia', function (Blueprint $table) {
             $table->id();
             $table->datetime('fecha_parametro')->nullable();
-            $table->string('valor',255)->nullable();
-            $table->unsignedInteger('tipo_parametro_id')->nullable();
+            $table->string('valor', 255)->nullable();
+            $table->unsignedBigInteger('tipo_parametro_id')->nullable();
 
-            $table->foreign('tipo_parametro_id')->references('id')->on('tipos_parametro')->onDelete('cascade');
+            //$table->foreign('tipo_parametro_id')->references('id')->on('tipos_parametros')->onDelete('cascade');
         });
     }
 

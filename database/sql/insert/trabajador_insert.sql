@@ -1,5 +1,5 @@
-INSERT INTO `Trabajador` (`ID`, `DNI`, `ACTIVO`, `APELLIDOS`, `BORRADO`, `NOMBRE`, `URLIMAGEN`, `USUARIO_NOMBRE`) VALUES
-(1,	'48696425S',	0,	'Muñoz García',	0,	'Isa',	'url',	'isa@gmail.com'),
+INSERT INTO `trabajadores` (`id`, `dni`, `activo`, `apellidos`, `borrado`, `nombre`, `url_imagen`, `usuario_nombre`) VALUES
+(1,	'48696425S',	0,	'Muñoz García',	0,	'Isa',	'url',	'isa'),
 (2,	'48737194X',	1,	'Calin Sanchez',	0,	'Mario',	'url',	NULL),
 (3,	'15467895Y',	1,	'Martinez Lopez',	0,	'Pepe',	'url',	NULL),
 (4,	'18795487X',	0,	'Rodriguez Anton',	0,	'Jose',	'url',	NULL),

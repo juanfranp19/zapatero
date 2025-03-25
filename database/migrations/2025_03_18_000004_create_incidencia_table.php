@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->datetime('fecha_incidencia')->nullable();
             $table->double('tiempo_incidencia')->nullable();
-            $table->unsignedInteger('tipo_incidencia_id')->nullable();
-            $table->unsignedInteger('trabajador_id')->nullable();
+            $table->unsignedBigInteger('tipo_incidencia_id')->nullable();
+            $table->unsignedBigInteger('trabajador_id')->nullable();
 
-            $table->foreign('tipo_incidencia_id')->references('id')->on('tipo_incidencias')->onDelete('cascade');
-            $table->foreign('trabajador_id')->references('id')->on('trabajadores')->onDelete('cascade');
+            /* $table->foreign('tipo_incidencia_id')->references('id')->on('tipos_incidencias')->onDelete('cascade');
+            $table->foreign('trabajador_id')->references('id')->on('trabajadores')->onDelete('cascade'); */
         });
     }
 

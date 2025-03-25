@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('accesos', function (Blueprint $table) {
             $table->id();
             $table->datetime('fecha_entrada');
-            $table->unsignedInteger('trabajador_id');
+            $table->unsignedBigInteger('trabajador_id');
 
-            $table->foreign('trabajador_id')->references('id')->on('trabajadores')->onDelete('cascade');
+            //$table->foreign('trabajador_id')->references('id')->on('trabajadores')->onDelete('cascade');
         });
     }
 

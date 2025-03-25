@@ -22,7 +22,9 @@ return new class extends Migration
             $table->double('value_f')->default(0);
             $table->string('equipo_numserie', 255)->nullable();
 
-            $table->foreign('equipo_numserie')->references('numserie')->on('equipo')->onDelete('cascade');
+            $table->unique(['fecha','equipo_numserie'], 'UNQ_ValoresProduccion_0');
+
+            /* $table->foreign('equipo_numserie')->references('numserie')->on('equipos')->onDelete('cascade'); */
         });
     }
 

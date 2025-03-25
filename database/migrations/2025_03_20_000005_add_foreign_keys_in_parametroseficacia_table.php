@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('ParametroEficacia', function (Blueprint $table) {
+        Schema::table('parametros_eficacia', function (Blueprint $table) {
 
-            //$table->foreign('TIPO_PARAMETRO_ID')->references('ID')->on('TipoParametro')->onDelete('cascade');
+            $table->foreign('tipo_parametro_id')->references('id')->on('tipos_parametros')->onDelete('cascade');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('ParametrosEficacia', function (Blueprint $table) {
+        Schema::table('parametros_eficacia', function (Blueprint $table) {
             //
         });
     }

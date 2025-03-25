@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('uso', function (Blueprint $table) {
+        Schema::create('usos', function (Blueprint $table) {
             $table->id();
             $table->unsignedTinyInteger('estado')->default(0);
-            $table->datetime('fechauso');
-            $table->string('horafin',255)->nullable();
-            $table->string('horainicio',255)->nullable();
-            $table->string('equipo_numserie',255);
-            $table->unsignedInteger('trabajador_id');
+            $table->datetime('fecha_uso');
+            $table->string('hora_fin', 255)->nullable();
+            $table->string('hora_inicio', 255)->nullable();
+            $table->string('equipo_numserie', 255);
+            $table->unsignedBigInteger('trabajador_id');
 
-            $table->foreign('equipo_numserie')->references('numserie')->on('equipo')->onDelete('cascade');
-            $table->foreign('trabajador_id')->references('id')->on('Trabajador')->onDelete('cascade');
+            /* $table->foreign('equipo_numserie')->references('numserie')->on('equipos')->onDelete('cascade');
+            $table->foreign('trabajador_id')->references('id')->on('trabajadores')->onDelete('cascade'); */
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('uso');
+        Schema::dropIfExists('usos');
     }
 };

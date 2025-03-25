@@ -1,4 +1,4 @@
-INSERT INTO `ValoresProduccion` (`ID`, `FECHA`, `valueA`, `valueB`, `valueC`, `valueD`, `valueE`, `valueF`, `EQUIPO_NUMSERIE`) VALUES
+INSERT INTO `valores_produccion` (`id`, `fecha`, `value_a`, `value_b`, `value_c`, `value_d`, `value_e`, `value_f`, `equipo_numserie`) VALUES
 (1,	'2017-10-02 00:00:00',	0,	40,	0,	10,	10,	0,	'2342ewdfw'),
 (2,	'2017-07-08 00:00:00',	2,	20,	2,	5,	5,	2,	'2342ewdfw'),
 (3,	'2017-07-08 00:00:00',	9,	20,	3,	5,	5,	3,	'1220'),

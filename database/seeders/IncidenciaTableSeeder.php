@@ -16,14 +16,12 @@ class IncidenciaTableSeeder extends Seeder
         $file = database_path('sql/insert/incidencia_insert.sql');
 
         if (!File::exists($file)) {
-            echo "no hay archivo SQL\n";
+            $this->command->error('no hay archivo SQL');
             return;
         }
 
         $sql = File::get($file);
 
         DB::unprepared($sql);
-
-        $this->command->info("archivo incidencia_insert ejecutado");
     }
 }

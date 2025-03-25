@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('Comentario', function (Blueprint $table) {
+        Schema::table('comentarios', function (Blueprint $table) {
 
-            // $table->foreign('USUARIO_EMAIL')->references('EMAIL')->on('Usuario')->onDelete('cascade');
+            $table->foreign('usuario_nombre')->references('nombre')->on('usuarios')->onDelete('cascade');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('Comentario', function (Blueprint $table) {
+        Schema::table('comentarios', function (Blueprint $table) {
             //
         });
     }

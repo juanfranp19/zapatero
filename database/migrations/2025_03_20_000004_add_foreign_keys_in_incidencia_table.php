@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('Incidencia', function (Blueprint $table) {
+        Schema::table('incidencias', function (Blueprint $table) {
 
-            //$table->foreign('TIPO_INCIDENCIA_ID')->references('ID')->on('TipoIncidencia')->onDelete('cascade');
-            //$table->foreign('TRABAJADOR_ID')->references('ID')->on('Trabajador')->onDelete('cascade');
+            $table->foreign('tipo_incidencia_id')->references('id')->on('tipos_incidencias')->onDelete('cascade');
+            $table->foreign('trabajador_id')->references('id')->on('trabajadores')->onDelete('cascade');
         });
     }
 
@@ -23,7 +23,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('Incidencia', function (Blueprint $table) {
+        Schema::table('incidencias', function (Blueprint $table) {
             //
         });
     }

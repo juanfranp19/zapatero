@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('comentarios', function (Blueprint $table) {
             $table->id();
-            $table->string('comentario',255);
+            $table->string('comentario', 255);
             $table->datetime('fecha');
-            $table->string('usuario_email',255);
+            $table->string('usuario_nombre', 255);
 
-            $table->foreign('usuario_email')->references('email')->on('usuario')->onDelete('cascade');
+            //$table->foreign('usuario_nombre')->references('nombre')->on('usuarios')->onDelete('cascade');
         });
     }
 

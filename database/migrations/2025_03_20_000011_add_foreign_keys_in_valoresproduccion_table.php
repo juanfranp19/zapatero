@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('ValoresProduccion', function (Blueprint $table) {
+        Schema::table('valores_produccion', function (Blueprint $table) {
 
-            //$table->foreign('EQUIPO_NUMSERIE')->references('NUMSERIE')->on('Equipo')->onDelete('cascade');
+            $table->foreign('equipo_numserie')->references('numserie')->on('equipos')->onDelete('cascade');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('ValoresProduccion', function (Blueprint $table) {
+        Schema::table('valores_produccion', function (Blueprint $table) {
             //
         });
     }

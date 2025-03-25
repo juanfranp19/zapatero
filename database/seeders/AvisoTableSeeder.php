@@ -16,14 +16,12 @@ class AvisoTableSeeder extends Seeder
         $file = database_path('sql/insert/aviso_insert.sql');
 
         if (!File::exists($file)) {
-            echo "no hay archivo SQL\n";
+            $this->command->error('no hay archivo SQL');
             return;
         }
 
         $sql = File::get($file);
 
         DB::unprepared($sql);
-
-        $this->command->info("archivo aviso_insert ejecutado");
     }
 }

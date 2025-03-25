@@ -1,4 +1,4 @@
-INSERT INTO `Uso` (`ID`, `ESTADO`, `FECHAUSO`, `HORAFIN`, `HORAINICIO`, `EQUIPO_NUMSERIE`, `TRABAJADOR_ID`) VALUES
+INSERT INTO `usos` (`id`, `estado`, `fecha_uso`, `hora_fin`, `hora_inicio`, `equipo_numserie`, `trabajador_id`) VALUES
 (1,	0,	'2017-07-18 00:00:00',	NULL,	NULL,	'1220',	103),
 (2,	0,	'2017-03-13 00:00:00',	NULL,	NULL,	'1220',	101),
 (3,	0,	'2017-03-13 00:00:00',	NULL,	NULL,	'1220',	101),

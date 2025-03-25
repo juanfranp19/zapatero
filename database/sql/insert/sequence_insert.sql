@@ -1,2 +1,2 @@
-INSERT INTO `sequence` (`seq_name`, `seq_count`) VALUES
+INSERT INTO `sequences` (`seq_name`, `seq_count`) VALUES
 ('SEQ_GEN',	100);
