@@ -6,12 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class TipoParametro extends Model
 {
+    protected $table = 'tipos_parametros';
+
+    public $timestamps = false;
+
     protected $fillable = [
-        'ID',
-        'CODIGO',
-        'DESCRIPCION',
-        'ELIMINADO',
-        'MEDIDA',
-        'EQUIPO_NUMSERIE'
+        'codigo',
+        'descripcion',
+        'eliminado',
+        'medida',
+        'equipo_numserie'
     ];
 }

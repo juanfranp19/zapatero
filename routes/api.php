@@ -11,7 +11,7 @@ use App\Http\Controllers\API\UsuarioController;
 use App\Http\Controllers\API\ComentarioController;
 use App\Http\Controllers\API\IncidenciaController;
 use App\Http\Controllers\API\SequenceController;
-
+use App\Http\Controllers\API\TipoParametroController;
 use App\Http\Resources\UsuarioResource;
 
 use Illuminate\Http\Request;
@@ -42,6 +42,7 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('incidencias', IncidenciaController::class);
 
 
+    Route::apiResource('tipos_parametros', TipoParametroController::class);
 });
 
 Route::any('/{any}', function (ServerRequestInterface $request) {
