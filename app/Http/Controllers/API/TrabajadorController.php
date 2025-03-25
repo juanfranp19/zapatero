@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\TrabajadorResource;
 use App\Models\Trabajador;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
 class TrabajadorController extends Controller
 {
@@ -16,9 +14,15 @@ class TrabajadorController extends Controller
      */
     public function index()
     {
-        $trabajadores = TrabajadorResource::collection(
-            Trabajador::orderBy('ID')->paginate(5)
-        );
+        try {
+
+            $trabajadores = TrabajadorResource::collection(
+                Trabajador::orderBy('id')->paginate(5)
+            );
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
 
         return $trabajadores;
     }
@@ -28,134 +32,82 @@ class TrabajadorController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'DNI' => 'required',
-            'ACTIVO' => 'required',
-            'APELLIDOS' => 'required',
-            'BORRADO' => 'required',
-            'NOMBRE' => 'required',
-            'URLIMAGEN' => 'required',
-            'USUARIO_NOMBRE' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
-        }
-
         try {
-            $trabajador = Trabajador::create([
-                'DNI' => $request->DNI,
-                'ACTIVO' => $request->ACTIVO,
-                'APELLIDOS' => $request->APELLIDOS,
-                'BORRADO' => $request->BORRADO,
-                'NOMBRE' => $request->NOMBRE,
-                'URLIMAGEN' => $request->URLIMAGEN,
-                'USUARIO_NOMBRE' => $request->USUARIO_NOMBRE
-            ]);
+
+            $trabajador = json_decode($request->getContent(), true);
+            $trabajador = Trabajador::create($trabajador);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        $data = [
-            'aviso' => $trabajador,
-            'status' => 201
-        ];
-
-        return response()->json($data, 201);
+        return new TrabajadorResource($trabajador);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Trabajador $trabajador)
+    public function show($id)
     {
-        $data = [
-            'trabajo' => $trabajador,
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
+        $trabajador = Trabajador::findOrFail($id);
+        return new TrabajadorResource($trabajador);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Trabajador $trabajador)
+    public function update(Request $request, $id)
     {
-        $datos = [
-            'DNI' => $request->DNI,
-            'ACTIVO' => $request->ACTIVO,
-            'APELLIDOS' => $request->APELLIDOS,
-            'BORRADO' => $request->BORRADO,
-            'NOMBRE' => $request->NOMBRE,
-            'URLIMAGEN' => $request->URLIMAGEN,
-            'USUARIO_NOMBRE' => $request->USUARIO_NOMBRE
-        ];
-
-        $validator = Validator::make($request->all(), [
-            'DNI' => 'required',
-            'ACTIVO' => 'required',
-            'APELLIDOS' => 'required',
-            'BORRADO' => 'required',
-            'NOMBRE' => 'required',
-            'URLIMAGEN' => 'required',
-            'USUARIO_NOMBRE' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de los datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
-        }
-
         try {
-            DB::table('Trabajador')
-                ->where('ID', $trabajador->ID)
-                ->update(
-                    ['DNI' => $request->DNI, 'ACTIVO' => $request->ACTIVO, 'APELLIDOS' => $request->APELLIDOS, 'BORRADO' => $request->BORRADO, 'NOMBRE' => $request->NOMBRE, 'URLIMAGEN' => $request->URLIMAGEN, 'USUARIO_NOMBRE' => $request->USUARIO_NOMBRE]
-                );
+
+            $trabajador = Trabajador::find($id);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        $data = [
-            'message' => 'Trabajador actualizado',
-            'aviso' => $datos,
-            'status' => 200
-        ];
+        if ($trabajador) {
 
-        return response()->json($data, 200);
+            $request->validate([
+                'dni' => 'required',
+                'activo' => 'required',
+                'apellidos' => 'required',
+                'borrado' => 'required',
+                'nombre' => 'required',
+                'url_imagen' => 'required',
+                'usuario_nombre' => 'required'
+            ]);
+
+            $trabajador->dni = $request->input('dni');
+            $trabajador->activo = $request->input('activo');
+            $trabajador->apellidos = $request->input('apellidos');
+            $trabajador->borrado = $request->input('borrado');
+            $trabajador->nombre = $request->input('nombre');
+            $trabajador->url_imagen = $request->input('url_imagen');
+            $trabajador->usuario_nombre = $request->input('usuario_nombre');
+            $trabajador->save();
+
+            return response()->json(new TrabajadorResource($trabajador), 200);
+
+        } else {
+            return response()->json(['message' => 'Trabajador no encontrado'], 404);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Trabajador $trabajador)
+    public function destroy($id)
     {
-        try {
-            DB::table('Trabajador')
-                ->where('ID', $trabajador->ID)
-                ->delete();
+        $trabajador = Trabajador::find($id);
 
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+        if ($trabajador) {
+
+            $trabajador->delete();
+            return response()->json(['message' => 'trabajador eliminado'], 200);
+
+        } else {
+            return response()->json(['message' => 'trabajador no encontrado'], 404);
         }
-
-        $data = [
-            'message' => 'Trabajador eliminado',
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
     }
 }

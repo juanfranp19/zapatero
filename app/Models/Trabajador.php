@@ -6,19 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Trabajador extends Model
 {
-
-    protected $table = 'Trabajador';
+    protected $table = 'trabajadores';
 
     public $timestamps = false;
 
     protected $fillable = [
-        'ID',
-        'DNI',
-        'ACTIVO',
-        'APELLIDOS',
-        'BORRADO',
-        'NOMBRE',
-        'URLIMAGEN',
-        'USUARIO_NOMBRE'
+        'dni',
+        'activo',
+        'apellidos',
+        'borrado',
+        'nombre',
+        'url_imagen',
+        'usuario_nombre'
     ];
 }
