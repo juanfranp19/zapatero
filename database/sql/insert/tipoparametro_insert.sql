@@ -1,4 +1,4 @@
-INSERT INTO `TipoParametro` (`ID`, `CODIGO`, `DESCRIPCION`, `ELIMINADO`, `MEDIDA`, `EQUIPO_NUMSERIE`) VALUES
+INSERT INTO `tipo_parametro` (`id`, `codigo`, `descripcion`, `eliminado`, `medida`, `equipo_numserie`) VALUES
 (1,	'2',	'minn',	1,	'8',	'1220'),
 (2,	'1',	'cm',	1,	'0',	'1220'),
 (3,	'1',	'Hora de Acceso',	1,	'0',	'1230'),

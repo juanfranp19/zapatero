@@ -1,4 +1,4 @@
-INSERT INTO `Incidencia` (`ID`, `FECHAINCIDENCIA`, `TIEMPOINCIDENCIA`, `TIPO_INCIDENCIA_ID`, `TRABAJADOR_ID`) VALUES
+INSERT INTO `incidencias` (`id`, `fecha_incidencia`, `tiempo_incidencia`, `tipo_incidencia_id`, `trabajador_id`) VALUES
 (13,	'2017-07-12 00:00:00',	30,	6,	103),
 (14,	'2017-01-26 00:00:00',	10,	6,	103),
 (15,	'2017-07-10 00:00:00',	13,	6,	103),

@@ -1,4 +1,4 @@
-INSERT INTO `Acceso` (`ID`, `FECHAENTRADA`, `TRABAJADOR_ID`) VALUES
+INSERT INTO `accesos` (`id`, `fecha_entrada`, `trabajador_id`) VALUES
 (7,	'2016-11-09 10:31:40',	1),
 (8,	'2016-11-09 10:31:40',	1),
 (9,	'2016-11-09 10:31:40',	1),

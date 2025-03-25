@@ -1,4 +1,4 @@
-INSERT INTO `TipoIncidencia` (`ID`, `CODIGO`, `DESCRIPCION`, `ELIMINADO`, `EQUIPO_NUMSERIE`) VALUES
+INSERT INTO `tipo_incidencia` (`id`, `codigo`, `descripcion`, `eliminado`, `equipo_numserie`) VALUES
 (1,	'1',	'Acceso denegado',	0,	'2342ewdfw'),
 (2,	'23',	'Error al arrancar la máquina',	0,	'2342ewdfw'),
 (3,	'1',	'Fallo en la operacion',	0,	'asd1324'),

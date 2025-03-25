@@ -1,4 +1,4 @@
-INSERT INTO `ParametroEficacia` (`ID`, `FECHAPARAMETRO`, `VALOR`, `TIPO_PARAMETRO_ID`) VALUES
+INSERT INTO `parametros_eficacia` (`id`, `fecha_parametro`, `valor`, `tipo_parametro_id`) VALUES
 (83,	'2016-12-05 00:00:00',	'[11,40]',	2),
 (84,	'2016-12-05 00:00:00',	'[11,40]',	2),
 (85,	'2016-12-05 00:00:00',	'[11,40]',	2),

@@ -1,4 +1,4 @@
-INSERT INTO `Equipo` (`NUMSERIE`, `ACTIVO`, `ALIAS`, `PERIODOUSO`, `REPARACION`, `TIPO`) VALUES
+INSERT INTO `equipos` (`numSerie`, `activo`, `alias`, `periodo_uso`, `reparacion`, `tipo`) VALUES
 ('1210',	1,	'COSECHADORA R14',	10,	0,	'CONTROL_EQUIPOS_MOTOR'),
 ('1220',	1,	'DESPALETIZADOR',	20,	0,	'CONTROL_EQUIPOS'),
 ('1230',	0,	'SALA AMONIACO',	50,	1,	'CONTROL_ACCESOS'),
