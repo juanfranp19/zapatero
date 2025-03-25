@@ -31,7 +31,9 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('equipo', EquipoController::class);
     Route::apiResource('permiso', PermisoController::class);
     Route::apiResource('trabajador', TrabajadorController::class);
-    Route::apiResource('uso', UsoController::class);
+
+    // Uso
+    Route::apiResource('usos', UsoController::class);
     Route::apiResource('usuario', UsuarioResource::class);
     Route::get('usuario', [UsuarioController::class,'index']);
     Route::get('usuario/{id}', [UsuarioController::class,'show']);
