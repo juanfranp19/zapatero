@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('ParametroEficacia', function (Blueprint $table) {
 
-            $table->foreign('TIPO_PARAMETRO_ID')->references('ID')->on('TipoParametro')->onDelete('cascade');
+            //$table->foreign('TIPO_PARAMETRO_ID')->references('ID')->on('TipoParametro')->onDelete('cascade');
         });
     }
 

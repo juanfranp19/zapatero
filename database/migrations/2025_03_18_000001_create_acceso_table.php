@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Acceso', function (Blueprint $table) {
-            $table->increments('ID');
-            //$table->unsignedInteger('ID')->primary();
+        Schema::create('accesos', function (Blueprint $table) {
+            $table->id();
+            $table->datetime('fecha_entrada');
+            $table->unsignedInteger('trabajador_id');
 
-            $table->datetime('FECHAENTRADA');
-            $table->unsignedInteger('TRABAJADOR_ID');
+            $table->foreign('trabajador_id')->references('id')->on('trabajadores')->onDelete('cascade');
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Acceso');
+        Schema::dropIfExists('accesos');
     }
 };
