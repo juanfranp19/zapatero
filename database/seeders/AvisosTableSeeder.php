@@ -6,14 +6,14 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class SEQUENCETableSeeder extends Seeder
+class AvisoTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $file = database_path('sql/insert/sequence_insert.sql');
+        $file = database_path('sql/insert/avisos_insert.sql');
 
         if (!File::exists($file)) {
             $this->command->error('no hay archivo SQL');

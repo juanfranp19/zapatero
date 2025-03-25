@@ -6,14 +6,14 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class TipoIncidenciaTableSeeder extends Seeder
+class SEQUENCETableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $file = database_path('sql/insert/tipoincidencia_insert.sql');
+        $file = database_path('sql/insert/sequences_insert.sql');
 
         if (!File::exists($file)) {
             $this->command->error('no hay archivo SQL');

@@ -6,14 +6,14 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class ParametroEficaciaTableSeeder extends Seeder
+class TipoParametroTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $file = database_path('sql/insert/parametroeficacia_insert.sql');
+        $file = database_path('sql/insert/tiposparametros_insert.sql');
 
         if (!File::exists($file)) {
             $this->command->error('no hay archivo SQL');
