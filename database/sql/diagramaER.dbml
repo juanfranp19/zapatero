@@ -1,3 +1,6 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
 Table accesos {
   id int [pk]
   fecha_entrada datetime
@@ -77,7 +80,7 @@ Table trabajadores {
   borrado tinyint(1) [default: 0]
   nombre varchar(255)
   urlimagen varchar(255)
-  usuario_nombre varchar(255) [ref: > usuarios.email]
+  usuario_nombre varchar(255) [ref: > usuarios.nombre]
 }
 
 Table usos {
