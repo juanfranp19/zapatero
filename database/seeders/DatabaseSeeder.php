@@ -11,46 +11,46 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(EquipoTableSeeder::class);
-        $this->command->info("archivo equipo_insert ejecutado");
+        $this->call(EquiposTableSeeder::class);
+        $this->command->info("EquiposTableSeeder ejecutado");
 
-        $this->call(UsuarioTableSeeder::class);
-        $this->command->info("archivo usuario_insert ejecutado");
+        $this->call(UsuariosTableSeeder::class);
+        $this->command->info("UsuariosTableSeeder ejecutado");
 
         $this->call(ValoresProducionTableSeeder::class);
-        $this->command->info("archivo valoresproduccion_insert ejecutado");
+        $this->command->info("ValoresProducionTableSeeder ejecutado");
 
-        $this->call(TrabajadorTableSeeder::class);
-        $this->command->info("archivo trabajador_insert ejecutado");
+        $this->call(TrabajadoresTableSeeder::class);
+        $this->command->info("TrabajadoresTableSeeder ejecutado");
 
-        $this->call(PermisoTableSeeder::class);
-        $this->command->info("archivo permiso_insert ejecutado");
+        $this->call(PermisosTableSeeder::class);
+        $this->command->info("PermisosTableSeeder ejecutado");
 
-        $this->call(UsoTableSeeder::class);
-        $this->command->info("archivo uso_insert ejecutado");
+        $this->call(UsosTableSeeder::class);
+        $this->command->info("UsosTableSeeder ejecutado");
 
-        $this->call(TipoIncidenciaTableSeeder::class);
-        $this->command->info("archivo tipoincidencia_insert ejecutado");
+        $this->call(TiposIncidenciasTableSeeder::class);
+        $this->command->info("TiposIncidenciasTableSeeder ejecutado");
 
-        $this->call(IncidenciaTableSeeder::class);
-        $this->command->info("archivo incidencia_insert ejecutado");
+        $this->call(IncidenciasTableSeeder::class);
+        $this->command->info("IncidenciasTableSeeder ejecutado");
 
-        $this->call(TipoParametroTableSeeder::class);
-        $this->command->info("archivo tipoparametro_insert ejecutado");
+        $this->call(TiposParametrosTableSeeder::class);
+        $this->command->info("TiposParametrosTableSeeder ejecutado");
 
-        $this->call(ParametroEficaciaTableSeeder::class);
-        $this->command->info("archivo parametroeficacia_insert ejecutado");
+        $this->call(ParametrosEficaciaTableSeeder::class);
+        $this->command->info("ParametrosEficaciaTableSeeder ejecutado");
 
-        $this->call(AccesoTableSeeder::class);
-        $this->command->info("archivo acceso_insert ejecutado");
+        $this->call(AccesosTableSeeder::class);
+        $this->command->info("AccesosTableSeeder ejecutado");
 
-        $this->call(AvisoTableSeeder::class);
-        $this->command->info("archivo aviso_insert ejecutado");
+        $this->call(AvisosTableSeeder::class);
+        $this->command->info("AvisosTableSeeder ejecutado");
 
-        $this->call(ComentarioTableSeeder::class);
-        $this->command->info("archivo comentario_insert ejecutado");
+        $this->call(ComentariosTableSeeder::class);
+        $this->command->info("ComentariosTableSeeder ejecutado");
 
-        $this->call(SEQUENCETableSeeder::class);
-        $this->command->info("archivo sequence_insert ejecutado");
+        $this->call(SequencesTableSeeder::class);
+        $this->command->info("SequencesTableSeeder ejecutado");
     }
 }
