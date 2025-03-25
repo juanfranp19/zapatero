@@ -1,119 +1,112 @@
-// Use DBML to define your database structure
-// Docs: https://dbml.dbdiagram.io/docs
-
-Table Acceso {
-  ID int [pk]
-  FECHAENTRADA datetime
-  TRABAJADOR_ID int
+Table accesos {
+  id int [pk]
+  fecha_entrada datetime
+  trabajador_id int [ref: > trabajadores.id]
 }
 
-Table Aviso {
-  ID int [pk]
-  EQUIPO_NUMSERIE varchar(255)
-  USUARIO_EMAIL varchar(255)
+Table avisos {
+  id int [pk]
+  equipo_numserie varchar(255) [ref: > equipos.numserie]
+  usuario_email varchar(255) [ref: > usuarios.email]
 }
 
-Table Comentario {
-  ID int [pk]
-  COMENTARIO varchar(255)
-  FECHA datetime
-  USUARIO_EMAIL varchar(255) [ref: > Usuario.EMAIL]
+Table comentarios {
+  id int [pk]
+  comentario varchar(255)
+  fecha datetime
+  usuario_nombre varchar(255) [ref: > usuarios.nombre]
 }
 
-Table Equipo {
-  NUMSERIE varchar(255) [pk, unique]
-  ACTIVO tinyint(1) [default: 0]
-  ALIAS varchar(255) [unique]
-  PERIODOUSO double
-  REPARACION tinyint(1) [default: 0]
-  TIPO varchar(255)
+Table equipos {
+  id int [pk]
+  numserie varchar(255) [unique]
+  activo tinyint(1) [default: 0]
+  alias varchar(255) [unique]
+  periodo_uso double
+  reparacion tinyint(1) [default: 0]
+  tipo varchar(255)
 }
 
-Table Incidencia {
-  ID int [pk, increment]
-  FECHAINCIDENCIA datetime
-  TIEMPOINCIDENCIA double
-  TIPO_INCIDENCIA_ID int [ref: > TipoIncidencia.ID]
-  TRABAJADOR_ID int [ref: > Trabajador.ID]
+Table incidencias {
+  id int [pk]
+  fecha_incidencia datetime
+  tiempo_incidencia double
+  tipo_incidencia_id int [ref: > tipos_incidencias.id]
+  trabajador_id int [ref: > trabajadores.id]
 }
 
-Table ParametroEficacia {
-  ID int [pk, increment]
-  FECHAPARAMETRO datetime
-  VALOR varchar(255)
-  TIPO_PARAMETRO_ID int [ref: > TipoParametro.ID]
+Table parametros_eficacia {
+  id int [pk, increment]
+  fecha_parametro datetime
+  valor varchar(255)
+  tipo_parametro_id int [ref: > tipos_parametros.id]
 }
 
-Table Permiso {
-  ID int [pk]
-  DESDE datetime
-  HASTA datetime
-  NUMUSOS int
-  PERIODOUSO double
-  EQUIPO_NUMSERIE varchar(255) [ref: > Equipo.NUMSERIE]
-  TRABAJADOR_ID int [ref: > Trabajador.ID]
+Table permisos {
+  id int [pk]
+  desde datetime
+  hasta datetime
+  numusos int
+  periodo_uso double
+  equipo_numserie varchar(255) [ref: > equipos.numserie]
+  trabajador_id int [ref: > trabajadores.id]
 }
 
-Table SEQUENCE {
-  SEQ_NAME varchar(50) [pk]
-  SEQ_COUNT decimal(38, 0)
+Table tipos_incidencias {
+  id int [pk]
+  codigo varchar(255)
+  descripcion varchar(255)
+  eliminado tinyint(1) [default: 0]
+  equipo_numserie varchar(255) [ref: > equipos.numserie]
 }
 
-Table TipoIncidencia {
-  ID int [pk, increment]
-  CODIGO varchar(255)
-  DESCRIPCION varchar(255)
-  ELIMINADO tinyint(1) [default: 0]
-  EQUIPO_NUMSERIE varchar(255) [ref: > Equipo.NUMSERIE]
+Table tipos_parametros {
+  id int [pk]
+  codigo varchar(255)
+  descripcion varchar(255)
+  eliminado tinyint(1) [default: 0]
+  medida varchar(255)
+  equipo_numserie varchar(255) [ref: > equipos.numserie]
 }
 
-Table TipoParametro {
-  ID int [pk, increment]
-  CODIGO varchar(255)
-  DESCRIPCION varchar(255)
-  ELIMINADO tinyint(1) [default: 0]
-  MEDIDA varchar(255)
-  EQUIPO_NUMSERIE varchar(255) [ref: > Equipo.NUMSERIE]
+Table trabajadores {
+  id int [pk]
+  dni varchar(255)
+  activo tinyint(1) [default: 0]
+  apellidos varchar(255)
+  borrado tinyint(1) [default: 0]
+  nombre varchar(255)
+  urlimagen varchar(255)
+  usuario_nombre varchar(255) [ref: > usuarios.email]
 }
 
-Table Trabajador {
-  ID int [pk]
-  DNI varchar(255)
-  ACTIVO tinyint(1) [default: 0]
-  APELLIDOS varchar(255)
-  BORRADO tinyint(1) [default: 0]
-  NOMBRE varchar(255)
-  URLIMAGEN varchar(255)
-  USUARIO_NOMBRE varchar(255) [ref: > Usuario.EMAIL]
+Table usos {
+  id int [pk]
+  estado tinyint(1) [default: 0]
+  fecha_uso datetime
+  hora_fin varchar(255)
+  hora_inicio varchar(255)
+  equipo_numserie varchar(255) [ref: > equipos.numserie]
+  trabajador_id int [ref: > trabajadores.id]
 }
 
-Table Uso {
-  ID int [pk, increment]
-  ESTADO tinyint(1) [default: 0]
-  FECHAUSO datetime
-  HORAFIN varchar(255)
-  HORAINICIO varchar(255)
-  EQUIPO_NUMSERIE varchar(255) [ref: > Equipo.NUMSERIE]
-  TRABAJADOR_ID int [ref: > Trabajador.ID]
+Table usuarios {
+  nombre varchar(255) [pk]
+  email varchar(255) [unique]
+  admin tinyint(1) [default: 0]
+  password varchar(255)
+  rol varchar(255)
+  token varchar(255)
 }
 
-Table Usuario {
-  EMAIL varchar(255) [pk]
-  ADMIN tinyint(1) [default: 0]
-  NOMBRE varchar(255)
-  PASSWORD varchar(255)
-  ROL varchar(255)
-  TOKEN varchar(255)
-}
-
-Table ValoresProduccion {
-  ID int [pk, increment]
-  FECHA datetime
-  valueA double [default: 0]
-  valueB double [default: 0]
-  valueC double [default: 0]
-  valueD double [default: 0]
-  valueE double [default: 0]
-  valueF double [default: 0]
-  EQUIPO_NUMSERIE varchar(255) [ref: > Equipo.NUMSERIE]
+Table valores_produccion {
+  id int [pk]
+  fecha datetime
+  value_a double [default: 0]
+  value_b double [default: 0]
+  value_c double [default: 0]
+  value_d double [default: 0]
+  value_e double [default: 0]
+  value_f double [default: 0]
+  equipo_numserie varchar(255) [ref: > equipos.numserie]
 }
