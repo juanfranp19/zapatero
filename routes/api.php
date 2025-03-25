@@ -11,7 +11,7 @@ use App\Http\Controllers\API\UsuarioController;
 use App\Http\Controllers\API\ComentarioController;
 use App\Http\Controllers\API\IncidenciaController;
 use App\Http\Controllers\API\SequenceController;
-
+use App\Http\Controllers\API\TipoIncidenciaController;
 use App\Http\Resources\UsuarioResource;
 
 use Illuminate\Http\Request;
@@ -40,6 +40,10 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('sequence', SequenceController::class);
 
     Route::apiResource('incidencias', IncidenciaController::class);
+
+
+    // TipoIncidencias
+    Route::apiResource('tipos_incidencias', TipoIncidenciaController::class);
 
 
 });
