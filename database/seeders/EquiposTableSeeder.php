@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class EquipoTableSeeder extends Seeder
+class EquiposTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

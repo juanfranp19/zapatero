@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class TipoIncidenciaTableSeeder extends Seeder
+class TiposIncidenciasTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class AccesoTableSeeder extends Seeder
+class AccesosTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
