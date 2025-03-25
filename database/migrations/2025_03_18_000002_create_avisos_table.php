@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('avisos', function (Blueprint $table) {
             $table->id();
             $table->string('equipo_numserie', 255)->nullable();
-            $table->string('usuario_email', 255)->nullable();
+            $table->string('usuario_nombre', 255)->nullable();
 
-            $table->unique(['equipo_numserie','usuario_email'], 'UNQ_Aviso_0');
+            $table->unique(['equipo_numserie','usuario_nombre'], 'UNQ_Aviso_0');
 
             //$table->foreign('equipo_numserie')->references('numserie')->on('equipos')->onDelete('cascade');
             //$table->foreign('usuario_email')->references('email')->on('usuarios')->onDelete('cascade');

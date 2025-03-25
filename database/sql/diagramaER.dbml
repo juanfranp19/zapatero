@@ -10,7 +10,7 @@ Table accesos {
 Table avisos {
   id int [pk]
   equipo_numserie varchar(255) [ref: > equipos.numserie]
-  usuario_email varchar(255) [ref: > usuarios.email]
+  usuario_email varchar(255) [ref: > usuarios.nombre]
 }
 
 Table comentarios {

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('avisos', function (Blueprint $table) {
 
             $table->foreign('equipo_numserie')->references('numserie')->on('equipos')->onDelete('cascade');
-            $table->foreign('usuario_email')->references('email')->on('usuarios')->onDelete('cascade');
+            $table->foreign('usuario_nombre')->references('nombre')->on('usuarios')->onDelete('cascade');
         });
     }
 
