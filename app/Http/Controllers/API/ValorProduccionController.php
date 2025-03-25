@@ -87,8 +87,6 @@ class ValorProduccionController extends Controller
             $valor_produccion->value_e = $request->input('value_e');
             $valor_produccion->value_f = $request->input('value_f');
             $valor_produccion->equipo_numserie = $request->input('equipo_numserie');
-
-            $valor_produccion->equipo_numserie = $request->input('equipo_numserie');
             $valor_produccion->save();
 
             return response()->json(new ValorProduccionResource($valor_produccion), 200);
