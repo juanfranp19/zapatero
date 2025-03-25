@@ -6,14 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Incidencia extends Model
 {
-    protected $table = 'Incidencia';
-
     public $timestamps = false;
 
     protected $fillable = [
-        'FECHAINCIDENCIA',
-        'TIEMPOINCIDENCIA',
-        'TIPO_INCIDENCIA_ID',
-        'TRABAJADOR_ID'
+        'fecha_incidencia',
+        'tiempo_incidencia',
+        'tipo_incidencia_id',
+        'trabajador_id'
     ];
 }

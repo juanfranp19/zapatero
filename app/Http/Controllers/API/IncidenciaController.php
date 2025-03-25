@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\IncidenciaResource;
 use App\Models\Incidencia;
 use Illuminate\Http\Request;
+/*
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+*/
 
 class IncidenciaController extends Controller
 {
@@ -20,7 +22,7 @@ class IncidenciaController extends Controller
         try {
 
             $incidencias = IncidenciaResource::collection(
-                Incidencia::orderBy('ID')->paginate(5)
+                Incidencia::orderBy('id')->paginate(5)
             );
 
         } catch (\Exception $e) {
@@ -35,11 +37,12 @@ class IncidenciaController extends Controller
      */
     public function store(Request $request)
     {
+        /*
         $validator = Validator::make($request->all(), [
-            'FECHAINCIDENCIA' => 'required',
-            'TIEMPOINCIDENCIA' => 'required',
-            'TIPO_INCIDENCIA_ID' => 'required',
-            'TRABAJADOR_ID' => 'required'
+            'fecha_incidencia' => 'required',
+            'tiempo_incidencia' => 'required',
+            'tipo_incidencia_id' => 'required',
+            'trabajador_id' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -53,10 +56,10 @@ class IncidenciaController extends Controller
 
         try {
             $incidencia = Incidencia::create([
-                'FECHAINCIDENCIA' => $request->FECHAINCIDENCIA,
-                'TIEMPOINCIDENCIA' => $request->TIEMPOINCIDENCIA,
-                'TIPO_INCIDENCIA_ID' => $request->TIPO_INCIDENCIA_ID,
-                'TRABAJADOR_ID' => $request->TRABAJADOR_ID,
+                'fecha_incidencia' => $request->fecha_incidencia,
+                'tiempo_incidencia' => $request->tiempo_incidencia,
+                'tipo_incidencia_id' => $request->tipo_incidencia_id,
+                'trabajador_id' => $request->trabajador_id,
             ]);
 
         } catch (\Exception $e) {
@@ -69,14 +72,27 @@ class IncidenciaController extends Controller
         ];
 
         return response()->json($data, 201);
+        */
+
+        try {
+
+            $incidencia = json_decode($request->getContent(), true);
+            $incidencia = Incidencia::create($incidencia);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
+        return new IncidenciaResource($incidencia);
     }
 
     /**
      * Display the specified resource.
      */
-    /*public function show(Incidencia $incidencia)
+    public function show(Incidencia $incidencia)
     {
-        /* $data = [
+        /*
+        $data = [
             'incidencia' => $incidencia,
             'status' => 200
         ];
@@ -86,11 +102,8 @@ class IncidenciaController extends Controller
         $data = Incidencia::findOrFail($incidencia->id);
 
         return $data;
-    } */
+        */
 
-    public function show($id)
-    {
-        $incidencia = Incidencia::findOrFail($id); // Si no se encuentra el incidencia, devolverá un error 404
         return new IncidenciaResource($incidencia);
     }
 
@@ -99,18 +112,19 @@ class IncidenciaController extends Controller
      */
     public function update(Request $request, Incidencia $incidencia)
     {
+        /*
         $datos = [
-            'FECHAINCIDENCIA' => $request->FECHAINCIDENCIA,
-            'TIEMPOINCIDENCIA' => $request->TIEMPOINCIDENCIA,
-            'TIPO_INCIDENCIA_ID' => $request->TIPO_INCIDENCIA_ID,
-            'TRABAJADOR_ID' => $request->TRABAJADOR_ID
+            'fecha_incidencia' => $request->fecha_incidencia,
+            'tiempo_incidencia' => $request->tiempo_incidencia,
+            'tipo_incidencia_id' => $request->tipo_incidencia_id,
+            'trabajador_id' => $request->trabajador_id
         ];
 
         $validator = Validator::make($request->all(), [
-            'FECHAINCIDENCIA' => 'required',
-            'TIEMPOINCIDENCIA' => 'required',
-            'TIPO_INCIDENCIA_ID' => 'required',
-            'TRABAJADOR_ID' => 'required'
+            'fecha_incidencia' => 'required',
+            'tiempo_incidencia' => 'required',
+            'tipo_incidencia_id' => 'required',
+            'trabajador_id' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -123,8 +137,8 @@ class IncidenciaController extends Controller
         }
 
         try {
-            DB::table('Incidencia')
-                ->where('ID', $incidencia->ID)
+            DB::table('incidencias')
+                ->where('id', $incidencia->id)
                 ->update($datos);
 
         } catch (\Exception $e) {
@@ -138,6 +152,18 @@ class IncidenciaController extends Controller
         ];
 
         return response()->json($data, 200);
+        */
+
+        try {
+
+            $incidenciaData = json_decode($request->getContent(), true);
+            $incidencia->update($incidenciaData);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
+        return new IncidenciaResource($incidencia);
     }
 
     /**
@@ -145,6 +171,37 @@ class IncidenciaController extends Controller
      */
     public function destroy(Incidencia $incidencia)
     {
-        //
+        /*
+        try {
+            DB::table('incidencias')
+                ->where('id', $incidencia->id)
+                ->delete();
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
+        $data = [
+            'message' => 'Acceso eliminado',
+            'status' => 200
+        ];
+
+        return response()->json($data, 200);
+        */
+
+        try {
+
+            $incidencia->delete();
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
+        $data = [
+            'message' => 'Incidencia eliminada',
+            'status' => 200
+        ];
+
+        return response()->json($data, 200);
     }
 }

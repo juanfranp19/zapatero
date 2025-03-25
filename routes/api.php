@@ -38,9 +38,8 @@ Route::prefix('v1')->group(function(){
 
     Route::apiResource('comentario', ComentarioController::class);
     Route::apiResource('sequence', SequenceController::class);
-    Route::apiResource('incidencia', IncidenciaController::class);
 
-    Route::get('incidencia/{incidencia}', [IncidenciaController::class, 'show']);
+    Route::apiResource('incidencias', IncidenciaController::class);
 
 
 });
