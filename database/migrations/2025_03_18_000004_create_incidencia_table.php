@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Incidencia', function (Blueprint $table) {
-            $table->increments('ID');
-            $table->datetime('FECHAINCIDENCIA')->nullable();
-            $table->double('TIEMPOINCIDENCIA')->nullable();
-            $table->unsignedInteger('TIPO_INCIDENCIA_ID')->nullable();
-            $table->unsignedInteger('TRABAJADOR_ID')->nullable();
+        Schema::create('incidencias', function (Blueprint $table) {
+            $table->id();
+            $table->datetime('fecha_incidencia')->nullable();
+            $table->double('tiempo_incidencia')->nullable();
+            $table->unsignedInteger('tipo_incidencia_id')->nullable();
+            $table->unsignedInteger('trabajador_id')->nullable();
+
+            $table->foreign('tipo_incidencia_id')->references('id')->on('tipo_incidencias')->onDelete('cascade');
+            $table->foreign('trabajador_id')->references('id')->on('trabajadores')->onDelete('cascade');
         });
     }
 
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Incidencia');
+        Schema::dropIfExists('incidencias');
     }
 };

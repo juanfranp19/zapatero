@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Aviso', function (Blueprint $table) {
-            $table->unsignedInteger('ID')->primary();
-            $table->string('EQUIPO_NUMSERIE',255)->nullable();
-            $table->string('USUARIO_EMAIL',255)->nullable();
+        Schema::create('avisos', function (Blueprint $table) {
+            $table->id();
+            $table->string('equipo_numSerie',255)->nullable()->unique();
+            $table->string('usuario_email',255)->nullable()->unique();
 
-            $table->unique(['EQUIPO_NUMSERIE','USUARIO_EMAIL'], 'UNQ_Aviso_0');
+            //$table->unique(['equipo_numserie','usuario_email'], 'UNQ_Aviso_0');
+
+            $table->foreign('equipo_numserie')->references('numserie')->on('equipo')->onDelete('cascade');
+            $table->foreign('usuario_email')->references('email')->on('usuario')->onDelete('cascade');
         });
     }
 
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Aviso');
+        Schema::dropIfExists('avisos');
     }
 };

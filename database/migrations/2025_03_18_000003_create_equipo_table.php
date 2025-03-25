@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Equipo', function (Blueprint $table) {
-            $table->string('NUMSERIE',255)->primary()->unique();
-            $table->unsignedTinyInteger('ACTIVO')->default(0);
-            $table->string('ALIAS',255)->unique();
-            $table->double('PERIODOUSO')->nullable();
-            $table->unsignedTinyInteger('REPARACION')->default(0);
-            $table->string('TIPO',255)->nullable();
+        Schema::create('equipos', function (Blueprint $table) {
+            $table->string('numSerie',255)->primary()->unique();
+            $table->unsignedTinyInteger('activo')->default(0);
+            $table->string('alias',255)->unique();
+            $table->double('periodo_uso')->nullable();
+            $table->unsignedTinyInteger('reparacion')->default(0);
+            $table->string('tipo',255)->nullable();
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Equipo');
+        Schema::dropIfExists('equipos');
     }
 };

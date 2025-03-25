@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Permiso', function (Blueprint $table) {
-            $table->unsignedInteger('ID')->primary();
-            $table->datetime('DESDE');
-            $table->datetime('HASTA');
-            $table->unsignedInteger('NUMUSOS')->nullable();
-            $table->double('PERIODOUSO')->nullable();
-            $table->string('EQUIPO_NUMSERIE',255);
-            $table->unsignedInteger('TRABAJADOR_ID');
+        Schema::create('permisos', function (Blueprint $table) {
+            $table->id();
+            $table->datetime('desde');
+            $table->datetime('hasta');
+            $table->unsignedInteger('num_usos')->nullable();
+            $table->double('periodo_uso')->nullable();
+            $table->string('equipo_num_serie',255);
+            $table->unsignedInteger('trabajador_id');
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Permiso');
+        Schema::dropIfExists('permisos');
     }
 };

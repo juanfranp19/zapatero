@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ParametroEficacia', function (Blueprint $table) {
-            $table->increments('ID');
-            $table->datetime('FECHAPARAMETRO')->nullable();
-            $table->string('VALOR',255)->nullable();
-            $table->unsignedInteger('TIPO_PARAMETRO_ID')->nullable();
+        Schema::create('parametros_eficacia', function (Blueprint $table) {
+            $table->id();
+            $table->datetime('fecha_parametro')->nullable();
+            $table->string('valor',255)->nullable();
+            $table->unsignedInteger('tipo_parametro_id')->nullable();
+
+            $table->foreign('tipo_parametro_id')->references('id')->on('tipos_parametro')->onDelete('cascade');
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ParametroEficacia');
+        Schema::dropIfExists('parametros_eficacia');
     }
 };

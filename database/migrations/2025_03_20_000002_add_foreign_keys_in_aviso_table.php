@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('Aviso', function (Blueprint $table) {
 
-            $table->foreign('EQUIPO_NUMSERIE')->references('NUMSERIE')->on('Equipo')->onDelete('cascade');
-            $table->foreign('USUARIO_EMAIL')->references('EMAIL')->on('Usuario')->onDelete('cascade');
+            /* $table->foreign('EQUIPO_NUMSERIE')->references('NUMSERIE')->on('Equipo')->onDelete('cascade');
+            $table->foreign('USUARIO_EMAIL')->references('EMAIL')->on('Usuario')->onDelete('cascade'); */
         });
     }
 
