@@ -12,6 +12,7 @@ use App\Http\Controllers\API\ComentarioController;
 use App\Http\Controllers\API\IncidenciaController;
 use App\Http\Controllers\API\SequenceController;
 use App\Http\Controllers\API\TipoParametroController;
+use App\Http\Controllers\API\ValorProduccionController;
 use App\Http\Resources\UsuarioResource;
 
 use Illuminate\Http\Request;
@@ -43,6 +44,8 @@ Route::prefix('v1')->group(function(){
 
 
     Route::apiResource('tipos_parametros', TipoParametroController::class);
+
+    Route::apiResource('valores_produccion', ValorProduccionController::class);
 });
 
 Route::any('/{any}', function (ServerRequestInterface $request) {
