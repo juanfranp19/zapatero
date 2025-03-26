@@ -27,8 +27,8 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function(){
-
-    Route::apiResource('acceso', AccesoController::class);
+    // Acceso
+    Route::apiResource('accesos', AccesoController::class);
 
     Route::apiResource('aviso', AvisoController::class);
     Route::apiResource('equipo', EquipoController::class);

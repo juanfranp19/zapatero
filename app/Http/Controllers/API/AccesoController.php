@@ -16,9 +16,15 @@ class AccesoController extends Controller
      */
     public function index()
     {
-        $accesos = AccesoResource::collection(
-            Acceso::orderBy('ID')->paginate(5)
-        );
+        try {
+
+            $accesos = AccesoResource::collection(
+                Acceso::orderBy('id')->paginate(5)
+            );
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
 
         return $accesos;
     }
@@ -28,114 +34,68 @@ class AccesoController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'FECHAENTRADA' => 'required',
-            'TRABAJADOR_ID' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
-        }
-
         try {
-            $acceso = Acceso::create([
-                'FECHAENTRADA' => $request->FECHAENTRADA,
-                'TRABAJADOR_ID' => $request->TRABAJADOR_ID
-            ]);
+
+            $acceso = json_decode($request->getContent(), true);
+            $acceso = Acceso::create($acceso);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        $data = [
-            'acceso' => $acceso,
-            'status' => 201
-        ];
-
-        return response()->json($data, 201);
+        return new AccesoResource($acceso);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Acceso $acceso)
+    public function show($id)
     {
-        $data = [
-            'acceso' => $acceso,
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
+        $acceso = Acceso::findOrFail($id);
+        return new AccesoResource($acceso);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Acceso $acceso)
+    public function update(Request $request, $id)
     {
-        $datos = [
-            'FECHAENTRADA' => $request->FECHAENTRADA,
-            'TRABAJADOR_ID' => $request->TRABAJADOR_ID
-        ];
+        try{
+        $acceso = Acceso::find($id);
 
-        $validator = Validator::make($request->all(), [
-            'FECHAENTRADA' => 'required',
-            'TRABAJADOR_ID' => 'required',
-        ]);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
 
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de los datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
+        if ($acceso) {
+
+            $request->validate([
+                'fecha_entrada' => 'required',
+                'trabajador_id' => 'required'
+            ]);
+
+            $acceso->fecha_entrada = $request->input('fecha_entrada');
+            $acceso->trabajador_id = $request->input('trabajador_id');
+            $acceso->save();
+
+            return response()->json(new AccesoResource($acceso), 200);
+
+        } else {
+            return response()->json(['message' => 'Acceso no encontrado'], 404);
         }
-
-        try {
-            DB::table('Acceso')
-                ->where('ID', $acceso->ID)
-                ->update(
-                    ['FECHAENTRADA' => $request->FECHAENTRADA, 'TRABAJADOR_ID' => $request->TRABAJADOR_ID]
-                );
-
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-
-        $data = [
-            'message' => 'Aviso actualizado',
-            'acceso' => $datos,
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Acceso $acceso)
+    public function destroy($id)
     {
-        try {
-            DB::table('Acceso')
-                ->where('ID', $acceso->ID)
-                ->delete();
-
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+        $acceso = Acceso::find($id);
+        if ($acceso) {
+            $acceso->delete();
+            return response()->json(['message' => 'Acceso eliminado'], 200);
+        } else {
+            return response()->json(['message' => 'Acceso no encontrado'], 404);
         }
-
-        $data = [
-            'message' => 'Acceso eliminado',
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
     }
 }
