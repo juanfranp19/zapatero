@@ -44,8 +44,8 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('usuario', UsuarioResource::class);
     Route::get('usuario', [UsuarioController::class,'index']);
     Route::get('usuario/{id}', [UsuarioController::class,'show']);
-
-    Route::apiResource('comentario', ComentarioController::class);
+    // Comentario
+    Route::apiResource('comentarios', ComentarioController::class);
     Route::apiResource('sequence', SequenceController::class);
 
     Route::apiResource('incidencias', IncidenciaController::class);

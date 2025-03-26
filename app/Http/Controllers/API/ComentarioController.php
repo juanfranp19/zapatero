@@ -8,7 +8,6 @@ use App\Models\Comentario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use PhpParser\Node\Stmt\TryCatch;
 
 class ComentarioController extends Controller
 {
@@ -20,7 +19,7 @@ class ComentarioController extends Controller
         try {
 
             $comentarios = ComentarioResource::collection(
-                Comentario::orderBy('ID')->paginate(5)
+                Comentario::orderBy('id')->paginate(5)
             );
 
         } catch (\Exception $e) {
@@ -35,116 +34,70 @@ class ComentarioController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'COMENTARIO' => 'required',
-            'FECHA' => 'required',
-            'USUARIO_EMAIL' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
-        }
-
         try {
-            $comentario = Comentario::create([
-                'COMENTARIO' => $request->COMENTARIO,
-                'FECHA' => $request->FECHA,
-                'USUARIO_EMAIL' => $request->USUARIO_EMAIL,
-            ]);
+
+            $comentario = json_decode($request->getContent(), true);
+            $comentario = Comentario::create($comentario);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        $data = [
-            'comentario' => $comentario,
-            'status' => 201
-        ];
-
-        return response()->json($data, 201);
+        return new ComentarioResource($comentario);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Comentario $comentario)
+    public function show($id)
     {
-        $data = [
-            'comentario' => $comentario,
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
+        $comentario = Comentario::findOrFail($id);
+        return new ComentarioResource($comentario);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comentario $comentario)
+    public function update(Request $request, $id)
     {
-        $datos = [
-            'COMENTARIO' => $request->COMENTARIO,
-            'FECHA' => $request->FECHA,
-            'USUARIO_EMAIL' => $request->USUARIO_EMAIL,
-        ];
+        try{
+        $comentario = Comentario::find($id);
 
-        $validator = Validator::make($request->all(), [
-            'COMENTARIO' => 'required',
-            'FECHA' => 'required',
-            'USUARIO_EMAIL' => 'required',
-        ]);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
 
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de los datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
+        if ($comentario) {
+
+            $request->validate([
+                'comentario' => 'required',
+                'fecha' => 'required',
+                'usuario_nombre' => 'required'
+            ]);
+
+            $comentario->comentario = $request->input('comentario');
+            $comentario->fecha = $request->input('fecha');
+            $comentario->usuario_nombre = $request->input('usuario_nombre');
+            $comentario->save();
+
+            return response()->json(new ComentarioResource($comentario), 200);
+
+        } else {
+            return response()->json(['message' => 'Comentario no encontrado'], 404);
         }
-
-        try {
-            DB::table('Comentario')
-                ->where('ID', $comentario->ID)
-                ->update($datos);
-
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-
-        $data = [
-            'message' => 'Comentario actualizado',
-            'comentario' => $datos,
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comentario $comentario)
+    public function destroy($id)
     {
-        try {
-            DB::table('Comentario')
-                ->where('ID', $comentario->ID)
-                ->delete();
-
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+        $comentario = Comentario::find($id);
+        if ($comentario) {
+            $comentario->delete();
+            return response()->json(['message' => 'Comentario eliminado'], 200);
+        } else {
+            return response()->json(['message' => 'Comentario no encontrado'], 404);
         }
-
-        $data = [
-            'message' => 'Comentario eliminado',
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
     }
 }
