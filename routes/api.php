@@ -10,6 +10,7 @@ use App\Http\Controllers\API\UsoController;
 use App\Http\Controllers\API\UsuarioController;
 use App\Http\Controllers\API\ComentarioController;
 use App\Http\Controllers\API\IncidenciaController;
+use App\Http\Controllers\API\ParametroEficaciaController;
 use App\Http\Controllers\API\SequenceController;
 use App\Http\Controllers\API\TipoParametroController;
 use App\Http\Controllers\API\ValorProduccionController;
@@ -50,8 +51,8 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('sequence', SequenceController::class);
 
     Route::apiResource('incidencias', IncidenciaController::class);
-
-
+    //ParametroEficacia
+    Route::apiResource('parametroseficacia', ParametroEficaciaController::class);
 
     Route::apiResource('tipos_parametros', TipoParametroController::class);
 

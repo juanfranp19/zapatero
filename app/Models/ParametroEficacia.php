@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class ParametroEficacia extends Model
 {
+    //protected $table = 'Equipo';
+
+    public $timestamps = false;
+
     protected $fillable = [
-        'ID',
-        'FECHAPARAMETRO	',
-        'VALOR',
-        'TIPO_PARAMETRO_ID'
+        'fecha_parametro	',
+        'valor',
+        'tipo_parametro_id'
     ];
 }
