@@ -72,10 +72,10 @@ class EquipoController extends Controller
             $request->validate([
                 'numserie' => 'required',
                 'activo' => 'required',
-                'hora_fin' => 'required',
-                'hora_inicio' => 'required',
-                'equipo_numserie' => 'required',
-                'trabajador_id' => 'required'
+                'alias' => 'required',
+                'periodo_uso' => 'required',
+                'reparacion' => 'required',
+                'tipo' => 'required'
             ]);
 
             $equipo->numserie = $request->input('numserie');
