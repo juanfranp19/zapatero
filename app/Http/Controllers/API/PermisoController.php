@@ -17,12 +17,15 @@ class PermisoController extends Controller
     public function index()
     {
         try {
-        $permisos = PermisoResource::collection(
-            Permiso::orderBy('ID')->paginate(5)
-        );
-    } catch (\Exception $e) {
-        return response()->json(['error' => $e->getMessage()], 500);
-    }
+
+            $permisos = PermisoResource::collection(
+                Permiso::orderBy('id')->paginate(5)
+            );
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
         return $permisos;
     }
 
@@ -31,130 +34,76 @@ class PermisoController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'DESDE' => 'required',
-            'HASTA' => 'required',
-            'NUMUSOS' => 'required',
-            'PERIODOUSO' => 'required',
-            'EQUIPO_NUMSERIE' => 'required',
-            'TRABAJADOR_ID' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
-        }
-
         try {
-            $permiso = Permiso::create([
-                'DESDE' => $request->DESDE,
-                'HASTA' => $request->HASTA,
-                'NUMUSOS' => $request->NUMUSOS,
-                'PERIODOUSO' => $request->PERIODOUSO,
-                'EQUIPO_NUMSERIE' => $request->EQUIPO_NUMSERIE,
-                'TRABAJADOR_ID' => $request->TRABAJADOR_ID
-            ]);
+
+            $permiso = json_decode($request->getContent(), true);
+            $permiso = Permiso::create($permiso);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        $data = [
-            'permiso' => $permiso,
-            'status' => 201
-        ];
-
-        return response()->json($data, 201);
+        return new PermisoResource($permiso);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Permiso $permiso)
+    public function show($id)
     {
-        $data = [
-            'permiso' => $permiso,
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
+        $permiso = Permiso::findOrFail($id);
+        return new PermisoResource($permiso);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Permiso $permiso)
+    public function update(Request $request, $id)
     {
-        $datos = [
-            'DESDE' => $request->DESDE,
-            'HASTA' => $request->HASTA,
-            'NUMUSOS' => $request->NUMUSOS,
-            'PERIODOUSO' => $request->PERIODOUSO,
-            'EQUIPO_NUMSERIE' => $request->EQUIPO_NUMSERIE,
-            'TRABAJADOR_ID' => $request->TRABAJADOR_ID
-        ];
+        try{
+        $permiso = Permiso::find($id);
 
-        $validator = Validator::make($request->all(), [
-            'DESDE' => 'required',
-            'HASTA' => 'required',
-            'NUMUSOS' => 'required',
-            'PERIODOUSO' => 'required',
-            'EQUIPO_NUMSERIE' => 'required',
-            'TRABAJADOR_ID' => 'required'
-        ]);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
 
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de los datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
+        if ($permiso) {
+
+            $request->validate([
+                'desde' => 'required',
+                'hasta' => 'required',
+                'numusos' => 'required',
+                'periodo_uso' => 'required',
+                'equipo_numserie' => 'required',
+                'trabajador_id' => 'required'
+            ]);
+
+            $permiso->desde = $request->input('desde');
+            $permiso->hasta = $request->input('hasta');
+            $permiso->numusos = $request->input('numusos');
+            $permiso->periodo_uso = $request->input('periodo_uso');
+            $permiso->equipo_numserie = $request->input('equipo_numserie');
+            $permiso->trabajador_id = $request->input('trabajador_id');
+            $permiso->save();
+
+            return response()->json(new PermisoResource($permiso), 200);
+
+        } else {
+            return response()->json(['message' => 'Permiso no encontrado'], 404);
         }
-
-        try {
-            DB::table('Permiso')
-                ->where('ID', $permiso->ID)
-                ->update(
-                    ['DESDE' => $request->DESDE, 'HASTA' => $request->HASTA, 'NUMUSOS' => $request->NUMUSOS, 'PERIODOUSO' => $request->PERIODOUSO, 'EQUIPO_NUMSERIE' => $request->EQUIPO_NUMSERIE, 'TRABAJADOR_ID' => $request->TRABAJADOR_ID]
-                );
-
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-
-        $data = [
-            'message' => 'Permiso actualizado',
-            'permiso' => $datos,
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Permiso $permiso)
+    public function destroy($id)
     {
-        try {
-            DB::table('Permiso')
-                ->where('ID', $permiso->ID)
-                ->delete();
-
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+        $permiso = Permiso::find($id);
+        if ($permiso) {
+            $permiso->delete();
+            return response()->json(['message' => 'Permiso eliminado'], 200);
+        } else {
+            return response()->json(['message' => 'Permiso no encontrado'], 404);
         }
-
-        $data = [
-            'message' => 'Permiso eliminado',
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
     }
 }

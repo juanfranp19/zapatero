@@ -34,7 +34,8 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('avisos', AvisoController::class);
     // Equipo
     Route::apiResource('equipos', EquipoController::class);
-    Route::apiResource('permiso', PermisoController::class);
+    // Permiso
+    Route::apiResource('permisos', PermisoController::class);
     Route::apiResource('trabajadores', TrabajadorController::class);
     Route::apiResource('uso', UsoController::class);
 
@@ -52,7 +53,7 @@ Route::prefix('v1')->group(function(){
 
     Route::apiResource('incidencias', IncidenciaController::class);
     //ParametroEficacia
-    Route::apiResource('parametroseficacia', ParametroEficaciaController::class);
+    Route::apiResource('parametros_eficacia', ParametroEficaciaController::class);
 
     Route::apiResource('tipos_parametros', TipoParametroController::class);
 
