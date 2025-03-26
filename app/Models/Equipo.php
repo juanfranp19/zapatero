@@ -11,11 +11,11 @@ class Equipo extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'NUMSERIE',
-        'ACTIVO',
-        'ALIAS',
-        'PERIODOUSO',
-        'REPARACION',
-        'TIPO'
+        'numserie',
+        'activo',
+        'alias',
+        'periodo_uso',
+        'reparacion',
+        'tipo'
     ];
 }

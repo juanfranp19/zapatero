@@ -31,7 +31,8 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('accesos', AccesoController::class);
     // Avisos
     Route::apiResource('avisos', AvisoController::class);
-    Route::apiResource('equipo', EquipoController::class);
+    // Equipo
+    Route::apiResource('equipos', EquipoController::class);
     Route::apiResource('permiso', PermisoController::class);
     Route::apiResource('trabajadores', TrabajadorController::class);
     Route::apiResource('uso', UsoController::class);

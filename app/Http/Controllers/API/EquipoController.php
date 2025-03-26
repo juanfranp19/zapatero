@@ -17,13 +17,15 @@ class EquipoController extends Controller
     public function index()
     {
         try {
-        $equipos = EquipoResource::collection(
-            Equipo::orderBy('NUMSERIE')->paginate(5)
-        );
 
-    } catch (\Exception $e) {
-        return response()->json(['error' => $e->getMessage()], 500);
-    }
+            $equipos = EquipoResource::collection(
+                Equipo::orderBy('id')->paginate(5)
+            );
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
         return $equipos;
     }
 
@@ -32,130 +34,76 @@ class EquipoController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'NUMSERIE' => 'required',
-            'ACTIVO' => 'required',
-            'ALIAS' => 'required',
-            'PERIODOUSO' => 'required',
-            'REPARACION' => 'required',
-            'TIPO' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
-        }
-
         try {
-            $equipo = Equipo::create([
-                'NUMSERIE' => $request->NUMSERIE,
-                'ACTIVO' => $request->ACTIVO,
-                'ALIAS' => $request->ALIAS,
-                'PERIODOUSO' => $request->PERIODOUSO,
-                'REPARACION' => $request->REPARACION,
-                'TIPO' => $request->TIPO
-            ]);
+
+            $equipo = json_decode($request->getContent(), true);
+            $equipo = Equipo::create($equipo);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        $data = [
-            'equipo' => $equipo,
-            'status' => 201
-        ];
-
-        return response()->json($data, 201);
+        return new EquipoResource($equipo);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Equipo $equipo)
+    public function show($id)
     {
-        $data = [
-            'equipo' => $equipo,
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
+        $equipo = Equipo::findOrFail($id);
+        return new EquipoResource($equipo);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Equipo $equipo)
+    public function update(Request $request, $id)
     {
-        $datos = [
-            'NUMSERIE' => $request->NUMSERIE,
-            'ACTIVO' => $request->ACTIVO,
-            'ALIAS' => $request->ALIAS,
-            'PERIODOUSO' => $request->PERIODOUSO,
-            'REPARACION' => $request->REPARACION,
-            'TIPO' => $request->TIPO
-        ];
+        try{
+        $equipo = Equipo::find($id);
 
-        $validator = Validator::make($request->all(), [
-            'NUMSERIE' => 'required',
-            'ACTIVO' => 'required',
-            'ALIAS' => 'required',
-            'PERIODOUSO' => 'required',
-            'REPARACION' => 'required',
-            'TIPO' => 'required'
-        ]);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
 
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de los datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
+        if ($equipo) {
+
+            $request->validate([
+                'numserie' => 'required',
+                'activo' => 'required',
+                'hora_fin' => 'required',
+                'hora_inicio' => 'required',
+                'equipo_numserie' => 'required',
+                'trabajador_id' => 'required'
+            ]);
+
+            $equipo->numserie = $request->input('numserie');
+            $equipo->activo = $request->input('activo');
+            $equipo->alias = $request->input('alias');
+            $equipo->periodo_uso = $request->input('periodo_uso');
+            $equipo->reparacion = $request->input('reparacion');
+            $equipo->tipo = $request->input('tipo');
+            $equipo->save();
+
+            return response()->json(new EquipoResource($equipo), 200);
+
+        } else {
+            return response()->json(['message' => 'Equipo no encontrado'], 404);
         }
-
-        try {
-            DB::table('Equipo')
-                ->where('ID', $equipo->ID)
-                ->update(
-                    ['NUMSERIE' => $request->NUMSERIE, 'ACTIVO' => $request->ACTIVO, 'ALIAS' => $request->ALIAS, 'PERIODOUSO' => $request->PERIODOUSO, 'REPARACION' => $request->REPARACION,'TIPO' => $request->TIPO]
-                );
-
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-
-        $data = [
-            'message' => 'Equipo actualizado',
-            'acceso' => $datos,
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Equipo $equipo)
+    public function destroy($id)
     {
-        try {
-            DB::table('Equipo')
-                ->where('ID', $equipo->ID)
-                ->delete();
-
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+        $equipo = Equipo::find($id);
+        if ($equipo) {
+            $equipo->delete();
+            return response()->json(['message' => 'Equipo eliminado'], 200);
+        } else {
+            return response()->json(['message' => 'Equipo no encontrado'], 404);
         }
-
-        $data = [
-            'message' => 'Equipo eliminado',
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
     }
 }
