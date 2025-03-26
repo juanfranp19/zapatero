@@ -19,7 +19,7 @@ class SequenceController extends Controller
         try {
 
             $sequences = SequenceResource::collection(
-                Sequence::orderBy('SEQ_NAME')->paginate(5)
+                Sequence::orderBy('id')->paginate(5)
             );
 
         } catch (\Exception $e) {
@@ -34,112 +34,68 @@ class SequenceController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'SEQ_NAME' => 'required',
-            'SEQ_COUNT' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
-        }
-
         try {
-            $sequence = Sequence::create([
-                'SEQ_NAME' => $request->SEQ_NAME,
-                'SEQ_COUNT' => $request->SEQ_COUNT
-            ]);
+
+            $sequence = json_decode($request->getContent(), true);
+            $sequence = Sequence::create($sequence);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        $data = [
-            'sequence' => $sequence,
-            'status' => 201
-        ];
-
-        return response()->json($data, 201);
+        return new SequenceResource($sequence);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Sequence $sequence)
+    public function show($id)
     {
-        $data = [
-            'sequence' => $sequence,
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
+        $sequence = Sequence::findOrFail($id);
+        return new SequenceResource($sequence);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Sequence $sequence)
+    public function update(Request $request, $id)
     {
-        $datos = [
-            'SEQ_NAME' => $request->SEQ_NAME,
-            'SEQ_COUNT' => $request->SEQ_COUNT
-        ];
+        try{
+        $sequence = Sequence::find($id);
 
-        $validator = Validator::make($request->all(), [
-            'SEQ_NAME' => 'required',
-            'SEQ_COUNT' => 'required'
-        ]);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
 
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de los datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
+        if ($sequence) {
+
+            $request->validate([
+                'seq_name' => 'required',
+                'fecha_uso' => 'required'
+            ]);
+
+            $sequence->seq_name = $request->input('seq_name');
+            $sequence->fecha_uso = $request->input('fecha_uso');
+            $sequence->save();
+
+            return response()->json(new SequenceResource($sequence), 200);
+
+        } else {
+            return response()->json(['message' => 'Sequence no encontrado'], 404);
         }
-
-        try {
-            DB::table('SEQUENCE')
-                ->where('ID', $sequence->ID)
-                ->update($datos);
-
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-
-        $data = [
-            'message' => 'Comentario actualizado',
-            'sequence' => $datos,
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sequence $sequence)
+    public function destroy($id)
     {
-        try {
-            DB::table('SEQUENCE')
-                ->where('ID', $sequence->ID)
-                ->delete();
-
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+        $sequence = Sequence::find($id);
+        if ($sequence) {
+            $sequence->delete();
+            return response()->json(['message' => 'Sequence eliminado'], 200);
+        } else {
+            return response()->json(['message' => 'Sequence no encontrado'], 404);
         }
-
-        $data = [
-            'message' => 'Sequence eliminada',
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
     }
 }

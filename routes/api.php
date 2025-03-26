@@ -49,7 +49,8 @@ Route::prefix('v1')->group(function(){
     Route::get('usuario/{id}', [UsuarioController::class,'show']);
     // Comentario
     Route::apiResource('comentarios', ComentarioController::class);
-    Route::apiResource('sequence', SequenceController::class);
+    // Sequence
+    Route::apiResource('sequences', SequenceController::class);
 
     Route::apiResource('incidencias', IncidenciaController::class);
     //ParametroEficacia
