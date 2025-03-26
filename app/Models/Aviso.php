@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Aviso extends Model
 {
-    protected $table = 'Aviso';
+    //protected $table = 'Aviso';
 
     public $timestamps = false;
 
     protected $fillable = [
-        'EQUIPO_NUMSERIE',
-        'USUARIO_EMAIL'
+        'equipo_numserie',
+        'usuario_nombre'
     ];
 }
