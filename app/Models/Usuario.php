@@ -34,6 +34,6 @@ class Usuario extends Model
 
     public function trabajador(): HasOne
     {
-        return $this->hasOne(Trabajador::class);
+        return $this->hasOne(Trabajador::class, 'usuario_id');
     }
 }
