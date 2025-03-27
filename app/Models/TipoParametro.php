@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TipoParametro extends Model
 {
@@ -17,4 +18,9 @@ class TipoParametro extends Model
         'medida',
         'equipo_numserie'
     ];
+
+    public function parametros_eficacia(): HasMany
+    {
+        return $this->HasMany(ParametroEficacia::class);
+    }
 }
