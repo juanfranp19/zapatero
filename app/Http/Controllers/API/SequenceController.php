@@ -71,11 +71,11 @@ class SequenceController extends Controller
 
             $request->validate([
                 'seq_name' => 'required',
-                'fecha_uso' => 'required'
+                'seq_count' => 'required'
             ]);
 
             $sequence->seq_name = $request->input('seq_name');
-            $sequence->fecha_uso = $request->input('fecha_uso');
+            $sequence->seq_count = $request->input('seq_count');
             $sequence->save();
 
             return response()->json(new SequenceResource($sequence), 200);
