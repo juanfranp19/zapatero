@@ -14,7 +14,6 @@ use App\Http\Controllers\API\TrabajadorController;
 use App\Http\Controllers\API\UsoController;
 use App\Http\Controllers\API\UsuarioController;
 use App\Http\Controllers\API\ValorProduccionController;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Psr\Http\Message\ServerRequestInterface;
@@ -26,6 +25,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function(){
+
     // Acceso
     Route::apiResource('accesos', AccesoController::class);
     // Avisos
@@ -52,16 +52,8 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('usos', UsoController::class);
     // Usuario
     Route::apiResource('usuarios', UsuarioController::class);
-    //Route::get('usuarios/{nombre}', [UsuarioController::class,'show']);
-
-    //Route::get('/user/profile',[UserProfileController::class, 'show'])->nombre('profile');
-
-    //Route::get('usuario', [UsuarioController::class,'index']);
-    //Route::get('usuarios/{nombre}', [UsuarioController::class,'show']);
-
     // ValorProduccion
     Route::apiResource('valores_produccion', ValorProduccionController::class);
-
 });
 
 Route::any('/{any}', function (ServerRequestInterface $request) {
