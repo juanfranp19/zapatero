@@ -6,43 +6,25 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UsuarioResource;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
 class UsuarioController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    /* public function index()
-    {
-        try{
-            $usuarios = Usuario::all();
-            return $usuarios;
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-        /*
-        try {
-            $usuarios = UsuarioResource::collection(
-                Usuario::orderBy('EMAIL')->paginate(5)
-            );
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-        return $usuarios;
-        */
-    // }
 
     public function index()
     {
         try {
+
             $usuarios = UsuarioResource::collection(
-                Usuario::orderBy('EMAIL')->paginate(5)
+                Usuario::orderBy('id')->paginate(5)
             );
+
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
+
         return $usuarios;
     }
 
@@ -51,59 +33,21 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'EMAIL' => 'required',
-            'ADMIN' => 'required',
-            'NOMBRE' => 'required',
-            'PASSWORD' => 'required',
-            'ROL' => 'required',
-            'TOKEN' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
-        }
-
         try {
-            $usuario = Usuario::create([
-                'EMAIL' => $request->EMAIL,
-                'ADMIN' => $request->ADMIN,
-                'NOMBRE' => $request->NOMBRE,
-                'PASSWORD' => $request->PASSWORD,
-                'ROL' => $request->ROL,
-                'TOKEN' => $request->TOKEN
-            ]);
+
+            $usuario = json_decode($request->getContent(), true);
+            $usuario = Usuario::create($usuario);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        $data = [
-            'usuario' => $usuario,
-            'status' => 201
-        ];
-
-        return response()->json($data, 201);
+        return new UsuarioResource($usuario);
     }
 
     /**
      * Display the specified resource.
      */
-    /* public function show(Usuario $usuario)
-    {
-        $data = [
-            'usuario' => $usuario,
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
-    }
-*/
     public function show($id)
     {
         $usuario = Usuario::findOrFail($id);
@@ -113,74 +57,62 @@ class UsuarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(Request $request, $id)
     {
-        $datos = [
-            'EMAIL' => $request->EMAIL,
-            'ADMIN' => $request->ADMIN,
-            'NOMBRE' => $request->NOMBRE,
-            'PASSWORD' => $request->PASSWORD,
-            'ROL' => $request->ROL,
-            'TOKEN' => $request->TOKEN
-        ];
-
-        $validator = Validator::make($request->all(), [
-            'EMAIL' => 'required',
-            'ADMIN' => 'required',
-            'NOMBRE' => 'required',
-            'PASSWORD' => 'required',
-            'ROL' => 'required',
-            'TOKEN' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de los datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
-        }
-
         try {
-            DB::table('Usuario')
-                ->where('ID', $usuario->ID)
-                ->update(
-                    ['EMAIL' => $request->EMAIL, 'ADMIN' => $request->ADMIN, 'NOMBRE' => $request->NOMBRE, 'PASSWORD' => $request->PASSWORD, 'ROL' => $request->ROL, 'TOKEN' => $request->TOKEN]
-                );
+
+            $usuario = Usuario::find($id);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        $data = [
-            'message' => 'Usuario actualizado',
-            'usuario' => $datos,
-            'status' => 200
-        ];
+        if ($usuario) {
 
-        return response()->json($data, 200);
+            $request->validate([
+                'nombre' => 'required',
+                'email' => 'required',
+                'admin' => 'required',
+                'password' => 'required',
+                //'rol' => 'required',
+                //'token' => 'required',
+            ]);
+
+            try {
+
+                $usuario->nombre = $request->input('nombre');
+                $usuario->email = $request->input('email');
+                $usuario->admin = $request->input('admin');
+                $usuario->password = $request->input('password');
+                $usuario->rol = $request->input('rol');
+                $usuario->token = $request->input('token');
+                $usuario->save();
+
+                return response()->json(new UsuarioResource($usuario), 200);
+
+            } catch (\Exception $e) {
+                return response()->json(['error' => $e->getMessage()], 500);
+            }
+
+        } else {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Usuario $usuario)
+    public function destroy($id)
     {
-        try {
-            DB::table('Usuario')
-                ->where('ID', $usuario->ID)
-                ->delete();
+        $usuario = Usuario::find($id);
 
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+        if ($usuario) {
+
+            $usuario->delete();
+            return response()->json(['message' => 'Usuario eliminado'], 200);
+
+        } else {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
         }
-
-        $data = [
-            'message' => 'Usuario eliminado',
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
     }
 }
