@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('trabajadores', function (Blueprint $table) {
             $table->id();
-            $table->string('dni', 255);
+            $table->string('dni', 255)->unique();
             $table->unsignedTinyInteger('activo')->default(0);
             $table->string('apellidos', 255);
             $table->unsignedTinyInteger('borrado')->default(0);
