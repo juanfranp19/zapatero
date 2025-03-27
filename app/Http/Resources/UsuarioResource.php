@@ -14,6 +14,11 @@ class UsuarioResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $array_usuarios = parent::toArray($request);
+        $array_comentarios = $this->comentarios;
+
+        return array_merge($array_usuarios, [
+            'comentarios' => $array_comentarios,
+        ]);
     }
 }

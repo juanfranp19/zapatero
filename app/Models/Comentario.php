@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Comentario extends Model
 {
@@ -13,4 +14,9 @@ class Comentario extends Model
         'fecha',
         'usuario_nombre'
     ];
+
+    public function usuario(): BelongsTo
+    {
+        return $this->belongsTo(Usuario::class);
+    }
 }
