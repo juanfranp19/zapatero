@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Trabajador extends Model
 {
@@ -19,4 +20,9 @@ class Trabajador extends Model
         'url_imagen',
         'usuario_nombre'
     ];
+
+    public function accesos(): HasMany
+    {
+        return $this->hasMany(Acceso::class);
+    }
 }
