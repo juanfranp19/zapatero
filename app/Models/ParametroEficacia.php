@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ParametroEficacia extends Model
 {
@@ -15,4 +16,9 @@ class ParametroEficacia extends Model
         'valor',
         'tipo_parametro_id'
     ];
+
+    public function tipo_parametro(): BelongsTo
+    {
+        return $this->belongsTo(TipoParametro::class, 'tipo_parametro_id');
+    }
 }

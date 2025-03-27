@@ -14,6 +14,14 @@ class ParametroEficaciaResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $parametrosEficacia_array = parent::toArray($request);
+
+        $tipoParametro_array = $this->tipo_parametro;
+
+        unset($parametrosEficacia_array['tipo_parametro_id']);
+
+        return array_merge($parametrosEficacia_array, [
+            'tipo_parametro' => $tipoParametro_array,
+        ]);
     }
 }

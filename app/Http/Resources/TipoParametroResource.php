@@ -14,6 +14,12 @@ class TipoParametroResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $tipoParametros_array = parent::toArray($request);
+
+        $parametrosEficacia_array = $this->parametros_eficacia;
+
+        return array_merge($tipoParametros_array, [
+            'parametros_eficacia' => $parametrosEficacia_array,
+        ]);
     }
 }
