@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\SequenceResource;
 use App\Models\Sequence;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
 class SequenceController extends Controller
 {
@@ -91,6 +89,7 @@ class SequenceController extends Controller
     public function destroy($id)
     {
         $sequence = Sequence::find($id);
+
         if ($sequence) {
             $sequence->delete();
             return response()->json(['message' => 'Sequence eliminado'], 200);

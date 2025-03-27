@@ -12,8 +12,11 @@ class Usuario extends Model
         'nombre',
         'email',
         'admin',
+        'rol'
+    ];
+
+    protected $hidden = [
         'password',
-        'rol',
-        'token'
+        'token',
     ];
 }

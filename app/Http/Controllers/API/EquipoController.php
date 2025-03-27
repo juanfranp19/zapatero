@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\EquipoResource;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
 class EquipoController extends Controller
 {

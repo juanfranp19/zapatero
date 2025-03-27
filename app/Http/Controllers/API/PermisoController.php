@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PermisoResource;
 use App\Models\Permiso;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
 class PermisoController extends Controller
 {

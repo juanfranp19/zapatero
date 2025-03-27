@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\AccesoResource;
 use App\Models\Acceso;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
 class AccesoController extends Controller
 {
@@ -91,6 +89,7 @@ class AccesoController extends Controller
     public function destroy($id)
     {
         $acceso = Acceso::find($id);
+
         if ($acceso) {
             $acceso->delete();
             return response()->json(['message' => 'Acceso eliminado'], 200);

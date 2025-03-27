@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\AvisoResource;
 use App\Models\Aviso;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
 class AvisoController extends Controller
 {

@@ -89,6 +89,7 @@ class TipoIncidenciaController extends Controller
     public function destroy($id)
     {
         $tipoIncidencia = TipoIncidencia::find($id);
+
         if ($tipoIncidencia) {
             $tipoIncidencia->delete();
             return response()->json(['message' => 'Tipo de Incidencia eliminado'], 200);

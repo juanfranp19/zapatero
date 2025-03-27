@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UsoResource;
 use App\Models\Uso;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
 class UsoController extends Controller
 {
@@ -98,6 +96,7 @@ class UsoController extends Controller
     public function destroy($id)
     {
         $uso = Uso::find($id);
+
         if ($uso) {
             $uso->delete();
             return response()->json(['message' => 'Uso eliminado'], 200);
