@@ -13,7 +13,6 @@ use App\Http\Controllers\API\TipoParametroController;
 use App\Http\Controllers\API\TrabajadorController;
 use App\Http\Controllers\API\UsoController;
 use App\Http\Controllers\API\UsuarioController;
-use App\Http\Resources\UsuarioResource;
 use App\Http\Controllers\API\ValorProduccionController;
 
 use Illuminate\Http\Request;
@@ -52,9 +51,14 @@ Route::prefix('v1')->group(function(){
     // Uso
     Route::apiResource('usos', UsoController::class);
     // Usuario
-    Route::apiResource('usuarios', UsuarioResource::class);
-    Route::get('usuario', [UsuarioController::class,'index']);
-    Route::get('usuario/{id}', [UsuarioController::class,'show']);
+    Route::apiResource('usuarios', UsuarioController::class);
+    //Route::get('usuarios/{nombre}', [UsuarioController::class,'show']);
+
+    //Route::get('/user/profile',[UserProfileController::class, 'show'])->nombre('profile');
+
+    //Route::get('usuario', [UsuarioController::class,'index']);
+    //Route::get('usuarios/{nombre}', [UsuarioController::class,'show']);
+
     // ValorProduccion
     Route::apiResource('valores_produccion', ValorProduccionController::class);
 
