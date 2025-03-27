@@ -25,4 +25,9 @@ class Usuario extends Model
     {
         return $this->hasMany(Comentario::class);
     }
+
+    public function avisos(): HasMany
+    {
+        return $this->hasMany(Aviso::class);
+    }
 }

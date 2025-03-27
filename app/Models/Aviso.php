@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Aviso extends Model
 {
@@ -12,4 +14,9 @@ class Aviso extends Model
         'equipo_numserie',
         'usuario_nombre'
     ];
+
+    public function usuario(): BelongsTo
+    {
+        return $this->BelongsTo(Usuario::class);
+    }
 }
