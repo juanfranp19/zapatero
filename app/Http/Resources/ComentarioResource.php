@@ -15,6 +15,7 @@ class ComentarioResource extends JsonResource
     public function toArray(Request $request): array
     {
         $array_comentarios = parent::toArray($request);
+        unset($array_comentarios['usuario_id']);
 
         return array_merge($array_comentarios, [
             'usuario' => $this->usuario,
