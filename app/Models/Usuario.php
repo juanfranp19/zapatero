@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Usuario extends Model
 {
@@ -29,5 +30,10 @@ class Usuario extends Model
     public function avisos(): HasMany
     {
         return $this->hasMany(Aviso::class);
+    }
+
+    public function trabajador(): HasOne
+    {
+        return $this->hasOne(Trabajador::class);
     }
 }

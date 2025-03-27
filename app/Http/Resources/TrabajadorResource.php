@@ -16,8 +16,12 @@ class TrabajadorResource extends JsonResource
     {
         $array_trabajadores = parent::toArray($request);
 
+        $array_accesos = $this->accesos;
+        $array_usuario = $this->usuario;
+
         return array_merge($array_trabajadores, [
-            'accesos' => $this->accesos,
+            'accesos' => $array_accesos,
+            'usuario' => $array_usuario,
         ]);
     }
 }
