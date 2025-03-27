@@ -72,8 +72,8 @@ class UsoController extends Controller
             $request->validate([
                 'estado' => 'required',
                 'fecha_uso' => 'required',
-                'hora_fin' => 'required',
-                'hora_inicio' => 'required',
+                //'hora_fin' => 'required',
+                //'hora_inicio' => 'required',
                 'equipo_numserie' => 'required',
                 'trabajador_id' => 'required'
             ]);
