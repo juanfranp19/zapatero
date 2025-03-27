@@ -19,9 +19,9 @@ return new class extends Migration
             $table->unsignedTinyInteger('borrado')->default(0);
             $table->string('nombre', 255);
             $table->string('url_imagen', 255)->nullable();
-            $table->string('usuario_nombre', 255)->nullable();
+            $table->unsignedBigInteger('usuario_id')->nullable();
 
-            /* $table->foreign('usuario_nombre')->references('nombre')->on('usuarios')->onDelete('cascade'); */
+            /* $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade'); */
         });
     }
 

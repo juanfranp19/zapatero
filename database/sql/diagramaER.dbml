@@ -10,14 +10,14 @@ Table accesos {
 Table avisos {
   id int [pk]
   equipo_numserie varchar(255) [ref: > equipos.numserie]
-  usuario_email varchar(255) [ref: > usuarios.nombre]
+  usuario_id varchar(255) [ref: > usuarios.id]
 }
 
 Table comentarios {
   id int [pk]
   comentario varchar(255)
   fecha datetime
-  usuario_nombre varchar(255) [ref: > usuarios.nombre]
+  usuario_id varchar(255) [ref: > usuarios.id]
 }
 
 Table equipos {
@@ -80,7 +80,7 @@ Table trabajadores {
   borrado tinyint(1) [default: 0]
   nombre varchar(255)
   urlimagen varchar(255)
-  usuario_nombre varchar(255) [ref: > usuarios.nombre]
+  usuario_id varchar(255) [ref: > usuarios.id]
 }
 
 Table usos {
@@ -94,7 +94,8 @@ Table usos {
 }
 
 Table usuarios {
-  nombre varchar(255) [pk]
+  id int [pk]
+  nombre varchar(255)
   email varchar(255) [unique]
   admin tinyint(1) [default: 0]
   password varchar(255)

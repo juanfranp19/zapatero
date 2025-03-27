@@ -1,7 +1,7 @@
-INSERT INTO `avisos` (`id`, `equipo_numserie`, `usuario_nombre`) VALUES
-(35,	'2342ewdfw',	'isa'),
-(34,	'asd1324',	'isa'),
-(38,	'2342ewdfw',	'jose'),
-(37,	'788845',	'jose'),
-(36,	'asd1324',	'mario'),
-(12,	'1210',	'prevencion');
+INSERT INTO `avisos` (`id`, `equipo_numserie`, `usuario_id`) VALUES
+(35,	'2342ewdfw',	1),
+(34,	'asd1324',	1),
+(38,	'2342ewdfw',	2),
+(37,	'788845',	2),
+(36,	'asd1324',	4),
+(12,	'1210',	5);
