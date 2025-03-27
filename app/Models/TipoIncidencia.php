@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TipoIncidencia extends Model
 {
@@ -16,4 +17,8 @@ class TipoIncidencia extends Model
         'eliminado',
         'equipo_numserie'
     ];
+    public function incidencias(): HasMany
+    {
+        return $this->hasMany(Incidencia::class);
+    }
 }

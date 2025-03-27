@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Incidencia extends Model
 {
@@ -14,4 +15,9 @@ class Incidencia extends Model
         'tipo_incidencia_id',
         'trabajador_id'
     ];
+
+    public function tiposincidencias(): BelongsTo
+    {
+        return $this->belongsTo(TipoIncidencia::class);
+    }
 }
