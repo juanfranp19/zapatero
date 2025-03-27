@@ -58,25 +58,32 @@ class ParametroEficaciaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try{
-        $parametroseficacia = ParametroEficacia::find($id);
+        try {
 
-    } catch (\Exception $e) {
-        return response()->json(['error' => $e->getMessage()], 500);
-    }
+            $parametroseficacia = ParametroEficacia::find($id);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
 
         if ($parametroseficacia) {
 
             $request->validate([
                 'fecha_parametro' => 'required',
-                'fecha_uso' => 'required',
-                'hora_fin' => 'required'
+                'valor' => 'required',
+                'tipo_parametro_id' => 'required'
             ]);
 
-            $parametroseficacia->fecha_parametro = $request->input('fecha_parametro');
-            $parametroseficacia->fecha_uso = $request->input('fecha_uso');
-            $parametroseficacia->hora_fin = $request->input('hora_fin');
-            $parametroseficacia->save();
+            try {
+
+                $parametroseficacia->fecha_parametro = $request->input('fecha_parametro');
+                $parametroseficacia->valor = $request->input('valor');
+                $parametroseficacia->tipo_parametro_id = $request->input('tipo_parametro_id');
+                $parametroseficacia->save();
+
+            } catch (\Exception $e) {
+                return response()->json(['error' => $e->getMessage()], 500);
+            }
 
             return response()->json(new ParametroEficaciaResource($parametroseficacia), 200);
 

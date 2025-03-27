@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class ParametroEficacia extends Model
 {
-    //protected $table = 'Equipo';
+    protected $table = 'parametros_eficacia';
 
     public $timestamps = false;
 
     protected $fillable = [
-        'fecha_parametro	',
+        'fecha_parametro',
         'valor',
         'tipo_parametro_id'
     ];
