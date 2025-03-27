@@ -1,21 +1,20 @@
 <?php
 
 use App\Http\Controllers\API\AccesoController;
-
 use App\Http\Controllers\API\AvisoController;
+use App\Http\Controllers\API\ComentarioController;
 use App\Http\Controllers\API\EquipoController;
+use App\Http\Controllers\API\IncidenciaController;
+use App\Http\Controllers\API\ParametroEficaciaController;
 use App\Http\Controllers\API\PermisoController;
+use App\Http\Controllers\API\SequenceController;
+use App\Http\Controllers\API\TipoIncidenciaController;
+use App\Http\Controllers\API\TipoParametroController;
 use App\Http\Controllers\API\TrabajadorController;
 use App\Http\Controllers\API\UsoController;
 use App\Http\Controllers\API\UsuarioController;
-use App\Http\Controllers\API\ComentarioController;
-use App\Http\Controllers\API\IncidenciaController;
-use App\Http\Controllers\API\ParametroEficaciaController;
-use App\Http\Controllers\API\SequenceController;
-use App\Http\Controllers\API\TipoParametroController;
-use App\Http\Controllers\API\ValorProduccionController;
-use App\Http\Controllers\API\TipoIncidenciaController;
 use App\Http\Resources\UsuarioResource;
+use App\Http\Controllers\API\ValorProduccionController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,38 +31,32 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('accesos', AccesoController::class);
     // Avisos
     Route::apiResource('avisos', AvisoController::class);
-    // Equipo
-    Route::apiResource('equipos', EquipoController::class);
-    // Permiso
-    Route::apiResource('permisos', PermisoController::class);
-    Route::apiResource('trabajadores', TrabajadorController::class);
-    Route::apiResource('uso', UsoController::class);
-
-    Route::apiResource('trabajador', TrabajadorController::class);
-
-    // Uso
-    Route::apiResource('usos', UsoController::class);
-
-    Route::apiResource('usuario', UsuarioResource::class);
-    Route::get('usuario', [UsuarioController::class,'index']);
-    Route::get('usuario/{id}', [UsuarioController::class,'show']);
     // Comentario
     Route::apiResource('comentarios', ComentarioController::class);
-    // Sequence
-    Route::apiResource('sequences', SequenceController::class);
-
+    // Equipo
+    Route::apiResource('equipos', EquipoController::class);
+    // Incidencia
     Route::apiResource('incidencias', IncidenciaController::class);
     //ParametroEficacia
     Route::apiResource('parametros_eficacia', ParametroEficaciaController::class);
-
-    Route::apiResource('tipos_parametros', TipoParametroController::class);
-
-    Route::apiResource('valores_produccion', ValorProduccionController::class);
-
-    // TipoIncidencias
+    // Permiso
+    Route::apiResource('permisos', PermisoController::class);
+    // Sequence
+    Route::apiResource('sequences', SequenceController::class);
+    // TipoIncidencia
     Route::apiResource('tipos_incidencias', TipoIncidenciaController::class);
-
-
+    // TipoParametro
+    Route::apiResource('tipos_parametros', TipoParametroController::class);
+    // Trabajador
+    Route::apiResource('trabajadores', TrabajadorController::class);
+    // Uso
+    Route::apiResource('usos', UsoController::class);
+    // Usuario
+    Route::apiResource('usuarios', UsuarioResource::class);
+    Route::get('usuario', [UsuarioController::class,'index']);
+    Route::get('usuario/{id}', [UsuarioController::class,'show']);
+    // ValorProduccion
+    Route::apiResource('valores_produccion', ValorProduccionController::class);
 
 });
 
