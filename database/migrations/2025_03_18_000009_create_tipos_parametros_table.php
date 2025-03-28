@@ -17,12 +17,12 @@ return new class extends Migration
             $table->string('descripcion', 255);
             $table->unsignedTinyInteger('eliminado')->default(0);
             $table->string('medida', 255);
-            $table->string('equipo_numserie', 255)->nullable();
+            $table->unsignedBigInteger('equipo_id')->nullable();
 
 
-            /* $table->foreign('equipo_numserie')->references('numserie')->on('equipos')->onDelete('cascade'); */
+            /* $table->foreign('equipo_id')->references('id')->on('equipos')->onDelete('cascade'); */
 
-            $table->unique(['codigo','equipo_numserie'], 'UNQ_TipoParametro_0');
+            $table->unique(['codigo','equipo_id'], 'UNQ_TipoParametro_0');
         });
     }
 

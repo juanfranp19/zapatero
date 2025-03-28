@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('codigo', 255);
             $table->string('descripcion', 255);
             $table->unsignedInteger('eliminado')->default(0);
-            $table->string('equipo_numserie', 255)->nullable();
+            $table->unsignedBigInteger('equipo_id')->nullable();
 
-            /* $table->foreign('equipo_numserie')->references('numserie')->on('equipos')->onDelete('cascade'); */
+            /* $table->foreign('equipo_id')->references('id')->on('equipos')->onDelete('cascade'); */
 
-            $table->unique(['codigo','equipo_numserie'], 'UNQ_TipoIncidencia_0');
+            $table->unique(['codigo','equipo_id'], 'UNQ_TipoIncidencia_0');
         });
     }
 
