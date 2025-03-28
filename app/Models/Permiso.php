@@ -22,4 +22,9 @@ class Permiso extends Model
     {
         return $this->belongsTo(Equipo::class);
     }
+
+    public function trabajador(): BelongsTo
+    {
+        return $this->belongsTo(Trabajador::class);
+    }
 }
