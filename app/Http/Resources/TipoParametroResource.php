@@ -19,6 +19,8 @@ class TipoParametroResource extends JsonResource
         $parametrosEficacia_array = $this->parametros_eficacia;
         $equipo_array = $this->equipo;
 
+        if ($equipo_array == null) $equipo_array = 'No hay equipo asignado';
+
         return array_merge($tipoParametros_array, [
             'parametros_eficacia' => $parametrosEficacia_array,
             'equipo' => $equipo_array,

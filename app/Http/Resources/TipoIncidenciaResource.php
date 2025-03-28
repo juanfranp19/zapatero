@@ -18,6 +18,8 @@ class TipoIncidenciaResource extends JsonResource
         $array_incidencias = $this->incidencias;
         $array_equipo = $this->equipo;
 
+        if ($array_equipo == null) $array_equipo = 'No hay equipo asignado';
+
         return array_merge($array_tiposincidencias, [
             'incidencias' => $array_incidencias,
             'equipo' => $array_equipo,
