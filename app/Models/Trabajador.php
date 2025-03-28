@@ -27,6 +27,11 @@ class Trabajador extends Model
         return $this->hasMany(Acceso::class);
     }
 
+    public function usos(): HasMany
+    {
+        return $this->hasMany(Uso::class);
+    }
+
     public function usuario(): HasOne
     {
         return $this->hasOne(Usuario::class, 'id');

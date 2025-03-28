@@ -14,6 +14,11 @@ class UsoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $array_usos = parent::toArray($request);
+
+        if (count($array_usos) == 0) $array_usos = 'No hay usos';
+        return array_merge($array_usos, [
+            'trabajador' => $this->trabajador,
+        ]);
     }
 }
