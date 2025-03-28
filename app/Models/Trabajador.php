@@ -36,4 +36,9 @@ class Trabajador extends Model
     {
         return $this->hasOne(Usuario::class, 'id');
     }
+
+    public function permisos(): HasMany
+    {
+        return $this->hasMany(Permiso::class);
+    }
 }

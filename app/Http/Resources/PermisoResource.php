@@ -17,9 +17,11 @@ class PermisoResource extends JsonResource
         $permisos_array = parent::toArray($request);
 
         $equipo_array = $this->equipo;
+        $trabajador_array = $this->trabajador;
 
         return array_merge($permisos_array, [
             'equipo' => $equipo_array,
+            'trabajadores' => $trabajador_array,
         ]);
 
     }
