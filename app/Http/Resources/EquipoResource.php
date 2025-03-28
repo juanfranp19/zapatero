@@ -20,6 +20,7 @@ class EquipoResource extends JsonResource
         $permisos_array = $this->permisos;
         $usos_array = $this->usos;
         $avisos_array = $this->avisos;
+        $tipoincidencias_array = $this->tipo_incidencias;
 
         if (count($valoresProduccion_array) == 0) $valoresProduccion_array = 'No tiene valores de producción';
         if (count($permisos_array) == 0) $permisos_array = 'No tiene permisos';
@@ -31,6 +32,7 @@ class EquipoResource extends JsonResource
             'permisos' => $permisos_array,
             'usos' => $usos_array,
             'avisos' => $avisos_array,
+            'tipo de incidencias' => $tipoincidencias_array,
         ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TipoIncidencia extends Model
@@ -20,5 +21,10 @@ class TipoIncidencia extends Model
     public function incidencias(): HasMany
     {
         return $this->hasMany(Incidencia::class);
+    }
+
+    public function equipo(): BelongsTo
+    {
+        return $this->belongsTo(Equipo::class);
     }
 }

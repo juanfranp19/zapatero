@@ -37,4 +37,10 @@ class Equipo extends Model
     {
         return $this->hasMany(Aviso::class);
     }
+
+    public function tipo_incidencias(): HasMany
+    {
+        return $this->hasMany(TipoIncidencia::class);
+    }
+
 }

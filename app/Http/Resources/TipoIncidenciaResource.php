@@ -16,9 +16,11 @@ class TipoIncidenciaResource extends JsonResource
     {
         $array_tiposincidencias = parent::toArray($request);
         $array_incidencias = $this->incidencias;
+        $array_equipo = $this->equipo;
 
         return array_merge($array_tiposincidencias, [
             'incidencias' => $array_incidencias,
+            'equipo' => $array_equipo,
         ]);
     }
 }
