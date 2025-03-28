@@ -17,9 +17,11 @@ class UsuarioResource extends JsonResource
         $array_usuarios = parent::toArray($request);
 
         $array_avisos = $this->avisos;
+        $array_comentarios = [];
         $array_comentarios = $this->comentarios;
         $array_trabajador = $this->trabajador;
 
+        if (count($array_comentarios) == 0) $array_comentarios = 'No hay comentarios';
         if ($array_trabajador == null) $array_trabajador = 'No hay trabajador asignado';
 
         return array_merge($array_usuarios, [

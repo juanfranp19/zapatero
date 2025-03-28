@@ -18,7 +18,7 @@ class TipoIncidenciaResource extends JsonResource
         $array_incidencias = $this->incidencias;
 
         return array_merge($array_tiposincidencias, [
-            'incidencia' => $array_incidencias,
+            'incidencias' => $array_incidencias,
         ]);
     }
 }

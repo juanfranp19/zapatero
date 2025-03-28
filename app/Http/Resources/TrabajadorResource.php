@@ -19,6 +19,7 @@ class TrabajadorResource extends JsonResource
         $array_accesos = $this->accesos;
         $array_usuario = $this->usuario;
 
+        if (count($array_accesos) == 0) $array_accesos = 'No hay accesos';
         if ($array_usuario == null) $array_usuario = 'No hay usuario asignado';
 
         return array_merge($array_trabajadores, [
