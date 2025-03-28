@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Equipo extends Model
 {
@@ -16,4 +17,14 @@ class Equipo extends Model
         'reparacion',
         'tipo'
     ];
+
+    public function valores_produccion(): HasMany
+    {
+        return $this->hasMany(ValorProduccion::class);
+    }
+
+    public function permisos(): HasMany
+    {
+        return $this->hasMany(Permiso::class);
+    }
 }

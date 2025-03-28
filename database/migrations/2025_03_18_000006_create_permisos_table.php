@@ -17,10 +17,10 @@ return new class extends Migration
             $table->datetime('hasta');
             $table->unsignedInteger('numusos')->nullable();
             $table->double('periodo_uso')->nullable();
-            $table->string('equipo_numserie', 255);
+            $table->unsignedBigInteger('equipo_id');
             $table->unsignedBigInteger('trabajador_id');
 
-            /* $table->foreign('equipo_numserie')->references('numserie')->on('equipos')->onDelete('cascade');
+            /* $table->foreign('equipo_id')->references('id')->on('equipos')->onDelete('cascade');
             $table->foreign('trabajador_id')->references('id')->on('trabajadores')->onDelete('cascade'); */
         });
     }
