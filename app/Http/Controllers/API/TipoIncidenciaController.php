@@ -66,13 +66,13 @@ class TipoIncidenciaController extends Controller
                 'codigo' => 'required',
                 'descripcion' => 'required',
                 'eliminado' => 'required',
-                'equipo_numserie' => 'required'
+                'equipo_id' => 'required'
             ]);
 
             $tipoIncidencia->codigo = $request->input('codigo');
             $tipoIncidencia->descripcion = $request->input('descripcion');
             $tipoIncidencia->eliminado = $request->input('eliminado');
-            $tipoIncidencia->equipo_numserie = $request->input('equipo_numserie');
+            $tipoIncidencia->equipo_id = $request->input('equipo_id');
             $tipoIncidencia->save();
 
             return response()->json(new TipoIncidenciaResource($tipoIncidencia), 200);

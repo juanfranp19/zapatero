@@ -14,7 +14,7 @@ class Uso extends Model
         'fecha_uso',
         'hora_fin',
         'hora_inicio',
-        'equipo_numserie',
+        'equipo_id',
         'trabajador_id'
     ];
 

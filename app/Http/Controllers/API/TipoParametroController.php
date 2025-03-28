@@ -73,14 +73,14 @@ class TipoParametroController extends Controller
                 'descripcion' => 'required',
                 'eliminado' => 'required',
                 'medida' => 'required',
-                'equipo_numserie' => 'required'
+                'equipo_id' => 'required'
             ]);
 
             $tipoParametro->codigo = $request->input('codigo');
             $tipoParametro->descripcion = $request->input('descripcion');
             $tipoParametro->eliminado = $request->input('eliminado');
             $tipoParametro->medida = $request->input('medida');
-            $tipoParametro->equipo_numserie = $request->input('equipo_numserie');
+            $tipoParametro->equipo_id = $request->input('equipo_id');
             $tipoParametro->save();
 
             return response()->json(new TipoParametroResource($tipoParametro), 200);

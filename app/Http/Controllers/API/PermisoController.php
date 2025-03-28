@@ -72,7 +72,7 @@ class PermisoController extends Controller
                 'hasta' => 'required',
                 'numusos' => 'required',
                 'periodo_uso' => 'required',
-                'equipo_numserie' => 'required',
+                'equipo_id' => 'required',
                 'trabajador_id' => 'required'
             ]);
 
@@ -80,7 +80,7 @@ class PermisoController extends Controller
             $permiso->hasta = $request->input('hasta');
             $permiso->numusos = $request->input('numusos');
             $permiso->periodo_uso = $request->input('periodo_uso');
-            $permiso->equipo_numserie = $request->input('equipo_numserie');
+            $permiso->equipo_id = $request->input('equipo_id');
             $permiso->trabajador_id = $request->input('trabajador_id');
             $permiso->save();
 

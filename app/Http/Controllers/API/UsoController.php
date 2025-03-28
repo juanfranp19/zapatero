@@ -72,7 +72,7 @@ class UsoController extends Controller
                 'fecha_uso' => 'required',
                 //'hora_fin' => 'required',
                 //'hora_inicio' => 'required',
-                'equipo_numserie' => 'required',
+                'equipo_id' => 'required',
                 'trabajador_id' => 'required'
             ]);
 
@@ -80,7 +80,7 @@ class UsoController extends Controller
             $uso->fecha_uso = $request->input('fecha_uso');
             $uso->hora_fin = $request->input('hora_fin');
             $uso->hora_inicio = $request->input('hora_inicio');
-            $uso->equipo_numserie = $request->input('equipo_numserie');
+            $uso->equipo_id = $request->input('equipo_id');
             $uso->trabajador_id = $request->input('trabajador_id');
             $uso->save();
 

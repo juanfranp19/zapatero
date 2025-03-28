@@ -14,7 +14,7 @@ class Permiso extends Model
         'hasta',
         'numusos',
         'periodo_uso',
-        'equipo_numserie',
+        'equipo_id',
         'trabajador_id'
     ];
 

@@ -76,7 +76,7 @@ class ValorProduccionController extends Controller
                 'value_d' => 'required',
                 'value_e' => 'required',
                 'value_f' => 'required',
-                'equipo_numserie' => 'required'
+                'equipo_id' => 'required'
             ]);
 
             $valor_produccion->fecha = $request->input('fecha');
@@ -86,7 +86,7 @@ class ValorProduccionController extends Controller
             $valor_produccion->value_d = $request->input('value_d');
             $valor_produccion->value_e = $request->input('value_e');
             $valor_produccion->value_f = $request->input('value_f');
-            $valor_produccion->equipo_numserie = $request->input('equipo_numserie');
+            $valor_produccion->equipo_id = $request->input('equipo_id');
             $valor_produccion->save();
 
             return response()->json(new ValorProduccionResource($valor_produccion), 200);

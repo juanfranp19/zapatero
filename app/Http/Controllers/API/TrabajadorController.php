@@ -75,7 +75,7 @@ class TrabajadorController extends Controller
                 'borrado' => 'required',
                 'nombre' => 'required',
                 'url_imagen' => 'required',
-                'usuario_nombre' => 'required'
+                'usuario_id' => 'required'
             ]);
 
             $trabajador->dni = $request->input('dni');
@@ -84,7 +84,7 @@ class TrabajadorController extends Controller
             $trabajador->borrado = $request->input('borrado');
             $trabajador->nombre = $request->input('nombre');
             $trabajador->url_imagen = $request->input('url_imagen');
-            $trabajador->usuario_nombre = $request->input('usuario_nombre');
+            $trabajador->usuario_id = $request->input('usuario_id');
             $trabajador->save();
 
             return response()->json(new TrabajadorResource($trabajador), 200);

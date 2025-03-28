@@ -16,7 +16,7 @@ class TipoIncidencia extends Model
         'codigo',
         'descripcion',
         'eliminado',
-        'equipo_numserie'
+        'equipo_id'
     ];
     public function incidencias(): HasMany
     {

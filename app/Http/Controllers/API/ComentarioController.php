@@ -70,12 +70,12 @@ class ComentarioController extends Controller
             $request->validate([
                 'comentario' => 'required',
                 'fecha' => 'required',
-                'usuario_nombre' => 'required'
+                'usuario_id' => 'required'
             ]);
 
             $comentario->comentario = $request->input('comentario');
             $comentario->fecha = $request->input('fecha');
-            $comentario->usuario_nombre = $request->input('usuario_nombre');
+            $comentario->usuario_id = $request->input('usuario_id');
             $comentario->save();
 
             return response()->json(new ComentarioResource($comentario), 200);

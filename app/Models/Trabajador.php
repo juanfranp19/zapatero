@@ -19,7 +19,7 @@ class Trabajador extends Model
         'borrado',
         'nombre',
         'url_imagen',
-        'usuario_nombre'
+        'usuario_id'
     ];
 
     public function accesos(): HasMany

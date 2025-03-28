@@ -19,7 +19,7 @@ class ValorProduccion extends Model
         'value_d',
         'value_e',
         'value_f',
-        'equipo_numserie'
+        'equipo_id'
     ];
 
     public function equipo(): BelongsTo

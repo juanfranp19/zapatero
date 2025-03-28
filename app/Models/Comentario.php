@@ -12,7 +12,7 @@ class Comentario extends Model
     protected $fillable = [
         'comentario',
         'fecha',
-        'usuario_nombre'
+        'usuario_id'
     ];
 
     public function usuario(): BelongsTo

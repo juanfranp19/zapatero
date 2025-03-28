@@ -17,7 +17,7 @@ class TipoParametro extends Model
         'descripcion',
         'eliminado',
         'medida',
-        'equipo_numserie'
+        'equipo_id'
     ];
 
     public function parametros_eficacia(): HasMany
