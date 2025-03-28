@@ -14,6 +14,13 @@ class PermisoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $permisos_array = parent::toArray($request);
+
+        $equipo_array = $this->equipo;
+
+        return array_merge($permisos_array, [
+            'equipo' => $equipo_array,
+        ]);
+
     }
 }

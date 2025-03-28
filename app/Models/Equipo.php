@@ -22,4 +22,9 @@ class Equipo extends Model
     {
         return $this->hasMany(ValorProduccion::class);
     }
+
+    public function permisos(): HasMany
+    {
+        return $this->hasMany(Permiso::class);
+    }
 }

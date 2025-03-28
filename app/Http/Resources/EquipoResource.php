@@ -17,11 +17,14 @@ class EquipoResource extends JsonResource
         $equipo_array = parent::toArray($request);
 
         $valoresProduccion_array = $this->valores_produccion;
+        $permisos_array = $this->permisos;
 
         if (count($valoresProduccion_array) == 0) $valoresProduccion_array = 'No tiene valores de producción';
+        if (count($permisos_array) == 0) $permisos_array = 'No tiene permisos';
 
         return array_merge($equipo_array, [
             'valores_produccion' => $valoresProduccion_array,
+            'permisos' => $permisos_array,
         ]);
     }
 }
