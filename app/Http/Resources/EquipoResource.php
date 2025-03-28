@@ -18,13 +18,16 @@ class EquipoResource extends JsonResource
 
         $valoresProduccion_array = $this->valores_produccion;
         $permisos_array = $this->permisos;
+        $usos_array = $this->usos;
 
         if (count($valoresProduccion_array) == 0) $valoresProduccion_array = 'No tiene valores de producción';
         if (count($permisos_array) == 0) $permisos_array = 'No tiene permisos';
+        if (count($usos_array) == 0) $usos_array = 'No tiene usos';
 
         return array_merge($equipo_array, [
             'valores_produccion' => $valoresProduccion_array,
             'permisos' => $permisos_array,
+            'usos' => $usos_array,
         ]);
     }
 }

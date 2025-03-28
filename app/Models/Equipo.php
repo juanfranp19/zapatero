@@ -27,4 +27,9 @@ class Equipo extends Model
     {
         return $this->hasMany(Permiso::class);
     }
+
+    public function usos(): HasMany
+    {
+        return $this->hasMany(Uso::class);
+    }
 }
