@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ValorProduccion extends Model
 {
@@ -20,4 +21,9 @@ class ValorProduccion extends Model
         'value_f',
         'equipo_numserie'
     ];
+
+    public function equipo(): BelongsTo
+    {
+        return $this->belongsTo(Equipo::class);
+    }
 }

@@ -14,6 +14,14 @@ class ValorProduccionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $valoresProduccion_array = parent::toArray($request);
+
+        $equipo_array = $this->equipo;
+
+        if ($equipo_array == null) $equipo_array = 'No tiene equipo';
+
+        return array_merge($valoresProduccion_array, [
+            'equipo' => $equipo_array,
+        ]);
     }
 }
