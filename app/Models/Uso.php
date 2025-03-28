@@ -22,4 +22,9 @@ class Uso extends Model
     {
         return $this->belongsTo(Trabajador::class);
     }
+
+    public function equipo(): belongsTo
+    {
+        return $this->belongsTo(Equipo::class);
+    }
 }

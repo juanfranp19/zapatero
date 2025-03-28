@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('avisos', function (Blueprint $table) {
             $table->id();
-            $table->string('equipo_numserie', 255)->nullable();
+            $table->unsignedBigInteger('equipo_id')->nullable();
             $table->unsignedBigInteger('usuario_id')->nullable();
 
-            $table->unique(['equipo_numserie','usuario_id'], 'UNQ_Aviso_0');
+            $table->unique(['equipo_id','usuario_id'], 'UNQ_Aviso_0');
 
-            //$table->foreign('equipo_numserie')->references('numserie')->on('equipos')->onDelete('cascade');
+            //$table->foreign('equipo_id')->references('id')->on('equipos')->onDelete('cascade');
             //$table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
         });
     }
