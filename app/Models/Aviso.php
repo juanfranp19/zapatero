@@ -19,4 +19,9 @@ class Aviso extends Model
     {
         return $this->BelongsTo(Usuario::class);
     }
+
+    public function equipo(): BelongsTo
+    {
+        return $this->BelongsTo(Equipo::class);
+    }
 }

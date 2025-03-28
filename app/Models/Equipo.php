@@ -32,4 +32,9 @@ class Equipo extends Model
     {
         return $this->hasMany(Uso::class);
     }
+
+    public function avisos(): HasMany
+    {
+        return $this->hasMany(Aviso::class);
+    }
 }
