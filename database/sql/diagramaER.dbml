@@ -9,7 +9,7 @@ Table accesos {
 
 Table avisos {
   id int [pk]
-  equipo_numserie varchar(255) [ref: > equipos.numserie]
+  equipo_numserie varchar(255) [ref: > equipos.id]
   usuario_id varchar(255) [ref: > usuarios.id]
 }
 
@@ -51,7 +51,7 @@ Table permisos {
   hasta datetime
   numusos int
   periodo_uso double
-  equipo_numserie varchar(255) [ref: > equipos.numserie]
+  equipo_numserie varchar(255) [ref: > equipos.id]
   trabajador_id int [ref: > trabajadores.id]
 }
 
@@ -60,7 +60,7 @@ Table tipos_incidencias {
   codigo varchar(255)
   descripcion varchar(255)
   eliminado tinyint(1) [default: 0]
-  equipo_numserie varchar(255) [ref: > equipos.numserie]
+  equipo_numserie varchar(255) [ref: > equipos.id]
 }
 
 Table tipos_parametros {
@@ -69,7 +69,7 @@ Table tipos_parametros {
   descripcion varchar(255)
   eliminado tinyint(1) [default: 0]
   medida varchar(255)
-  equipo_numserie varchar(255) [ref: > equipos.numserie]
+  equipo_numserie varchar(255) [ref: > equipos.id]
 }
 
 Table trabajadores {
@@ -89,7 +89,7 @@ Table usos {
   fecha_uso datetime
   hora_fin varchar(255)
   hora_inicio varchar(255)
-  equipo_numserie varchar(255) [ref: > equipos.numserie]
+  equipo_numserie varchar(255) [ref: > equipos.id]
   trabajador_id int [ref: > trabajadores.id]
 }
 
@@ -112,5 +112,5 @@ Table valores_produccion {
   value_d double [default: 0]
   value_e double [default: 0]
   value_f double [default: 0]
-  equipo_numserie varchar(255) [ref: > equipos.numserie]
+  equipo_numserie varchar(255) [ref: > equipos.id]
 }
