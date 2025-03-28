@@ -20,11 +20,11 @@ return new class extends Migration
             $table->double('value_d')->default(0);
             $table->double('value_e')->default(0);
             $table->double('value_f')->default(0);
-            $table->string('equipo_numserie', 255)->nullable();
+            $table->unsignedBigInteger('equipo_id')->nullable();
 
-            $table->unique(['fecha','equipo_numserie'], 'UNQ_ValoresProduccion_0');
+            $table->unique(['fecha','equipo_id'], 'UNQ_ValoresProduccion_0');
 
-            /* $table->foreign('equipo_numserie')->references('numserie')->on('equipos')->onDelete('cascade'); */
+            /* $table->foreign('equipo_id')->references('id')->on('equipos')->onDelete('cascade'); */
         });
     }
 
