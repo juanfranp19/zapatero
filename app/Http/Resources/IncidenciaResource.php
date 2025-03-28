@@ -18,6 +18,8 @@ class IncidenciaResource extends JsonResource
 
         return array_merge($array_incidencias, [
             'tipo incidencia' => $this->tipo_incidencia,
+            'trabajador' => $this->trabajador,
+
         ]);
     }
 }

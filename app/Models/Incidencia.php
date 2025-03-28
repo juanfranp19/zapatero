@@ -20,4 +20,9 @@ class Incidencia extends Model
     {
         return $this->belongsTo(TipoIncidencia::class);
     }
+
+    public function trabajador(): BelongsTo
+    {
+        return $this->belongsTo(Trabajador::class);
+    }
 }

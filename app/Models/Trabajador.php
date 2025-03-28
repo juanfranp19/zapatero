@@ -41,4 +41,10 @@ class Trabajador extends Model
     {
         return $this->hasMany(Permiso::class);
     }
+
+    public function incidencias(): HasMany
+    {
+        return $this->hasMany(Incidencia::class);
+    }
+
 }
