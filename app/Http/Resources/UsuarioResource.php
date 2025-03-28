@@ -14,20 +14,21 @@ class UsuarioResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $array_usuarios = parent::toArray($request);
+        $usuarios_array = parent::toArray($request);
 
-        $array_avisos = $this->avisos;
-        $array_comentarios = [];
-        $array_comentarios = $this->comentarios;
-        $array_trabajador = $this->trabajador;
+        $avisos_array = $this->avisos;
+        $comentarios_array = $this->comentarios;
+        $trabajador_array = $this->trabajador;
 
-        if (count($array_comentarios) == 0) $array_comentarios = 'No hay comentarios';
-        if ($array_trabajador == null) $array_trabajador = 'No hay trabajador asignado';
+        if (count($avisos_array) != 0)      foreach ($avisos_array as $key)         unset($key['usuario_id']);
+        if (count($comentarios_array) != 0) foreach ($comentarios_array as $key)    unset($key['usuario_id']);
 
-        return array_merge($array_usuarios, [
-            'avisos' => $array_avisos,
-            'comentarios' => $array_comentarios,
-            'trabajador' => $array_trabajador,
+        if ($trabajador_array != null)  unset($trabajador_array['usuario_id']);
+
+        return array_merge($usuarios_array, [
+            'avisos' => $avisos_array,
+            'comentarios' => $comentarios_array,
+            'trabajador' => $trabajador_array,
         ]);
     }
 }

@@ -14,15 +14,13 @@ class TipoIncidenciaResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $array_tiposincidencias = parent::toArray($request);
-        $array_incidencias = $this->incidencias;
-        $array_equipo = $this->equipo;
+        $tiposincidencias_array = parent::toArray($request);
+        $incidencias_array = $this->incidencias;
+        $equipo_array = $this->equipo;
 
-        if ($array_equipo == null) $array_equipo = 'No hay equipo asignado';
-
-        return array_merge($array_tiposincidencias, [
-            'incidencias' => $array_incidencias,
-            'equipo' => $array_equipo,
+        return array_merge($tiposincidencias_array, [
+            'incidencias' => $incidencias_array,
+            'equipo' => $equipo_array,
         ]);
     }
 }

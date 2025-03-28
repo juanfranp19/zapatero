@@ -14,10 +14,14 @@ class AccesoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $array_accesos = parent::toArray($request);
+        $accesos_array = parent::toArray($request);
 
-        return array_merge($array_accesos, [
-            'trabajador' => $this->trabajador,
+        $trabajador_array = $this->trabajador;
+
+        unset($accesos_array['trabajador_id']);
+
+        return array_merge($accesos_array, [
+            'trabajador' => $trabajador_array,
         ]);
     }
 }

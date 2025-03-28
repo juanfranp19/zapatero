@@ -14,11 +14,14 @@ class ComentarioResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $array_comentarios = parent::toArray($request);
-        unset($array_comentarios['usuario_id']);
+        $comentarios_array = parent::toArray($request);
 
-        return array_merge($array_comentarios, [
-            'usuario' => $this->usuario,
+        $usuario_array = $this->usuario;
+
+        unset($comentarios_array['usuario_id']);
+
+        return array_merge($comentarios_array, [
+            'usuario' => $usuario_array,
         ]);
     }
 }

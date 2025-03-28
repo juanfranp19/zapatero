@@ -18,7 +18,7 @@ class ValorProduccionResource extends JsonResource
 
         $equipo_array = $this->equipo;
 
-        if ($equipo_array == null) $equipo_array = 'No tiene equipo';
+        unset($valoresProduccion_array['equipo_id']);
 
         return array_merge($valoresProduccion_array, [
             'equipo' => $equipo_array,

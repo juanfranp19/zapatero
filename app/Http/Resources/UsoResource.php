@@ -14,16 +14,17 @@ class UsoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $array_usos = parent::toArray($request);
+        $usos_array = parent::toArray($request);
 
-        $array_trabajador = $this->trabajador;
-        $array_equipo = $this->equipo;
+        $trabajador_array = $this->trabajador;
+        $equipo_array = $this->equipo;
 
-        if (count($array_usos) == 0) $array_usos = 'No hay usos';
+        unset($usos_array['trabajador_id']);
+        unset($usos_array['equipo_id']);
 
-        return array_merge($array_usos, [
-            'trabajador' => $array_trabajador,
-            'equipo' => $array_equipo,
+        return array_merge($usos_array, [
+            'trabajador' => $trabajador_array,
+            'equipo' => $equipo_array,
         ]);
     }
 }

@@ -19,10 +19,12 @@ class PermisoResource extends JsonResource
         $equipo_array = $this->equipo;
         $trabajador_array = $this->trabajador;
 
+        unset($permisos_array['equipo_id']);
+        unset($permisos_array['trabajador_id']);
+
         return array_merge($permisos_array, [
             'equipo' => $equipo_array,
-            'trabajadores' => $trabajador_array,
+            'trabajador' => $trabajador_array,
         ]);
-
     }
 }

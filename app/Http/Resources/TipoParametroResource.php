@@ -19,7 +19,9 @@ class TipoParametroResource extends JsonResource
         $parametrosEficacia_array = $this->parametros_eficacia;
         $equipo_array = $this->equipo;
 
-        if ($equipo_array == null) $equipo_array = 'No hay equipo asignado';
+        unset($tipoParametros_array['equipo_id']);
+
+        if (count($parametrosEficacia_array) != 0)   foreach ($parametrosEficacia_array as $key)  unset($key['tipo_parametro_id']);
 
         return array_merge($tipoParametros_array, [
             'parametros_eficacia' => $parametrosEficacia_array,

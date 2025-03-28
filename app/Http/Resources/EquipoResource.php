@@ -23,12 +23,13 @@ class EquipoResource extends JsonResource
         $tipoIncidencias_array = $this->tipos_incidencias;
         $tipoParametros_array = $this->tipos_parametros;
 
-        if (count($valoresProduccion_array) == 0) $valoresProduccion_array = 'No tiene valores de producción';
-        if (count($permisos_array) == 0) $permisos_array = 'No tiene permisos';
-        if (count($usos_array) == 0) $usos_array = 'No tiene usos';
-        if (count($avisos_array) == 0) $avisos_array = 'No tiene avisos';
-        if (count($tipoIncidencias_array) == 0) $tipoIncidencias_array = 'No tiene tipos de incidencias';
-        if (count($tipoParametros_array) == 0) $tipoParametros_array = 'No tiene tipos de parametros';
+        // borra equipo_id de cada objeto del array
+        if (count($valoresProduccion_array) != 0)   foreach ($valoresProduccion_array as $key)  unset($key['equipo_id']);
+        if (count($permisos_array) != 0)            foreach ($permisos_array as $key)           unset($key['equipo_id']);
+        if (count($usos_array) != 0)                foreach ($usos_array as $key)               unset($key['equipo_id']);
+        if (count($avisos_array) != 0)              foreach ($avisos_array as $key)             unset($key['equipo_id']);
+        if (count($tipoIncidencias_array) != 0)     foreach ($tipoIncidencias_array as $key)    unset($key['equipo_id']);
+        if (count($tipoParametros_array) != 0)      foreach ($tipoParametros_array as $key)     unset($key['equipo_id']);
 
         return array_merge($equipo_array, [
             'valores_produccion' => $valoresProduccion_array,

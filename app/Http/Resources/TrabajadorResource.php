@@ -14,26 +14,27 @@ class TrabajadorResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $array_trabajadores = parent::toArray($request);
+        $trabajadores_array = parent::toArray($request);
 
-        $array_accesos = $this->accesos;
-        $array_usuario = $this->usuario;
-        $array_usos = $this->usos;
-        $array_permisos = $this->permisos;
-        $array_incidencias = $this->incidencias;
+        $accesos_array = $this->accesos;
+        $usos_array = $this->usos;
+        $permisos_array = $this->permisos;
+        $incidencias_array = $this->incidencias;
+        $usuario_array = $this->usuario;
 
-        if (count($array_accesos) == 0) $array_accesos = 'No hay accesos';
-        if ($array_usuario == null) $array_usuario = 'No hay usuario asignado';
-        if (count($array_usos) == 0) $array_usos = 'No hay usos';
-        if (count($array_permisos) == 0) $array_permisos = 'No hay usos';
-        if (count($array_incidencias) == 0) $array_incidencias = 'No hay incidencias asignadas';
+        unset($trabajadores_array['usuario_id']);
 
-        return array_merge($array_trabajadores, [
-            'accesos' => $array_accesos,
-            'usuario' => $array_usuario,
-            'usos' => $array_usos,
-            'permisos' => $array_permisos,
-            'incidencias' => $array_incidencias,
+        if (count($accesos_array) != 0)        foreach ($accesos_array as $key)        unset($key['trabajador_id']);
+        if (count($usos_array) != 0)           foreach ($usos_array as $key)           unset($key['trabajador_id']);
+        if (count($permisos_array) != 0)       foreach ($permisos_array as $key)       unset($key['trabajador_id']);
+        if (count($incidencias_array) != 0)    foreach ($incidencias_array as $key)    unset($key['trabajador_id']);
+
+        return array_merge($trabajadores_array, [
+            'accesos' => $accesos_array,
+            'usos' => $usos_array,
+            'permisos' => $permisos_array,
+            'incidencias' => $incidencias_array,
+            'usuario' => $usuario_array,
         ]);
     }
 }

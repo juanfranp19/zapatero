@@ -14,12 +14,14 @@ class IncidenciaResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $array_incidencias = parent::toArray($request);
+        $incidencias_array = parent::toArray($request);
 
-        return array_merge($array_incidencias, [
-            'tipo incidencia' => $this->tipo_incidencia,
-            'trabajador' => $this->trabajador,
+        $tipoIncidencia_array = $this->tipo_incidencia;
+        $trabajador_array = $this->trabajador;
 
+        return array_merge($incidencias_array, [
+            'tipo_incidencia' => $tipoIncidencia_array,
+            'trabajador' => $trabajador_array,
         ]);
     }
 }
