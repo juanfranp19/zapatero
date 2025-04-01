@@ -22,17 +22,23 @@ use Psr\Http\Message\ServerRequestInterface;
 use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config\Config;
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+/**
+ *  para autenticados
+ */
 Route::middleware(['auth:sanctum'])->group(function () {
 
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::post('/register', [AuthController::class, 'register'])->middleware(CheckAdminGate::class);
     Route::get('/logout', [AuthController::class, 'logout']);
 
+    /**
+     *  base de datos
+     */
     Route::prefix('v1')->group(function(){
 
         Route::get('accesos', [AccesoController::class, 'index']);
@@ -77,7 +83,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('valores_produccion', [ValorProduccionController::class, 'index']);
         Route::get('valores_produccion/{id}', [ValorProduccionController::class, 'show']);
 
-        // necesitas ser admin
+        /**
+         *  para admin
+         */
         Route::middleware([CheckAdminGate::class])->group(function () {
 
             Route::post('accesos', [AccesoController::class, 'store']);
