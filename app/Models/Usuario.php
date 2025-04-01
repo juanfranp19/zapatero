@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Usuario extends Model
+class User extends Model
 {
     public $timestamps = false;
 
@@ -34,6 +34,6 @@ class Usuario extends Model
 
     public function trabajador(): HasOne
     {
-        return $this->hasOne(Trabajador::class, 'usuario_id');
+        return $this->hasOne(Trabajador::class, 'user_id');
     }
 }

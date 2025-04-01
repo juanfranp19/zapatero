@@ -12,11 +12,11 @@ class Comentario extends Model
     protected $fillable = [
         'comentario',
         'fecha',
-        'usuario_id'
+        'user_id'
     ];
 
-    public function usuario(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(User::class);
     }
 }

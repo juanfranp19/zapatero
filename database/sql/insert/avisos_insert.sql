@@ -1,4 +1,4 @@
-INSERT INTO `avisos` (`id`, `equipo_id`, `usuario_id`) VALUES
+INSERT INTO `avisos` (`id`, `equipo_id`, `user_id`) VALUES
 (35,	6,	1),
 (34,	10,	1),
 (38,	6,	2),

@@ -20,9 +20,9 @@ class TrabajadorResource extends JsonResource
         $usos_array = $this->usos;
         $permisos_array = $this->permisos;
         $incidencias_array = $this->incidencias;
-        $usuario_array = $this->usuario;
+        $user_array = $this->user;
 
-        unset($trabajadores_array['usuario_id']);
+        unset($trabajadores_array['user_id']);
 
         if (count($accesos_array) != 0)        foreach ($accesos_array as $key)        unset($key['trabajador_id']);
         if (count($usos_array) != 0)           foreach ($usos_array as $key)           unset($key['trabajador_id']);
@@ -34,7 +34,7 @@ class TrabajadorResource extends JsonResource
             'usos' => $usos_array,
             'permisos' => $permisos_array,
             'incidencias' => $incidencias_array,
-            'usuario' => $usuario_array,
+            'user' => $user_array,
         ]);
     }
 }

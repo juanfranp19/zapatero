@@ -16,12 +16,12 @@ class ComentarioResource extends JsonResource
     {
         $comentarios_array = parent::toArray($request);
 
-        $usuario_array = $this->usuario;
+        $user_array = $this->user;
 
-        unset($comentarios_array['usuario_id']);
+        unset($comentarios_array['user_id']);
 
         return array_merge($comentarios_array, [
-            'usuario' => $usuario_array,
+            'user' => $user_array,
         ]);
     }
 }

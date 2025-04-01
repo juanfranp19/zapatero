@@ -12,7 +12,7 @@ use App\Http\Controllers\API\TipoIncidenciaController;
 use App\Http\Controllers\API\TipoParametroController;
 use App\Http\Controllers\API\TrabajadorController;
 use App\Http\Controllers\API\UsoController;
-use App\Http\Controllers\API\UsuarioController;
+use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\ValorProduccionController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -31,6 +31,12 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/logout', [AuthController::class, 'logout']);
+
+
+
+
+
+
 });
 
 Route::prefix('v1')->group(function(){
@@ -59,8 +65,8 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('trabajadores', TrabajadorController::class);
     // Uso
     Route::apiResource('usos', UsoController::class);
-    // Usuario
-    Route::apiResource('usuarios', UsuarioController::class);
+    // User
+    Route::apiResource('users', UserController::class);
     // ValorProduccion
     Route::apiResource('valores_produccion', ValorProduccionController::class);
 });

@@ -1,4 +1,4 @@
-INSERT INTO `trabajadores` (`id`, `dni`, `activo`, `apellidos`, `borrado`, `nombre`, `url_imagen`, `usuario_id`) VALUES
+INSERT INTO `trabajadores` (`id`, `dni`, `activo`, `apellidos`, `borrado`, `nombre`, `url_imagen`, `user_id`) VALUES
 (1,	'48696425S',	0,	'Muñoz García',	0,	'Isa',	'url',	1),
 (2,	'48737194X',	1,	'Calin Sanchez',	0,	'Mario',	'url',	2),
 (3,	'15467895Y',	1,	'Martinez Lopez',	0,	'Pepe',	'url',	3),

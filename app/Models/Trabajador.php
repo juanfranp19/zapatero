@@ -19,7 +19,7 @@ class Trabajador extends Model
         'borrado',
         'nombre',
         'url_imagen',
-        'usuario_id'
+        'user_id'
     ];
 
     public function accesos(): HasMany
@@ -32,9 +32,9 @@ class Trabajador extends Model
         return $this->hasMany(Uso::class);
     }
 
-    public function usuario(): HasOne
+    public function user(): HasOne
     {
-        return $this->hasOne(Usuario::class, 'id');
+        return $this->hasOne(User::class, 'id');
     }
 
     public function permisos(): HasMany

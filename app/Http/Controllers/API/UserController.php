@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UsuarioResource;
-use App\Models\Usuario;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class UsuarioController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,41 +17,44 @@ class UsuarioController extends Controller
     {
         try {
 
-            $usuarios = UsuarioResource::collection(
-                Usuario::orderBy('id')->paginate(5)
+            $users = UserResource::collection(
+                User::orderBy('id')->paginate(5)
             );
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        return $usuarios;
+        return $users;
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+
+    // la sustituye register
+
+    /*public function store(Request $request)
     {
         try {
 
-            $usuario = json_decode($request->getContent(), true);
-            $usuario = Usuario::create($usuario);
+            $user = json_decode($request->getContent(), true);
+            $user = User::create($user);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        return new UsuarioResource($usuario);
-    }
+        return new UserResource($user);
+    }*/
 
     /**
      * Display the specified resource.
      */
     public function show($id)
     {
-        $usuario = Usuario::findOrFail($id);
-        return new UsuarioResource($usuario);
+        $user = User::findOrFail($id);
+        return new UserResource($user);
     }
 
     /**
@@ -61,16 +64,16 @@ class UsuarioController extends Controller
     {
         try {
 
-            $usuario = Usuario::find($id);
+            $user = User::find($id);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        if ($usuario) {
+        if ($user) {
 
             $request->validate([
-                'nombre' => 'required',
+                'name' => 'required',
                 'email' => 'required',
                 'admin' => 'required',
                 'password' => 'required',
@@ -80,22 +83,22 @@ class UsuarioController extends Controller
 
             try {
 
-                $usuario->nombre = $request->input('nombre');
-                $usuario->email = $request->input('email');
-                $usuario->admin = $request->input('admin');
-                $usuario->password = $request->input('password');
-                $usuario->rol = $request->input('rol');
-                $usuario->token = $request->input('token');
-                $usuario->save();
+                $user->name = $request->input('name');
+                $user->email = $request->input('email');
+                $user->admin = $request->input('admin');
+                $user->password = $request->input('password');
+                $user->rol = $request->input('rol');
+                $user->token = $request->input('token');
+                $user->save();
 
-                return response()->json(new UsuarioResource($usuario), 200);
+                return response()->json(new UserResource($user), 200);
 
             } catch (\Exception $e) {
                 return response()->json(['error' => $e->getMessage()], 500);
             }
 
         } else {
-            return response()->json(['message' => 'Usuario no encontrado'], 404);
+            return response()->json(['message' => 'User no encontrado'], 404);
         }
     }
 
@@ -104,15 +107,15 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        $usuario = Usuario::find($id);
+        $user = User::find($id);
 
-        if ($usuario) {
+        if ($user) {
 
-            $usuario->delete();
-            return response()->json(['message' => 'Usuario eliminado'], 200);
+            $user->delete();
+            return response()->json(['message' => 'User eliminado'], 200);
 
         } else {
-            return response()->json(['message' => 'Usuario no encontrado'], 404);
+            return response()->json(['message' => 'User no encontrado'], 404);
         }
     }
 }

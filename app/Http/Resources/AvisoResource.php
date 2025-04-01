@@ -16,14 +16,14 @@ class AvisoResource extends JsonResource
     {
         $avisos_array = parent::toArray($request);
 
-        $usuario_array = $this->usuario;
+        $user_array = $this->user;
         $equipo_array = $this->equipo;
 
-        unset($avisos_array['usuario_id']);
+        unset($avisos_array['user_id']);
         unset($avisos_array['equipo_id']);
 
         return array_merge($avisos_array, [
-            'usuario' => $usuario_array,
+            'user' => $user_array,
             'equipo' => $equipo_array,
         ]);
     }

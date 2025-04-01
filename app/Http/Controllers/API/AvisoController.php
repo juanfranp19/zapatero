@@ -69,11 +69,11 @@ class AvisoController extends Controller
 
             $request->validate([
                 'equipo_id' => 'required',
-                'usuario_id' => 'required'
+                'user_id' => 'required'
             ]);
 
             $aviso->equipo_id = $request->input('equipo_id');
-            $aviso->usuario_id = $request->input('usuario_id');
+            $aviso->user_id = $request->input('user_id');
             $aviso->save();
 
             return response()->json(new AvisoResource($aviso), 200);

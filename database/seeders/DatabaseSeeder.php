@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder
         $this->call(EquiposTableSeeder::class);
         $this->command->info("EquiposTableSeeder ejecutado");
 
-        $this->call(UsuariosTableSeeder::class);
-        $this->command->info("UsuariosTableSeeder ejecutado");
+        $this->call(UsersTableSeeder::class);
+        $this->command->info("UsersTableSeeder ejecutado");
 
         $this->call(ValoresProducionTableSeeder::class);
         $this->command->info("ValoresProducionTableSeeder ejecutado");

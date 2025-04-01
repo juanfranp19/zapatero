@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('comentario', 255);
             $table->datetime('fecha');
-            $table->unsignedBigInteger('usuario_id');
+            $table->unsignedBigInteger('user_id');
 
-            //$table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
+            //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

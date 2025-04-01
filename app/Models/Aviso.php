@@ -11,12 +11,12 @@ class Aviso extends Model
 
     protected $fillable = [
         'equipo_id',
-        'usuario_id'
+        'user_id'
     ];
 
-    public function usuario(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->BelongsTo(Usuario::class);
+        return $this->BelongsTo(User::class);
     }
 
     public function equipo(): BelongsTo
