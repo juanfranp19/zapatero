@@ -45,7 +45,7 @@ class AuthController extends Controller
 
             $data = $request->validate([
                 'email' => ['required', 'email', 'exists:users'],
-                'password' => ['required', 'min:8'],
+                'password' => ['required'],
             ]);
 
         } catch(\Exception $e) {
