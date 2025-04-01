@@ -14,6 +14,7 @@ use App\Http\Controllers\API\TrabajadorController;
 use App\Http\Controllers\API\UsoController;
 use App\Http\Controllers\API\UsuarioController;
 use App\Http\Controllers\API\ValorProduccionController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Psr\Http\Message\ServerRequestInterface;
@@ -22,6 +23,14 @@ use Tqdev\PhpCrudApi\Config\Config;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware(['auth:sanctum'])->group(function () {
+
+    Route::get('/logout', [AuthController::class, 'logout']);
 });
 
 Route::prefix('v1')->group(function(){
