@@ -15,6 +15,7 @@ use App\Http\Controllers\API\UsoController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\ValorProduccionController;
 use App\Http\Controllers\AuthController;
+use App\Http\Middleware\CheckAdminGate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Psr\Http\Message\ServerRequestInterface;
@@ -32,43 +33,110 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/logout', [AuthController::class, 'logout']);
 
+    Route::prefix('v1')->group(function(){
 
+        Route::get('accesos', [AccesoController::class, 'index']);
+        Route::get('accesos/{id}', [AccesoController::class, 'show']);
 
+        Route::get('avisos', [AvisoController::class, 'index']);
+        Route::get('avisos/{id}', [AvisoController::class, 'show']);
 
+        Route::get('comentarios', [ComentarioController::class, 'index']);
+        Route::get('comentarios/{id}', [ComentarioController::class, 'show']);
 
+        Route::get('equipos', [EquipoController::class, 'index']);
+        Route::get('equipos/{id}', [EquipoController::class, 'show']);
 
-});
+        Route::get('incidencias', [IncidenciaController::class, 'index']);
+        Route::get('incidencias/{id}', [IncidenciaController::class, 'show']);
 
-Route::prefix('v1')->group(function(){
+        Route::get('parametros_eficacia', [ParametroEficaciaController::class, 'index']);
+        Route::get('parametros_eficacia/{id}', [ParametroEficaciaController::class, 'show']);
 
-    // Acceso
-    Route::apiResource('accesos', AccesoController::class);
-    // Avisos
-    Route::apiResource('avisos', AvisoController::class);
-    // Comentario
-    Route::apiResource('comentarios', ComentarioController::class);
-    // Equipo
-    Route::apiResource('equipos', EquipoController::class);
-    // Incidencia
-    Route::apiResource('incidencias', IncidenciaController::class);
-    //ParametroEficacia
-    Route::apiResource('parametros_eficacia', ParametroEficaciaController::class);
-    // Permiso
-    Route::apiResource('permisos', PermisoController::class);
-    // Sequence
-    Route::apiResource('sequences', SequenceController::class);
-    // TipoIncidencia
-    Route::apiResource('tipos_incidencias', TipoIncidenciaController::class);
-    // TipoParametro
-    Route::apiResource('tipos_parametros', TipoParametroController::class);
-    // Trabajador
-    Route::apiResource('trabajadores', TrabajadorController::class);
-    // Uso
-    Route::apiResource('usos', UsoController::class);
-    // User
-    Route::apiResource('users', UserController::class);
-    // ValorProduccion
-    Route::apiResource('valores_produccion', ValorProduccionController::class);
+        Route::get('permisos', [PermisoController::class, 'index']);
+        Route::get('permisos/{id}', [PermisoController::class, 'show']);
+
+        Route::get('sequences', [SequenceController::class, 'index']);
+        Route::get('sequences/{id}', [SequenceController::class, 'show']);
+
+        Route::get('tipos_incidencias', [TipoIncidenciaController::class, 'index']);
+        Route::get('tipos_incidencias/{id}', [TipoIncidenciaController::class, 'show']);
+
+        Route::get('tipos_parametros', [TipoParametroController::class, 'index']);
+        Route::get('tipos_parametros/{id}', [TipoParametroController::class, 'show']);
+
+        Route::get('trabajadores', [TrabajadorController::class, 'index']);
+        Route::get('trabajadores/{id}', [TrabajadorController::class, 'show']);
+
+        Route::get('usos', [UsoController::class, 'index']);
+        Route::get('usos/{id}', [UsoController::class, 'show']);
+
+        Route::get('users', [UserController::class, 'index']);
+        Route::get('users/{id}', [UserController::class, 'show']);
+
+        Route::get('valores_produccion', [ValorProduccionController::class, 'index']);
+        Route::get('valores_produccion/{id}', [ValorProduccionController::class, 'show']);
+
+        // necesitas ser admin
+        Route::middleware([CheckAdminGate::class])->group(function () {
+
+            Route::post('accesos', [AccesoController::class, 'store']);
+            Route::put('accesos/{id}', [AccesoController::class, 'update']);
+            Route::delete('accesos/{id}', [AccesoController::class, 'destroy']);
+
+            Route::post('avisos', [AvisoController::class, 'store']);
+            Route::put('avisos/{id}', [AvisoController::class, 'update']);
+            Route::delete('avisos/{id}', [AvisoController::class, 'destroy']);
+
+            Route::post('comentarios', [ComentarioController::class, 'store']);
+            Route::put('comentarios/{id}', [ComentarioController::class, 'update']);
+            Route::delete('comentarios/{id}', [ComentarioController::class, 'destroy']);
+
+            Route::post('equipos', [EquipoController::class, 'store']);
+            Route::put('equipos/{id}', [EquipoController::class, 'update']);
+            Route::delete('equipos/{id}', [EquipoController::class, 'destroy']);
+
+            Route::post('incidencias', [IncidenciaController::class, 'store']);
+            Route::put('incidencias/{id}', [IncidenciaController::class, 'update']);
+            Route::delete('incidencias/{id}', [IncidenciaController::class, 'destroy']);
+
+            Route::post('parametros_eficacia', [ParametroEficaciaController::class, 'store']);
+            Route::put('parametros_eficacia/{id}', [ParametroEficaciaController::class, 'update']);
+            Route::delete('parametros_eficacia/{id}', [ParametroEficaciaController::class, 'destroy']);
+
+            Route::post('permisos', [PermisoController::class, 'store']);
+            Route::put('permisos/{id}', [PermisoController::class, 'update']);
+            Route::delete('permisos/{id}', [PermisoController::class, 'destroy']);
+
+            Route::post('sequences', [SequenceController::class, 'store']);
+            Route::put('sequences/{id}', [SequenceController::class, 'update']);
+            Route::delete('sequences/{id}', [SequenceController::class, 'destroy']);
+
+            Route::post('tipos_incidencias', [TipoIncidenciaController::class, 'store']);
+            Route::put('tipos_incidencias/{id}', [TipoIncidenciaController::class, 'update']);
+            Route::delete('tipos_incidencias/{id}', [TipoIncidenciaController::class, 'destroy']);
+
+            Route::post('tipos_parametros', [TipoParametroController::class, 'store']);
+            Route::put('tipos_parametros/{id}', [TipoParametroController::class, 'update']);
+            Route::delete('tipos_parametros/{id}', [TipoParametroController::class, 'destroy']);
+
+            Route::post('trabajadores', [TrabajadorController::class, 'store']);
+            Route::put('trabajadores/{id}', [TrabajadorController::class, 'update']);
+            Route::delete('trabajadores/{id}', [TrabajadorController::class, 'destroy']);
+
+            Route::post('usos', [UsoController::class, 'store']);
+            Route::put('usos/{id}', [UsoController::class, 'update']);
+            Route::delete('usos/{id}', [UsoController::class, 'destroy']);
+
+            Route::post('users', [UserController::class, 'store']);
+            Route::put('users/{id}', [UserController::class, 'update']);
+            Route::delete('users/{id}', [UserController::class, 'destroy']);
+
+            Route::post('valores_produccion', [ValorProduccionController::class, 'store']);
+            Route::put('valores_produccion/{id}', [ValorProduccionController::class, 'update']);
+            Route::delete('valores_produccion/{id}', [ValorProduccionController::class, 'destroy']);
+        });
+    });
 });
 
 Route::any('/{any}', function (ServerRequestInterface $request) {
