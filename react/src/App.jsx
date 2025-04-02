@@ -5,6 +5,8 @@ import EstadisticasDeUso from './components/EstadisticasDeUso/EstadisticasDeUso.
 import Usos from './components/Usos/Usos.jsx';
 import Incidencias from './components/Incidencias/Incidencias.jsx';
 
+import LoginForm from './components/LoginForm/LoginForm.jsx';
+
 function App() {
 
     return (
@@ -16,6 +18,10 @@ function App() {
             <EstadisticasDeUso></EstadisticasDeUso>
             <Usos></Usos>
             <Incidencias></Incidencias>
+
+
+            <LoginForm></LoginForm>
+
         </>
     );
 }
