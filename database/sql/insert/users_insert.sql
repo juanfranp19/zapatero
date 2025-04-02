@@ -1,5 +1,5 @@
 INSERT INTO `users` (`id`, `name`, `email`, `admin`,  `password`, `rol`, `token`) VALUES
-(1,     'isa',              'isa@gmail.com',            1,  'isa',              'ADMIN',            '2176E100-1318-4B6F-AFB5-F435184B8152|isa@gmail.com|1519732810955'),
+(1,     'isa',              'isa@gmail.com',            1,  '$2y$12$X3u10WxGr59k057.AD8URuESr3PgvCIHWUYcu5WmDsTVtVKqPSuqe',              'ADMIN',            '2176E100-1318-4B6F-AFB5-F435184B8152|isa@gmail.com|1519732810955'),
 (4,     'jose',             'jose@mail.com',	        0,  'jose',	            '',	                NULL),
 (12,    'mantenimiento',    'mantenimiento@gmail.com',	0,  'mantenimiento',    'JMANTENIMIENTO',	'4BD59EDB-DC7D-472E-8212-929839CCA3B8|mantenimiento@gmail.com|1519638468984'),
 (2,     'mario',            'mario@mail.com',	        0,	'mario',	        'JPRODUCCION',	    'FBEE7725-875C-4365-A4D3-7C2230164110|mario@mail.com|1500460659489'),
