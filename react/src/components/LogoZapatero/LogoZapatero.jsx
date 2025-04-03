@@ -1,9 +1,10 @@
-import logo from '../../assets/logo-zapatero.png';
+import logo from "../../assets/logo-zapatero.png";
+import "./LogoZapatero.css";
 
 const LogoZapatero = () => {
 
     return (
-        <img src={logo} alt="Zapatero a tus zapatos" />
+        <img className="logoZ" src={logo} alt="Zapatero a tus zapatos" />
     );
 }
 
