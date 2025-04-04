@@ -1,0 +1,29 @@
+.navbar-toggler, .navbar-toggler:focus {
+    border: none;
+    box-shadow: none;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    position: absolute; /* para que no se quede dentro del navbar */
+    margin-top: 0; /* para que cuando se haga click no se mueva el dropdown */
+}
+
+
+.dropdown-menu {
+    background-color: #3b434c;
+
+}
+
+.dropdown-item {
+    color: #aaafb7;
+    font-size: 15px;
+}
+
+.dropdown-item .bi {
+    color: #6fa7d7;
+}
