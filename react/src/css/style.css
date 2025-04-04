@@ -1,0 +1,9 @@
+body {
+    background-color: #eff3f8;
+    font-family: "Open Sans", sans-serif;
+}
+
+.scroll-horizontal {
+    overflow-x: auto;
+    white-space: nowrap;
+}

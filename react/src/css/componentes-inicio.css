@@ -1,0 +1,59 @@
+/*
+    componentes:
+
+    DatosPersonalIncidencias
+*/
+
+.componente-inicio {
+    background-color: #ffffff;
+    font-size: 13px;
+    padding: 0 20px;
+}
+
+.componente-inicio .titulo-componentes-inicio {
+    font-size: 15px;
+    font-weight: 700;
+    color: #4db3a4;
+    text-transform: uppercase;
+    border-bottom: 1px solid #F2F5F8;
+    padding: 20px 0;
+}
+
+.componente-inicio .datos-inicio {
+    padding: 20px 0;
+}
+
+.componente-inicio .dato-inicio {
+    padding: 0px 10px;
+}
+
+.componente-inicio .nombre-dato-inicio {
+    color: #b8c3c7;
+    margin-bottom: 3px;
+}
+
+.componente-inicio .numero-dato-inicio {
+    font-size: 27px;
+    color: #7d8c9d;
+    line-height: 27px;
+}
+
+.componente-inicio table thead th {
+    font-weight: 600;
+    color: #93a2a9;
+    border-bottom: 1px solid #F2F5F8;
+    text-transform: uppercase;
+}
+
+.componente-inicio table tbody td {
+    color: #8896a0;
+    border-bottom: 1px solid #f2f5f8; /* líneas de las filas */
+    max-width: 200px;
+    padding: 10px 0;
+}
+
+.componente-inicio table tbody td:first-child {
+    font-weight: 600;
+    color: #65A0D0;
+    white-space: normal; /* para que los nombres sean responsive */
+}
