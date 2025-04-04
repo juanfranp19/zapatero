@@ -15,7 +15,7 @@ const DatosUsos = () => {
 
 
     return (
-        <div className="row card componente-inicio">
+        <div className="row componente-inicio">
 
             <div className="col-12">
                 <h1 className="titulo-componentes-inicio">Usos</h1>

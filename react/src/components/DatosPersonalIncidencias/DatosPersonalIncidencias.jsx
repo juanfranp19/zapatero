@@ -1,5 +1,3 @@
-import "./DatosPersonalIncidencias.css";
-
 const DatosPersonalIncidencias = () => {
 
     const trabajadores = [
@@ -13,7 +11,7 @@ const DatosPersonalIncidencias = () => {
     ];
 
     return (
-        <div className="row card componente-inicio">
+        <div className="row componente-inicio">
 
             <div className="col-12">
                 <h1 className="titulo-componentes-inicio">Personal en las instalaciones</h1>
@@ -56,7 +54,7 @@ const DatosPersonalIncidencias = () => {
                         <tbody>
                             {trabajadores.map((trabajador, index) => (
                                 <tr key={index}>
-                                    <td>{trabajador.nombre}</td>
+                                    <td className="con-enlace">{trabajador.nombre}</td>
                                     <td>{trabajador.hora}</td>
                                     <td>{trabajador.maquinas}</td>
                                 </tr>

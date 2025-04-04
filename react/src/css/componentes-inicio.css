@@ -2,12 +2,16 @@
     componentes:
 
     DatosPersonalIncidencias
+    DatosUsos
+    DatosIncidencias
 */
 
 .componente-inicio {
     background-color: #ffffff;
     font-size: 13px;
+    margin: 10px 5px;
     padding: 0 20px;
+    border-radius: 4px;
 }
 
 .componente-inicio .titulo-componentes-inicio {
@@ -43,6 +47,9 @@
     color: #93a2a9;
     border-bottom: 1px solid #F2F5F8;
     text-transform: uppercase;
+    min-width: 100px;
+    text-align: left;
+    padding-left: 0;
 }
 
 .componente-inicio table tbody td {
@@ -50,10 +57,11 @@
     border-bottom: 1px solid #f2f5f8; /* líneas de las filas */
     max-width: 200px;
     padding: 10px 0;
+    white-space: normal; /* para que los nombres sean responsive */
+    word-wrap: break-word;
 }
 
-.componente-inicio table tbody td:first-child {
+.componente-inicio table tbody .con-enlace {
     font-weight: 600;
     color: #65A0D0;
-    white-space: normal; /* para que los nombres sean responsive */
 }
