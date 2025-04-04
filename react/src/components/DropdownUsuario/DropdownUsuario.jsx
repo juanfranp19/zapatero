@@ -1,18 +1,18 @@
+import "./DropdownUsuario.css";
+
 const DropdownUsuario = () => {
-
-
-
     return (
         <ul className="navbar-nav">
-            <li class="nav-item dropdown">
-                <button class="nav-link dropdown-toggle">
-                    <i class="bi bi-person"></i>
-                    <span className="d-none"> Alejandro</span>
+            <li className="nav-item dropdown">
+                <button className="nav-link dropdown-toggle" aria-expanded="false">
+                    <i className="bi bi-person"></i>
+                    <span className="d-none d-md-block"> Alejandro</span>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Mi perfil</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-lock"></i> Bloquear pantalla</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-key"></i> Salir</a></li>
+
+                <ul className="dropdown-menu dropdown-left">
+                    <li><a className="dropdown-item" href="#"><i className="bi bi-person"></i> Mi perfil</a></li>
+                    <li><a className="dropdown-item" href="#"><i className="bi bi-lock"></i> Bloquear pantalla</a></li>
+                    <li><a className="dropdown-item" href="#"><i className="bi bi-key"></i> Salir</a></li>
                 </ul>
             </li>
         </ul>

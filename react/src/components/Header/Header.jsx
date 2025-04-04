@@ -1,6 +1,3 @@
-
-/*
-
 import DropdownAlertas from "../DropdownAlertas/DropdownAlertas";
 import DropdownUsuario from "../DropdownUsuario/DropdownUsuario";
 import LogoZapatero from "../LogoZapatero/LogoZapatero";
@@ -8,59 +5,43 @@ import "./Header.css";
 
 const Header = () => {
 
-
-
-
-
-
-
-
     return (
         <>
 
-
-
-
-
-
-
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
-                    <a className="navbar-brand navbar-visible" href="#"><LogoZapatero/></a>
-                    <DropdownAlertas></DropdownAlertas>
-                    <DropdownUsuario></DropdownUsuario>
-                    <button className="navbar-toggler navbar-visible" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <i className="bi bi-list"></i>
-                    </button>
+
+
+                    <a className="navbar-brand navbar-visible" href="#"><LogoZapatero /></a>
 
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">Home</a>
+                                <a className="nav-link active" aria-current="page" href="#">Inicio</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Features</a>
+                                <a className="nav-link" href="#">Usuarios</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Pricing</a>
+                                <a className="nav-link" href="#">Equipos</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link disabled" aria-disabled="true">Disabled</a>
+                                <a className="nav-link" href="#">Permisos</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Historial</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link disabled" aria-disabled="true">Incidencias</a>
                             </li>
                         </ul>
                     </div>
+
+                    <DropdownAlertas></DropdownAlertas>
+                    <DropdownUsuario></DropdownUsuario>
+
                 </div>
             </nav>
-
-
-
-
-
-
-
-
-
-
 
         </>
     );
@@ -69,10 +50,7 @@ const Header = () => {
 export default Header;
 
 
-*/
-
-
-
+/*
 import DropdownAlertas from "../DropdownAlertas/DropdownAlertas";
 import DropdownUsuario from "../DropdownUsuario/DropdownUsuario";
 import LogoZapatero from "../LogoZapatero/LogoZapatero";
@@ -80,19 +58,8 @@ import "./Header.css";
 
 const Header = () => {
 
-
-
-
-
-
-
-
     return (
         <>
-
-
-
-
 
             <div className="navbar navbar-expand-lg bg-body-tertiary col-12">
                 <div className="container-fluid">
@@ -145,17 +112,9 @@ const Header = () => {
                 </div>
             </div>
 
-
-
-
-
-
-
-
-
-
         </>
     );
 }
 
 export default Header;
+*/
