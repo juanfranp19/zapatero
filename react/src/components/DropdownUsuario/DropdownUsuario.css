@@ -1,0 +1,39 @@
+.nav-item .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    font-weight: bold;
+    position: relative;
+}
+
+.nav-item .dropdown-toggle:hover {
+    background-color: #f8f8f8;
+    border-radius: 5px;
+}
+
+.dropdown-menu {
+    width: 200px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.dropdown-item {
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown-left {
+    right: 30px;
+}
+
+.nav-item .dropdown-toggle .bi-person{
+    font-size: 25px;
+}

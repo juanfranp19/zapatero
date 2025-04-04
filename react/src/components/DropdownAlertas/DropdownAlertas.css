@@ -1,13 +1,45 @@
-
+.boton-alertas {
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
 
 .num-alertas {
     font-family: "Open Sans", sans-serif;
-    font-size: 11px ;
+    font-size: 11px;
     background-color: #f36a5a;
     color: #ffffff;
     top: -10px;
     right: 30px;
     position: relative;
-    border-radius: 12px ;
+    border-radius: 12px;
     padding: 1px 6px;
+}
+
+.dropdown-menu {
+    width: 200px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.dropdown-item {
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown-left {
+    right: 30px;
+}
+
+.nav-item .dropdown-toggle .bi-bell{
+    font-size: 25px;
 }

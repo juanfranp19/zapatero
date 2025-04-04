@@ -1,8 +1,22 @@
+body {
+    background-color: #EFF3F8;
+}
+
 button.rectangular-btn {
     border-radius: 0;
 }
 
 .fa-user, .fa-lock {
     font-size: 18px;
-    color: #007bff;
+    color: #4DB3A4;
+  }
+
+  .custom-green{
+    background-color: #4DB3A4;
+    border-color: #4DB3A4;
+    color: white;
+  }
+
+  .custom-placeholder::placeholder {
+    color: #bbbcbd;
   }
