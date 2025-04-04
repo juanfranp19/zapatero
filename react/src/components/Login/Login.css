@@ -1,0 +1,8 @@
+button.rectangular-btn {
+    border-radius: 0;
+}
+
+.fa-user, .fa-lock {
+    font-size: 18px;
+    color: #007bff;
+  }
