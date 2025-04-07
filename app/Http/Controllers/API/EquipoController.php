@@ -68,7 +68,6 @@ class EquipoController extends Controller
         if ($equipo) {
 
             $request->validate([
-                'numserie' => 'required',
                 'activo' => 'required',
                 'alias' => 'required',
                 'periodo_uso' => 'required',
@@ -76,7 +75,6 @@ class EquipoController extends Controller
                 'tipo' => 'required'
             ]);
 
-            $equipo->numserie = $request->input('numserie');
             $equipo->activo = $request->input('activo');
             $equipo->alias = $request->input('alias');
             $equipo->periodo_uso = $request->input('periodo_uso');
