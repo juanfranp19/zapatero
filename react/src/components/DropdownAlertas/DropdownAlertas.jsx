@@ -2,19 +2,17 @@ import "./DropdownAlertas.css";
 
 const DropdownAlertas = () => {
     return (
-        <ul className="navbar-nav">
-            <li className="nav-item dropdown">
-                <button className="nav-link dropdown-toggle boton-alertas" aria-expanded="false">
+        <div className="row">
+            <div className="dropdownalertas col-12">
+                <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
                     <i className="bi bi-bell"></i>
-                    <span className="num-alertas">1</span>
-                </button>
-
-                <ul className="dropdown-menu dropdown-left">
-                    <li><a className="dropdown-item" href="#"> <i className="bi bi-lock"> </i> Alerta</a></li>
-                    {/* Aquí puedes agregar más alertas */}
+                    <span className="num-alertas">9+</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a className="dropdown-item" href="#"> alertas </a></li>
                 </ul>
-            </li>
-        </ul>
+            </div>
+        </div>
     );
 }
 

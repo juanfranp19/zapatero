@@ -1,9 +1,32 @@
 body {
-    background-color: #eff3f8;
+    background-color: var(--fondoPagina);
     font-family: "Open Sans", sans-serif;
 }
 
 .scroll-horizontal {
     overflow-x: auto;
     white-space: nowrap;
+}
+
+:root {
+    --fondoPagina: #eff3f8;
+    --blanco: #ffffff;
+
+    --colorIconos: #8ea3b6;
+
+    --verde: #4db3a4;
+    --azul: #6fa7d7;
+    --rojo: #f36a5a;
+
+    --colorDropdown: #aaafb7;
+    --fondoDropdown: #595c5f;
+
+    --fondoMarron: #3b434c;
+    --fondoMarronHover: #595c5f;
+
+
+    --fondoMarronMenu: #444d58;
+    --hoverMenu: #4e5966;
+    --colorItemsMenu: #BCC2CB;
+    --blancoHover: #f1f1f1;
 }
