@@ -1,0 +1,23 @@
+.btn-blue-dark {
+    background-color: #506176;
+    color: white;
+    border: 1px solid #506176;
+  }
+
+  .btn-blue-dark:hover {
+    background-color: #394452;
+    border-color: #394452;
+    color: white;
+  }
+
+  .btn-grey-dark{
+    background-color: #a5a5a5;
+    color: white;
+    border: 1px solid #a5a5a5;
+  }
+
+  .btn-grey-dark:hover{
+    background-color: #8d8d8d;
+    border-color: #8d8d8d;
+    color: white;
+  }
