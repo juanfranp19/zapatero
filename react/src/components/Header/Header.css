@@ -1,7 +1,87 @@
+.cabecera {
+    background-color: var(--blanco);
+}
 
+.navbar-nav{
+    text-align: center;
+}
 
-.boton-navbar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* items del menú */
+.nav-item-menu {
+    padding: 0 5px;
+    margin: 5px;
+}
+
+.nav-item-menu .nav-link:hover {
+    color: var(--verde);
+}
+
+.nav-item-menu .nav-link {
+    border-radius: 5px;
+}
+
+.nav-item-menu .nav-link:focus {
+    color: var(--fondoPagina);
+    background-color: var(--verde);
+}
+
+.nav-item-menu .nav-link:focus:hover {
+    color: var(--fondoPagina);
+}
+
+/* botón del menú*/
+.navbar-toggler, .navbar-toggler:focus {
+    border: none;
+    box-shadow: none;
+}
+
+/* para dropdown alertas y usuario */
+.dropdown-menu {
+    background-color: var(--fondoMarron);
+}
+
+.dropdown-item {
+    color: var(--colorDropdown);
+    font-size: 15px;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    color: var(--colorDropdown);
+    background-color: var(--fondoDropdown);
+    font-size: 15px;
+    padding: 10px;
+}
+
+.dropdown-item .bi {
+    color: var(--azul);
+}
+
+@media screen and (min-width: 768px) {
+
+    .navbar{
+        background-color: var(--fondoMarronMenu);
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-item-menu .nav-link {
+        color: var(--colorItemsMenu);
+    }
+
+    .nav-item-menu .nav-link:hover {
+        background-color: var(--fondoMarronHover);
+        color: var(--blancoHover);
+    }
+
+    .nav-item-menu:focus {
+        color: var(--fondoPagina);
+        background-color: var(--colorItemsMenu);
+    }
+
+    .nav-item-menu .nav-link:focus {
+        color: var(--colorItemsMenu);
+        background-color: var(--hoverMenu);
+    }
 }
