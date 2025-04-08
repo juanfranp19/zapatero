@@ -1,0 +1,23 @@
+html,body {
+    height: 100%;
+    margin: 0;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+
+.page-footer {
+    background-color: #3B434C;
+    color: #BCC2CB;
+    padding: 20px 0;
+    position: relative;
+    margin-top: auto;
+}
+
+.container {
+    text-align: center;
+}
