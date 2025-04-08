@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('equipos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedTinyInteger('activo')->default(0);
-            $table->string('nombre', 255)->unique();
-            $table->double('periodo_uso')->nullable();
+            $table->string('nombre')->unique();
+            $table->unsignedBigInteger('tipo_equipo_id')->nullable();
+            $table->unsignedBigInteger('sala_id')->nullable();
+            $table->string('imagen')->nullable();
+            $table->date('fecha_integracion')->nullable();
+            $table->unsignedTinyInteger('activo')->default(1);
             $table->unsignedTinyInteger('reparacion')->default(0);
-            $table->string('tipo', 255)->nullable();
+            $table->unsignedTinyInteger('mantenimiento')->default(0);
         });
     }
 

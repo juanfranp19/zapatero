@@ -68,11 +68,13 @@ class EquipoController extends Controller
         if ($equipo) {
 
             $request->validate([
+                'nombre' => 'required',
+                'tipo' => 'required',
+                'sala' => 'required',
+                'imagen' => 'required',
+                'fecha_integracion' => 'required',
                 'activo' => 'required',
-                'alias' => 'required',
-                'periodo_uso' => 'required',
                 'reparacion' => 'required',
-                'tipo' => 'required'
             ]);
 
             $equipo->activo = $request->input('activo');

@@ -10,11 +10,13 @@ class Equipo extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'nombre',
+        'tipo',
+        'sala',
+        'imagen',
+        'fecha_integracion',
         'activo',
-        'alias',
-        'periodo_uso',
         'reparacion',
-        'tipo'
     ];
 
     public function valores_produccion(): HasMany

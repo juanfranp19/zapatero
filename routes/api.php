@@ -24,6 +24,18 @@ use Tqdev\PhpCrudApi\Config\Config;
 
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::get('/storage/{archivo}', function ($archivo) {
+
+    $path = storage_path('app/public/' . $archivo);
+
+    // Verifica si el archivo existe
+    if (!file_exists($path)) {
+        abort(404);  // Si el archivo no existe, retorna un error 404
+    }
+
+    // Devuelve el archivo con el tipo MIME adecuado
+    return Response::file($path);
+});
 /**
  *  para autenticados
  */
