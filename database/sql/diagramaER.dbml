@@ -22,7 +22,6 @@ Table comentarios {
 
 Table equipos {
   id int [pk]
-  numserie varchar(255) [unique]
   activo tinyint(1) [default: 0]
   alias varchar(255) [unique]
   periodo_uso double

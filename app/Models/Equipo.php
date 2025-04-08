@@ -10,7 +10,6 @@ class Equipo extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'numserie',
         'activo',
         'alias',
         'periodo_uso',

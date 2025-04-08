@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('equipos', function (Blueprint $table) {
             $table->id();
-            $table->string('numserie', 255)->unique();
             $table->unsignedTinyInteger('activo')->default(0);
-            $table->string('alias', 255)->unique();
+            $table->string('nombre', 255)->unique();
             $table->double('periodo_uso')->nullable();
             $table->unsignedTinyInteger('reparacion')->default(0);
             $table->string('tipo', 255)->nullable();
