@@ -7,7 +7,9 @@ use App\Http\Controllers\API\EquipoController;
 use App\Http\Controllers\API\IncidenciaController;
 use App\Http\Controllers\API\ParametroEficaciaController;
 use App\Http\Controllers\API\PermisoController;
+use App\Http\Controllers\API\SalaController;
 use App\Http\Controllers\API\SequenceController;
+use App\Http\Controllers\API\TipoEquipoController;
 use App\Http\Controllers\API\TipoIncidenciaController;
 use App\Http\Controllers\API\TipoParametroController;
 use App\Http\Controllers\API\TrabajadorController;
@@ -17,6 +19,7 @@ use App\Http\Controllers\API\ValorProduccionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\CheckAdminGate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Psr\Http\Message\ServerRequestInterface;
 use Tqdev\PhpCrudApi\Api;
@@ -28,14 +31,13 @@ Route::get('/storage/{archivo}', function ($archivo) {
 
     $path = storage_path('app/public/' . $archivo);
 
-    // Verifica si el archivo existe
     if (!file_exists($path)) {
-        abort(404);  // Si el archivo no existe, retorna un error 404
+        abort(404);
     }
 
-    // Devuelve el archivo con el tipo MIME adecuado
     return Response::file($path);
 });
+
 /**
  *  para autenticados
  */
@@ -94,6 +96,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         Route::get('valores_produccion', [ValorProduccionController::class, 'index']);
         Route::get('valores_produccion/{id}', [ValorProduccionController::class, 'show']);
+
+        Route::get('salas', [SalaController::class, 'index']);
+        Route::get('salas/{id}', [SalaController::class, 'show']);
+
+        Route::get('tipos_equipo', [TipoEquipoController::class, 'index']);
+        Route::get('tipos_equipo/{id}', [TipoEquipoController::class, 'show']);
 
         /**
          *  para admin
@@ -155,6 +163,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::post('valores_produccion', [ValorProduccionController::class, 'store']);
             Route::put('valores_produccion/{id}', [ValorProduccionController::class, 'update']);
             Route::delete('valores_produccion/{id}', [ValorProduccionController::class, 'destroy']);
+
+            Route::post('salas', [SalaController::class, 'store']);
+            Route::put('salas/{id}', [SalaController::class, 'update']);
+            Route::delete('salas/{id}', [SalaController::class, 'destroy']);
+
+            Route::post('tipos_equipo', [TipoEquipoController::class, 'store']);
+            Route::put('tipos_equipo/{id}', [TipoEquipoController::class, 'update']);
+            Route::delete('tipos_equipo/{id}', [TipoEquipoController::class, 'destroy']);
         });
     });
 });
