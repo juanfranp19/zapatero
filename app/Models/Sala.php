@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Sala extends Model
 {
@@ -12,4 +13,9 @@ class Sala extends Model
         'nombre',
         'accesible',
     ];
+
+    public function equipos(): HasMany
+    {
+        return $this->hasMany(Equipo::class);
+    }
 }

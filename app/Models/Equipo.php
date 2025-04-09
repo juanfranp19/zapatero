@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Equipo extends Model
@@ -47,5 +48,15 @@ class Equipo extends Model
     public function tipos_parametros(): HasMany
     {
         return $this->hasMany(TipoParametro::class);
+    }
+
+    public function tipo_equipo(): BelongsTo
+    {
+        return $this->belongsTo(TipoEquipo::class);
+    }
+
+    public function sala(): BelongsTo
+    {
+        return $this->belongsTo(Sala::class);
     }
 }

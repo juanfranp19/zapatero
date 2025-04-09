@@ -15,13 +15,17 @@ class EquipoResource extends JsonResource
     public function toArray(Request $request): array
     {
         $equipo_array = parent::toArray($request);
-
+        $sala_array = $this->sala;
+        $tipoEquipo_array = $this->tipo_equipo;
         $valoresProduccion_array = $this->valores_produccion;
         $permisos_array = $this->permisos;
         $usos_array = $this->usos;
         $avisos_array = $this->avisos;
         $tipoIncidencias_array = $this->tipos_incidencias;
         $tipoParametros_array = $this->tipos_parametros;
+
+        unset($equipo_array['tipo_equipo_id']);
+        unset($equipo_array['sala_id']);
 
         // borra equipo_id de cada objeto del array
         if (count($valoresProduccion_array) != 0)   foreach ($valoresProduccion_array as $key)  unset($key['equipo_id']);
@@ -32,6 +36,8 @@ class EquipoResource extends JsonResource
         if (count($tipoParametros_array) != 0)      foreach ($tipoParametros_array as $key)     unset($key['equipo_id']);
 
         return array_merge($equipo_array, [
+            'sala' => $sala_array,
+            'tipo' => $tipoEquipo_array,
             'valores_produccion' => $valoresProduccion_array,
             'permisos' => $permisos_array,
             'usos' => $usos_array,

@@ -11,6 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(SalasTableSeeder::class);
+        $this->command->info("SalasTableSeeder ejecutado");
+
+        $this->call(TiposEquipoTableSeeder::class);
+        $this->command->info("TiposEquipoTableSeeder ejecutado");
+
         $this->call(EquiposTableSeeder::class);
         $this->command->info("EquiposTableSeeder ejecutado");
 
