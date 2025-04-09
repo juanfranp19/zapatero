@@ -1,3 +1,4 @@
+// import { Link } from 'react-router-dom';
 import DropdownAlertas from "../DropdownAlertas/DropdownAlertas";
 import DropdownUsuario from "../DropdownUsuario/DropdownUsuario";
 import LogoZapatero from "../LogoZapatero/LogoZapatero";
@@ -9,7 +10,7 @@ const Header = () => {
         <nav class="row cabecera">
 
             <div class="col-12 col-sm-6 d-sm-flex justify-content-start">
-                <a class="navbar-brand" href="#"><LogoZapatero></LogoZapatero></a>
+                <Link class="navbar-brand" href="#"><LogoZapatero></LogoZapatero></Link>
             </div>
 
             <div class="col-12 col-sm-6 d-flex justify-content-center justify-content-sm-end usuario-alertas">
@@ -27,22 +28,22 @@ const Header = () => {
                     <div class="collapse navbar-collapse " id="collapsibleNavbar">
                         <ul class="navbar-nav">
                             <li class="nav-item nav-item-menu">
-                                <a class="nav-link" href="#">Inicio</a>
+                                <Link class="nav-link" to="/inicio">Inicio</Link>
                             </li>
                             <li class="nav-item nav-item-menu">
-                                <a class="nav-link" href="#">Usuarios</a>
+                                <Link class="nav-link" to="/usuarios">Usuarios</Link>
                             </li>
                             <li class="nav-item nav-item-menu">
-                                <a class="nav-link" href="#">Equipos</a>
+                                <Link class="nav-link" to="/equipos">Equipos</Link>
                             </li>
                             <li class="nav-item nav-item-menu">
-                                <a class="nav-link" href="#">Permisos</a>
+                                <Link class="nav-link" to="/permisos">Permisos</Link>
                             </li>
                             <li class="nav-item nav-item-menu">
-                                <a class="nav-link" href="#">Historial</a>
+                                <Link class="nav-link" to="/historial">Historial</Link>
                             </li>
                             <li class="nav-item nav-item-menu">
-                                <a class="nav-link" href="#">Incidencias</a>
+                                <Link class="nav-link" to="/incidencias">Incidencias</Link>
                             </li>
                         </ul>
                     </div>

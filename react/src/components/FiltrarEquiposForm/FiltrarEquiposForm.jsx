@@ -1,7 +1,7 @@
 import './FiltrarEquiposForm.css';
 import React, { useState } from 'react';
 
-const OrdersTable = () => {
+const FiltrarEquiposForm = () => {
   const [orders] = useState([
     {
       id: 1,
@@ -109,4 +109,4 @@ const OrdersTable = () => {
   );
 };
 
-export default OrdersTable;
+export default FiltrarEquiposForm;

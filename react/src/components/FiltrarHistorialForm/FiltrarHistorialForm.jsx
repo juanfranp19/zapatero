@@ -1,3 +1,4 @@
+import './FiltrarHistorialForm.css';
 import React, { useState } from 'react';
 
 const FiltrarHistorialForm = () => {

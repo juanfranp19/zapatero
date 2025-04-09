@@ -1,15 +1,15 @@
 import React from 'react';
-import FiltrarEquipos from "../../components/FiltrarEquiposForm/FiltrarEquiposForm";
+import FiltrarIncidencias from "../../components/FiltrarIncidenciasForm/FiltrarIncidenciasForm";
 // import { Link } from 'react-router-dom';  // para poner algun tipo de enlace
 
-const Equipos = () => {
+const Incidencias = () => {
     return (
         <div>
             <h2>Bienvenido a Equipos</h2>
             <p>Este es el contenido de la página Equipos.</p>
-            <FiltrarEquipos/>
+            <FiltrarIncidencias/>
         </div>
     );
 };
 
-export default Equipos;
+export default Incidencias;
