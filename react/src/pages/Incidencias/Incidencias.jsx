@@ -2,7 +2,7 @@ import React from 'react';
 import FiltrarIncidencias from "../../components/FiltrarIncidenciasForm/FiltrarIncidenciasForm";
 // import { Link } from 'react-router-dom';  // para poner algun tipo de enlace
 
-const Incidencias = () => {
+const IncidenciasPage = () => {
     return (
         <div>
             <h2>Bienvenido a Equipos</h2>
@@ -12,4 +12,4 @@ const Incidencias = () => {
     );
 };
 
-export default Incidencias;
+export default IncidenciasPage;

@@ -2,7 +2,7 @@ import React from 'react';
 import FiltrarEquipos from "../../components/FiltrarEquiposForm/FiltrarEquiposForm";
 // import { Link } from 'react-router-dom';  // para poner algun tipo de enlace
 
-const Equipos = () => {
+const EquiposPage = () => {
     return (
         <div>
             <h2>Bienvenido a Equipos</h2>
@@ -12,4 +12,4 @@ const Equipos = () => {
     );
 };
 
-export default Equipos;
+export default EquiposPage;

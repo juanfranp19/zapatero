@@ -5,7 +5,7 @@ import DatosPersonalIncidencias from "../../components/DatosPersonalIncidencias/
 import DatosIncidencias from "../../components/DatosIncidencias/DatosIncidencias.jsx";
 // import { Link } from 'react-router-dom';  // para poner algun tipo de enlace
 
-const Inicio = () => {
+const InicioPage = () => {
     return (
         <div>
             <h2>Bienvenido al Inicio</h2>
@@ -18,4 +18,4 @@ const Inicio = () => {
     );
 };
 
-export default Inicio;
+export default InicioPage;

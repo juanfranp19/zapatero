@@ -2,7 +2,7 @@ import React from 'react';
 import CrearPermisos from "../../components/CrearPermisos/CrearPermisos";
 // import { Link } from 'react-router-dom';  // para poner algun tipo de enlace
 
-const CrearPermisos = () => {
+const CrearPermisosPage = () => {
     return (
         <div>
             <p>Este es el contenido de la página Creacion de Permisos.</p>
@@ -11,4 +11,4 @@ const CrearPermisos = () => {
     );
 };
 
-export default CrearPermisos;
+export default CrearPermisosPage;

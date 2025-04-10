@@ -2,7 +2,7 @@ import React from 'react';
 import FiltrarPermisos from "../../components/FiltrarPermisosForm/FiltrarPermisosForm";
 // import { Link } from 'react-router-dom';  // para poner algun tipo de enlace
 
-const Permisos = () => {
+const PermisosPage = () => {
     return (
         <div>
             <h2>Bienvenido a Permisos</h2>
@@ -12,4 +12,4 @@ const Permisos = () => {
     );
 };
 
-export default Permisos;
+export default PermisosPage;

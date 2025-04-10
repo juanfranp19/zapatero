@@ -2,7 +2,7 @@ import React from 'react';
 import FiltrarHistorial from "../../components/FiltrarHistorialForm/FiltrarHistorialForm";
 // import { Link } from 'react-router-dom';  // para poner algun tipo de enlace
 
-const Historial = () => {
+const HistorialPage = () => {
     return (
         <div>
             <h2>Bienvenido a Equipos</h2>
@@ -12,4 +12,4 @@ const Historial = () => {
     );
 };
 
-export default Historial;
+export default HistorialPage;

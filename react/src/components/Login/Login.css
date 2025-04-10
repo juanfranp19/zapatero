@@ -1,22 +1,130 @@
 body {
-    background-color: #EFF3F8;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-button.rectangular-btn {
-    border-radius: 0;
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
-.fa-user, .fa-lock {
+.login {
+    position: relative;
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    z-index: 2;
+}
+
+.login h2 {
+    font-size: 1.8em;
+    color: black;
+    text-align: center;
+}
+
+.login .inputBx {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.login .inputBx i {
     font-size: 18px;
     color: #4DB3A4;
-  }
+}
 
-  .custom-green{
-    background-color: #4DB3A4;
-    border-color: #4DB3A4;
-    color: white;
-  }
+.login .inputBx input {
+    width: 100%;
+    padding: 10px 0px 10px 35px;
+    background: transparent;
+    border: 2px solid black;
+    border-radius: 30px;
+    font-size: 1em;
+    color: black;
+    box-shadow: none;
+    outline: none;
+    text-align: left;
+}
 
-  .custom-placeholder::placeholder {
-    color: #bbbcbd;
-  }
+.login .inputBx input[type="submit"] {
+    width: 100%;
+    padding: 10px 15px;
+    background: linear-gradient(45deg, #59AEA2, #fff172);
+    border: none;
+    border-radius: 30px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.login .inputBx input::placeholder {
+    color: #000000;
+}
+
+.ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ring i {
+    position: absolute;
+    inset: 0;
+    border: 2px solid #59AEA2;
+    transition: 0.5s;
+}
+
+.ring i:nth-child(1) {
+    border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+    animation: animate 6s linear infinite;
+}
+
+.ring i:nth-child(2) {
+    border-radius: 41% 44% 56% 59% / 38% 62% 63% 37%;
+    animation: animate 4s linear infinite;
+}
+
+.ring i:nth-child(3) {
+    border-radius: 41% 44% 56% 59% / 38% 62% 63% 37%;
+    animation: animate2 10s linear infinite;
+}
+
+.ring:hover i {
+    border: 6px solid var(--clr);
+    filter: drop-shadow(0 0 20px var(--clr));
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes animate2 {
+    0% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}

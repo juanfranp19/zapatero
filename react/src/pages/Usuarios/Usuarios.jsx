@@ -1,8 +1,8 @@
 import React from 'react';
 import FiltrarUsuarios from "../../components/FiltrarUsuariosForm/FiltrarUsuariosForm";
-// import { Link } from 'react-router-dom';  // para poner algun tipo de enlace
+import { Link } from 'react-router-dom';  // para poner algun tipo de enlace
 
-const Usuarios = () => {
+const UsuariosPage = () => {
     return (
         <div>
             <h2>Bienvenido a Usuarios</h2>
@@ -18,4 +18,4 @@ const Usuarios = () => {
     );
 };
 
-export default Usuarios;
+export default UsuariosPage;
