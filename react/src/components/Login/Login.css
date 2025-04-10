@@ -61,7 +61,7 @@ body {
 .login .inputBx input[type="submit"] {
     width: 100%;
     padding: 10px 15px;
-    background: linear-gradient(45deg, #59AEA2, #fff172);
+    background: linear-gradient(45deg, #59AEA2, #fff17280);
     border: none;
     border-radius: 30px;
     font-size: 1em;
@@ -71,6 +71,17 @@ body {
 .login .inputBx input::placeholder {
     color: #000000;
 }
+
+/* Estilos para el icono del ojo */
+.login .inputBx i.fa-eye, .login .inputBx i.fa-eye-slash {
+    position: absolute;
+    right: 15px;
+    font-size: 20px;
+    color: #4DB3A4;
+    cursor: pointer;
+}
+
+/*                               */
 
 .ring {
     position: absolute;
@@ -84,6 +95,7 @@ body {
     align-items: center;
 }
 
+/* los <i> de la clase ring */
 .ring i {
     position: absolute;
     inset: 0;
@@ -91,26 +103,41 @@ body {
     transition: 0.5s;
 }
 
+/*                          */
+
+/* primer i de la clase ring: animacion y parametros para las curvas */
 .ring i:nth-child(1) {
     border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
     animation: animate 6s linear infinite;
 }
 
+/*                                                                   */
+
+/* segundo i de la clase ring: animacion y parametros para las curvas */
 .ring i:nth-child(2) {
     border-radius: 41% 44% 56% 59% / 38% 62% 63% 37%;
     animation: animate 4s linear infinite;
 }
 
+/*                                                                    */
+
+/* tercer i de la clase ring: animacion y parametros para las curvas */
 .ring i:nth-child(3) {
     border-radius: 41% 44% 56% 59% / 38% 62% 63% 37%;
     animation: animate2 10s linear infinite;
 }
 
+/*                                                                   */
+
+/* cuando pasas por encima de los i  */
 .ring:hover i {
     border: 6px solid var(--clr);
     filter: drop-shadow(0 0 20px var(--clr));
 }
 
+/*                                   */
+
+/* animaciones para el rotar de los rings */
 @keyframes animate {
     0% {
         transform: rotate(0deg);
@@ -128,3 +155,5 @@ body {
         transform: rotate(0deg);
     }
 }
+
+/*                                        */
