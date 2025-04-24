@@ -359,5 +359,68 @@ class EquiposTableSeeder extends Seeder
             'sala_id' => 2,
             'imagen' => 'hololones-2-realidad-aumentada.png',
         ],
+
+        // equipos del aula informatica
+
+        [
+            'nombre' => 'AUF3D',
+            'tipo_equipo_id' => '10',
+            'sala_id' => '5',
+            'imagen' => 'ordenador-informatica.png',
+        ],
+        [
+            'nombre' => 'AUF143',
+            'tipo_equipo_id' => '10',
+            'sala_id' => '5',
+            'imagen' => 'ordenador-informatica.png',
+        ],
+        [
+            'nombre' => 'AUF4D',
+            'tipo_equipo_id' => '10',
+            'sala_id' => '5',
+            'imagen' => 'ordenador-informatica.png',
+        ],
+        [
+            'nombre' => 'AUF3IZ',
+            'tipo_equipo_id' => '10',
+            'sala_id' => '5',
+            'imagen' => 'ordenador-informatica.png',
+        ],
+        [
+            'nombre' => 'AUF3M',
+            'tipo_equipo_id' => '10',
+            'sala_id' => '5',
+            'imagen' => 'ordenador-informatica.png',
+        ],
+        [
+            'nombre' => 'AUF2IZ',
+            'tipo_equipo_id' => '10',
+            'sala_id' => '5',
+            'imagen' => 'ordenador-informatica.png',
+        ],
+        [
+            'nombre' => 'Fbrender',
+            'tipo_equipo_id' => '10',
+            'sala_id' => '5',
+            'imagen' => 'ordenador-informatica.png',
+        ],
+        [
+            'nombre' => 'AUF1D',
+            'tipo_equipo_id' => '10',
+            'sala_id' => '5',
+            'imagen' => 'ordenador-informatica.png',
+        ],
+        [
+            'nombre' => 'AUF-PRO',
+            'tipo_equipo_id' => '10',
+            'sala_id' => '5',
+            'imagen' => 'ordenador-informatica.png',
+        ],
+        [
+            'nombre' => 'AULFAB4IZ',
+            'tipo_equipo_id' => '10',
+            'sala_id' => '5',
+            'imagen' => 'ordenador-informatica.png',
+        ],
     ];
 }

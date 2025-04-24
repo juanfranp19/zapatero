@@ -47,5 +47,8 @@ class TiposEquipoTableSeeder extends Seeder
         [
             'nombre' => 'XR VR AR',
         ],
+        [
+            'nombre' => 'Ordenador',
+        ]
     ];
 }
