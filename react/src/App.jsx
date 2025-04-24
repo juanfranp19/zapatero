@@ -12,9 +12,13 @@ import Incidencias from './pages/Incidencias/Incidencias';
 import CrearUsuarios from './pages/CrearUsuarios/CrearUsuarios';
 import CrearEquipos from './pages/CrearEquipos/CrearEquipos';
 import CrearPermisos from './pages/CrearPermisos/CrearPermisos';
+import Mapa from './pages/Mapa/Mapa';
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+//  const [isAuthenticated, setIsAuthenticated] = useState(false); // si se recarga la pagina, se pierde el estado y el usuario vuelve al login
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return !!localStorage.getItem('token');
+  });
 
   const handleLogin = (status) => {
     setIsAuthenticated(status);
@@ -64,6 +68,10 @@ const App = () => {
           path: '/crear-permiso',
           element: isAuthenticated ? <CrearPermisos /> : <Navigate to="/" />,
         },
+        {
+          path: '/mapa',
+          element: isAuthenticated ? <Mapa /> : <Navigate to="/" />,
+          },
       ],
     },
   ]);

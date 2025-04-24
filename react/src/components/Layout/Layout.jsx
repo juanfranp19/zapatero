@@ -6,12 +6,11 @@ import '../../css/componentes-inicio.css';
 
 const Layout = () => {
     return (
-        <div className="layout-container">
-
+        <div className='container-fluid'>
             <Header />
 
             {/* Este es el contenido de las rutas anidadas */}
-            <main className="main-content">
+            <main className="row main-content">
                 <Outlet />  {/* Aquí se renderizarán las páginas de Dashboard, Usuario, Equipos, etc. */}
             </main>
 
