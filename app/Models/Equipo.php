@@ -59,4 +59,9 @@ class Equipo extends Model
     {
         return $this->belongsTo(Sala::class);
     }
+
+    public function movimientos(): HasMany
+    {
+        return $this->hasMany(Movimiento::class);
+    }
 }

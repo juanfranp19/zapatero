@@ -23,6 +23,7 @@ class EquipoResource extends JsonResource
         $avisos_array = $this->avisos;
         $tipoIncidencias_array = $this->tipos_incidencias;
         $tipoParametros_array = $this->tipos_parametros;
+        $movimientos_array = $this->movimientos;
 
         unset($equipo_array['tipo_equipo_id']);
         unset($equipo_array['sala_id']);
@@ -34,8 +35,10 @@ class EquipoResource extends JsonResource
         if (count($avisos_array) != 0)              foreach ($avisos_array as $key)             unset($key['equipo_id']);
         if (count($tipoIncidencias_array) != 0)     foreach ($tipoIncidencias_array as $key)    unset($key['equipo_id']);
         if (count($tipoParametros_array) != 0)      foreach ($tipoParametros_array as $key)     unset($key['equipo_id']);
+        if (count($movimientos_array) != 0)         foreach ($movimientos_array as $key)        unset($key['equipo_id']);
 
         return array_merge($equipo_array, [
+            'movimientos' => $movimientos_array,
             'sala' => $sala_array,
             'tipo' => $tipoEquipo_array,
             'valores_produccion' => $valoresProduccion_array,
