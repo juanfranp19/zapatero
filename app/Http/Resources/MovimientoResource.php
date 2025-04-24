@@ -14,6 +14,13 @@ class MovimientoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $movimientos_array = parent::toArray($request);
+        $trabajador_array = $this->trabajador;
+
+        unset($movimientos_array['trabajador_id']);
+
+        return array_merge($movimientos_array, [
+            'trabajador' => $trabajador_array,
+        ]);
     }
 }

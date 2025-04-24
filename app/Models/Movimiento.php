@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Movimiento extends Model
 {
@@ -15,4 +16,9 @@ class Movimiento extends Model
         'destino',
         'trabajador_id',
     ];
+
+    public function trabajador(): BelongsTo
+    {
+        return $this->belongsTo(Trabajador::class);
+    }
 }

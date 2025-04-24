@@ -21,6 +21,7 @@ class TrabajadorResource extends JsonResource
         $permisos_array = $this->permisos;
         $incidencias_array = $this->incidencias;
         $user_array = $this->user;
+        $movimientos_array = $this->movimientos;
 
         unset($trabajadores_array['user_id']);
 
@@ -28,6 +29,7 @@ class TrabajadorResource extends JsonResource
         if (count($usos_array) != 0)           foreach ($usos_array as $key)           unset($key['trabajador_id']);
         if (count($permisos_array) != 0)       foreach ($permisos_array as $key)       unset($key['trabajador_id']);
         if (count($incidencias_array) != 0)    foreach ($incidencias_array as $key)    unset($key['trabajador_id']);
+        if (count($movimientos_array) != 0)    foreach ($movimientos_array as $key)    unset($key['trabajador_id']);
 
         return array_merge($trabajadores_array, [
             'accesos' => $accesos_array,
@@ -35,6 +37,7 @@ class TrabajadorResource extends JsonResource
             'permisos' => $permisos_array,
             'incidencias' => $incidencias_array,
             'user' => $user_array,
+            'movimientos' => $movimientos_array,
         ]);
     }
 }

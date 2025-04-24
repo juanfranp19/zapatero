@@ -47,4 +47,8 @@ class Trabajador extends Model
         return $this->hasMany(Incidencia::class);
     }
 
+    public function movimientos(): HasMany
+    {
+        return $this->hasMany(Movimiento::class);
+    }
 }
