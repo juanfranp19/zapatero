@@ -49,6 +49,9 @@ class TiposEquipoTableSeeder extends Seeder
         ],
         [
             'nombre' => 'Ordenador',
-        ]
+        ],
+        [
+            'nombre' => 'Impresora',
+        ],
     ];
 }

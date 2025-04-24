@@ -422,5 +422,35 @@ class EquiposTableSeeder extends Seeder
             'sala_id' => '5',
             'imagen' => 'ordenador-informatica.png',
         ],
+
+        // equipos despacho
+
+        [
+            'nombre' => 'MONITOR 1',
+            'tipo_equipo_id' => '10',
+            'sala_id' => '6',
+            'imagen' => 'monitor-despacho.png',
+        ],
+        [
+            'nombre' => 'MONITOR 2',
+            'tipo_equipo_id' => '10',
+            'sala_id' => '6',
+            'imagen' => 'monitor-despacho.png',
+        ],
+        [
+            'nombre' => 'F Desingjet 800',
+            'tipo_equipo_id' => '10',
+            'sala_id' => '6',
+            'imagen' => 'f-desingjet-800.png',
+        ],
+
+        // impresora
+
+        [
+            'nombre' => 'HP Color Laser MFP 179fnw',
+            'tipo_equipo_id' => '11',
+            'sala_id' => '6',
+            'imagen' => 'hp-color-laser-mfp-179fnw.png',
+        ],
     ];
 }
