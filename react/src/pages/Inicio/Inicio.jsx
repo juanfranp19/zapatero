@@ -7,9 +7,11 @@ import DatosIncidencias from "../../components/DatosIncidencias/DatosIncidencias
 
 const InicioPage = () => {
     return (
-        <div>
-            <h2>Bienvenido al Inicio</h2>
-            <p>Este es el contenido de la página Inicio.</p>
+        <div className='container-fluid'>
+            <div className="row">
+                <h2>Bienvenido al Inicio</h2>
+                <p>Este es el contenido de la página Inicio.</p>
+            </div>
             {/*<EstadisticasUso/>*/}
             <DatosUsos/>
             <DatosPersonalIncidencias/>
