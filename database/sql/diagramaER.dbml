@@ -23,6 +23,7 @@ Table comentarios {
 Table equipos {
   id int [pk]
   nombre string [unique]
+  descripcion string [unique, null]
   tipo_equipo_id int [ref:>tipos_equipo.id]
   sala_id int [ref:>salas.id]
   imagen string

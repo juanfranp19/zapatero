@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('equipos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre')->unique();
+            $table->string('descripcion')->unique()->nullable();
             $table->unsignedBigInteger('tipo_equipo_id')->nullable();
             $table->unsignedBigInteger('sala_id')->nullable();
             $table->string('imagen')->nullable();
