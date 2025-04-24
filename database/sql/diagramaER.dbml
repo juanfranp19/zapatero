@@ -22,11 +22,14 @@ Table comentarios {
 
 Table equipos {
   id int [pk]
-  activo tinyint(1) [default: 0]
-  alias varchar(255) [unique]
-  periodo_uso double
+  nombre string [unique]
+  tipo_equipo_id int [ref:>tipos_equipo.id]
+  sala_id int [ref:>salas.id]
+  imagen string
+  fecha_integracion date [null]
+  activo tinyint(1) [default: 1]
   reparacion tinyint(1) [default: 0]
-  tipo varchar(255)
+  mantenimiento tinyint(1) [default: 0]
 }
 
 Table incidencias {
@@ -112,4 +115,24 @@ Table valores_produccion {
   value_e double [default: 0]
   value_f double [default: 0]
   equipo_numserie varchar(255) [ref: > equipos.id]
+}
+
+Table tipos_equipo {
+  id int [pk]
+  nombre string
+}
+
+Table salas {
+  id int [pk]
+  nombre string
+  accesible int
+}
+
+Table movimientos {
+  id int [pk]
+  fecha datetime
+  equipo_id int [ref:>equipos.id]
+  origen string [ref:>salas.id]
+  destino string [ref:>salas.id]
+  trabajador_id int [ref:>trabajadores.id]
 }
