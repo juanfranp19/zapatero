@@ -5,6 +5,7 @@ use App\Http\Controllers\API\AvisoController;
 use App\Http\Controllers\API\ComentarioController;
 use App\Http\Controllers\API\EquipoController;
 use App\Http\Controllers\API\IncidenciaController;
+use App\Http\Controllers\API\MovimientoController;
 use App\Http\Controllers\API\ParametroEficaciaController;
 use App\Http\Controllers\API\PermisoController;
 use App\Http\Controllers\API\SalaController;
@@ -102,6 +103,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         Route::get('tipos_equipo', [TipoEquipoController::class, 'index']);
         Route::get('tipos_equipo/{id}', [TipoEquipoController::class, 'show']);
+
+        Route::get('movimientos', [MovimientoController::class, 'index']);
+        Route::get('movimientos/{id}', [MovimientoController::class, 'show']);
+        Route::post('movimientos', [MovimientoController::class, 'store']);
+        Route::put('movimientos/{id}', [MovimientoController::class, 'update']);
+        Route::delete('movimientos/{id}', [MovimientoController::class, 'destroy']);
 
         /**
          *  para admin
