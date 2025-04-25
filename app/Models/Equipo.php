@@ -12,12 +12,14 @@ class Equipo extends Model
 
     protected $fillable = [
         'nombre',
-        'tipo',
-        'sala',
+        'descripcion',
+        'tipo_equipo_id',
+        'sala_id',
         'imagen',
         'fecha_integracion',
         'activo',
         'reparacion',
+        'mantenimiento'
     ];
 
     public function valores_produccion(): HasMany

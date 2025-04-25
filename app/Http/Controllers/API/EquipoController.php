@@ -58,31 +58,44 @@ class EquipoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try{
-        $equipo = Equipo::find($id);
+        try {
 
-    } catch (\Exception $e) {
-        return response()->json(['error' => $e->getMessage()], 500);
-    }
+            $equipo = Equipo::find($id);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
 
         if ($equipo) {
 
-            $request->validate([
-                'nombre' => 'required',
-                'tipo' => 'required',
-                'sala' => 'required',
-                'imagen' => 'required',
-                'fecha_integracion' => 'required',
-                'activo' => 'required',
-                'reparacion' => 'required',
-            ]);
+            try {
 
-            $equipo->activo = $request->input('activo');
-            $equipo->alias = $request->input('alias');
-            $equipo->periodo_uso = $request->input('periodo_uso');
-            $equipo->reparacion = $request->input('reparacion');
-            $equipo->tipo = $request->input('tipo');
-            $equipo->save();
+                $request->validate([
+                    'nombre' => 'required',
+                    'descripcion' => 'required',
+                    'tipo_equipo_id' => 'required',
+                    'sala_id' => 'required',
+                    'imagen' => 'required',
+                    //'fecha_integracion' => 'required',
+                    'activo' => 'required',
+                    'reparacion' => 'required',
+                    'mantenimiento' => 'required',
+                ]);
+
+                $equipo->nombre = $request->input('nombre');
+                $equipo->descripcion = $request->input('descripcion');
+                $equipo->tipo_equipo_id = $request->input('tipo_equipo_id');
+                $equipo->sala_id = $request->input('sala_id');
+                $equipo->imagen = $request->input('imagen');
+                $equipo->fecha_integracion = $request->input('fecha_integracion');
+                $equipo->activo = $request->input('activo');
+                $equipo->reparacion = $request->input('reparacion');
+                $equipo->mantenimiento = $request->input('mantenimiento');
+                $equipo->save();
+
+            } catch (\Exception $e) {
+                return response()->json(['error' => $e->getMessage()], 500);
+            }
 
             return response()->json(new EquipoResource($equipo), 200);
 
