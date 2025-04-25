@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Equipo;
 use App\Models\User;
+use App\Observers\EquipoObserver;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,5 +32,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('isAdmin', function (User $user) {
             return $user->admin === 1 || $user->rol === 'ADMIN';
         });
+
+        Equipo::observe(EquipoObserver::class);
     }
 }
