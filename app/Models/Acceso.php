@@ -11,6 +11,7 @@ class Acceso extends Model
 
     protected $fillable = [
         'fecha_entrada',
+        'fecha_salida',
         'trabajador_id'
     ];
 

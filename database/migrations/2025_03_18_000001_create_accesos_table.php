@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('accesos', function (Blueprint $table) {
             $table->id();
             $table->datetime('fecha_entrada');
+            $table->datetime('fecha_salida')->nullable();
             $table->unsignedBigInteger('trabajador_id');
 
             //$table->foreign('trabajador_id')->references('id')->on('trabajadores')->onDelete('cascade');

@@ -69,10 +69,12 @@ class AccesoController extends Controller
 
             $request->validate([
                 'fecha_entrada' => 'required',
+                'fecha_salida' => 'required',
                 'trabajador_id' => 'required'
             ]);
 
             $acceso->fecha_entrada = $request->input('fecha_entrada');
+            $acceso->fecha_salida = $request->input('fecha_salida');
             $acceso->trabajador_id = $request->input('trabajador_id');
             $acceso->save();
 
