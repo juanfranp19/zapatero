@@ -45,8 +45,8 @@ const Mapa = () => {
                 <area shape="rect" coords="683,239,771,386" alt="Almacen 3" onClick={() => handleAreaClick("")} />
                 <area shape="rect" coords="527,70,583,233" alt="Almacen 4" onClick={() => handleAreaClick("")} />
                 <area shape="rect" coords="683,70,770,233" alt="Aseo 2" onClick={() => handleAreaClick("")} />
-                <area shape="rect" coords="526,239,589,238,590,70,676,70,676,387,525,386" alt="Almacén Central" onClick={() => handleAreaClick("")} />
-                <area shape="rect" coords="16,168,520,169,520,387,163,387,162,227,16,227" alt="Salon Cooworking" onClick={() => handleAreaClick("")} />
+                <area shape="rect" coords="527,241,674,384" alt="Almacén Central" onClick={() => handleAreaClick("")} />
+                <area shape="rect" coords="165,169,518,386" alt="Salon Cooworking" onClick={() => handleAreaClick("")} />
                 <area shape="rect" coords="527,17,769,62" alt="Sala Blanco" onClick={() => handleAreaClick("")} />
             </map>
 
