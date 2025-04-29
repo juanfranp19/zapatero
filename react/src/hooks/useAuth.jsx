@@ -1,38 +1,35 @@
 import { useState } from 'react';
-import * as authService from '../services/authService';
 
 export const useAuth = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
 
     const login = async (email, password) => {
-        try {
-            // guarda en la base de datos el loguin
-            const data = await authService.login(email, password);
+        const response = await fetch('http://zapatero.es/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
 
-            // guarda el token en localStorage
+        const data = await response.json();
+
+        // Comprobamos si la respuesta es correcta y devolvemos el token
+        if (response.ok && data.token) {
             localStorage.setItem('token', data.token);
-
             setIsAuthenticated(true);
             return { success: true };
-        } catch (error) {
-            console.error('Login error:', error);
-            return { success: false, error };
         }
+
+        // Si no se recibe el token, lanzamos un error
+        return { success: false, error: data.message || 'Email o contraseña incorrectos' };
     };
 
     const logout = async () => {
-        try {
-            // cierra sesion desde la base de datos
-            await authService.logout();
-
-        } catch (error) {
-            console.error('Logout error:', error);
-        } finally {
-            // quita el token de localStorage
-            localStorage.removeItem('token');
-
-            setIsAuthenticated(false);
-        }
+        localStorage.removeItem('token');
+        setIsAuthenticated(false);
+        window.location.reload() // recarga la pagina al hacer el logout
     };
 
     return {
