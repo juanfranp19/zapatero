@@ -12,6 +12,8 @@ class SalasTableSeeder extends Seeder
      */
     public function run(): void
     {
+        // llena la tabla con los datos del array
+
         foreach (self::$salas as $sala) {
             $sa = new Sala();
             $sa->nombre = $sala['nombre'];

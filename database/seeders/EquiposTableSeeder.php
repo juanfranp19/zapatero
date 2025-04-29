@@ -25,8 +25,7 @@ class EquiposTableSeeder extends Seeder
         DB::unprepared($sql);
         */
 
-        //Equipo::truncate();
-
+        // llena la tabla con los datos del array
         foreach (self::$equipos_fablab as $equipo) {
             $equ = new Equipo();
             $equ->nombre = $equipo['nombre'];

@@ -12,6 +12,8 @@ class TiposEquipoTableSeeder extends Seeder
      */
     public function run(): void
     {
+        // llena la tabla con los datos del array
+
         foreach (self::$tiposEquipo_array as $tipo) {
             $te = new TipoEquipo();
             $te->nombre = $tipo['nombre'];

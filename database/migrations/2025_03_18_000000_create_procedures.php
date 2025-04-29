@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\File;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+    // ejecuta lo que hay en el archivo sql
     public function up(): void
     {
         $archivo = database_path('sql/procedures.sql');

@@ -13,6 +13,8 @@ class TrabajadoresTableSeeder extends Seeder
      */
     public function run(): void
     {
+        // ejecuta lo que hay en el archivo sql
+
         $file = database_path('sql/insert/trabajadores_insert.sql');
 
         if (!File::exists($file)) {

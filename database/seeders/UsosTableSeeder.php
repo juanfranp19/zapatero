@@ -13,6 +13,8 @@ class UsosTableSeeder extends Seeder
      */
     public function run(): void
     {
+        // ejecuta lo que hay en el archivo sql
+
         $file = database_path('sql/insert/usos_insert.sql');
 
         if (!File::exists($file)) {

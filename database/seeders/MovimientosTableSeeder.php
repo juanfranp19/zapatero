@@ -13,6 +13,8 @@ class MovimientosTableSeeder extends Seeder
      */
     public function run(): void
     {
+        // llena la tabla con los datos del array
+
         foreach (self::$movimientos_array as $movimiento) {
             $mov = new Movimiento();
             $mov->fecha = $movimiento['fecha'];
