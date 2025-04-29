@@ -57,15 +57,15 @@ const App = () => {
           element: isAuthenticated ? <Incidencias /> : <Navigate to="/" />,
         },
         {
-          path: '/crear-usuario',
+          path: '/usuarios/crear',
           element: isAuthenticated ? <CrearUsuarios /> : <Navigate to="/" />,
         },
         {
-          path: '/crear-equipo',
+          path: '/equipos/crear',
           element: isAuthenticated ? <CrearEquipos /> : <Navigate to="/" />,
         },
         {
-          path: '/crear-permiso',
+          path: '/permisos/crear',
           element: isAuthenticated ? <CrearPermisos /> : <Navigate to="/" />,
         },
         {
