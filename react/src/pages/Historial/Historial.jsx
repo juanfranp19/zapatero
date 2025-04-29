@@ -5,8 +5,8 @@ import FiltrarHistorial from "../../components/FiltrarHistorialForm/FiltrarHisto
 const HistorialPage = () => {
     return (
         <div>
-            <h2>Bienvenido a Equipos</h2>
-            <p>Este es el contenido de la página Equipos.</p>
+            <h2>Bienvenido a Historial</h2>
+            <p>Este es el contenido de la página Historial.</p>
             <FiltrarHistorial/>
         </div>
     );
