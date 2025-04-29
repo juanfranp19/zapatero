@@ -16,8 +16,10 @@ class ComentarioResource extends JsonResource
     {
         $comentarios_array = parent::toArray($request);
 
+        // arrays de relaciones
         $user_array = $this->user;
 
+        // valores que sobran
         unset($comentarios_array['user_id']);
 
         return array_merge($comentarios_array, [

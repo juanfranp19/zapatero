@@ -16,8 +16,10 @@ class ParametroEficaciaResource extends JsonResource
     {
         $parametrosEficacia_array = parent::toArray($request);
 
+        // arrays de relaciones
         $tipoParametro_array = $this->tipo_parametro;
 
+        // valores que sobran
         unset($parametrosEficacia_array['tipo_parametro_id']);
 
         return array_merge($parametrosEficacia_array, [

@@ -16,9 +16,11 @@ class UsoResource extends JsonResource
     {
         $usos_array = parent::toArray($request);
 
+        // arrays de relaciones
         $trabajador_array = $this->trabajador;
         $equipo_array = $this->equipo;
 
+        // valores que sobran
         unset($usos_array['trabajador_id']);
         unset($usos_array['equipo_id']);
 

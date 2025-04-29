@@ -16,8 +16,10 @@ class TipoEquipoResource extends JsonResource
     {
         $tipoEquipo_array = parent::toArray($request);
 
+        // arrays de relaciones
         $equipos_array = $this->equipos;
 
+        // valores que sobran
         if (count($equipos_array) != 0)   foreach ($equipos_array as $key)  unset($key['tipo_equipo_id']);
 
         return array_merge($tipoEquipo_array, [

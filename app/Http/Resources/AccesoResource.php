@@ -16,8 +16,10 @@ class AccesoResource extends JsonResource
     {
         $accesos_array = parent::toArray($request);
 
+        // arrays de relaciones
         $trabajador_array = $this->trabajador;
 
+        // valores que sobran
         unset($accesos_array['trabajador_id']);
 
         return array_merge($accesos_array, [

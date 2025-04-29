@@ -15,6 +15,8 @@ class TipoIncidenciaResource extends JsonResource
     public function toArray(Request $request): array
     {
         $tiposincidencias_array = parent::toArray($request);
+
+        // arrays de relaciones
         $incidencias_array = $this->incidencias;
         $equipo_array = $this->equipo;
 

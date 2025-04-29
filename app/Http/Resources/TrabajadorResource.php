@@ -16,6 +16,7 @@ class TrabajadorResource extends JsonResource
     {
         $trabajadores_array = parent::toArray($request);
 
+        // arrays de relaciones
         $accesos_array = $this->accesos;
         $usos_array = $this->usos;
         $permisos_array = $this->permisos;
@@ -23,6 +24,7 @@ class TrabajadorResource extends JsonResource
         $user_array = $this->user;
         $movimientos_array = $this->movimientos;
 
+        // valores que sobran
         unset($trabajadores_array['user_id']);
 
         if (count($accesos_array) != 0)        foreach ($accesos_array as $key)        unset($key['trabajador_id']);

@@ -16,10 +16,12 @@ class UserResource extends JsonResource
     {
         $users_array = parent::toArray($request);
 
+        // arrays de relaciones
         $avisos_array = $this->avisos;
         $comentarios_array = $this->comentarios;
         $trabajador_array = $this->trabajador;
 
+        // valores que sobran
         if (count($avisos_array) != 0)      foreach ($avisos_array as $key)         unset($key['user_id']);
         if (count($comentarios_array) != 0) foreach ($comentarios_array as $key)    unset($key['user_id']);
 

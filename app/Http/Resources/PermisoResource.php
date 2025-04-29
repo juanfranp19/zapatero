@@ -16,9 +16,11 @@ class PermisoResource extends JsonResource
     {
         $permisos_array = parent::toArray($request);
 
+        // arrays de relaciones
         $equipo_array = $this->equipo;
         $trabajador_array = $this->trabajador;
 
+        // valores que sobran
         unset($permisos_array['equipo_id']);
         unset($permisos_array['trabajador_id']);
 

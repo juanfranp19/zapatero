@@ -15,8 +15,11 @@ class MovimientoResource extends JsonResource
     public function toArray(Request $request): array
     {
         $movimientos_array = parent::toArray($request);
+
+        // arrays de relaciones
         $trabajador_array = $this->trabajador;
 
+        // valores que sobran
         unset($movimientos_array['trabajador_id']);
 
         return array_merge($movimientos_array, [

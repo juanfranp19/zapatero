@@ -16,6 +16,7 @@ class IncidenciaResource extends JsonResource
     {
         $incidencias_array = parent::toArray($request);
 
+        // arrays de relaciones
         $tipoIncidencia_array = $this->tipo_incidencia;
         $trabajador_array = $this->trabajador;
 

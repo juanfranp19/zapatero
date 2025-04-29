@@ -16,8 +16,10 @@ class SalaResource extends JsonResource
     {
         $sala_array = parent::toArray($request);
 
+        // arrays de relaciones
         $equipos_array = $this->equipos;
 
+        // valores que sobran
         if (count($equipos_array) != 0)   foreach ($equipos_array as $key)  unset($key['sala_id']);
 
         return array_merge($sala_array, [

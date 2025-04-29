@@ -16,9 +16,11 @@ class TipoParametroResource extends JsonResource
     {
         $tipoParametros_array = parent::toArray($request);
 
+        // arrays de relaciones
         $parametrosEficacia_array = $this->parametros_eficacia;
         $equipo_array = $this->equipo;
 
+        // valores que sobran
         unset($tipoParametros_array['equipo_id']);
 
         if (count($parametrosEficacia_array) != 0)   foreach ($parametrosEficacia_array as $key)  unset($key['tipo_parametro_id']);

@@ -15,6 +15,8 @@ class EquipoResource extends JsonResource
     public function toArray(Request $request): array
     {
         $equipo_array = parent::toArray($request);
+
+        // arrays de relaciones
         $sala_array = $this->sala;
         $tipoEquipo_array = $this->tipo_equipo;
         $valoresProduccion_array = $this->valores_produccion;
@@ -25,6 +27,7 @@ class EquipoResource extends JsonResource
         $tipoParametros_array = $this->tipos_parametros;
         $movimientos_array = $this->movimientos;
 
+        // valores que sobran
         unset($equipo_array['tipo_equipo_id']);
         unset($equipo_array['sala_id']);
 
