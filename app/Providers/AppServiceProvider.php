@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Models\Acceso;
 use App\Models\Equipo;
+use App\Models\Movimiento;
 use App\Models\User;
 use App\Observers\AccesoObserver;
 use App\Observers\EquipoObserver;
+use App\Observers\MovimientoObserver;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -36,5 +38,6 @@ class AppServiceProvider extends ServiceProvider
 
         Equipo::observe(EquipoObserver::class);
         Acceso::observe(AccesoObserver::class);
+        Movimiento::observe(MovimientoObserver::class);
     }
 }
