@@ -6,8 +6,6 @@ import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs.jsx";
 const HistorialPage = () => {
     return (
         <div>
-            <h2>Bienvenido a Historial</h2>
-            <p>Este es el contenido de la página Historial.</p>
             <Breadcrumbs/>
             <FiltrarHistorial/>
         </div>

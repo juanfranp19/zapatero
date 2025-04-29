@@ -6,7 +6,6 @@ import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs.jsx";
 const CrearPermisosPage = () => {
     return (
         <div>
-            <p>Este es el contenido de la página Creacion de Permisos.</p>
             <Breadcrumbs/>
             <CrearPermisos/>
         </div>

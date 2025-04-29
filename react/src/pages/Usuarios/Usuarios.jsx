@@ -5,8 +5,6 @@ import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs.jsx";
 const UsuariosPage = () => {
     return (
         <div>
-            <h2>Bienvenido a Usuarios</h2>
-            <p>Este es el contenido de la página Usuarios.</p>
 
             <Breadcrumbs/>
 

@@ -6,8 +6,6 @@ import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs.jsx";
 const EquiposPage = () => {
     return (
         <div>
-            <h2>Bienvenido a Equipos</h2>
-            <p>Este es el contenido de la página Equipos.</p>
 
             <Breadcrumbs/>
 

@@ -8,9 +8,8 @@ import DatosIncidencias from "../../components/DatosIncidencias/DatosIncidencias
 const InicioPage = () => {
     return (
         <div className='container-fluid'>
-            <div className="row">
-                <h2>Bienvenido al Inicio</h2>
-                <p>Este es el contenido de la página Inicio.</p>
+            <div className="row col-12">
+
             </div>
             {/*<EstadisticasUso/>*/}
             <DatosUsos/>

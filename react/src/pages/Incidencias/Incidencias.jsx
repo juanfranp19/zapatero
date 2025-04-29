@@ -6,8 +6,6 @@ import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs.jsx";
 const IncidenciasPage = () => {
     return (
         <div>
-            <h2>Bienvenido a Incidencias</h2>
-            <p>Este es el contenido de la página Incidencias.</p>
 
             <Breadcrumbs/>
 
