@@ -16,6 +16,9 @@ class CheckAdminGate
      */
     public function handle(Request $request, Closure $next): Response
     {
+
+        // si el usuario tiene el gate: isAdmin; tiene permitido entrar al $request, si no, aborta 403
+
         if (!Gate::allows('isAdmin', auth()->user())) {
             abort(403);
         }
