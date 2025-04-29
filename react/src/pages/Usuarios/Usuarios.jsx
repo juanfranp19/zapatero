@@ -2,9 +2,12 @@ import React from 'react';
 import FiltrarUsuarios from "../../components/FiltrarUsuariosForm/FiltrarUsuariosForm";
 import { Link } from 'react-router-dom';  // para poner algun tipo de enlace
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs.jsx";
+import TituloPagina from "../../components/TituloPagina/TituloPagina.jsx";
 const UsuariosPage = () => {
     return (
         <div>
+
+            <TituloPagina nombre="Usuarios"/>
 
             <Breadcrumbs/>
 

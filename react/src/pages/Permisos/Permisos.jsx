@@ -2,10 +2,13 @@ import React from 'react';
 import FiltrarPermisos from "../../components/FiltrarPermisosForm/FiltrarPermisosForm";
 import { Link } from 'react-router-dom';  // para poner algun tipo de enlace
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs.jsx";
+import TituloPagina from "../../components/TituloPagina/TituloPagina.jsx";
 
 const PermisosPage = () => {
     return (
         <div>
+
+            <TituloPagina nombre="Permisos"/>
 
             <Breadcrumbs/>
 
