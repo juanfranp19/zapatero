@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../../hooks/useAuth";
 
 const Login = ({ onLogin }) => {
     const [email, setEmail] = useState('');
@@ -9,6 +10,12 @@ const Login = ({ onLogin }) => {
     const [error, setError] = useState(null);
 
     const navigate = useNavigate();
+    const { isAuthenticated, login } = useAuth();
+
+    // Función de redirección
+    const handleRedireccionar = () => {
+        navigate('/inicio'); // Redirige a la ruta de inicio
+    };
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(prevState => !prevState);
@@ -16,41 +23,29 @@ const Login = ({ onLogin }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(null);
+        setError(null);  // Limpiar errores
 
         try {
-            const response = await fetch('http://zapatero.es/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            });
+            // Llamamos a la función login desde el hook useAuth
+            const result = await login(email, password);
 
-            const data = await response.json();
-
-            // Verificar el código de estado y el contenido de la respuesta
-            if (response.ok) {
-                if (data.token) {
-                    // Guardar token
-                    localStorage.setItem('token', data.token);
-                    // Cambiar estado global
-                    onLogin(true);
-                    // Redirigir al usuario a la página de inicio
-                    navigate('/inicio');
-                } else {
-                    setError('No se recibió token de autenticación');
-                }
+            if (result.success) {
+                onLogin(true);  // Actualizamos el estado global de autenticación
             } else {
-                // Si la respuesta no es ok, lanzar un error con el mensaje de la API
-                throw new Error(data.message || 'Email o contraseña incorrectos');
+                setError(result.error);  // Aquí actualizamos el estado de error
             }
         } catch (err) {
-            // Si hay un error, actualizar el estado de error con el mensaje correspondiente
-            setError(err.message);
+            console.error('Error durante el login:', err);
+            setError('Hubo un error durante el login.'); // Mostrar error genérico
         }
     };
+
+    // Efecto para redirigir cuando el usuario esté autenticado
+    useEffect(() => {
+        if (isAuthenticated) {
+            handleRedireccionar();  // Redirigir cuando esté autenticado
+        }
+    }, [isAuthenticated]);  // El efecto se ejecuta cuando cambia isAuthenticated
 
     return (
         <div className='cuerpo'>
@@ -87,7 +82,7 @@ const Login = ({ onLogin }) => {
                                 onClick={togglePasswordVisibility}
                             ></i>
                         </div>
-                        {error && <p style={{ color: 'red' }}>{error}</p>}
+                        {error && <p style={{ color: 'red' }}>{error}</p>}  {/* Mostramos el error aquí */}
                         <div className="inputBx">
                             <input type="submit" value="Login" />
                         </div>

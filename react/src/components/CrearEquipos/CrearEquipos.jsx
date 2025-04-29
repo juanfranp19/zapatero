@@ -7,14 +7,14 @@ const CrearEquipos = () => {
   const [alias, setAlias] = useState('');
   const [search, setSearch] = useState('');
   const [selectedEquipos, setSelectedEquipos] = useState([
-    'Control de accesos',
-    'Control de lugares',
-    'Control de equipos',
-    'Control de equipos a motor',
+    'Alejandro Nortes',
+    'Raul Rodríguez',
+    'Isidro Ibarra',
+    'Pablo Marmol',
+    'Juan López',
+    'María González'
   ]);
-  const [equiposSeleccionados, setEquiposSeleccionados] = useState([
-    'Control de accesos'
-  ]);
+  const [equiposSeleccionados, setEquiposSeleccionados] = useState([]);
   const [activado, setActivado] = useState(false);
 
   const handleTipoEquipoChange = (e) => {
@@ -33,15 +33,20 @@ const CrearEquipos = () => {
     setSearch(e.target.value);
   };
 
+  // Filtrar los usuarios según la búsqueda
   const filteredOptions = selectedEquipos.filter((equipo) =>
     equipo.toLowerCase().includes(search.toLowerCase())
   );
 
+  // Actualizar la selección de usuarios y el campo de texto con los usuarios seleccionados
   const handleSelectEquiposChange = (e) => {
     const selectedOptions = Array.from(e.target.selectedOptions).map(
       (option) => option.value
     );
     setEquiposSeleccionados(selectedOptions);
+
+    // Actualizar el campo de texto con los usuarios seleccionados
+    setSearch(selectedOptions.join(', ')); // Mostrar los usuarios seleccionados separados por coma
   };
 
   const handleActivadoChange = (e) => {
@@ -128,12 +133,13 @@ const CrearEquipos = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="form-group">
-                <label className="control-label">Seleccione un equipo</label>
+                <label className="control-label">Seleccione un usuario</label>
 
+                {/* Campo de entrada que se actualizará con los usuarios seleccionados */}
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Buscar equipo..."
+                  placeholder="Seleccione un usuario..."
                   value={search}
                   onChange={handleSearchChange}
                 />

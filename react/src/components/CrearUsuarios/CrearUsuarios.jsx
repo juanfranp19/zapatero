@@ -29,6 +29,7 @@ const CrearUsuarios = () => {
     setSearch(e.target.value);
   };
 
+  // Filtrar los equipos según la búsqueda
   const filteredOptions = selectedEquipos.filter((equipo) =>
     equipo.toLowerCase().includes(search.toLowerCase())
   );
@@ -38,6 +39,9 @@ const CrearUsuarios = () => {
       (option) => option.value
     );
     setEquiposSeleccionados(selectedOptions);
+
+    // Actualizar el campo de texto con los equipos seleccionados
+    setSearch(selectedOptions.join(', ')); // Mostrar los equipos seleccionados separados por coma
   };
 
   const handleSubmit = (e) => {
@@ -90,7 +94,7 @@ const CrearUsuarios = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Buscar equipo..."
+                  placeholder="Seleccione un equipo..."
                   value={search}
                   onChange={handleSearchChange}
                 />
@@ -112,16 +116,12 @@ const CrearUsuarios = () => {
             </div>
           </div>
 
-          <div className="col-md-12">
-            <div className="form-actions right">
-              <button type="button" className="btn default btn-grey-dark">
-                Cancelar
-              </button>&nbsp;
-              <button type="submit" className="btn blue-dark btn-blue-dark ">
+          <div className="form-actions right">
+            <button type="button" className="btn default btn-grey-dark">Cancelar</button>&nbsp;
+            <button type="submit" className="btn blue-dark btn-blue-dark">
                 <i className="fa fa-check"></i> Guardar
-              </button>
-            </div>
-          </div>
+            </button>
+        </div>
         </div>
       </form>
     </div>

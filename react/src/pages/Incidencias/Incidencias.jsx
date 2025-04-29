@@ -5,8 +5,11 @@ import FiltrarIncidencias from "../../components/FiltrarIncidenciasForm/FiltrarI
 const IncidenciasPage = () => {
     return (
         <div>
-            <h2>Bienvenido a Equipos</h2>
-            <p>Este es el contenido de la página Equipos.</p>
+            <h2>Bienvenido a Incidencias</h2>
+            <p>Este es el contenido de la página Incidencias.</p>
+
+
+
             <FiltrarIncidencias/>
         </div>
     );
