@@ -1,0 +1,29 @@
+.titulo-pagina {
+    padding: 25px 40px;
+}
+
+.titulo-pagina h1 {
+    /* para que la primera letra sea en mayúscula */
+    text-transform: capitalize;
+    font-size: 22px;
+    color: var(--tituloPagina);
+}
+
+.titulo-pagina h1 * {
+    /* para que el resto del h1 se quede como esa escrito */
+    text-transform: none;
+}
+
+.titulo-pagina-pequenio {
+    font-size: 13px;
+    color: var(--tituloPequenio);
+}
+
+
+@media screen and (min-width: 768px) {
+
+    /* que cambie el color de fondo a la vez que cambie el navbar de color */
+    .titulo-pagina {
+        background-color: var(--blanco);
+    }
+}
