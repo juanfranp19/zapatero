@@ -16,6 +16,7 @@ class TrabajadorController extends Controller
     {
         try {
 
+            // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $trabajadores = TrabajadorResource::collection(
                 Trabajador::orderBy('id')->paginate(5)
             );
@@ -34,13 +35,17 @@ class TrabajadorController extends Controller
     {
         try {
 
+            // obtiene el contenido del json y lo transforma a array asociativo
             $trabajador = json_decode($request->getContent(), true);
+
+            // crea el modelo con los datos transformados
             $trabajador = Trabajador::create($trabajador);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
+        // devuleve el modelo creado desde el recurso
         return new TrabajadorResource($trabajador);
     }
 
@@ -49,7 +54,10 @@ class TrabajadorController extends Controller
      */
     public function show($id)
     {
+        // encuentra el modelo
         $trabajador = Trabajador::findOrFail($id);
+
+        // lo devuelve a través del recurso
         return new TrabajadorResource($trabajador);
     }
 
@@ -60,6 +68,7 @@ class TrabajadorController extends Controller
     {
         try {
 
+            // encuentra el modelo
             $trabajador = Trabajador::find($id);
 
         } catch (\Exception $e) {
@@ -68,6 +77,7 @@ class TrabajadorController extends Controller
 
         if ($trabajador) {
 
+            // verifica que se encuentren los campos
             $request->validate([
                 'dni' => 'required',
                 'activo' => 'required',
@@ -78,6 +88,7 @@ class TrabajadorController extends Controller
                 'user_id' => 'required'
             ]);
 
+            // los actualiza
             $trabajador->dni = $request->input('dni');
             $trabajador->activo = $request->input('activo');
             $trabajador->apellidos = $request->input('apellidos');
@@ -87,6 +98,7 @@ class TrabajadorController extends Controller
             $trabajador->user_id = $request->input('user_id');
             $trabajador->save();
 
+            // lo devuelve mediante el recurso
             return response()->json(new TrabajadorResource($trabajador), 200);
 
         } else {
@@ -99,11 +111,15 @@ class TrabajadorController extends Controller
      */
     public function destroy($id)
     {
+        // encuentra el modelo
         $trabajador = Trabajador::find($id);
 
         if ($trabajador) {
 
+            // lo elimina
             $trabajador->delete();
+
+            // devuelve mensaje
             return response()->json(['message' => 'trabajador eliminado'], 200);
 
         } else {

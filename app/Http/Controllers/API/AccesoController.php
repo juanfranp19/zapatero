@@ -16,15 +16,16 @@ class AccesoController extends Controller
     {
         try {
 
+            // desde el recurso, saca todos los datos de accesos, ordenador por id y de 5 en 5
             $accesos = AccesoResource::collection(
                 Acceso::orderBy('id')->paginate(5)
             );
 
+            return $accesos;
+
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
-
-        return $accesos;
     }
 
     /**
@@ -34,13 +35,17 @@ class AccesoController extends Controller
     {
         try {
 
+            // obtiene el contenido del json y lo transforma a array asociativo
             $acceso = json_decode($request->getContent(), true);
+
+            // crea el modelo con los datos transformados
             $acceso = Acceso::create($acceso);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
+        // devuleve el modelo creado desde el recurso
         return new AccesoResource($acceso);
     }
 
@@ -49,7 +54,10 @@ class AccesoController extends Controller
      */
     public function show($id)
     {
+        // encuentra el modelo
         $acceso = Acceso::findOrFail($id);
+
+        // lo devuelve a través del recurso
         return new AccesoResource($acceso);
     }
 
@@ -58,26 +66,31 @@ class AccesoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try{
-        $acceso = Acceso::find($id);
+        try {
 
-    } catch (\Exception $e) {
-        return response()->json(['error' => $e->getMessage()], 500);
-    }
+            // encuentra el modelo
+            $acceso = Acceso::find($id);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
 
         if ($acceso) {
 
+            // verifica que se encuentren los campos
             $request->validate([
                 'fecha_entrada' => 'required',
                 'fecha_salida' => 'required',
                 'trabajador_id' => 'required'
             ]);
 
+            // los actualiza
             $acceso->fecha_entrada = $request->input('fecha_entrada');
             $acceso->fecha_salida = $request->input('fecha_salida');
             $acceso->trabajador_id = $request->input('trabajador_id');
             $acceso->save();
 
+            // lo devuelve mediante el recurso
             return response()->json(new AccesoResource($acceso), 200);
 
         } else {
@@ -90,11 +103,17 @@ class AccesoController extends Controller
      */
     public function destroy($id)
     {
+        // encuentra el modelo
         $acceso = Acceso::find($id);
 
         if ($acceso) {
+
+            // lo elimina
             $acceso->delete();
+
+            // devuelve mensaje
             return response()->json(['message' => 'Acceso eliminado'], 200);
+
         } else {
             return response()->json(['message' => 'Acceso no encontrado'], 404);
         }

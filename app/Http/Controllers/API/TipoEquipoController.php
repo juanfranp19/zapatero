@@ -16,6 +16,7 @@ class TipoEquipoController extends Controller
     {
         try {
 
+            // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $tiposEquipo = TipoEquipoResource::collection(
                 TipoEquipo::orderBy('id')->paginate(5)
             );
@@ -34,13 +35,17 @@ class TipoEquipoController extends Controller
     {
         try {
 
+            // obtiene el contenido del json y lo transforma a array asociativo
             $tipoEquipo = json_decode($request->getContent(), true);
+
+            // crea el modelo con los datos transformados
             $tipoEquipo = TipoEquipo::create($tipoEquipo);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
+        // devuleve el modelo creado desde el recurso
         return new TipoEquipoResource($tipoEquipo);
     }
 
@@ -49,7 +54,10 @@ class TipoEquipoController extends Controller
      */
     public function show($id)
     {
+        // encuentra el modelo
         $tipoEquipo = TipoEquipo::findOrFail($id);
+
+        // lo devuelve a través del recurso
         return new TipoEquipoResource($tipoEquipo);
     }
 
@@ -60,6 +68,7 @@ class TipoEquipoController extends Controller
     {
         try {
 
+            // encuentra el modelo
             $tipoEquipo = TipoEquipo::find($id);
 
         } catch (\Exception $e) {
@@ -68,13 +77,16 @@ class TipoEquipoController extends Controller
 
         if ($tipoEquipo) {
 
+            // verifica que se encuentren los campos
             $request->validate([
                 'nombre' => 'required',
             ]);
 
+            // los actualiza
             $tipoEquipo->nombre = $request->input('nombre');
             $tipoEquipo->save();
 
+            // lo devuelve mediante el recurso
             return response()->json(new TipoEquipoResource($tipoEquipo), 200);
 
         } else {
@@ -87,11 +99,17 @@ class TipoEquipoController extends Controller
      */
     public function destroy($id)
     {
+        // encuentra el modelo
         $tipoEquipo = TipoEquipo::find($id);
 
         if ($tipoEquipo) {
+
+            // lo elimina
             $tipoEquipo->delete();
+
+            // devuelve mensaje
             return response()->json(['message' => 'Tipo de equipo eliminado'], 200);
+
         } else {
             return response()->json(['message' => 'Tipo de equipo no encontrado'], 404);
         }

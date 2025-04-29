@@ -16,6 +16,7 @@ class PermisoController extends Controller
     {
         try {
 
+            // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $permisos = PermisoResource::collection(
                 Permiso::orderBy('id')->paginate(5)
             );
@@ -34,13 +35,17 @@ class PermisoController extends Controller
     {
         try {
 
+            // obtiene el contenido del json y lo transforma a array asociativo
             $permiso = json_decode($request->getContent(), true);
+
+            // crea el modelo con los datos transformados
             $permiso = Permiso::create($permiso);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
+        // devuleve el modelo creado desde el recurso
         return new PermisoResource($permiso);
     }
 
@@ -49,7 +54,10 @@ class PermisoController extends Controller
      */
     public function show($id)
     {
+        // encuentra el modelo
         $permiso = Permiso::findOrFail($id);
+
+        // lo devuelve a través del recurso
         return new PermisoResource($permiso);
     }
 
@@ -58,15 +66,18 @@ class PermisoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try{
-        $permiso = Permiso::find($id);
+        try {
 
-    } catch (\Exception $e) {
-        return response()->json(['error' => $e->getMessage()], 500);
-    }
+            // encuentra el modelo
+            $permiso = Permiso::find($id);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
 
         if ($permiso) {
 
+            // verifica que se encuentren los campos
             $request->validate([
                 'desde' => 'required',
                 'hasta' => 'required',
@@ -76,6 +87,7 @@ class PermisoController extends Controller
                 'trabajador_id' => 'required'
             ]);
 
+            // los actualiza
             $permiso->desde = $request->input('desde');
             $permiso->hasta = $request->input('hasta');
             $permiso->numusos = $request->input('numusos');
@@ -84,6 +96,7 @@ class PermisoController extends Controller
             $permiso->trabajador_id = $request->input('trabajador_id');
             $permiso->save();
 
+            // lo devuelve mediante el recurso
             return response()->json(new PermisoResource($permiso), 200);
 
         } else {
@@ -96,10 +109,17 @@ class PermisoController extends Controller
      */
     public function destroy($id)
     {
+        // encuentra el modelo
         $permiso = Permiso::find($id);
+
         if ($permiso) {
+
+            // lo elimina
             $permiso->delete();
+
+            // devuelve mensaje
             return response()->json(['message' => 'Permiso eliminado'], 200);
+
         } else {
             return response()->json(['message' => 'Permiso no encontrado'], 404);
         }

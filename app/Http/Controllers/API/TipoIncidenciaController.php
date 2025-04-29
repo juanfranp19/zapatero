@@ -16,6 +16,7 @@ class TipoIncidenciaController extends Controller
     {
         try {
 
+            // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $tiposincidencias = TipoIncidenciaResource::collection(
                 TipoIncidencia::orderBy('id')->paginate(5)
             );
@@ -34,13 +35,17 @@ class TipoIncidenciaController extends Controller
     {
         try {
 
+            // obtiene el contenido del json y lo transforma a array asociativo
             $tipoincidencia = json_decode($request->getContent(), true);
+
+            // crea el modelo con los datos transformados
             $tipoincidencia = TipoIncidencia::create($tipoincidencia);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
+        // devuleve el modelo creado desde el recurso
         return new TipoIncidenciaResource($tipoincidencia);
     }
 
@@ -49,7 +54,10 @@ class TipoIncidenciaController extends Controller
      */
     public function show($id)
     {
+        // encuentra el modelo
         $tipoincidencia = TipoIncidencia::findOrFail($id);
+
+        // lo devuelve a través del recurso
         return new TipoIncidenciaResource($tipoincidencia);
     }
 
@@ -58,10 +66,12 @@ class TipoIncidenciaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // encuentra el modelo
         $tipoIncidencia = TipoIncidencia::find($id);
 
         if ($tipoIncidencia) {
 
+            // verifica que se encuentren los campos
             $request->validate([
                 'codigo' => 'required',
                 'descripcion' => 'required',
@@ -69,12 +79,14 @@ class TipoIncidenciaController extends Controller
                 'equipo_id' => 'required'
             ]);
 
+            // los actualiza
             $tipoIncidencia->codigo = $request->input('codigo');
             $tipoIncidencia->descripcion = $request->input('descripcion');
             $tipoIncidencia->eliminado = $request->input('eliminado');
             $tipoIncidencia->equipo_id = $request->input('equipo_id');
             $tipoIncidencia->save();
 
+            // lo devuelve mediante el recurso
             return response()->json(new TipoIncidenciaResource($tipoIncidencia), 200);
 
         } else {
@@ -88,16 +100,19 @@ class TipoIncidenciaController extends Controller
      */
     public function destroy($id)
     {
+        // encuentra el modelo
         $tipoIncidencia = TipoIncidencia::find($id);
 
         if ($tipoIncidencia) {
+
+            // lo elimina
             $tipoIncidencia->delete();
+
+            // devuelve mensaje
             return response()->json(['message' => 'Tipo de Incidencia eliminado'], 200);
+
         } else {
             return response()->json(['message' => 'Tipo de Incidencia no encontrado'], 404);
         }
     }
-
-
-
 }

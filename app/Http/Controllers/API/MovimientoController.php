@@ -16,6 +16,7 @@ class MovimientoController extends Controller
     {
         try {
 
+            // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $movimientos = MovimientoResource::collection(
                 Movimiento::orderBy('id')->get(),
             );
@@ -36,9 +37,13 @@ class MovimientoController extends Controller
     {
         try {
 
+            // obtiene el contenido del json y lo transforma a array asociativo
             $movimiento = json_decode($request->getContent(), true);
+
+            // crea el modelo con los datos transformados
             $movimiento = Movimiento::create($movimiento);
 
+            // devuleve el modelo creado desde el recurso
             return response()->json([
                 'data' => new MovimientoResource($movimiento),
             ], 201);
@@ -53,8 +58,10 @@ class MovimientoController extends Controller
      */
     public function show($id)
     {
+        // encuentra el modelo
         $movimiento = Movimiento::findOrFail($id);
 
+        // lo devuelve a través del recurso
         return response()->json([
             'data' => new MovimientoResource($movimiento),
         ], 200);
@@ -65,8 +72,10 @@ class MovimientoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // encuentra el modelo
         $movimiento = Movimiento::findOrFail($id);
 
+        // verifica que se encuentren los campos
         $request->validate([
             'fecha' => 'required',
             'equipo_id' => 'required',
@@ -75,6 +84,7 @@ class MovimientoController extends Controller
             'trabajador_id' => 'required',
         ]);
 
+        // los actualiza
         $movimiento->fecha = $request->input('fecha');
         $movimiento->equipo_id = $request->input('equipo_id');
         $movimiento->origen = $request->input('origen');
@@ -82,6 +92,7 @@ class MovimientoController extends Controller
         $movimiento->trabajador_id = $request->input('trabajador_id');
         $movimiento->save();
 
+        // devuelve respuesta vacía
         return response('', 204);
     }
 
@@ -90,9 +101,13 @@ class MovimientoController extends Controller
      */
     public function destroy($id)
     {
+        // encuentra el modelo
         $movimiento = Movimiento::findOrFail($id);
 
+        // lo elimina
         $movimiento->delete();
+
+        // devuelve mensaje vacío
         return response('', 204);
     }
 }

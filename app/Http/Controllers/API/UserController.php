@@ -17,6 +17,7 @@ class UserController extends Controller
     {
         try {
 
+            // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $users = UserResource::collection(
                 User::orderBy('id')->paginate(5)
             );
@@ -31,21 +32,9 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-
-    // la sustituye register
-
     /*public function store(Request $request)
     {
-        try {
-
-            $user = json_decode($request->getContent(), true);
-            $user = User::create($user);
-
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-
-        return new UserResource($user);
+        //
     }*/
 
     /**
@@ -53,7 +42,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        // encuentra el modelo
         $user = User::findOrFail($id);
+
+        // lo devuelve a través del recurso
         return new UserResource($user);
     }
 
@@ -64,6 +56,7 @@ class UserController extends Controller
     {
         try {
 
+            // encuentra el modelo
             $user = User::find($id);
 
         } catch (\Exception $e) {
@@ -72,6 +65,7 @@ class UserController extends Controller
 
         if ($user) {
 
+            // verifica que se encuentren los campos
             $request->validate([
                 'name' => 'required',
                 'email' => 'required',
@@ -83,6 +77,7 @@ class UserController extends Controller
 
             try {
 
+                // los actualiza
                 $user->name = $request->input('name');
                 $user->email = $request->input('email');
                 $user->admin = $request->input('admin');
@@ -91,6 +86,7 @@ class UserController extends Controller
                 $user->token = $request->input('token');
                 $user->save();
 
+                // lo devuelve mediante el recurso
                 return response()->json(new UserResource($user), 200);
 
             } catch (\Exception $e) {
@@ -107,11 +103,15 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        // encuentra el modelo
         $user = User::find($id);
 
         if ($user) {
 
+            // lo elimina
             $user->delete();
+
+            // devuelve mensaje
             return response()->json(['message' => 'User eliminado'], 200);
 
         } else {

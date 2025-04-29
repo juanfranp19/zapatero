@@ -21,6 +21,7 @@ class IncidenciaController extends Controller
     {
         try {
 
+            // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $incidencias = IncidenciaResource::collection(
                 Incidencia::orderBy('id')->paginate(5)
             );
@@ -37,46 +38,12 @@ class IncidenciaController extends Controller
      */
     public function store(Request $request)
     {
-        /*
-        $validator = Validator::make($request->all(), [
-            'fecha_incidencia' => 'required',
-            'tiempo_incidencia' => 'required',
-            'tipo_incidencia_id' => 'required',
-            'trabajador_id' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
-        }
-
-        try {
-            $incidencia = Incidencia::create([
-                'fecha_incidencia' => $request->fecha_incidencia,
-                'tiempo_incidencia' => $request->tiempo_incidencia,
-                'tipo_incidencia_id' => $request->tipo_incidencia_id,
-                'trabajador_id' => $request->trabajador_id,
-            ]);
-
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-
-        $data = [
-            'comentario' => $incidencia,
-            'status' => 201
-        ];
-
-        return response()->json($data, 201);
-        */
-
         try {
 
+            // obtiene el contenido del json y lo transforma a array asociativo
             $incidencia = json_decode($request->getContent(), true);
+
+            // crea el modelo con los datos transformados
             $incidencia = Incidencia::create($incidencia);
 
         } catch (\Exception $e) {
@@ -104,6 +71,7 @@ class IncidenciaController extends Controller
         return $data;
         */
 
+        // devuleve el modelo creado desde el recurso
         return new IncidenciaResource($incidencia);
     }
 
@@ -112,57 +80,19 @@ class IncidenciaController extends Controller
      */
     public function update(Request $request, Incidencia $incidencia)
     {
-        /*
-        $datos = [
-            'fecha_incidencia' => $request->fecha_incidencia,
-            'tiempo_incidencia' => $request->tiempo_incidencia,
-            'tipo_incidencia_id' => $request->tipo_incidencia_id,
-            'trabajador_id' => $request->trabajador_id
-        ];
-
-        $validator = Validator::make($request->all(), [
-            'fecha_incidencia' => 'required',
-            'tiempo_incidencia' => 'required',
-            'tipo_incidencia_id' => 'required',
-            'trabajador_id' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validación de los datos',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
-        }
-
-        try {
-            DB::table('incidencias')
-                ->where('id', $incidencia->id)
-                ->update($datos);
-
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-
-        $data = [
-            'message' => 'Incidencia actualizada',
-            'comentario' => $datos,
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
-        */
-
         try {
 
+            // obtiene la información en json y la transofmra en array asociativo
             $incidenciaData = json_decode($request->getContent(), true);
+
+            // actualiza los datos
             $incidencia->update($incidenciaData);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
+        // devuelve el modelo actualizado mediante el recurs
         return new IncidenciaResource($incidencia);
     }
 
@@ -171,32 +101,16 @@ class IncidenciaController extends Controller
      */
     public function destroy(Incidencia $incidencia)
     {
-        /*
-        try {
-            DB::table('incidencias')
-                ->where('id', $incidencia->id)
-                ->delete();
-
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-
-        $data = [
-            'message' => 'Acceso eliminado',
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
-        */
-
         try {
 
+            // elimina el modelo
             $incidencia->delete();
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
+        // devuelve mensaje
         $data = [
             'message' => 'Incidencia eliminada',
             'status' => 200

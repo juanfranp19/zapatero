@@ -16,6 +16,7 @@ class TipoParametroController extends Controller
     {
         try {
 
+            // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $tiposParametros = TipoParametroResource::collection(
                 TipoParametro::orderBy('id')->paginate(5)
             );
@@ -34,13 +35,17 @@ class TipoParametroController extends Controller
     {
         try {
 
+            // obtiene el contenido del json y lo transforma a array asociativo
             $tipoParametro = json_decode($request->getContent(), true);
+
+            // crea el modelo con los datos transformados
             $tipoParametro = TipoParametro::create($tipoParametro);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
+        // devuleve el modelo creado desde el recurso
         return new TipoParametroResource($tipoParametro);
     }
 
@@ -49,7 +54,10 @@ class TipoParametroController extends Controller
      */
     public function show($id)
     {
+        // encuentra el modelo
         $tipoParametro = TipoParametro::findOrFail($id);
+
+        // lo devuelve a través del recurso
         return new TipoParametroResource($tipoParametro);
     }
 
@@ -60,6 +68,7 @@ class TipoParametroController extends Controller
     {
         try {
 
+            // encuentra el modelo
             $tipoParametro = TipoParametro::find($id);
 
         } catch (\Exception $e) {
@@ -68,6 +77,7 @@ class TipoParametroController extends Controller
 
         if ($tipoParametro) {
 
+            // verifica que se encuentren los campos
             $request->validate([
                 'codigo' => 'required',
                 'descripcion' => 'required',
@@ -76,6 +86,7 @@ class TipoParametroController extends Controller
                 'equipo_id' => 'required'
             ]);
 
+            // los actualiza
             $tipoParametro->codigo = $request->input('codigo');
             $tipoParametro->descripcion = $request->input('descripcion');
             $tipoParametro->eliminado = $request->input('eliminado');
@@ -83,6 +94,7 @@ class TipoParametroController extends Controller
             $tipoParametro->equipo_id = $request->input('equipo_id');
             $tipoParametro->save();
 
+            // lo devuelve mediante el recurso
             return response()->json(new TipoParametroResource($tipoParametro), 200);
 
         } else {
@@ -95,11 +107,15 @@ class TipoParametroController extends Controller
      */
     public function destroy($id)
     {
+        // encuentra el modelo
         $tipoParametro = TipoParametro::find($id);
 
         if ($tipoParametro) {
 
+            // lo elimina
             $tipoParametro->delete();
+
+            // devuelve mensaje
             return response()->json(['message' => 'TipoParametro eliminado'], 200);
 
         } else {

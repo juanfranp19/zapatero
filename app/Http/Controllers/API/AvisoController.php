@@ -16,15 +16,16 @@ class AvisoController extends Controller
     {
         try {
 
+            // desde el recurso, saca todos los datos de avisos, ordenador por id y de 5 en 5
             $avisos = AvisoResource::collection(
                 Aviso::orderBy('id')->paginate(5)
             );
 
+            return $avisos;
+
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
-
-        return $avisos;
     }
 
     /**
@@ -34,13 +35,17 @@ class AvisoController extends Controller
     {
         try {
 
+            // obtiene el contenido del json y lo transforma a array asociativo
             $aviso = json_decode($request->getContent(), true);
+
+            // crea el modelo con los datos transformados
             $aviso = Aviso::create($aviso);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
+        // devuleve el modelo creado desde el recurso
         return new AvisoResource($aviso);
     }
 
@@ -49,7 +54,10 @@ class AvisoController extends Controller
      */
     public function show($id)
     {
+        // encuentra el modelo
         $aviso = Aviso::findOrFail($id);
+
+        // lo devuelve a través del recurso
         return new AvisoResource($aviso);
     }
 
@@ -58,24 +66,29 @@ class AvisoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try{
-        $aviso = Aviso::find($id);
+        try {
 
-    } catch (\Exception $e) {
-        return response()->json(['error' => $e->getMessage()], 500);
-    }
+            // encuentra el modelo
+            $aviso = Aviso::find($id);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
 
         if ($aviso) {
 
+            // verifica que se encuentren los campos
             $request->validate([
                 'equipo_id' => 'required',
                 'user_id' => 'required'
             ]);
 
+            // los actualiza
             $aviso->equipo_id = $request->input('equipo_id');
             $aviso->user_id = $request->input('user_id');
             $aviso->save();
 
+            // lo devuelve mediante el recurso
             return response()->json(new AvisoResource($aviso), 200);
 
         } else {
@@ -88,10 +101,17 @@ class AvisoController extends Controller
      */
     public function destroy($id)
     {
+        // encuentra el modelo
         $aviso = Aviso::find($id);
+
         if ($aviso) {
+
+            // lo elimina
             $aviso->delete();
+
+            // devuelve mensaje
             return response()->json(['message' => 'Aviso eliminado'], 200);
+
         } else {
             return response()->json(['message' => 'Aviso no encontrado'], 404);
         }

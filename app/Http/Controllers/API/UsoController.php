@@ -16,6 +16,7 @@ class UsoController extends Controller
     {
         try {
 
+            // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $usos = UsoResource::collection(
                 Uso::orderBy('id')->paginate(5)
             );
@@ -34,13 +35,17 @@ class UsoController extends Controller
     {
         try {
 
+            // obtiene el contenido del json y lo transforma a array asociativo
             $uso = json_decode($request->getContent(), true);
+
+            // crea el modelo con los datos transformados
             $uso = Uso::create($uso);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
+        // devuleve el modelo creado desde el recurso
         return new UsoResource($uso);
     }
 
@@ -49,7 +54,10 @@ class UsoController extends Controller
      */
     public function show($id)
     {
+        // encuentra el modelo
         $uso = Uso::findOrFail($id);
+
+        // lo devuelve a través del recurso
         return new UsoResource($uso);
     }
 
@@ -58,15 +66,18 @@ class UsoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try{
-        $uso = Uso::find($id);
+        try {
 
-    } catch (\Exception $e) {
-        return response()->json(['error' => $e->getMessage()], 500);
-    }
+            // encuentra el modelo
+            $uso = Uso::find($id);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
 
         if ($uso) {
 
+            // verifica que se encuentren los campos
             $request->validate([
                 'estado' => 'required',
                 'fecha_uso' => 'required',
@@ -76,6 +87,7 @@ class UsoController extends Controller
                 'trabajador_id' => 'required'
             ]);
 
+            // los actualiza
             $uso->estado = $request->input('estado');
             $uso->fecha_uso = $request->input('fecha_uso');
             $uso->hora_fin = $request->input('hora_fin');
@@ -84,6 +96,7 @@ class UsoController extends Controller
             $uso->trabajador_id = $request->input('trabajador_id');
             $uso->save();
 
+            // lo devuelve mediante el recurso
             return response()->json(new UsoResource($uso), 200);
 
         } else {
@@ -95,11 +108,17 @@ class UsoController extends Controller
      */
     public function destroy($id)
     {
+        // encuentra el modelo
         $uso = Uso::find($id);
 
         if ($uso) {
+
+            // lo elimina
             $uso->delete();
+
+            // devuelve mensaje
             return response()->json(['message' => 'Uso eliminado'], 200);
+
         } else {
             return response()->json(['message' => 'Uso no encontrado'], 404);
         }

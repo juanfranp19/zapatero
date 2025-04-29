@@ -16,6 +16,7 @@ class ValorProduccionController extends Controller
     {
         try {
 
+            // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $valores_produccion = ValorProduccionResource::collection(
                 ValorProduccion::orderBy('id')->paginate(5)
             );
@@ -34,13 +35,17 @@ class ValorProduccionController extends Controller
     {
         try {
 
+            // obtiene el contenido del json y lo transforma a array asociativo
             $valor_produccion = json_decode($request->getContent(), true);
+
+            // crea el modelo con los datos transformados
             $valor_produccion = ValorProduccion::create($valor_produccion);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
+        // devuleve el modelo creado desde el recurso
         return new ValorProduccionResource($valor_produccion);
     }
 
@@ -49,7 +54,10 @@ class ValorProduccionController extends Controller
      */
     public function show($id)
     {
+        // encuentra el modelo
         $valor_produccion = ValorProduccion::findOrFail($id);
+
+        // lo devuelve a través del recurso
         return new ValorProduccionResource($valor_produccion);
     }
 
@@ -60,6 +68,7 @@ class ValorProduccionController extends Controller
     {
         try {
 
+            // encuentra el modelo
             $valor_produccion = ValorProduccion::find($id);
 
         } catch (\Exception $e) {
@@ -68,6 +77,7 @@ class ValorProduccionController extends Controller
 
         if ($valor_produccion) {
 
+            // verifica que se encuentren los campos
             $request->validate([
                 'fecha' => 'required',
                 'value_a' => 'required',
@@ -79,6 +89,7 @@ class ValorProduccionController extends Controller
                 'equipo_id' => 'required'
             ]);
 
+            // los actualiza
             $valor_produccion->fecha = $request->input('fecha');
             $valor_produccion->value_a = $request->input('value_a');
             $valor_produccion->value_b = $request->input('value_b');
@@ -89,6 +100,7 @@ class ValorProduccionController extends Controller
             $valor_produccion->equipo_id = $request->input('equipo_id');
             $valor_produccion->save();
 
+            // lo devuelve mediante el recurso
             return response()->json(new ValorProduccionResource($valor_produccion), 200);
 
         } else {
@@ -101,11 +113,15 @@ class ValorProduccionController extends Controller
      */
     public function destroy($id)
     {
+        // encuentra el modelo
         $valor_produccion = ValorProduccion::find($id);
 
         if ($valor_produccion) {
 
+            // lo elimina
             $valor_produccion->delete();
+
+            // devuelve mensaje
             return response()->json(['message' => 'ValorProduccion eliminado'], 200);
 
         } else {

@@ -16,6 +16,7 @@ class SalaController extends Controller
     {
         try {
 
+            // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $salas = SalaResource::collection(
                 Sala::orderBy('id')->paginate(5)
             );
@@ -34,13 +35,17 @@ class SalaController extends Controller
     {
         try {
 
+            // obtiene el contenido del json y lo transforma a array asociativo
             $sala = json_decode($request->getContent(), true);
+
+            // crea el modelo con los datos transformados
             $sala = Sala::create($sala);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
+        // devuleve el modelo creado desde el recurso
         return new SalaResource($sala);
     }
 
@@ -49,7 +54,10 @@ class SalaController extends Controller
      */
     public function show($id)
     {
+        // encuentra el modelo
         $sala = Sala::findOrFail($id);
+
+        // lo devuelve a través del recurso
         return new SalaResource($sala);
     }
 
@@ -60,6 +68,7 @@ class SalaController extends Controller
     {
         try {
 
+            // encuentra el modelo
             $sala = Sala::find($id);
 
         } catch (\Exception $e) {
@@ -68,14 +77,17 @@ class SalaController extends Controller
 
         if ($sala) {
 
+            // verifica que se encuentren los campos
             $request->validate([
                 'nombre' => 'required',
             ]);
 
+            // los actualiza
             $sala->nombre = $request->input('nombre');
             $sala->accesible = $request->input('accesible');
             $sala->save();
 
+            // lo devuelve mediante el recurso
             return response()->json(new SalaResource($sala), 200);
 
         } else {
@@ -88,11 +100,17 @@ class SalaController extends Controller
      */
     public function destroy($id)
     {
+        // encuentra el modelo
         $sala = Sala::find($id);
 
         if ($sala) {
+
+            // lo elimina
             $sala->delete();
+
+            // devuelve mensaje
             return response()->json(['message' => 'Sala eliminada'], 200);
+
         } else {
             return response()->json(['message' => 'Sala no encontrada'], 404);
         }

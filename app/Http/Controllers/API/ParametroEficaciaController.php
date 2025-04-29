@@ -16,6 +16,7 @@ class ParametroEficaciaController extends Controller
     {
         try {
 
+            // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $parametroseficacia = ParametroEficaciaResource::collection(
                 ParametroEficacia::orderBy('id')->paginate(5)
             );
@@ -34,13 +35,17 @@ class ParametroEficaciaController extends Controller
     {
         try {
 
+            // obtiene el contenido del json y lo transforma a array asociativo
             $parametroseficacia = json_decode($request->getContent(), true);
+
+            // crea el modelo con los datos transformados
             $parametroseficacia = ParametroEficacia::create($parametroseficacia);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
+        // devuleve el modelo creado desde el recurso
         return new ParametroEficaciaResource($parametroseficacia);
     }
 
@@ -49,7 +54,10 @@ class ParametroEficaciaController extends Controller
      */
     public function show($id)
     {
+        // encuentra el modelo
         $parametroseficacia = ParametroEficacia::findOrFail($id);
+
+        // lo devuelve a través del recurso
         return new ParametroEficaciaResource($parametroseficacia);
     }
 
@@ -60,6 +68,7 @@ class ParametroEficaciaController extends Controller
     {
         try {
 
+            // encuentra el modelo
             $parametroseficacia = ParametroEficacia::find($id);
 
         } catch (\Exception $e) {
@@ -68,6 +77,7 @@ class ParametroEficaciaController extends Controller
 
         if ($parametroseficacia) {
 
+            // verifica que se encuentren los campos
             $request->validate([
                 'fecha_parametro' => 'required',
                 'valor' => 'required',
@@ -76,6 +86,7 @@ class ParametroEficaciaController extends Controller
 
             try {
 
+                // los actualiza
                 $parametroseficacia->fecha_parametro = $request->input('fecha_parametro');
                 $parametroseficacia->valor = $request->input('valor');
                 $parametroseficacia->tipo_parametro_id = $request->input('tipo_parametro_id');
@@ -85,6 +96,7 @@ class ParametroEficaciaController extends Controller
                 return response()->json(['error' => $e->getMessage()], 500);
             }
 
+            // lo devuelve mediante el recurso
             return response()->json(new ParametroEficaciaResource($parametroseficacia), 200);
 
         } else {
@@ -97,10 +109,17 @@ class ParametroEficaciaController extends Controller
      */
     public function destroy($id)
     {
+        // encuentra el modelo
         $parametroseficacia = ParametroEficacia::find($id);
+
         if ($parametroseficacia) {
+
+            // lo elimina
             $parametroseficacia->delete();
+
+            // devuelve mensaje
             return response()->json(['message' => 'Parametros Eficacia eliminado'], 200);
+
         } else {
             return response()->json(['message' => 'Parametros Eficacia no encontrado'], 404);
         }
