@@ -13,6 +13,7 @@ class AuthController extends Controller
     {
         try {
 
+            // valida los datos del registro
             $data = $request->validate([
                 'name' => ['required', 'string'],
                 'email' => ['required', 'email'],
@@ -27,13 +28,12 @@ class AuthController extends Controller
 
         try {
 
+            // crea el modelo con los datos
             $user = User::create($data);
 
-            $token = $user->createToken('auth_token')->plainTextToken;
-
+            // devulve el nombre del usuario creado
             return response()->json([
-                'user' => $user,
-                'token' => $token,
+                'user' => $user
             ], 201);
 
         } catch(\Exception $e) {
@@ -45,6 +45,7 @@ class AuthController extends Controller
     {
         try {
 
+            // valida los datos del login
             $data = $request->validate([
                 'email' => ['required', 'email', 'exists:users'],
                 'password' => ['required'],
@@ -54,8 +55,10 @@ class AuthController extends Controller
             return response()->json(['error' => $e->getMessage()], 400);
         }
 
+        // verifica que estén los datos en la base de datos
         $user = User::where('email', $data['email'])->first();
 
+        // si no encuentra el user o la contraseña es incorrecta, devuelve error 401
         if (!$user || !Hash::check($data['password'], $user->password)) {
             return response([
                 'message' => 'Email o contraseña incorrectos'
@@ -64,12 +67,14 @@ class AuthController extends Controller
 
         try {
 
+            // crea el token
             $token = $user->createToken('auth_token')->plainTextToken;
 
         } catch(\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
+        // devuelve mensaje, nombre de usuario y token
         return response()->json([
             'message' => 'Has iniciado sesión',
             'user' => $user,
@@ -81,12 +86,14 @@ class AuthController extends Controller
     {
         try {
 
+            // elimina el token
             auth()->user()->tokens()->delete();
 
         } catch(\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
+        // devuelve mensaje
         return response()->json([
             'message' => 'Has cerrado sesión',
         ], 200);
