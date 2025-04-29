@@ -15,6 +15,8 @@ class Comentario extends Model
         'user_id'
     ];
 
+    // relaciones
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

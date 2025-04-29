@@ -17,6 +17,8 @@ class ParametroEficacia extends Model
         'tipo_parametro_id'
     ];
 
+    // relaciones
+
     public function tipo_parametro(): BelongsTo
     {
         return $this->belongsTo(TipoParametro::class, 'tipo_parametro_id');

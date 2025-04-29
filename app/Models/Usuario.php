@@ -22,6 +22,8 @@ class User extends Model
         'token',
     ];
 
+    // relaciones
+
     public function comentarios(): HasMany
     {
         return $this->hasMany(Comentario::class);

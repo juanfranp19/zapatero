@@ -22,6 +22,8 @@ class Equipo extends Model
         'mantenimiento'
     ];
 
+    // relaciones
+
     public function valores_produccion(): HasMany
     {
         return $this->hasMany(ValorProduccion::class);

@@ -18,6 +18,8 @@ class Uso extends Model
         'trabajador_id'
     ];
 
+    // relaciones
+
     public function trabajador(): belongsTo
     {
         return $this->belongsTo(Trabajador::class);

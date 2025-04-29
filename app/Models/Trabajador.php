@@ -22,6 +22,8 @@ class Trabajador extends Model
         'user_id'
     ];
 
+    // relaciones
+
     public function accesos(): HasMany
     {
         return $this->hasMany(Acceso::class);

@@ -14,6 +14,8 @@ class Sala extends Model
         'accesible',
     ];
 
+    // relaciones
+
     public function equipos(): HasMany
     {
         return $this->hasMany(Equipo::class);

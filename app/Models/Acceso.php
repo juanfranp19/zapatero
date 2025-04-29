@@ -15,6 +15,8 @@ class Acceso extends Model
         'trabajador_id'
     ];
 
+    // relaciones
+
     public function trabajador(): BelongsTo
     {
         return $this->belongsTo(Trabajador::class);

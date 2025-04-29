@@ -16,6 +16,8 @@ class Incidencia extends Model
         'trabajador_id'
     ];
 
+    // relaciones
+
     public function tipo_incidencia(): BelongsTo
     {
         return $this->belongsTo(TipoIncidencia::class);

@@ -51,6 +51,8 @@ class User extends Authenticatable
         ];
     }
 
+    // relaciones
+
     public function comentarios(): HasMany
     {
         return $this->hasMany(Comentario::class);

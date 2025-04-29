@@ -22,6 +22,8 @@ class ValorProduccion extends Model
         'equipo_id'
     ];
 
+    // relaciones
+
     public function equipo(): BelongsTo
     {
         return $this->belongsTo(Equipo::class);

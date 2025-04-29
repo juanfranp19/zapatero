@@ -18,6 +18,9 @@ class TipoIncidencia extends Model
         'eliminado',
         'equipo_id'
     ];
+
+    // relaciones
+
     public function incidencias(): HasMany
     {
         return $this->hasMany(Incidencia::class);

@@ -18,6 +18,8 @@ class Permiso extends Model
         'trabajador_id'
     ];
 
+    // relaciones
+
     public function equipo(): BelongsTo
     {
         return $this->belongsTo(Equipo::class);

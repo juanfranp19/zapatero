@@ -20,6 +20,8 @@ class TipoParametro extends Model
         'equipo_id'
     ];
 
+    // relaciones
+
     public function parametros_eficacia(): HasMany
     {
         return $this->HasMany(ParametroEficacia::class);

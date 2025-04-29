@@ -15,6 +15,8 @@ class TipoEquipo extends Model
         'nombre',
     ];
 
+    // relaciones
+
     public function equipos(): HasMany
     {
         return $this->hasMany(Equipo::class);
