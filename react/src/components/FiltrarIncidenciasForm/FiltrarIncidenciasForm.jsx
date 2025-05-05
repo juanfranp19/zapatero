@@ -51,32 +51,22 @@ const FiltrarIncidenciasForm = () => {
                         </td>
                         <td>
                             <div className="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                {/* Campo de "Desde" */}
                                 <input
-                                    type="text"
+                                    type="date"
                                     className="form-control form-filter input-sm"
-                                    readOnly
+                                    readOnly=""
                                     name="order_date_from"
-                                    placeholder="Desde"
-                                />
-                                <span className="input-group-btn">
-                                    <button className="btn btn-sm default" type="button">
-                                        <i className="fa fa-calendar"></i>
-                                    </button>
-                                </span>
+                                    placeholder="Desde"/>
                             </div>
-                            <div className="input-group date date-picker" data-date-format="dd/mm/yyyy">
+                            <div className="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+                                {/* Campo de "Hasta" */}
                                 <input
-                                    type="text"
+                                    type="date"
                                     className="form-control form-filter input-sm"
-                                    readOnly
-                                    name="order_date_to"
-                                    placeholder="Hasta"
-                                />
-                                <span className="input-group-btn">
-                                    <button className="btn btn-sm default" type="button">
-                                        <i className="fa fa-calendar"></i>
-                                    </button>
-                                </span>
+                                    readOnly=""
+                                    name="order_date_from"
+                                    placeholder="Hasta"/>
                             </div>
                         </td>
 
