@@ -13,9 +13,9 @@ import CrearUsuarios from './pages/CrearUsuarios/CrearUsuarios';
 import CrearEquipos from './pages/CrearEquipos/CrearEquipos';
 import CrearPermisos from './pages/CrearPermisos/CrearPermisos';
 import Mapa from './pages/Mapa/Mapa';
+import ErrorPage from './pages/ErrorPage/ErrorPage';
 
 const App = () => {
-//  const [isAuthenticated, setIsAuthenticated] = useState(false); // si se recarga la pagina, se pierde el estado y el usuario vuelve al login
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return !!localStorage.getItem('token');
   });
@@ -30,11 +30,11 @@ const App = () => {
       element: <Login onLogin={handleLogin} />,
     },
     {
-      element: <Layout />,
+      element: <Layout />, // Componente que se renderiza para todas las rutas hijas
       children: [
         {
           path: '/inicio',
-          element: isAuthenticated ? <Inicio /> : <Navigate to="/" />,
+          element: isAuthenticated ? <Inicio /> : <Navigate to="/" />, // Si el usuario está autenticado, muestra la página "Inicio", de lo contrario redirige al login
         },
         {
           path: '/usuarios',
@@ -71,8 +71,12 @@ const App = () => {
         {
           path: '/mapa',
           element: isAuthenticated ? <Mapa /> : <Navigate to="/" />,
-          },
+        },
       ],
+    },
+    {
+      path: '*', // Ruta que captura cualquier página no definida
+      element: <ErrorPage />, // Redirigir al componente de error
     },
   ]);
 
@@ -80,24 +84,3 @@ const App = () => {
 };
 
 export default App;
-
-
-// import Header from "./components/Header/Header";
-// import './css/style.css';
-// import DatosPersonalIncidencias from "./components/DatosPersonalIncidencias/DatosPersonalIncidencias";
-
-// function App() {
-
-//    return (
-//        <>
-//            <div className="container-fluid">
-//                <div className="row">
-//                    {/* <Header></Header> */}
-//                    <DatosPersonalIncidencias></DatosPersonalIncidencias>
-//                </div>
-//            </div>
-//        </>
-//    );
-// }
-
-// export default App;
