@@ -1,181 +1,288 @@
-import './CrearEquipos.css';
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
-const CrearEquipos = () => {
-  const [tipoEquipo, setTipoEquipo] = useState('');
-  const [serie, setSerie] = useState('');
-  const [alias, setAlias] = useState('');
-  const [search, setSearch] = useState('');
-  const [selectedEquipos, setSelectedEquipos] = useState([
-    'Alejandro Nortes',
-    'Raul Rodríguez',
-    'Isidro Ibarra',
-    'Pablo Marmol',
-    'Juan López',
-    'María González'
-  ]);
-  const [equiposSeleccionados, setEquiposSeleccionados] = useState([]);
-  const [activado, setActivado] = useState(false);
+import useTipoEquipo from '../../hooks/useTipoEquipo';
+import useSala from '../../hooks/useSala';
 
-  const handleTipoEquipoChange = (e) => {
-    setTipoEquipo(e.target.value);
-  };
+import './CrearEquipos.css';
 
-  const handleSerieChange = (e) => {
-    setSerie(e.target.value);
-  };
+const CrearEquipos = (props) => {
 
-  const handleAliasChange = (e) => {
-    setAlias(e.target.value);
-  };
+    const { tiposEquipo } = useTipoEquipo([]);
+    const { salas } = useSala([]);
 
-  const handleSearchChange = (e) => {
-    setSearch(e.target.value);
-  };
+    function optionsTiposEquipo() {
 
-  // Filtrar los usuarios según la búsqueda
-  const filteredOptions = selectedEquipos.filter((equipo) =>
-    equipo.toLowerCase().includes(search.toLowerCase())
-  );
+        if (!Array.isArray(tiposEquipo)) {
+            console.warn('tiposEquipo is not an array:', tiposEquipo);
+            return <option disabled>No options available</option>;
+        }
 
-  // Actualizar la selección de usuarios y el campo de texto con los usuarios seleccionados
-  const handleSelectEquiposChange = (e) => {
-    const selectedOptions = Array.from(e.target.selectedOptions).map(
-      (option) => option.value
-    );
-    setEquiposSeleccionados(selectedOptions);
+        return tiposEquipo.map((tipo) => (
+            <option key={tipo.id} value={tipo.id}>{tipo.nombre}</option>
+        ))
+    }
 
-    // Actualizar el campo de texto con los usuarios seleccionados
-    setSearch(selectedOptions.join(', ')); // Mostrar los usuarios seleccionados separados por coma
-  };
+    function optionsSalas() {
 
-  const handleActivadoChange = (e) => {
-    setActivado(e.target.checked);
-  };
+        if (!Array.isArray(salas)) {
+            console.warn('salas is not an array:', salas);
+            return <option disabled>No options available</option>;
+        }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Datos del formulario', { tipoEquipo, serie, alias, equiposSeleccionados, activado });
-  };
+        return salas.map((sala) => (
+            <option key={sala.id} value={sala.id}>{sala.nombre}</option>
+        ))
+    }
 
-  return (
-    <div className="portlet-body form">
-      <form action="#" className="horizontal-form" onSubmit={handleSubmit}>
-        <div className="form-body">
-          <h3 className="form-section">Datos del equipo</h3>
+    // funciones para manejar el valor de los input hidden
 
-          <div className="row">
-            <div className="col-md-3">
-              <div className="form-group">
-                <label className="control-label">Tipo de equipo</label>
-                <select
-                  className="form-control"
-                  value={tipoEquipo}
-                  onChange={handleTipoEquipoChange}
-                  required
-                >
-                  <option value="">Seleccione tipo de equipo</option>
-                  <option value="Control de accesos">Control de accesos</option>
-                  <option value="Control de lugares">Control de lugares</option>
-                  <option value="Control de equipos">Control de equipos</option>
-                  <option value="Control de equipos a motor">Control de equipos a motor</option>
-                </select>
-              </div>
-            </div>
+    function manejarSelectTipoEquipo(e) {
+        setValue(EQUIPO.TIPO_EQUIPO_ID, e.target.value);
+        trigger(EQUIPO.TIPO_EQUIPO_ID);
+    }
 
-            <div className="col-md-4">
-              <div className="form-group">
-                <label className="control-label">Nº de Serie</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="N/S"
-                  value={serie}
-                  onChange={handleSerieChange}
-                />
-              </div>
-            </div>
+    function manejarSelectSala_id(e) {
+        setValue(EQUIPO.SALA_ID, e.target.value);
+        trigger(EQUIPO.SALA_ID);
+    }
 
-            <div className="col-md-3">
-              <div className="form-group">
-                <label className="control-label">Alias</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Alias"
-                  value={alias}
-                  onChange={handleAliasChange}
-                />
-              </div>
-            </div>
+    function manejarSelectActivo(e) {
+        setValue(EQUIPO.ACTIVO, e.target.value);
+        trigger(EQUIPO.ACTIVO);
+    }
 
-            {/* Checkbox para "Activado" */}
-            <div className="col-md-2">
-              <div className="form-group">
-                <label className="control-label"></label>
-                <div className="icheck-list">
-                  <div className="icheckbox_minimal-grey">
-                    <input
-                      type="checkbox"
-                      className="icheck"
-                      checked={activado}
-                      onChange={handleActivadoChange}
-                    />
-                    <label>Activado</label>
-                  </div>
+    function manejarSelectMantinimiento(e) {
+        setValue(EQUIPO.MANTENIMIENTO, e.target.value);
+        trigger(EQUIPO.MANTENIMIENTO);
+    }
+
+    function manejarSelectReparacion(e) {
+        setValue(EQUIPO.REPARACION, e.target.value);
+        trigger(EQUIPO.REPARACION);
+    }
+
+    // modelo
+    const EQUIPO = {
+        NOMBRE: "nombre",
+        DESCRIPCION: "descripcion",
+        TIPO_EQUIPO_ID: "tipo_equipo_id",
+        SALA_ID: "sala_id",
+        IMAGEN: "imagen",
+        FECHA_INTEGRACION: "fecha_integracion",
+        ACTIVO: "activo",
+        REPARACION: "reparacion",
+        MANTENIMIENTO: "mentenimiento",
+    }
+
+    // equipo en su estado inicial
+    const EQUIPOINICIAL = {
+        nombre: "",
+        descripcion: "",
+        tipo_equipo_id: "",
+        sala_id: "",
+        imagen: "",
+        fecha_integracion: "",
+        activo: "",
+        reparacion: "",
+        mentenimiento: "",
+    }
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+        setValue,
+        trigger,
+    } = useForm({ defaulValues: EQUIPOINICIAL });
+
+    const manejarFormulario = handleSubmit((nuevoEquipo) => {
+
+        // devuelve la información que hay en los campos del Login, en JSON
+        console.log(nuevoEquipo);
+
+        // manda los datos a la función de SOCIO.jsx
+        props.manejarCrearSocio(nuevoEquipo);
+    });
+
+    return (
+        <div className='row'>
+
+            <form className="col-12" id='crear-equipo' onSubmit={manejarFormulario} >
+                <div className="row">
+                    <div className="col-12">
+                        <h1>Crear equipo</h1>
+                    </div>
+
+                    {/* campo nombre */}
+
+                    <div className="campo col-12 col-md-6">
+                        <label htmlFor={EQUIPO.NOMBRE}>Nombre</label>
+                        <input id={EQUIPO.NOMBRE} type="text" className='form-control form-filter input-sm'
+
+                            {...register(EQUIPO.NOMBRE, {
+                                required: {
+                                    value: true,
+                                    message: 'Este campo es obligatorio',
+                                },
+                            })}
+
+                        />
+                        <span className='input-error'>{errors.nombre?.message}</span>
+                    </div>
+
+                    {/* campo descripcion */}
+
+                    <div className="campo col-12 col-md-6">
+                        <label htmlFor={EQUIPO.DESCRIPCION}>Descripción</label>
+                        <input id={EQUIPO.DESCRIPCION} type="file" accept="image/*" className='form-control form-filter'
+
+                            {...register(EQUIPO.DESCRIPCION, {
+                                required: {
+                                    value: true,
+                                    message: 'Este campo es obligatorio',
+                                },
+                            })}
+
+                        />
+                        <span className='input-error'>{errors.descripcion?.message}</span>
+                    </div>
+
+                    {/* campo tipo equipo id */}
+
+                    <div className="campo col-12 col-md-6">
+                        <label htmlFor={EQUIPO.TIPO_EQUIPO_ID}>Tipo</label>
+                        <select id={EQUIPO.TIPO_EQUIPO_ID} name={EQUIPO.TIPO_EQUIPO_ID} className='form-control form-filter' onChange={manejarSelectTipoEquipo}>
+                            <option value="">Selecciona un tipo de equipo</option>
+                            {optionsTiposEquipo()}
+                        </select>
+                        <input type='hidden'
+                            {...register(EQUIPO.TIPO_EQUIPO_ID, {
+                                required: {
+                                    value: true,
+                                    message: 'Este campo es obligatorio',
+                                },
+                            })}
+                        />
+                        <span className='input-error'>{errors.tipo_equipo_id?.message}</span>
+                    </div>
+
+                    {/* campo sala_id */}
+
+                    <div className="campo col-12 col-md-6">
+                        <label htmlFor={EQUIPO.SALA_ID}>Sala</label>
+                        <select id={EQUIPO.SALA_ID} name={EQUIPO.SALA_ID} className='form-control form-filter' onChange={manejarSelectSala_id}>
+                            <option value="">Selecciona una sala</option>
+                            {optionsSalas()}
+                        </select>
+                        <input type='hidden'
+                            {...register(EQUIPO.SALA_ID, {
+                                required: {
+                                    value: true,
+                                    message: 'Este campo es obligatorio',
+                                },
+                            })}
+                        />
+                        <span className='input-error'>{errors.sala_id?.message}</span>
+                    </div>
+
+                    {/* campo imagen */}
+
+                    <div className="campo col-12 col-md-6">
+                        <label htmlFor={EQUIPO.IMAGEN}>Imágen</label>
+                        <input id={EQUIPO.IMAGEN} type="file" accept="image/*" className='form-control form-filter'
+                            {...register(EQUIPO.IMAGEN, {
+                                required: {
+                                    value: true,
+                                    message: 'Este campo es obligatorio',
+                                },
+                            })}
+                        />
+                        <span className='input-error'>{errors.imagen?.message}</span>
+                    </div>
+
+                    {/* campo activo */}
+
+                    <div className="campo col-12 col-md-6">
+                        <label htmlFor={EQUIPO.ACTIVO}>Activo</label>
+                        <div>
+                            <input id="equipo-activo-true" name={EQUIPO.ACTIVO} type="radio" value="1" className="form-check-input" onChange={manejarSelectActivo} />
+                            <label htmlFor="equipo-activo-true">Sí</label>
+                        </div>
+                        <div>
+                            <input id="equipo-activo-false" name={EQUIPO.ACTIVO} type="radio" value="0" className="form-check-input" onChange={manejarSelectActivo} />
+                            <label htmlFor="equipo-activo-false">No</label>
+                        </div>
+                        <input type='hidden'
+                            {...register(EQUIPO.ACTIVO, {
+                                required: {
+                                    value: true,
+                                    message: 'Este campo es obligatorio',
+                                },
+                            })}
+                        />
+                        <span className='input-error'>{errors.activo?.message}</span>
+                    </div>
+
+                    {/* campo reparación */}
+
+                    <div className="campo col-12 col-md-6">
+                        <label htmlFor={EQUIPO.REPARACION}>Reparación</label>
+                        <div>
+                            <input id="equipo-reparacion-true" name={EQUIPO.REPARACION} type="radio" value="1" className="form-check-input" onChange={manejarSelectReparacion} />
+                            <label htmlFor="equipo-reparacion-true">Sí</label>
+                        </div>
+                        <div>
+                            <input id="equipo-reparacion-false" name={EQUIPO.REPARACION} type="radio" value="0" className="form-check-input" onChange={manejarSelectReparacion} />
+                            <label htmlFor="equipo-reparacion-false">No</label>
+                        </div>
+                        <input type='hidden'
+                            {...register(EQUIPO.REPARACION, {
+                                required: {
+                                    value: true,
+                                    message: 'Este campo es obligatorio',
+                                },
+                            })}
+                        />
+                        <span className='input-error'>{errors.reparacion?.message}</span>
+                    </div>
+
+                    {/* campo mantenimiento */}
+
+                    <div className="campo col-12 col-md-6">
+                        <label htmlFor={EQUIPO.MANTENIMIENTO}>Mantenimiento</label>
+                        <div>
+                            <input id="equipo-mantenimiento-true" name={EQUIPO.MANTENIMIENTO} type="radio" value="1" className="form-check-input" onChange={manejarSelectMantinimiento} />
+                            <label htmlFor="equipo-mantenimiento-true">Sí</label>
+                        </div>
+                        <div>
+                            <input id="equipo-mantenimiento-false" name={EQUIPO.MANTENIMIENTO} type="radio" value="0" className="form-check-input" onChange={manejarSelectMantinimiento} />
+                            <label htmlFor="equipo-mantenimiento-false">No</label>
+                        </div>
+                        <input type='hidden'
+                            {...register(EQUIPO.MANTENIMIENTO, {
+                                required: {
+                                    value: true,
+                                    message: 'Este campo es obligatorio',
+                                },
+                            })}
+                        />
+                        <span className='input-error'>{errors.mentenimiento?.message}</span>
+                    </div>
+
+                    <div className="campo col-12 col-md-6">
+                        <button type='submit' className='btn btn-primary'>
+                            Crear Equipo
+                        </button>
+                    </div>
+
                 </div>
-              </div>
-            </div>
-          </div>
+                {JSON.stringify(watch())}
+            </form>
 
-          <h3 className="form-section">Permisos</h3>
-
-          <div className="row">
-            <div className="col-md-12">
-              <div className="form-group">
-                <label className="control-label">Seleccione un usuario</label>
-
-                {/* Campo de entrada que se actualizará con los usuarios seleccionados */}
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Seleccione un usuario..."
-                  value={search}
-                  onChange={handleSearchChange}
-                />
-
-                <select
-                  multiple
-                  id="select-equipos"
-                  className="form-control"
-                  value={equiposSeleccionados}
-                  onChange={handleSelectEquiposChange}
-                  size={filteredOptions.length || 5}
-                >
-                  {filteredOptions.map((equipo) => (
-                    <option key={equipo} value={equipo}>
-                      {equipo}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-md-12">
-            <div className="form-actions right">
-              <button type="button" className="btn default btn-grey-dark">
-                Cancelar
-              </button>&nbsp;
-              <button type="submit" className="btn blue-dark btn-blue-dark ">
-                <i className="fa fa-check"></i> Guardar
-              </button>
-            </div>
-          </div>
         </div>
-      </form>
-    </div>
-  );
-};
+    );
+}
 
 export default CrearEquipos;
