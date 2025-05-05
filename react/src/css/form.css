@@ -1,0 +1,84 @@
+input[type="radio"].form-check-input:checked {
+    background-color: var(--verde);
+    border-color: var(--verde);
+}
+
+/* Eliminar o cambiar el color de la sombra predeterminada (azul) en los inputs */
+input:focus,
+textarea:focus,
+select:focus,
+button:focus {
+    outline: none;
+    /* Elimina el contorno predeterminado que aparece como azul */
+    box-shadow: 0 0 0 0.25rem var(--verde) !important;
+    /* Sombra verde */
+    border-color: var(--verde) !important;
+    /* Borde verde */
+}
+
+/* Opciones del select */
+select {
+    border: 1px solid var(--verde);
+    /* Borde verde para el select */
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 16px;
+}
+
+/* Estilo cuando el input está enfocado */
+input[type="text"],
+input[type="email"],
+textarea {
+    border: 1px solid #ced4da;
+    /* Borde gris claro */
+    background-color: #ffffff;
+    /* Fondo blanco */
+    color: #495057;
+    /* Texto gris oscuro */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    /* Ancho completo */
+    box-sizing: border-box;
+    /* Incluye el padding dentro del ancho total */
+}
+
+/* Cuando el input está enfocado (borde verde y sombra verde) */
+input[type="text"]:focus,
+textarea:focus {
+    border-color: var(--verde);
+    /* Borde verde */
+    box-shadow: 0 0 5px var(--verde);
+    /* Sombra verde */
+    outline: none;
+    /* Eliminar borde azul predeterminado */
+}
+
+/* Estilo cuando la opción está seleccionada o enfocada */
+select option:checked,
+select option:focus,
+select option:hover {
+    background-color: var(--verde);
+    /* Fondo verde */
+    color: white;
+    /* Texto blanco */
+}
+
+/* Estilo cuando el radio button está seleccionado */
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.25rem var(--verde);
+    /* Sombra verde */
+    border-color: var(--verde);
+    /* Borde verde */
+}
+
+.campo {
+    padding: 10px;
+}
+
+.input-error {
+    color: red;
+}
