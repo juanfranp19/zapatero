@@ -3,7 +3,7 @@ import { useAuth } from "../../hooks/useAuth"
 
 const DropdownUsuario = () => {
 
-    const { logout } = useAuth();
+    const { logout, user } = useAuth();
 
     const handleLogout = async (e) => {
         e.preventDefault();
@@ -15,7 +15,9 @@ const DropdownUsuario = () => {
             <div className="dropdown-usuarios col-12">
                 <a className="nav-link" href="#" role="button" data-bs-toggle="dropdown">
                     <i className="bi bi-person">
-                        <span className="nombre-usuario d-none d-md-block">Alejandro</span>
+                        <span className="nombre-usuario d-none d-md-block">
+                            {user?.name || "Usuario"}
+                        </span>
                     </i>
                 </a>
                 <ul className="dropdown-menu">
