@@ -16,9 +16,9 @@ class SalaController extends Controller
     {
         try {
 
-            // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
+            // desde el recurso, saca todos los datos, ordenados por nombre
             $salas = SalaResource::collection(
-                Sala::orderBy('id')->paginate(5)
+                Sala::orderBy('nombre')->get()
             );
 
         } catch (\Exception $e) {
