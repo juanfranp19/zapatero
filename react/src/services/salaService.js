@@ -1,11 +1,20 @@
 const API_URL = import.meta.env.VITE_API_URL;
 const API_URL_SALAS = API_URL + '/api/v1/salas';
 
+const token = localStorage.getItem('token');
+
 export const getSalas = () => {
-    return fetch(API_URL_SALAS)
+    return fetch(API_URL_SALAS, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
         .then(response => {
-            const data = response.json();
-            return data;
+            return response.json();
+        })
+        .then((data) => {
+            return data.data;
         })
         .catch(error => {
             console.error('Error en getSalas:', error);

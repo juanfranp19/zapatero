@@ -1,11 +1,20 @@
 const API_URL = import.meta.env.VITE_API_URL;
 const API_URL_TIPOS_EQUIPO = API_URL + '/api/v1/tipos_equipo';
 
+const token = localStorage.getItem('token');
+
 export const getTipoEquipos = () => {
-    return fetch(API_URL_TIPOS_EQUIPO)
+    return fetch(API_URL_TIPOS_EQUIPO, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
         .then(response => {
-            const data = response.json();
-            return data;
+            return response.json();
+        })
+        .then((data) => {
+            return data.data;
         })
         .catch(error => {
             console.error('Error en getTipoEquipos:', error);
