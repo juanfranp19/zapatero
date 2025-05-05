@@ -4,8 +4,6 @@ import { useForm } from 'react-hook-form';
 import useTipoEquipo from '../../hooks/useTipoEquipo';
 import useSala from '../../hooks/useSala';
 
-import './CrearEquipos.css';
-
 const CrearEquipos = (props) => {
 
     const { tiposEquipo } = useTipoEquipo([]);

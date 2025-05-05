@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
-import './css/style.css';
 import Login from './components/Login/Login';
 import Inicio from './pages/Inicio/Inicio';
 import Usuarios from './pages/Usuarios/Usuarios';
