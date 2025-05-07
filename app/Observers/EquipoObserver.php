@@ -3,37 +3,62 @@
 namespace App\Observers;
 
 use App\Models\Equipo;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class EquipoObserver
 {
     /**
-     * Handle the Equipo "created" event.
+     * Handle the Equipo "creating" event.
      */
-    public function created(Equipo $equipo): void
+    public function creating(Equipo $equipo): void
     {
         // solo se ejecuta si no se crean equipos por consola (seeder)
-        if (! \App::runningInConsole()) {
+        if (! App::runningInConsole()) {
 
             // escribir en el log si se elimina el archivo o no
-            if ($equipo->descripcion != null) {
+            if (request()->hasFile('descripcion')) {
 
-                if (Storage::disk('public')->put($equipo->descripcion, $equipo->descripcion)) {
-                    Log::info('archivo añadido descripción');
-                } else {
-                    Log::error('error al añadir el archivo descripción');
+                // coge el objeto File
+                $archivo = request()->file('descripcion');
+                // saca el nombre
+                $nombre = $archivo->getClientOriginalName();
+
+                // si la descripcion es repetida, aborta la creación del equipo
+                if (Equipo::where('descripcion', $nombre)->exists()) {
+                    abort(400, 'Ya existe un equipo con esa descripcion.');
                 }
+
+                // lo almacena en el servidor
+                $archivo->storeAs('equipos', $nombre, 'public');
+                // guarda el nombre del archivo en la tabla equipos
+                $equipo->descripcion = $nombre;
+
+            } else {
+                $equipo->descripcion = null;
             }
 
-            // escribir en el log si se elimina el archivo o no
-            if ($equipo->imagen != null) {
 
-                if (Storage::disk('public')->put($equipo->imagen, $equipo->imagen)) {
-                    Log::info('archivo añadido imagen');
-                } else {
-                    Log::error('error al añadir el archivo imagen');
+            if (request()->hasFile('imagen')) {
+
+                // coge el objeto File
+                $archivo = request()->file('imagen');
+                // saca el nombre
+                $nombre = $archivo->getClientOriginalName();
+
+                // si la imagen es repetida, aborta la creación del equipo
+                if (Equipo::where('imagen', $nombre)->exists()) {
+                    abort(400, 'Ya existe un equipo con esa imagen.');
                 }
+
+                // lo almacena en el servidor
+                $archivo->storeAs('equipos', $nombre, 'public');
+                // guarda el nombre del archivo en la tabla equipos
+                $equipo->imagen = $nombre;
+
+            } else {
+                $equipo->imagen = null;
             }
 
         }

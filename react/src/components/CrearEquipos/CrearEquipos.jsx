@@ -1,14 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import useTipoEquipo from '../../hooks/useTipoEquipo';
-import useSala from '../../hooks/useSala';
+import { useGetTiposEquipo } from '../../hooks/useTipoEquipo';
+import { useGetSalas } from '../../hooks/useSala';
 
 const CrearEquipos = (props) => {
 
-    const { tiposEquipo } = useTipoEquipo([]);
-    const { salas } = useSala([]);
+    const { tiposEquipo } = useGetTiposEquipo();
+    const { salas } = useGetSalas();
 
+    const [imagen, setImagen] = useState();
+    const [descripcion, setDescripcion] = useState();
+
+    function autocompletarFecha() {
+
+        const hoy = new Date();
+        // de la fecha de hoy, la pasa a formato YYYY-MM-DD
+        const fechaHoy = hoy.toISOString().split('T')[0];
+        // le da valor al campo
+        setValue(EQUIPO.FECHA_INTEGRACION, fechaHoy);
+    }
+
+    /**
+     *
+     * Options de Selects
+     */
     function optionsTiposEquipo() {
 
         if (!Array.isArray(tiposEquipo)) {
@@ -16,6 +32,7 @@ const CrearEquipos = (props) => {
             return <option disabled>No options available</option>;
         }
 
+        // a partir de los datos llamados de la API, genera los options del select
         return tiposEquipo.map((tipo) => (
             <option key={tipo.id} value={tipo.id}>{tipo.nombre}</option>
         ))
@@ -28,13 +45,17 @@ const CrearEquipos = (props) => {
             return <option disabled>No options available</option>;
         }
 
-        return salas.map((sala) => (
-            <option key={sala.id} value={sala.id}>{sala.nombre}</option>
+        // a partir de los datos llamados de la API, genera los options del select
+        return salas.map((tipo) => (
+            <option key={tipo.id} value={tipo.id}>{tipo.nombre}</option>
         ))
+
     }
 
-    // funciones para manejar el valor de los input hidden
-
+    /**
+     *
+     * Funciones para manejar el valor de los input hidden
+     */
     function manejarSelectTipoEquipo(e) {
         setValue(EQUIPO.TIPO_EQUIPO_ID, e.target.value);
         trigger(EQUIPO.TIPO_EQUIPO_ID);
@@ -58,6 +79,51 @@ const CrearEquipos = (props) => {
     function manejarSelectReparacion(e) {
         setValue(EQUIPO.REPARACION, e.target.value);
         trigger(EQUIPO.REPARACION);
+    }
+
+    /**
+     *
+     * Funciones para los archivos
+     */
+    function manejarImagens(event) {
+        console.log('sadsafadsfas');
+
+        // el objeto con toda la info del archivo
+        const selectedFile = event.target.files[0];
+        console.log(selectedFile);
+        // para que mustre debajo del input el nombre del archivo
+        setImagen(selectedFile.name);
+        // lo envía al modelo el objeto, porque por sí solo como otros inputs no puede
+        setValue(EQUIPO.IMAGEN, selectedFile);
+        trigger(EQUIPO.IMAGEN);
+    }
+
+    function manejarDescripcion(event) {
+
+        // el objeto con toda la info del archivo
+        const selectedFile = event.target.files[0];
+        console.log(selectedFile);
+        // para que mustre debajo del input el nombre del archivo
+        setDescripcion(selectedFile.name);
+        // lo envía al modelo el objeto, porque por sí solo como otros inputs no puede
+        setValue(EQUIPO.DESCRIPCION, selectedFile);
+        trigger(EQUIPO.DESCRIPCION);
+    }
+
+    function eliminarDescripcion() {
+        // lo elimina del modelo
+        setDescripcion(null);
+        // elimina el value, y fuerza la validación
+        setValue(EQUIPO.DESCRIPCION, null);
+        trigger(EQUIPO.DESCRIPCION);
+    }
+
+    function eliminarImagen() {
+        // lo elimina del modelo
+        setImagen(null);
+        // elimina el value, y fuerza la validación
+        setValue(EQUIPO.IMAGEN, null);
+        trigger(EQUIPO.IMAGEN);
     }
 
     // modelo
@@ -89,7 +155,7 @@ const CrearEquipos = (props) => {
     const {
         register,
         handleSubmit,
-        watch,
+        //watch,
         formState: { errors },
         setValue,
         trigger,
@@ -101,8 +167,10 @@ const CrearEquipos = (props) => {
         console.log(nuevoEquipo);
 
         // manda los datos a la función de SOCIO.jsx
-        props.manejarCrearSocio(nuevoEquipo);
+        props.manejarCrearEquipo(nuevoEquipo);
     });
+
+    useEffect(autocompletarFecha, []);
 
     return (
         <div className='row'>
@@ -116,7 +184,7 @@ const CrearEquipos = (props) => {
                     {/* campo nombre */}
 
                     <div className="campo col-12 col-md-6">
-                        <label htmlFor={EQUIPO.NOMBRE}>Nombre</label>
+                        <label className='label-titulo' htmlFor={EQUIPO.NOMBRE}>Nombre</label>
                         <input id={EQUIPO.NOMBRE} type="text" className='form-control form-filter input-sm'
 
                             {...register(EQUIPO.NOMBRE, {
@@ -133,16 +201,21 @@ const CrearEquipos = (props) => {
                     {/* campo descripcion */}
 
                     <div className="campo col-12 col-md-6">
-                        <label htmlFor={EQUIPO.DESCRIPCION}>Descripción</label>
-                        <input id={EQUIPO.DESCRIPCION} type="file" accept="image/*" className='form-control form-filter'
-
-                            {...register(EQUIPO.DESCRIPCION, {
-                                required: {
-                                    value: true,
-                                    message: 'Este campo es obligatorio',
-                                },
-                            })}
-
+                        <label className='label-titulo' htmlFor={EQUIPO.DESCRIPCION}>Descripción</label>
+                        <input id={EQUIPO.DESCRIPCION} type="file" accept="image/*" className='form-control form-filter' onChange={manejarDescripcion} />
+                        {descripcion &&
+                            <>
+                                <span className='fw-bold'>Archivo seleccionado:</span> {descripcion}
+                                <button className='btn' onClick={eliminarDescripcion}><i className="bi bi-file-earmark-minus eliminar-imagen"></i></button>
+                            </>
+                        }
+                        <input type='hidden'
+                        /* {...register(EQUIPO.DESCRIPCION, {
+                            required: {
+                                value: true,
+                                message: 'Este campo es obligatorio',
+                            },
+                        })} */
                         />
                         <span className='input-error'>{errors.descripcion?.message}</span>
                     </div>
@@ -150,7 +223,7 @@ const CrearEquipos = (props) => {
                     {/* campo tipo equipo id */}
 
                     <div className="campo col-12 col-md-6">
-                        <label htmlFor={EQUIPO.TIPO_EQUIPO_ID}>Tipo</label>
+                        <label className='label-titulo' htmlFor={EQUIPO.TIPO_EQUIPO_ID}>Tipo</label>
                         <select id={EQUIPO.TIPO_EQUIPO_ID} name={EQUIPO.TIPO_EQUIPO_ID} className='form-control form-filter' onChange={manejarSelectTipoEquipo}>
                             <option value="">Selecciona un tipo de equipo</option>
                             {optionsTiposEquipo()}
@@ -169,7 +242,7 @@ const CrearEquipos = (props) => {
                     {/* campo sala_id */}
 
                     <div className="campo col-12 col-md-6">
-                        <label htmlFor={EQUIPO.SALA_ID}>Sala</label>
+                        <label className='label-titulo' htmlFor={EQUIPO.SALA_ID}>Sala</label>
                         <select id={EQUIPO.SALA_ID} name={EQUIPO.SALA_ID} className='form-control form-filter' onChange={manejarSelectSala_id}>
                             <option value="">Selecciona una sala</option>
                             {optionsSalas()}
@@ -188,22 +261,44 @@ const CrearEquipos = (props) => {
                     {/* campo imagen */}
 
                     <div className="campo col-12 col-md-6">
-                        <label htmlFor={EQUIPO.IMAGEN}>Imágen</label>
-                        <input id={EQUIPO.IMAGEN} type="file" accept="image/*" className='form-control form-filter'
-                            {...register(EQUIPO.IMAGEN, {
+                        <label className='label-titulo' htmlFor={EQUIPO.IMAGEN}>Imágen</label>
+                        <input id={EQUIPO.IMAGEN} type="file" accept="image/*" className='form-control form-filter' onChange={manejarImagens} />
+                        {imagen &&
+                            <>
+                                <span className='fw-bold'>Archivo seleccionado:</span> {imagen}
+                                <button className='btn' onClick={eliminarImagen}><i className="bi bi-file-earmark-minus eliminar-imagen"></i></button>
+                            </>
+                        }
+                        <input type='hidden'
+                            /* {...register(EQUIPO.IMAGEN, {
+                                required: {
+                                    value: true,
+                                    message: 'Este campo es obligatorio',
+                                },
+                            })} */
+                        />
+                        <span className='input-error'>{errors.imagen?.message}</span>
+                    </div>
+
+                    {/* compo fecha_integración */}
+
+                    <div className="campo col-12 col-md-6">
+                        <label className='label-titulo' htmlFor={EQUIPO.FECHA_INTEGRACION}>Fecha de Integración</label>
+                        <input id={EQUIPO.FECHA_INTEGRACION} className='form-control form-filter' type='date'
+                            {...register(EQUIPO.FECHA_INTEGRACION, {
                                 required: {
                                     value: true,
                                     message: 'Este campo es obligatorio',
                                 },
                             })}
                         />
-                        <span className='input-error'>{errors.imagen?.message}</span>
+                        <span className='input-error'>{errors.fecha_integracion?.message}</span>
                     </div>
 
                     {/* campo activo */}
 
                     <div className="campo col-12 col-md-6">
-                        <label htmlFor={EQUIPO.ACTIVO}>Activo</label>
+                        <label className='label-titulo' htmlFor={EQUIPO.ACTIVO}>Activo</label>
                         <div>
                             <input id="equipo-activo-true" name={EQUIPO.ACTIVO} type="radio" value="1" className="form-check-input" onChange={manejarSelectActivo} />
                             <label htmlFor="equipo-activo-true">Sí</label>
@@ -226,7 +321,7 @@ const CrearEquipos = (props) => {
                     {/* campo reparación */}
 
                     <div className="campo col-12 col-md-6">
-                        <label htmlFor={EQUIPO.REPARACION}>Reparación</label>
+                        <label className='label-titulo' htmlFor={EQUIPO.REPARACION}>Reparación</label>
                         <div>
                             <input id="equipo-reparacion-true" name={EQUIPO.REPARACION} type="radio" value="1" className="form-check-input" onChange={manejarSelectReparacion} />
                             <label htmlFor="equipo-reparacion-true">Sí</label>
@@ -249,7 +344,7 @@ const CrearEquipos = (props) => {
                     {/* campo mantenimiento */}
 
                     <div className="campo col-12 col-md-6">
-                        <label htmlFor={EQUIPO.MANTENIMIENTO}>Mantenimiento</label>
+                        <label className='label-titulo' htmlFor={EQUIPO.MANTENIMIENTO}>Mantenimiento</label>
                         <div>
                             <input id="equipo-mantenimiento-true" name={EQUIPO.MANTENIMIENTO} type="radio" value="1" className="form-check-input" onChange={manejarSelectMantinimiento} />
                             <label htmlFor="equipo-mantenimiento-true">Sí</label>
@@ -269,14 +364,20 @@ const CrearEquipos = (props) => {
                         <span className='input-error'>{errors.mentenimiento?.message}</span>
                     </div>
 
-                    <div className="campo col-12 col-md-6">
+                </div>
+
+                <div className="row boton">
+
+                    {/* boton crear */}
+
+                    <div className="campo col-12">
                         <button type='submit' className='btn btn-primary'>
                             Crear Equipo
                         </button>
                     </div>
 
                 </div>
-                {JSON.stringify(watch())}
+                {/* {JSON.stringify(watch())} */}
             </form>
 
         </div>

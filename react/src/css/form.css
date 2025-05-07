@@ -1,19 +1,35 @@
+.label-titulo {
+    font-size: larger;
+    color: var(--verde);
+}
+
+.eliminar-imagen {
+    color: red;
+}
+
+.campo {
+    padding: 10px;
+}
+
+.input-error {
+    font-size: smaller;
+    color: red;
+}
+
 input[type="radio"].form-check-input:checked {
     background-color: var(--verde);
     border-color: var(--verde);
 }
 
-/* Eliminar o cambiar el color de la sombra predeterminada (azul) en los inputs */
+/* eliminar o cambiar el color de la sombra predeterminada (azul) en los inputs */
 input:focus,
 textarea:focus,
 select:focus,
 button:focus {
+    /* elimina el contorno predeterminado que aparece como azul */
     outline: none;
-    /* Elimina el contorno predeterminado que aparece como azul */
     box-shadow: 0 0 0 0.25rem var(--verde) !important;
-    /* Sombra verde */
     border-color: var(--verde) !important;
-    /* Borde verde */
 }
 
 /* Opciones del select */
@@ -73,12 +89,4 @@ input[type="checkbox"]:focus {
     /* Sombra verde */
     border-color: var(--verde);
     /* Borde verde */
-}
-
-.campo {
-    padding: 10px;
-}
-
-.input-error {
-    color: red;
 }
