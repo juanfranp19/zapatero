@@ -1,9 +1,12 @@
 const API_URL = import.meta.env.VITE_API_URL;
 const API_URL_TIPOS_EQUIPO = API_URL + '/api/v1/tipos_equipo';
 
-const token = localStorage.getItem('token');
+export const getTiposEquipos = () => {
 
-export const getTipoEquipos = () => {
+    // token del local storage
+    const token = localStorage.getItem('token');
+
+    // petición a la API
     return fetch(API_URL_TIPOS_EQUIPO, {
         method: 'GET',
         headers: {
@@ -11,74 +14,15 @@ export const getTipoEquipos = () => {
         },
     })
         .then(response => {
+            // respuesta de la API
             return response.json();
         })
         .then((data) => {
+            // los tipos de equipo
             return data.data;
         })
         .catch(error => {
             console.error('Error en getTipoEquipos:', error);
-            return 0;
-        });
-}
-
-export const createTipoEquipo = (datosTipoEquipo) => {
-    return fetch(API_URL_TIPOS_EQUIPO, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datosTipoEquipo),
-    })
-        .then(response => {
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            console.error('Error en createTipoEquipo:', error);
-            return 0;
-        });
-}
-
-export const showTipoEquipo = (tipoEquipoId) => {
-    return fetch(`${API_URL_TIPOS_EQUIPO}/${tipoEquipoId}`)
-        .then(response => {
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            console.error('Error en showTipoEquipo:', error);
-            return 0;
-        });
-}
-
-export const updateTipoEquipo = (tipoEquipoId, datosTipoEquipo) => {
-    return fetch(`${API_URL_TIPOS_EQUIPO}/${tipoEquipoId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datosTipoEquipo),
-    })
-        .then(response => {
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            console.error('Error en updateTipoEquipo:', error);
-            return 0;
-        });
-}
-
-export const deleteTipoEquipo = (tipoEquipoId) => {
-    return fetch(`${API_URL_TIPOS_EQUIPO}/${tipoEquipoId}`, {
-        method: 'DELETE',
-    })
-        .then(response => {
-            return 'TipoEquipo eliminado correctamente';
-        })
-        .catch(error => {
-            console.error('Error en deleteTipoEquipo:', error);
             return 0;
         });
 }

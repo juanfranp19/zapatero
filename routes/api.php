@@ -20,24 +20,12 @@ use App\Http\Controllers\API\ValorProduccionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\CheckAdminGate;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Psr\Http\Message\ServerRequestInterface;
 use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config\Config;
 
 Route::post('/login', [AuthController::class, 'login']);
-
-Route::get('/storage/{archivo}', function ($archivo) {
-
-    $path = storage_path('app/public/' . $archivo);
-
-    if (!file_exists($path)) {
-        abort(404);
-    }
-
-    return Response::file($path);
-});
 
 /**
  *  para autenticados

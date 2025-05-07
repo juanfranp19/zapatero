@@ -1,105 +1,39 @@
 import { useState, useEffect } from 'react';
-import { getSalas, createSala, showSala, updateSala, deleteSala } from '../services/salaService';
+import { getSalas } from '../services/salaService';
 
-const useSala = () => {
+// obtener todos las salas
+export const useGetSalas = () => {
+
     const [salas, setSalas] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // Obtener todos los tipos de equipo
-    const fetchSalas = async () => {
+    const obtenerSalas = async () => {
+
+        // empieza a cargar
         setLoading(true);
         setError(null);
+
         try {
+
+            // obtiene los datos del servicio
             const data = await getSalas();
             console.log(data);
+            // mete los datos al estado
             setSalas(data);
+
         } catch (error) {
-            console.error('error al obtener los tipos de equipo:', error);
+            console.error('error al obtener las salas:', error);
         } finally {
+            // termina de cargar
             setLoading(false);
         }
-    };
+    }
 
-    // Crear un nuevo tipo de equipo
-    const handleCreateSala = async (datosSala) => {
-        setLoading(true);
-        setError(null);
-        try {
-            const data = await createSala(datosSala);
-            setSalas((prev) => [...prev, data]); // Añadir el nuevo tipo de equipo
-        } catch (error) {
-            console.error('Error al crear el tipo de equipo:', error);
-            setError('Error al crear el tipo de equipo');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // Obtener un tipo de equipo por ID
-    const fetchSala = async (SalaId) => {
-        setLoading(true);
-        setError(null);
-        try {
-            const data = await showSala(SalaId);
-            return data;
-        } catch (error) {
-            console.error('Error al obtener el tipo de equipo:', error);
-            setError('Error al obtener el tipo de equipo');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // Actualizar un tipo de equipo
-    const handleUpdateSala = async (SalaId, datosSala) => {
-        setLoading(true);
-        setError(null);
-        try {
-            const data = await updateSala(SalaId, datosSala);
-            setSalas((prev) =>
-                prev.map((tipo) =>
-                    tipo.id === SalaId ? { ...tipo, ...data } : tipo
-                )
-            );
-        } catch (error) {
-            console.error('Error al actualizar el tipo de equipo:', error);
-            setError('Error al actualizar el tipo de equipo');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // Eliminar un tipo de equipo
-    const handleDeleteSala = async (SalaId) => {
-        setLoading(true);
-        setError(null);
-        try {
-            await deleteSala(SalaId);
-            setSalas((prev) => prev.filter((tipo) => tipo.id !== SalaId)); // Eliminar de la lista
-        } catch (error) {
-            console.error('Error al eliminar el tipo de equipo:', error);
-            setError('Error al eliminar el tipo de equipo');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // Cargar los tipos de equipo al montar el hook
+    // ejecuta la función
     useEffect(() => {
-        fetchSalas();
+        obtenerSalas()
     }, []);
 
-    return {
-        salas,
-        loading,
-        error,
-        fetchSalas,
-        handleCreateSala,
-        fetchSala,
-        handleUpdateSala,
-        handleDeleteSala,
-    };
-};
-
-export default useSala;
+    return ({ salas, loading, error });
+}

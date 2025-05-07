@@ -1,75 +1,64 @@
+import { Notyf } from 'notyf';
+
 const API_URL = import.meta.env.VITE_API_URL;
 const API_URL_EQUIPOS = API_URL + '/api/v1/equipos';
 
-export const getEquipos = () => {
-    return fetch(API_URL_EQUIPOS)
-        .then(response => {
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            console.error('Error en getEquipos:', error);
-            return 0;
-        });
-}
+// se inicializa para que aparezcan los mensajes arriba en el centro de la pantalla
+const notyf = new Notyf({
+    position: {
+        x: 'center',
+        y: 'top'
+    }
+});
 
-export const createEquipo = (datosEquipo) => {
-    return fetch(API_URL_EQUIPOS, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datosEquipo),
-    })
-        .then(response => {
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            console.error('Error en createEquipo:', error);
-            return 0;
-        });
-}
+export const postEquipo = async (data) => {
 
-export const showEquipo = (equipoId) => {
-    return fetch(`${API_URL_EQUIPOS}/${equipoId}`)
-        .then(response => {
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            console.error('Error en showEquipo:', error);
-            return 0;
-        });
-}
+    const token = localStorage.getItem('token');
 
-export const updateEquipo = (equipoId, datosEquipo) => {
-    return fetch(`${API_URL_EQUIPOS}/${equipoId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datosEquipo),
-    })
-        .then(response => {
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            console.error('Error en updateEquipo:', error);
-            return 0;
-        });
-}
+    try {
 
-export const deleteEquipo = (equipoId) => {
-    return fetch(`${API_URL_EQUIPOS}/${equipoId}`, {
-        method: 'DELETE',
-    })
-        .then(response => {
-            return 'Equipo eliminado correctamente';
-        })
-        .catch(error => {
-            console.error('Error en deleteEquipo:', error);
-            return 0;
+        const formData = new FormData();
+
+        // agrega todos los campos del objeto data al objeto formData
+        for (const [key, value] of Object.entries(data)) {
+            formData.append(key, value);
+        }
+
+        // envía a la URL de equipo los datos del equipo por método POST
+        const response = await fetch(API_URL_EQUIPOS, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: formData,
         });
+
+        // error que sale en pantalla si no se ha podido crear el equipo
+        if (!response.ok) {
+
+            const errorData = await response.json();
+            console.error('Error del servidor:', errorData);
+
+            //mensajes del observer
+            notyf.error(errorData.error);
+
+            return 0;
+
+        } else {
+
+            // coge la respuesta de la API
+            const data = await response.json();
+
+            notyf.success('Equipo creado con éxito.');
+
+            console.log('equipo creado: ', data);
+            return data;
+        }
+
+    } catch (error) {
+
+        notyf.error('Error al crear el equipo.');
+        console.error('error al crear equipo:', error.message);
+        throw error;
+    }
 }
