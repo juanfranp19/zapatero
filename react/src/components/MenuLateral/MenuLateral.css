@@ -1,0 +1,54 @@
+.menu-lateral {
+    width: 250px;
+    padding: 20px 0;
+  }
+
+  .menu-portlet {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+  }
+
+  .usuario-titulo {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .usuario-nombre {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+  }
+
+  .usuario-rol {
+    font-size: 14px;
+    color: #888;
+  }
+
+  .usuario-menu .menu-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .usuario-menu .menu-lista li {
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+  }
+
+  .usuario-menu .menu-lista li a {
+    color: #444;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .usuario-menu .menu-lista li:hover {
+    background-color: #e9eff5;
+  }
+
+  .usuario-menu .menu-lista .activo {
+    background-color: #d0e4f7;
+    font-weight: bold;
+  }
