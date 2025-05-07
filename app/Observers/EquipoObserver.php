@@ -31,7 +31,7 @@ class EquipoObserver
                 }
 
                 // lo almacena en el servidor
-                $archivo->storeAs('equipos', $nombre, 'public');
+                $archivo->storeAs('equipos/descripcion', $nombre, 'public');
                 // guarda el nombre del archivo en la tabla equipos
                 $equipo->descripcion = $nombre;
 
@@ -53,7 +53,7 @@ class EquipoObserver
                 }
 
                 // lo almacena en el servidor
-                $archivo->storeAs('equipos', $nombre, 'public');
+                $archivo->storeAs('equipos/imagen', $nombre, 'public');
                 // guarda el nombre del archivo en la tabla equipos
                 $equipo->imagen = $nombre;
 
