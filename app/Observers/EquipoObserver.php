@@ -14,6 +14,9 @@ class EquipoObserver
      */
     public function creating(Equipo $equipo): void
     {
+        //si registra un equipo con el mismo nombre, aborta
+        if (Equipo::where('nombre', $equipo->nombre)->exists())             abort(400, 'Ya existe un equipo con ese nombre.');
+
         // solo se ejecuta si no se crean equipos por consola (seeder)
         if (! App::runningInConsole()) {
 

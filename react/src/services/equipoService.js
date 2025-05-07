@@ -1,5 +1,15 @@
+import { Notyf } from 'notyf';
+
 const API_URL = import.meta.env.VITE_API_URL;
 const API_URL_EQUIPOS = API_URL + '/api/v1/equipos';
+
+// se inicializa para que aparezcan los mensajes arriba en el centro de la pantalla
+const notyf = new Notyf({
+    position: {
+        x: 'center',
+        y: 'top'
+    }
+});
 
 export const postEquipo = async (data) => {
 
@@ -29,14 +39,17 @@ export const postEquipo = async (data) => {
             const errorData = await response.json();
             console.error('Error del servidor:', errorData);
 
-            //(errorData.error); //mensajes del observer
+            //mensajes del observer
+            notyf.error(errorData.error);
+
+            return 0;
 
         } else {
 
             // coge la respuesta de la API
             const data = await response.json();
 
-            //('Socio creado con éxito.');
+            notyf.success('Equipo creado con éxito.');
 
             console.log('equipo creado: ', data);
             return data;
@@ -44,7 +57,7 @@ export const postEquipo = async (data) => {
 
     } catch (error) {
 
-        //('Error al crear el usuario.');
+        notyf.error('Error al crear el equipo.');
         console.error('error al crear equipo:', error.message);
         throw error;
     }
