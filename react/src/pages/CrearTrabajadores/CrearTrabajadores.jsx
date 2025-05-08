@@ -1,5 +1,5 @@
 import React from 'react';
-import CrearUsuarios from "../../components/CrearUsuarios/CrearUsuarios";
+import CrearTrabajadores from "../../components/CrearTrabajadores/CrearTrabajadores.jsx";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs.jsx";
 import TituloPagina from "../../components/TituloPagina/TituloPagina.jsx";
 // import { Link } from 'react-router-dom';  // para poner algun tipo de enlace
@@ -7,9 +7,9 @@ import TituloPagina from "../../components/TituloPagina/TituloPagina.jsx";
 const CrearUsuariosPage = () => {
     return (
         <div>
-            <TituloPagina nombre="Usuarios"/>
+            <TituloPagina nombre="trabajadores"/>
             <Breadcrumbs/>
-            <CrearUsuarios/>
+            <CrearTrabajadores/>
         </div>
     );
 };
