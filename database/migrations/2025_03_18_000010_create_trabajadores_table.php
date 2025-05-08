@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('trabajadores', function (Blueprint $table) {
             $table->id();
             $table->string('dni', 255)->unique();
-            $table->unsignedTinyInteger('activo')->default(0);
-            $table->string('apellidos', 255);
-            $table->unsignedTinyInteger('borrado')->default(0);
             $table->string('nombre', 255);
-            $table->string('url_imagen', 255)->nullable();
+            $table->string('apellidos', 255);
+            $table->unsignedTinyInteger('activo')->default(0);
+            $table->unsignedTinyInteger('borrado')->default(0);
+            $table->string('imagen', 255)->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
 
             /* $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); */

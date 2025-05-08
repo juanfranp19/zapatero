@@ -15,10 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->unsignedTinyInteger('admin')->default(0);
             $table->string('password');
-            $table->string('rol', 255)->nullable();
-            $table->string('token')->nullable();
+            $table->unsignedBigInteger('rol_id');
             $table->timestamps();
         });
 

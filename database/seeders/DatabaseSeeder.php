@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call(EquiposTableSeeder::class);
         $this->command->info("EquiposTableSeeder ejecutado");
 
+        $this->call(RolSeeder::class);
+        $this->command->info("RolSeeder ejecutado");
+
         $this->call(UsersTableSeeder::class);
         $this->command->info("UsersTableSeeder ejecutado");
 
