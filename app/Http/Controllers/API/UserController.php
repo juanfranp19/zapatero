@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -16,6 +17,8 @@ class UserController extends Controller
     public function index()
     {
         try {
+
+            Gate::authorize('viewAny', User::class);
 
             // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $users = UserResource::collection(
@@ -45,6 +48,8 @@ class UserController extends Controller
         // encuentra el modelo
         $user = User::findOrFail($id);
 
+        Gate::authorize('view', [User::class, $user]);
+
         // lo devuelve a través del recurso
         return new UserResource($user);
     }
@@ -59,6 +64,8 @@ class UserController extends Controller
             // encuentra el modelo
             $user = User::find($id);
 
+            Gate::authorize('update', [User::class, $user]);
+
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -69,10 +76,8 @@ class UserController extends Controller
             $request->validate([
                 'name' => 'required',
                 'email' => 'required',
-                'admin' => 'required',
                 'password' => 'required',
-                //'rol' => 'required',
-                //'token' => 'required',
+                'rol' => 'required',
             ]);
 
             try {
@@ -80,10 +85,8 @@ class UserController extends Controller
                 // los actualiza
                 $user->name = $request->input('name');
                 $user->email = $request->input('email');
-                $user->admin = $request->input('admin');
                 $user->password = $request->input('password');
                 $user->rol = $request->input('rol');
-                $user->token = $request->input('token');
                 $user->save();
 
                 // lo devuelve mediante el recurso
@@ -105,6 +108,8 @@ class UserController extends Controller
     {
         // encuentra el modelo
         $user = User::find($id);
+
+        Gate::authorize('delete', [User::class, $user]);
 
         if ($user) {
 
