@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\AccesoResource;
 use App\Models\Acceso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AccesoController extends Controller
 {
@@ -15,6 +16,8 @@ class AccesoController extends Controller
     public function index()
     {
         try {
+
+            Gate::authorize('viewAny', Acceso::class);
 
             // desde el recurso, saca todos los datos de accesos, ordenador por id y de 5 en 5
             $accesos = AccesoResource::collection(
@@ -35,6 +38,8 @@ class AccesoController extends Controller
     {
         try {
 
+            Gate::authorize('create', Acceso::class);
+
             // obtiene el contenido del json y lo transforma a array asociativo
             $acceso = json_decode($request->getContent(), true);
 
@@ -54,11 +59,19 @@ class AccesoController extends Controller
      */
     public function show($id)
     {
-        // encuentra el modelo
-        $acceso = Acceso::findOrFail($id);
+        try {
 
-        // lo devuelve a través del recurso
-        return new AccesoResource($acceso);
+            // encuentra el modelo
+            $acceso = Acceso::findOrFail($id);
+
+            Gate::authorize('view', [Acceso::class, $acceso]);
+
+            // lo devuelve a través del recurso
+            return new AccesoResource($acceso);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -67,6 +80,8 @@ class AccesoController extends Controller
     public function update(Request $request, $id)
     {
         try {
+
+            Gate::authorize('update', Acceso::class);
 
             // encuentra el modelo
             $acceso = Acceso::find($id);
@@ -105,6 +120,8 @@ class AccesoController extends Controller
     {
         // encuentra el modelo
         $acceso = Acceso::find($id);
+
+        Gate::authorize('delete', Acceso::class);
 
         if ($acceso) {
 

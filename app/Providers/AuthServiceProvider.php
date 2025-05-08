@@ -51,5 +51,9 @@ class AuthServiceProvider extends ServiceProvider
             // devuelve true si el usuario tiene rol universitario
             return $user->rol_id === 4;
         });
+
+        // policies
+
+        Gate::policy(Acceso::class, AccesoPolicy::class);
     }
 }
