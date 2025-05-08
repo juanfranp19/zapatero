@@ -3,12 +3,12 @@ import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import Layout from './components/Layout/Layout';
 import Login from './components/Login/Login';
 import Inicio from './pages/Inicio/Inicio';
-import Usuarios from './pages/Usuarios/Usuarios';
+import Trabajadores from './pages/Trabajadores/Trabajadores';
 import Equipos from './pages/Equipos/Equipos';
 import Permisos from './pages/Permisos/Permisos';
 import Historial from './pages/Historial/Historial';
 import Incidencias from './pages/Incidencias/Incidencias';
-import CrearUsuarios from './pages/CrearUsuarios/CrearUsuarios';
+import CrearTrabajadores from './pages/CrearTrabajadores/CrearTrabajadores';
 import CrearEquipos from './pages/CrearEquipos/CrearEquipos';
 import CrearPermisos from './pages/CrearPermisos/CrearPermisos';
 import Mapa from './pages/Mapa/Mapa';
@@ -36,8 +36,8 @@ const App = () => {
           element: isAuthenticated ? <Inicio /> : <Navigate to="/" />, // Si el usuario está autenticado, muestra la página "Inicio", de lo contrario redirige al login
         },
         {
-          path: '/usuarios',
-          element: isAuthenticated ? <Usuarios /> : <Navigate to="/" />,
+          path: '/trabajadores',
+          element: isAuthenticated ? <Trabajadores /> : <Navigate to="/" />,
         },
         {
           path: '/equipos',
@@ -56,8 +56,8 @@ const App = () => {
           element: isAuthenticated ? <Incidencias /> : <Navigate to="/" />,
         },
         {
-          path: '/usuarios/crear',
-          element: isAuthenticated ? <CrearUsuarios /> : <Navigate to="/" />,
+          path: '/trabajadores/crear',
+          element: isAuthenticated ? <CrearTrabajadores /> : <Navigate to="/" />,
         },
         {
           path: '/equipos/crear',
