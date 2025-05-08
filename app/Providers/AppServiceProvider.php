@@ -5,11 +5,9 @@ namespace App\Providers;
 use App\Models\Acceso;
 use App\Models\Equipo;
 use App\Models\Movimiento;
-use App\Models\User;
 use App\Observers\AccesoObserver;
 use App\Observers\EquipoObserver;
 use App\Observers\MovimientoObserver;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,13 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // gates
-
-        Gate::define('isAdmin', function (User $user) {
-            // devuelve true si en usuarios, la columna admin tiene valor 1 o la columna rol tiene valor "ADMIN"
-            return $user->admin === 1 || $user->rol === 'ADMIN';
-        });
-
         // observadores
 
         Equipo::observe(EquipoObserver::class);
