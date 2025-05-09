@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\SalaResource;
 use App\Models\Sala;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class SalaController extends Controller
 {
@@ -15,6 +16,8 @@ class SalaController extends Controller
     public function index()
     {
         try {
+
+            Gate::authorize('viewAny', Sala::class);
 
             // desde el recurso, saca todos los datos, ordenados por nombre
             $salas = SalaResource::collection(
@@ -35,6 +38,8 @@ class SalaController extends Controller
     {
         try {
 
+            Gate::authorize('create', Sala::class);
+
             // obtiene el contenido del json y lo transforma a array asociativo
             $sala = json_decode($request->getContent(), true);
 
@@ -54,6 +59,8 @@ class SalaController extends Controller
      */
     public function show($id)
     {
+        Gate::authorize('view', Sala::class);
+
         // encuentra el modelo
         $sala = Sala::findOrFail($id);
 
@@ -67,6 +74,8 @@ class SalaController extends Controller
     public function update(Request $request, $id)
     {
         try {
+
+            Gate::authorize('update', Sala::class);
 
             // encuentra el modelo
             $sala = Sala::find($id);
@@ -104,6 +113,8 @@ class SalaController extends Controller
         $sala = Sala::find($id);
 
         if ($sala) {
+
+            Gate::authorize('delete', Sala::class);
 
             // lo elimina
             $sala->delete();
