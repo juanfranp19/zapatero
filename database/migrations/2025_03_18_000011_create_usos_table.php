@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('usos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedTinyInteger('estado')->default(0);
-            $table->datetime('fecha_uso');
-            $table->string('hora_fin', 255)->nullable();
-            $table->string('hora_inicio', 255)->nullable();
+            $table->date('fecha_uso');
+            $table->time('hora_inicio');
+            $table->time('hora_fin')->nullable();
             $table->unsignedBigInteger('equipo_id');
             $table->unsignedBigInteger('trabajador_id');
 
