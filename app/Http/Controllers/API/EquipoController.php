@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\EquipoResource;
 use App\Models\Equipo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class EquipoController extends Controller
 {
@@ -15,6 +16,8 @@ class EquipoController extends Controller
     public function index()
     {
         try {
+
+            Gate::authorize('viewAny', Equipo::class);
 
             // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $equipos = EquipoResource::collection(
@@ -35,6 +38,8 @@ class EquipoController extends Controller
     {
         try {
 
+            Gate::authorize('create', Equipo::class);
+
             // obtiene el contenido del json y lo transforma a array asociativo
             $equipo = $request->all();
 
@@ -54,6 +59,8 @@ class EquipoController extends Controller
      */
     public function show($id)
     {
+        Gate::authorize('view', Equipo::class);
+
         // encuentra el modelo
         $equipo = Equipo::findOrFail($id);
 
@@ -67,6 +74,8 @@ class EquipoController extends Controller
     public function update(Request $request, $id)
     {
         try {
+
+            Gate::authorize('update', Equipo::class);
 
             // encuentra el modelo
             $equipo = Equipo::find($id);
@@ -121,6 +130,8 @@ class EquipoController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('delete', Equipo::class);
+
         // encuentra el modelo
         $equipo = Equipo::find($id);
 
