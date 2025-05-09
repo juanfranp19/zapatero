@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('equipo_id');
             $table->unsignedBigInteger('origen');
             $table->unsignedBigInteger('destino');
-            $table->unsignedBigInteger('trabajador_id');
+            $table->unsignedBigInteger('trabajador_id')->nullable();
 
             $table->foreign('equipo_id')->references('id')->on('equipos');
             $table->foreign('origen')->references('id')->on('salas');

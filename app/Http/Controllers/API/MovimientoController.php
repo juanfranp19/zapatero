@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\MovimientoResource;
 use App\Models\Movimiento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class MovimientoController extends Controller
 {
@@ -15,6 +16,8 @@ class MovimientoController extends Controller
     public function index()
     {
         try {
+
+            Gate::authorize('viewAny', Movimiento::class);
 
             // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $movimientos = MovimientoResource::collection(
@@ -37,11 +40,14 @@ class MovimientoController extends Controller
     {
         try {
 
+            Gate::authorize('create', Movimiento::class);
+
             // obtiene el contenido del json y lo transforma a array asociativo
             $movimiento = json_decode($request->getContent(), true);
 
             // crea el modelo con los datos transformados
             $movimiento = Movimiento::create($movimiento);
+            // el trabajador_id lo asigna el observer
 
             // devuleve el modelo creado desde el recurso
             return response()->json([
@@ -58,6 +64,8 @@ class MovimientoController extends Controller
      */
     public function show($id)
     {
+        Gate::authorize('view', Movimiento::class);
+
         // encuentra el modelo
         $movimiento = Movimiento::findOrFail($id);
 
@@ -75,13 +83,15 @@ class MovimientoController extends Controller
         // encuentra el modelo
         $movimiento = Movimiento::findOrFail($id);
 
+        Gate::authorize('update', [Movimiento::class, $movimiento]);
+
         // verifica que se encuentren los campos
         $request->validate([
             'fecha' => 'required',
             'equipo_id' => 'required',
             'origen' => 'required',
             'destino' => 'required',
-            'trabajador_id' => 'required',
+            //'trabajador_id' => 'required',
         ]);
 
         // los actualiza
@@ -89,7 +99,7 @@ class MovimientoController extends Controller
         $movimiento->equipo_id = $request->input('equipo_id');
         $movimiento->origen = $request->input('origen');
         $movimiento->destino = $request->input('destino');
-        $movimiento->trabajador_id = $request->input('trabajador_id');
+        // el trabajador_id lo asigna el observer
         $movimiento->save();
 
         // devuelve respuesta vacía
@@ -103,6 +113,8 @@ class MovimientoController extends Controller
     {
         // encuentra el modelo
         $movimiento = Movimiento::findOrFail($id);
+
+        Gate::authorize('delete', [Movimiento::class, $movimiento]);
 
         // lo elimina
         $movimiento->delete();
