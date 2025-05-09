@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\TrabajadorResource;
 use App\Models\Trabajador;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TrabajadorController extends Controller
 {
@@ -15,6 +16,8 @@ class TrabajadorController extends Controller
     public function index()
     {
         try {
+
+            Gate::authorize('viewAny', Trabajador::class);
 
             // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $trabajadores = TrabajadorResource::collection(
@@ -34,6 +37,8 @@ class TrabajadorController extends Controller
     public function store(Request $request)
     {
         try {
+
+            Gate::authorize('create', Trabajador::class);
 
             // obtiene el contenido del json y lo transforma a array asociativo
             $trabajador = json_decode($request->getContent(), true);
@@ -57,6 +62,8 @@ class TrabajadorController extends Controller
         // encuentra el modelo
         $trabajador = Trabajador::findOrFail($id);
 
+        Gate::authorize('view', [Trabajador::class, $trabajador]);
+
         // lo devuelve a través del recurso
         return new TrabajadorResource($trabajador);
     }
@@ -71,6 +78,8 @@ class TrabajadorController extends Controller
             // encuentra el modelo
             $trabajador = Trabajador::find($id);
 
+            Gate::authorize('update', [Trabajador::class, $trabajador]);
+
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -80,22 +89,23 @@ class TrabajadorController extends Controller
             // verifica que se encuentren los campos
             $request->validate([
                 'dni' => 'required',
-                'activo' => 'required',
-                'apellidos' => 'required',
-                'borrado' => 'required',
                 'nombre' => 'required',
-                'url_imagen' => 'required',
-                'user_id' => 'required'
+                'apellidos' => 'required',
+                'activo' => 'required',
+                'borrado' => 'required',
+                //'imagen' => 'required',
+                //'user_id' => 'required'
             ]);
 
             // los actualiza
             $trabajador->dni = $request->input('dni');
-            $trabajador->activo = $request->input('activo');
-            $trabajador->apellidos = $request->input('apellidos');
-            $trabajador->borrado = $request->input('borrado');
             $trabajador->nombre = $request->input('nombre');
-            $trabajador->url_imagen = $request->input('url_imagen');
+            $trabajador->apellidos = $request->input('apellidos');
+            $trabajador->activo = $request->input('activo');
+            $trabajador->borrado = $request->input('borrado');
+            $trabajador->imagen = $request->input('imagen');
             $trabajador->user_id = $request->input('user_id');
+            // la imagen y el user_id se asigna en el observer
             $trabajador->save();
 
             // lo devuelve mediante el recurso
@@ -111,6 +121,8 @@ class TrabajadorController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('delete', [Trabajador::class]);
+
         // encuentra el modelo
         $trabajador = Trabajador::find($id);
 
