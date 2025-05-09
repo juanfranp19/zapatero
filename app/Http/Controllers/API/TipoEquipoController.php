@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\TipoEquipoResource;
 use App\Models\TipoEquipo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TipoEquipoController extends Controller
 {
@@ -15,6 +16,8 @@ class TipoEquipoController extends Controller
     public function index()
     {
         try {
+
+            Gate::authorize('viewAny', TipoEquipo::class);
 
             // desde el recurso, saca todos los datos, ordenados por nombre
             $tiposEquipo = TipoEquipoResource::collection(
@@ -35,6 +38,8 @@ class TipoEquipoController extends Controller
     {
         try {
 
+            Gate::authorize('create', TipoEquipo::class);
+
             // obtiene el contenido del json y lo transforma a array asociativo
             $tipoEquipo = json_decode($request->getContent(), true);
 
@@ -54,6 +59,8 @@ class TipoEquipoController extends Controller
      */
     public function show($id)
     {
+        Gate::authorize('view', TipoEquipo::class);
+
         // encuentra el modelo
         $tipoEquipo = TipoEquipo::findOrFail($id);
 
@@ -67,6 +74,8 @@ class TipoEquipoController extends Controller
     public function update(Request $request, $id)
     {
         try {
+
+            Gate::authorize('update', TipoEquipo::class);
 
             // encuentra el modelo
             $tipoEquipo = TipoEquipo::find($id);
@@ -99,6 +108,8 @@ class TipoEquipoController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('delete', TipoEquipo::class);
+
         // encuentra el modelo
         $tipoEquipo = TipoEquipo::find($id);
 
