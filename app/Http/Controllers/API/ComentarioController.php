@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ComentarioResource;
 use App\Models\Comentario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ComentarioController extends Controller
 {
@@ -15,6 +16,8 @@ class ComentarioController extends Controller
     public function index()
     {
         try {
+
+            Gate::authorize('viewAny', Comentario::class);
 
             // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $comentarios = ComentarioResource::collection(
@@ -35,11 +38,15 @@ class ComentarioController extends Controller
     {
         try {
 
+            Gate::authorize('create', Comentario::class);
+
             // obtiene el contenido del json y lo transforma a array asociativo
             $comentario = json_decode($request->getContent(), true);
 
             // crea el modelo con los datos transformados
             $comentario = Comentario::create($comentario);
+
+            // en el observer se le asigna el user_id
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -54,6 +61,8 @@ class ComentarioController extends Controller
      */
     public function show($id)
     {
+        Gate::authorize('view', Comentario::class);
+
         // encuentra el modelo
         $comentario = Comentario::findOrFail($id);
 
@@ -71,6 +80,8 @@ class ComentarioController extends Controller
             // encuentra el modelo
             $comentario = Comentario::find($id);
 
+            Gate::authorize('update', [Comentario::class, $comentario]);
+
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -81,13 +92,13 @@ class ComentarioController extends Controller
             $request->validate([
                 'comentario' => 'required',
                 'fecha' => 'required',
-                'user_id' => 'required'
+                //'user_id' => 'required'
             ]);
 
             // los actualiza
             $comentario->comentario = $request->input('comentario');
             $comentario->fecha = $request->input('fecha');
-            $comentario->user_id = $request->input('user_id');
+            // en el observer se le asigna el user_id
             $comentario->save();
 
             // lo devuelve mediante el recurso
@@ -105,6 +116,8 @@ class ComentarioController extends Controller
     {
         // encuentra el modelo
         $comentario = Comentario::find($id);
+
+        Gate::authorize('delete', [Comentario::class, $comentario]);
 
         if ($comentario) {
 

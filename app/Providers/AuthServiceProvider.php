@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Models\Acceso;
+use App\Models\Comentario;
 use App\Models\Rol;
 use App\Models\User;
 use App\Policies\AccesoPolicy;
+use App\Policies\ComentarioPolicy;
 use App\Policies\RolPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -27,11 +29,6 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // gates
-
-        Gate::define('isPropietario', function (User $user, $model) {
-            // devualve true si el usuario que hace la petición coincide con el user_id de la petición
-            return $model->user_id === $user->id;
-        });
 
         Gate::define('isAdmin', function (User $user) {
 
@@ -57,6 +54,7 @@ class AuthServiceProvider extends ServiceProvider
         // policies
 
         Gate::policy(Acceso::class, AccesoPolicy::class);
+        Gate::policy(Comentario::class, ComentarioPolicy::class);
         Gate::policy(Rol::class, RolPolicy::class);
         Gate::policy(User::class, UserPolicy::class);
     }
