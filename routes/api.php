@@ -8,6 +8,7 @@ use App\Http\Controllers\API\IncidenciaController;
 use App\Http\Controllers\API\MovimientoController;
 use App\Http\Controllers\API\ParametroEficaciaController;
 use App\Http\Controllers\API\PermisoController;
+use App\Http\Controllers\API\RolController;
 use App\Http\Controllers\API\SalaController;
 use App\Http\Controllers\API\SequenceController;
 use App\Http\Controllers\API\TipoEquipoController;
@@ -98,6 +99,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('movimientos/{id}', [MovimientoController::class, 'update']);
         Route::delete('movimientos/{id}', [MovimientoController::class, 'destroy']);
 
+        Route::get('roles', [RolController::class, 'index']);
+        Route::get('roles/{id}', [RolController::class, 'show']);
+
         /**
          *  para admin
          */
@@ -166,6 +170,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::post('tipos_equipo', [TipoEquipoController::class, 'store']);
             Route::put('tipos_equipo/{id}', [TipoEquipoController::class, 'update']);
             Route::delete('tipos_equipo/{id}', [TipoEquipoController::class, 'destroy']);
+
+            Route::post('roles', [RolController::class, 'store']);
+            Route::put('roles/{id}', [RolController::class, 'update']);
+            Route::delete('roles/{id}', [RolController::class, 'destroy']);
         });
     });
 });
