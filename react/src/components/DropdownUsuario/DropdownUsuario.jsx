@@ -1,4 +1,5 @@
 import "./DropdownUsuario.css";
+import { Link } from 'react-router-dom';
 import { useAuth } from "../../hooks/useAuth"
 
 const DropdownUsuario = () => {
@@ -21,7 +22,7 @@ const DropdownUsuario = () => {
                     </i>
                 </a>
                 <ul className="dropdown-menu">
-                    <li><a className="dropdown-item" href="#"><i className="bi bi-person"></i> Mi perfil</a></li>
+                    <li><Link className="dropdown-item" to="/usuario-historial"><i className="bi bi-person"></i> Mi perfil</Link></li>
                     <li><a className="dropdown-item" href="#" onClick={handleLogout}><i className="bi bi-key"></i> Salir</a></li>
                 </ul>
             </div>
