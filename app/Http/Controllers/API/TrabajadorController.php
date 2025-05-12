@@ -41,7 +41,7 @@ class TrabajadorController extends Controller
             Gate::authorize('create', Trabajador::class);
 
             // obtiene el contenido del json y lo transforma a array asociativo
-            $trabajador = json_decode($request->getContent(), true);
+            $trabajador = $request->all();
 
             // crea el modelo con los datos transformados
             $trabajador = Trabajador::create($trabajador);

@@ -1,75 +1,64 @@
+import { Notyf } from 'notyf';
+
 const API_URL = import.meta.env.VITE_API_URL;
 const API_URL_TRABAJADORES = API_URL + '/api/v1/trabajadores';
 
-export const getTrabajadores = () => {
-    return fetch(API_URL_TRABAJADORES)
-        .then(response => {
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            console.error('Error en getTrabajadores:', error);
-            return 0;
-        });
-}
+// se inicializa para que aparezcan los mensajes arriba en el centro de la pantalla
+const notyf = new Notyf({
+    position: {
+        x: 'center',
+        y: 'top'
+    }
+});
 
-export const createTrabajador = (datosTrabajador) => {
-    return fetch(API_URL_TRABAJADORES, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datosTrabajador),
-    })
-        .then(response => {
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            console.error('Error en createTrabajador:', error);
-            return 0;
-        });
-}
+export const postTrabajador = async (data) => {
 
-export const showTrabajador = (trabajadorId) => {
-    return fetch(`${API_URL_TRABAJADORES}/${trabajadorId}`)
-        .then(response => {
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            console.error('Error en showTrabajador:', error);
-            return 0;
-        });
-}
+    const token = localStorage.getItem('token');
 
-export const updateTrabajador = (trabajadorId, datosTrabajador) => {
-    return fetch(`${API_URL_TRABAJADORES}/${trabajadorId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datosTrabajador),
-    })
-        .then(response => {
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            console.error('Error en updateTrabajador:', error);
-            return 0;
-        });
-}
+    try {
 
-export const deleteTrabajador = (trabajadorId) => {
-    return fetch(`${API_URL_TRABAJADORES}/${trabajadorId}`, {
-        method: 'DELETE',
-    })
-        .then(response => {
-            return 'Trabajador eliminado correctamente';
-        })
-        .catch(error => {
-            console.error('Error en deleteTrabajador:', error);
-            return 0;
+        const formData = new FormData();
+
+        // agrega todos los campos del objeto data al objeto formData
+        for (const [key, value] of Object.entries(data)) {
+            formData.append(key, value);
+        }
+
+        // envía a la URL de trabajadores los datos del trabajador por método POST
+        const response = await fetch(API_URL_TRABAJADORES, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: formData,
         });
+
+        // error que sale en pantalla si no se ha podido crear el trabajador
+        if (!response.ok) {
+
+            const errorData = await response.json();
+            console.error('Error del servidor:', errorData);
+
+            //mensajes del observer
+            notyf.error(errorData.error);
+
+            return 0;
+
+        } else {
+
+            // coge la respuesta de la API
+            const data = await response.json();
+
+            notyf.success('Trabajador creado con éxito.');
+
+            console.log('trabajador creado: ', data);
+            return data;
+        }
+
+    } catch (error) {
+
+        notyf.error('Error al crear el trabajador.');
+        console.error('error al crear trabajador:', error.message);
+        throw error;
+    }
 }
