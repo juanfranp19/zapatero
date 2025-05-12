@@ -6,22 +6,24 @@ import MenuLateral from "../../components/MenuLateral/MenuLateral";
 import './UsuarioHistorialPage.css';
 
 const UsuarioHistorialPage = () => {
-    return (
-        <div className="usuario-pagina-contenedor">
-            <div className="usuario-layout">
-                <aside className="usuario-sidebar">
-                    <TituloPagina nombre="Historial" />
-                    <Breadcrumbs />
-                    <MenuLateral />
-                </aside>
+  return (
+    <div className="usuario-pagina">
+      <aside className="usuario-sidebar">
+        <MenuLateral />
+      </aside>
 
-                <main className="usuario-contenido">
-                    <PanelControlSeccion />
-                </main>
-            </div>
-        </div>
+      <div className="usuario-main">
+        <header className="usuario-header">
+          <TituloPagina nombre="Usuario" />
+          <Breadcrumbs />
+        </header>
 
-    );
+        <section className="usuario-panel">
+          <PanelControlSeccion />
+        </section>
+      </div>
+    </div>
+  );
 };
 
 export default UsuarioHistorialPage;
