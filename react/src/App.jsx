@@ -13,6 +13,7 @@ import CrearEquipos from './pages/CrearEquipos/CrearEquipos';
 import CrearPermisos from './pages/CrearPermisos/CrearPermisos';
 import Mapa from './pages/Mapa/Mapa';
 import DetallesMaquinaPage from './pages/DetallesMaquinaPage/DetallesMaquinaPage';
+import UsuarioHistorialPage from './pages/UsuarioHistorialPage/UsuarioHistorialPage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 
 const App = () => {
@@ -75,6 +76,10 @@ const App = () => {
         {
             path: '/detalles-maquina/:id',
             element: isAuthenticated ? <DetallesMaquinaPage /> : <Navigate to="/" />,
+        },
+        {
+            path: '/usuario-historial',
+            element: isAuthenticated ? <UsuarioHistorialPage /> : <Navigate to="/" />,
         },
       ],
     },
