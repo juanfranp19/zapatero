@@ -1,17 +1,72 @@
 import React, { useState } from "react";
 import mapa from "../../assets/mapa.jpeg";
 import { Link } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL;
 
 // Objeto que mapea el nombre del área con sus imágenes remotas
 const areaData = {
-    "Aseo 1": {
+    "Salon Cooworking": {
         imagenes: [
-            { id: 1, url: "http://zapatero.es/storage/public/equipos/imagen/bordadora-brother-model-pr670e.png" },
-            { id: 2, url: "http://zapatero.es/storage/public/equipos/imagen/framun-fl1409.png" },
-            { id: 3, url: "http://zapatero.es/storage/public/equipos/imagen/gcc-mercury-iii.png" },
-            { id: 4, url: "http://zapatero.es/storage/public/equipos/imagen/estampadora-beinsen.png" },
-            { id: 5, url: "http://zapatero.es/storage/public/equipos/imagen/maquina-universal-de-ensayos-instron-68tm-10.png" },
-            { id: 6, url: "http://zapatero.es/storage/public/equipos/imagen/fresadora-5-ejes-haas-unc-1000.png" },
+            { id: 1, url: `${API_URL}/storage/public/equipos/imagen/bordadora-brother-model-pr670e.png` },
+            { id: 2, url: `${API_URL}/storage/public/equipos/imagen/framun-fl1409.png` },
+            { id: 3, url: `${API_URL}/storage/public/equipos/imagen/gcc-mercury-iii.png` },
+            { id: 4, url: `${API_URL}/storage/public/equipos/imagen/estampadora-beinsen.png` },
+            { id: 5, url: `${API_URL}/storage/public/equipos/imagen/maquina-universal-de-ensayos-instron-68tm-10.png` },
+            { id: 6, url: `${API_URL}/storage/public/equipos/imagen/fresadora-5-ejes-haas-unc-1000.png` },
+            { id: 7, url: `${API_URL}/storage/public/equipos/imagen/cortadora-por-chorro-de-agua-wazer.png` },
+            { id: 8, url: `${API_URL}/storage/public/equipos/imagen/roland-srm-20.png` },
+            { id: 9, url: `${API_URL}/storage/public/equipos/imagen/fresadora-cnc-sw1325.png` },
+            { id: 10, url: `${API_URL}/storage/public/equipos/imagen/fresadora-stepcraft-420.png` },
+            { id: 11, url: `${API_URL}/storage/public/equipos/imagen/metal-cnc-haas-meltio.png` },
+            { id: 12, url: `${API_URL}/storage/public/equipos/imagen/sigmax-pro-r19.png` },
+            { id: 13, url: `${API_URL}/storage/public/equipos/imagen/dimension-bst-1200.png` },
+            { id: 14, url: `${API_URL}/storage/public/equipos/imagen/object-30-pro.png` },
+            { id: 15, url: `${API_URL}/storage/public/equipos/imagen/discovery-3d.png` },
+            { id: 16, url: `${API_URL}/storage/public/equipos/imagen/ender-3-pro.png` },
+            { id: 17, url: `${API_URL}/storage/public/equipos/imagen/formlab-form3b.png` },
+            { id: 18, url: `${API_URL}/storage/public/equipos/imagen/lapiz-3d-prince.png` },
+            { id: 19, url: `${API_URL}/storage/public/equipos/imagen/3d-creality-ender-3.png` },
+            { id: 20, url: `${API_URL}/storage/public/equipos/imagen/bq-prusa-i3-hephestos.png` },
+            { id: 21, url: `${API_URL}/storage/public/equipos/imagen/bioimpresora-reg4life.png` },
+            { id: 22, url: `${API_URL}/storage/public/equipos/imagen/arcilla-delta-wasp-2040.png` },
+            { id: 23, url: `${API_URL}/storage/public/equipos/imagen/anycubic-photon-m3-max.png` },
+            { id: 24, url: `${API_URL}/storage/public/equipos/imagen/anycubic-photon-mono-m5s.png` },
+            { id: 25, url: `${API_URL}/storage/public/equipos/imagen/bambulab-x1-carbon.png` },
+        ],
+    },
+    "Sala VR": {
+        imagenes: [
+            { id: 41, url: `${API_URL}/storage/public/equipos/imagen/plataforma-de-movimiento-vr.png` },
+            { id: 42, url: `${API_URL}/storage/public/equipos/imagen/mocap.png` },
+            { id: 43, url: `${API_URL}/storage/public/equipos/imagen/simuladores-vr-conduccion.png` },
+            { id: 44, url: `${API_URL}/storage/public/equipos/imagen/meta-quest-2.png` },
+            { id: 45, url: `${API_URL}/storage/public/equipos/imagen/meta-quest-3.png` },
+            { id: 46, url: `${API_URL}/storage/public/equipos/imagen/hp-reverb-2.png` },
+            { id: 47, url: `${API_URL}/storage/public/equipos/imagen/htc-vive-cosmos.png` },
+            { id: 48, url: `${API_URL}/storage/public/equipos/imagen/htc-vive-pro.png` },
+            { id: 49, url: `${API_URL}/storage/public/equipos/imagen/hololones-2-realidad-aumentada.png` },
+        ],
+    },
+    "Aula Informatica": {
+        imagenes: [
+            { id: 50, url: `${API_URL}/storage/public/equipos/imagen/ordenador-informatica.png` },
+            { id: 51, url: `${API_URL}/storage/public/equipos/imagen/ordenador-informatica.png` },
+            { id: 52, url: `${API_URL}/storage/public/equipos/imagen/ordenador-informatica.png` },
+            { id: 53, url: `${API_URL}/storage/public/equipos/imagen/ordenador-informatica.png` },
+            { id: 54, url: `${API_URL}/storage/public/equipos/imagen/ordenador-informatica.png` },
+            { id: 55, url: `${API_URL}/storage/public/equipos/imagen/ordenador-informatica.png` },
+            { id: 56, url: `${API_URL}/storage/public/equipos/imagen/ordenador-informatica.png` },
+            { id: 57, url: `${API_URL}/storage/public/equipos/imagen/ordenador-informatica.png` },
+            { id: 58, url: `${API_URL}/storage/public/equipos/imagen/ordenador-informatica.png` },
+            { id: 59, url: `${API_URL}/storage/public/equipos/imagen/ordenador-informatica.png` },
+        ],
+    },
+    "Despacho": {
+        imagenes: [
+            { id: 60, url: `${API_URL}/storage/public/equipos/imagen/monitor-despacho.png` },
+            { id: 61, url: `${API_URL}/storage/public/equipos/imagen/monitor-despacho.png` },
+            { id: 62, url: `${API_URL}/storage/public/equipos/imagen/f-desingjet-800.png` },
+            { id: 63, url: `${API_URL}/storage/public/equipos/imagen/hp-color-laser-mfp-179fnw.png` },
         ],
     },
 };
