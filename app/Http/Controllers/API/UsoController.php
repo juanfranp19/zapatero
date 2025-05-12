@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UsoResource;
 use App\Models\Uso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UsoController extends Controller
 {
@@ -15,6 +16,8 @@ class UsoController extends Controller
     public function index()
     {
         try {
+
+            Gate::authorize('viewAny', Uso::class);
 
             // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
             $usos = UsoResource::collection(
@@ -35,11 +38,14 @@ class UsoController extends Controller
     {
         try {
 
+            Gate::authorize('create', Uso::class);
+
             // obtiene el contenido del json y lo transforma a array asociativo
             $uso = json_decode($request->getContent(), true);
 
             // crea el modelo con los datos transformados
             $uso = Uso::create($uso);
+            // el trabajador_id lo asigna el observer
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -54,6 +60,8 @@ class UsoController extends Controller
      */
     public function show($id)
     {
+        Gate::authorize('view', Uso::class);
+
         // encuentra el modelo
         $uso = Uso::findOrFail($id);
 
@@ -71,6 +79,8 @@ class UsoController extends Controller
             // encuentra el modelo
             $uso = Uso::find($id);
 
+            Gate::authorize('update', [Uso::class, $uso]);
+
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -79,21 +89,19 @@ class UsoController extends Controller
 
             // verifica que se encuentren los campos
             $request->validate([
-                'estado' => 'required',
                 'fecha_uso' => 'required',
-                //'hora_fin' => 'required',
                 //'hora_inicio' => 'required',
+                //'hora_fin' => 'required',
                 'equipo_id' => 'required',
-                'trabajador_id' => 'required'
+                //'trabajador_id' => 'required'
             ]);
 
             // los actualiza
-            $uso->estado = $request->input('estado');
             $uso->fecha_uso = $request->input('fecha_uso');
-            $uso->hora_fin = $request->input('hora_fin');
             $uso->hora_inicio = $request->input('hora_inicio');
+            $uso->hora_fin = $request->input('hora_fin');
             $uso->equipo_id = $request->input('equipo_id');
-            $uso->trabajador_id = $request->input('trabajador_id');
+            // el trabajador_id lo asigna el observer
             $uso->save();
 
             // lo devuelve mediante el recurso
@@ -110,6 +118,8 @@ class UsoController extends Controller
     {
         // encuentra el modelo
         $uso = Uso::find($id);
+
+        Gate::authorize('delete', [Uso::class, $uso]);
 
         if ($uso) {
 

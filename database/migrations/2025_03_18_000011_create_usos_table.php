@@ -17,7 +17,7 @@ return new class extends Migration
             $table->time('hora_inicio');
             $table->time('hora_fin')->nullable();
             $table->unsignedBigInteger('equipo_id');
-            $table->unsignedBigInteger('trabajador_id');
+            $table->unsignedBigInteger('trabajador_id')->nullable();
 
             /* $table->foreign('equipo_id')->references('id')->on('equipos')->onDelete('cascade');
             $table->foreign('trabajador_id')->references('id')->on('trabajadores')->onDelete('cascade'); */

@@ -10,6 +10,7 @@ use App\Models\Sala;
 use App\Models\TipoEquipo;
 use App\Models\Trabajador;
 use App\Models\User;
+use App\Models\Uso;
 use App\Policies\AccesoPolicy;
 use App\Policies\ComentarioPolicy;
 use App\Policies\MovimientoPolicy;
@@ -18,6 +19,7 @@ use App\Policies\SalaPolicy;
 use App\Policies\TipoEquipoPolicy;
 use App\Policies\TrabajadorPolicy;
 use App\Policies\UserPolicy;
+use App\Policies\UsoPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -69,5 +71,6 @@ class AuthServiceProvider extends ServiceProvider
         Gate::policy(TipoEquipo::class, TipoEquipoPolicy::class);
         Gate::policy(Trabajador::class, TrabajadorPolicy::class);
         Gate::policy(User::class, UserPolicy::class);
+        Gate::policy(Uso::class, UsoPolicy::class);
     }
 }

@@ -80,6 +80,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         Route::get('usos', [UsoController::class, 'index']);
         Route::get('usos/{id}', [UsoController::class, 'show']);
+        Route::post('usos', [UsoController::class, 'store']);
+        Route::put('usos/{id}', [UsoController::class, 'update']);
+        Route::delete('usos/{id}', [UsoController::class, 'destroy']);
 
         Route::get('users', [UserController::class, 'index']);
         Route::get('users/{id}', [UserController::class, 'show']);
@@ -150,10 +153,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::post('trabajadores', [TrabajadorController::class, 'store']);
             Route::put('trabajadores/{id}', [TrabajadorController::class, 'update']);
             Route::delete('trabajadores/{id}', [TrabajadorController::class, 'destroy']);
-
-            Route::post('usos', [UsoController::class, 'store']);
-            Route::put('usos/{id}', [UsoController::class, 'update']);
-            Route::delete('usos/{id}', [UsoController::class, 'destroy']);
 
             Route::post('users', [UserController::class, 'store']);
             Route::put('users/{id}', [UserController::class, 'update']);
