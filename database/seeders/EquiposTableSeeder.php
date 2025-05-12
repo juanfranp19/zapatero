@@ -268,7 +268,7 @@ class EquiposTableSeeder extends Seeder
             'descripcion' => 'desc-ender-cr-30.png',
             'tipo_equipo_id' => 5,
             'sala_id' => 3,
-            'imagen' => 'creality-cr6.png',
+            'imagen' => 'ender-cr30.png',
         ],
         [
             'nombre' => 'Procusini 5.0 Alimentos',
