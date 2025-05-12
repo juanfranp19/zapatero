@@ -1,18 +1,19 @@
 import { useState } from 'react';
-import { postEquipo } from '../services/equipoService';
+import { postTrabajador } from '../services/trabajadorService';
 
-export const useCrearEquipo = () => {
+export const useCrearTrabajador = () => {
 
-    const [cargando, setCargando] = useState();
+    const [cargando, setCargando] = useState(false);
 
-    const crearEquipo = async (formData) => {
+    const crearTrabajador = async (formData) => {
 
+        // empieza a cargar
         setCargando(true);
 
         try {
 
             // recoge los datos devueltor por el servicio
-            const dataService = await postEquipo(formData);
+            const dataService = await postTrabajador(formData);
 
             // devuelve los datos recibidos del servicio
             return dataService;
@@ -24,9 +25,10 @@ export const useCrearEquipo = () => {
 
         } finally {
 
+            // termina la carga
             setCargando(false);
         }
     }
 
-    return ({ crearEquipo, cargando });
+    return ({ crearTrabajador, cargando });
 }
