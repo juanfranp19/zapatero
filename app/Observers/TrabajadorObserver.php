@@ -27,7 +27,7 @@ class TrabajadorObserver
                 }
 
                 // lo almacena en el servidor
-                $archivo->storeAs('trabajadores', $nombre, 'local');
+                $archivo->storeAs('trabajadores/imagen', $nombre, 'local');
                 // guarda el nombre del archivo en la tabla
                 $trabajador->imagen = $nombre;
 
