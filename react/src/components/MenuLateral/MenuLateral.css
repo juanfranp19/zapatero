@@ -1,6 +1,6 @@
 .menu-lateral {
     width: 250px;
-    padding: 20px 0;
+    padding: 1px 0;
   }
 
   .menu-portlet {
@@ -17,12 +17,12 @@
   .usuario-nombre {
     font-weight: bold;
     font-size: 18px;
-    color: #333;
+    color: #5a7391;
   }
 
   .usuario-rol {
     font-size: 14px;
-    color: #888;
+    color: #5b9bd1;
   }
 
   .usuario-menu .menu-lista {

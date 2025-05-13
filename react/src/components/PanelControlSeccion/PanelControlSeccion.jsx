@@ -20,8 +20,6 @@ const PanelControlSeccion = () => {
 
   const accesosData = [
     {
-      iconClass: 'icon-check',
-      labelClass: 'label-info',
       description: (
         <a className="primary-link" href="equipos-historial.html">
           Equipo en la entrada
@@ -88,16 +86,16 @@ const PanelControlSeccion = () => {
   ];
 
   return (
-    <div className="profile-content">
-      <div className="row componente-inicio">
-        <TablaSeccion title="Permisos" data={permisosData} />
-        <EntradaSeccion title="Accesos" items={accesosData} />
+     <div className="profile-content">
+        <div className="row componente-inicio">
+          <TablaSeccion title="Permisos" data={permisosData} />
+          <EntradaSeccion title="Accesos" items={accesosData} />
+        </div>
+        <div className="row componente-inicio">
+          <EntradaSeccion title="Usos" items={usosData} />
+          <EntradaSeccion title="Incidencias" items={incidenciasData} />
+        </div>
       </div>
-      <div className="row componente-inicio">
-        <EntradaSeccion title="Usos" items={usosData} />
-        <EntradaSeccion title="Incidencias" items={incidenciasData} />
-      </div>
-    </div>
   );
 };
 

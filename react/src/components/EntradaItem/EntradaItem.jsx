@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EntradaItem = ({ iconClass, labelClass, description, date, link }) => (
+const EntradaItem = ({ description, date, link }) => (
   <tr>
     <td>
       <div className={`label label-sm ${labelClass}`}>
