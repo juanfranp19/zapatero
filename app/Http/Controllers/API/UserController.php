@@ -20,9 +20,9 @@ class UserController extends Controller
 
             Gate::authorize('viewAny', User::class);
 
-            // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
+            // desde el recurso, saca todos los datos, ordenados por id
             $users = UserResource::collection(
-                User::orderBy('id')->paginate(5)
+                User::orderBy('id')->get()
             );
 
         } catch (\Exception $e) {

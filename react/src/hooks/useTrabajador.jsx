@@ -1,5 +1,39 @@
-import { useState } from 'react';
-import { postTrabajador } from '../services/trabajadorService';
+import { useEffect, useState } from 'react';
+import { getSocios, postTrabajador } from '../services/trabajadorService';
+
+export const useGetTrabajadores = () => {
+
+    const [trabajadores, setTrabajadores] = useState([]);
+    const [cargando, setCargando] = useState(false);
+
+    const obtenerTrabajadores = async () => {
+
+        // epieza a cargar
+        setCargando(true);
+
+        try {
+
+            // obtiene los datos del servicio
+            const data = await getSocios();
+            console.log(data);
+            // mete los datos del servicio al estado
+            setTrabajadores(data);
+
+        } catch (error) {
+            console.error('error al obtener los trabajadores:', error);
+        } finally {
+            // termina de cargar
+            setCargando(false);
+        }
+    }
+
+    // ejecuta la función
+    useEffect(() => {
+        obtenerTrabajadores()
+    }, []);
+
+    return ({ trabajadores, cargando });
+}
 
 export const useCrearTrabajador = () => {
 

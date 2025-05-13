@@ -19,9 +19,9 @@ class TrabajadorController extends Controller
 
             Gate::authorize('viewAny', Trabajador::class);
 
-            // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
+            // desde el recurso, saca todos los datos, ordenados por id
             $trabajadores = TrabajadorResource::collection(
-                Trabajador::orderBy('id')->paginate(5)
+                Trabajador::orderBy('id')->get()
             );
 
         } catch (\Exception $e) {

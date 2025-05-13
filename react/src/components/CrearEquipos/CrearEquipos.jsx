@@ -6,8 +6,8 @@ import { useGetSalas } from '../../hooks/useSala';
 
 const CrearEquipos = (props) => {
 
-    const { tiposEquipo } = useGetTiposEquipo();
-    const { salas } = useGetSalas();
+    const { tiposEquipo, cargando: cargandoTiposEquipo } = useGetTiposEquipo();
+    const { salas, cargando: cargandoSalas } = useGetSalas();
 
     const [imagen, setImagen] = useState();
     const [descripcion, setDescripcion] = useState();
@@ -28,8 +28,12 @@ const CrearEquipos = (props) => {
     function optionsTiposEquipo() {
 
         if (!Array.isArray(tiposEquipo)) {
-            console.warn('tiposEquipo is not an array:', tiposEquipo);
-            return <option disabled>No options available</option>;
+            console.warn('tiposEquipo no es un array:', tiposEquipo);
+            return <option disabled>No hay opciones</option>;
+        }
+
+        if (cargandoTiposEquipo) {
+            return <option disabled>Cargando...</option>;
         }
 
         // a partir de los datos llamados de la API, genera los options del select
@@ -41,15 +45,18 @@ const CrearEquipos = (props) => {
     function optionsSalas() {
 
         if (!Array.isArray(salas)) {
-            console.warn('salas is not an array:', salas);
-            return <option disabled>No options available</option>;
+            console.warn('salas no es un array:', salas);
+            return <option disabled>No hay opciones</option>;
+        }
+
+        if (cargandoSalas) {
+            return <option disabled>Cargando...</option>;
         }
 
         // a partir de los datos llamados de la API, genera los options del select
         return salas.map((tipo) => (
             <option key={tipo.id} value={tipo.id}>{tipo.nombre}</option>
-        ))
-
+        ));
     }
 
     /**

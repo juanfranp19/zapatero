@@ -62,7 +62,7 @@ class User extends Authenticatable
 
     public function trabajador(): HasOne
     {
-        return $this->hasOne(Trabajador::class, 'user_id');
+        return $this->hasOne(Trabajador::class);
     }
 
     public function rol(): BelongsTo

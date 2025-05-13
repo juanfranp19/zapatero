@@ -11,6 +11,32 @@ const notyf = new Notyf({
     }
 });
 
+export const getSocios = () => {
+
+    // token del local storage
+    const token = localStorage.getItem('token');
+
+    // petición a la API
+    return fetch(API_URL_TRABAJADORES, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+        .then(response => {
+            // respuesta de la API
+            return response.json();
+        })
+        .then((data) => {
+            // los trabajadores
+            return data.data;
+        })
+        .catch(error => {
+            console.error('Error en getSocios:', error);
+            return 0;
+        });
+}
+
 export const postTrabajador = async (data) => {
 
     const token = localStorage.getItem('token');
