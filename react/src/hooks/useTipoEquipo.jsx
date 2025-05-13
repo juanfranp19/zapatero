@@ -5,13 +5,13 @@ import { getTiposEquipos } from '../services/tipoEquipoService';
 export const useGetTiposEquipo = () => {
 
     const [tiposEquipo, setTiposEquipo] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [cargando, setCargando] = useState(false);
     const [error, setError] = useState(null);
 
     const obtenerTiposEquipo = async () => {
 
         // epieza a cargar
-        setLoading(true);
+        setCargando(true);
         setError(null);
 
         try {
@@ -26,7 +26,7 @@ export const useGetTiposEquipo = () => {
             console.error('error al obtener los tipos de equipo:', error);
         } finally {
             // termina de cargar
-            setLoading(false);
+            setCargando(false);
         }
     }
 
@@ -35,5 +35,5 @@ export const useGetTiposEquipo = () => {
         obtenerTiposEquipo()
     }, []);
 
-    return ({ tiposEquipo, loading, error });
+    return ({ tiposEquipo, cargando, error });
 }

@@ -220,7 +220,7 @@ const CrearTrabajadores = (props) => {
                 {/* boton reset */}
 
                 <div className="campo col-12">
-                    <button type='submit' className='btn btn-secondary'>
+                    <button type='reset' className='btn btn-secondary'>
                         Reset
                     </button>
                 </div>

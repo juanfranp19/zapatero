@@ -5,13 +5,13 @@ import { getSalas } from '../services/salaService';
 export const useGetSalas = () => {
 
     const [salas, setSalas] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [cargando, setCargando] = useState(false);
     const [error, setError] = useState(null);
 
     const obtenerSalas = async () => {
 
         // empieza a cargar
-        setLoading(true);
+        setCargando(true);
         setError(null);
 
         try {
@@ -26,7 +26,7 @@ export const useGetSalas = () => {
             console.error('error al obtener las salas:', error);
         } finally {
             // termina de cargar
-            setLoading(false);
+            setCargando(false);
         }
     }
 
@@ -35,5 +35,5 @@ export const useGetSalas = () => {
         obtenerSalas()
     }, []);
 
-    return ({ salas, loading, error });
+    return ({ salas, cargando, error });
 }
