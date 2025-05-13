@@ -42,7 +42,7 @@ class TrabajadorObserver
      */
     public function updating(Trabajador $trabajador): void
     {
-        $datosTrabajador = Trabajador::find($trabajador->id)->first();
+        $datosTrabajador = Trabajador::find($trabajador->id);
 
         if (!$trabajador->imagen) $trabajador->imagen = $datosTrabajador->imagen;
         if (!$trabajador->user_id) $trabajador->user_id = $datosTrabajador->user_id;
