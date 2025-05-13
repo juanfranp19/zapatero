@@ -87,11 +87,27 @@ export const useAuth = () => {
 
     // Función para hacer logout
     const logout = async () => {
-        // borramos token y estado
+        const token = localStorage.getItem('token');
+
+        try {
+            if (token) {
+                await fetch('http://zapatero.es/api/logout', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/json',
+                    }
+                });
+            }
+        } catch (error) {
+            console.warn('Error al llamar al API de logout (puede ser normal si el token expiró):', error);
+        }
+
+        // Limpieza
         localStorage.removeItem('token');
         setIsAuthenticated(false);
         setUser(null);
-        navigate('/'); // Redirige al login después del logout
+        navigate('/'); // Redirige al login
     };
 
     // Devolvemos los valores para otros componentes

@@ -1,14 +1,13 @@
 import "./DropdownUsuario.css";
 import { Link } from 'react-router-dom';
-import { useAuth } from "../../hooks/useAuth"
+import { useAuth } from "../../hooks/useAuth";
 
 const DropdownUsuario = () => {
-
     const { logout, user } = useAuth();
 
     const handleLogout = async (e) => {
         e.preventDefault();
-        await logout(); // cierra sesión
+        await logout(); // Llama a logout cuando se hace clic en "Salir"
     };
 
     return (
@@ -28,6 +27,6 @@ const DropdownUsuario = () => {
             </div>
         </div>
     );
-}
+};
 
 export default DropdownUsuario;
