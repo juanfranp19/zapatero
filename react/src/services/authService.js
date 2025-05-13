@@ -1,4 +1,6 @@
 const API_URL = import.meta.env.VITE_API_URL;
+
+// variables para hacer mas facil la llamada al logout, login, user desde la api
 const API_URL_LOGOUT = API_URL + '/api/logout';
 const API_URL_LOGIN = API_URL + '/api/login';
 const API_URL_USER = API_URL + '/api/user';
@@ -18,6 +20,7 @@ export const logoutRequest = async () => {
 };
 
 export const loginRequest = async (email, password) => {
+    // Envía una solicitud POST con el email y contraseña en formato JSON
     const response = await fetch(API_URL_LOGIN, {
         method: 'POST',
         headers: {
@@ -27,11 +30,15 @@ export const loginRequest = async (email, password) => {
         body: JSON.stringify({ email, password })
     });
 
+    // Convierte la respuesta en JSON
     const data = await response.json();
+
+    // devuelve el estado y los datos de la respuesta
     return { ok: response.ok, data };
 };
 
 export const fetchUser = async (token) => {
+    // Realiza una solicitud GET del usuario autenticado
     const response = await fetch(API_URL_USER, {
         method: 'GET',
         headers: {
@@ -40,6 +47,9 @@ export const fetchUser = async (token) => {
         }
     });
 
+    // Si respuesta no es ok, lanza un error
     if (!response.ok) throw new Error("Token inválido");
+
+    // Devuelve la respuesta como objeto JSON
     return await response.json();
 };

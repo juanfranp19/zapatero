@@ -81,6 +81,26 @@ const App = () => {
             path: '/usuario-historial',
             element: isAuthenticated ? <UsuarioHistorialPage /> : <Navigate to="/" />,
         },
+        /* {
+            path: '/usuario-editar',
+            element: isAuthenticated ? <UsuarioEditarPage /> : <Navigate to="/" />,
+        },
+        {
+            path: '/usuario-accesos',
+            element: isAuthenticated ? <UsuarioAccesosPage /> : <Navigate to="/" />,
+        },
+        {
+            path: '/usuario-movimientos',
+            element: isAuthenticated ? <UsuarioMovimientosPage /> : <Navigate to="/" />,
+        },
+        {
+            path: '/usuario-usos',
+            element: isAuthenticated ? <UsuarioUsosPage /> : <Navigate to="/" />,
+        },
+        {
+            path: '/usuario-incidencias',
+            element: isAuthenticated ? <UsuarioIncidenciasPage /> : <Navigate to="/" />,
+        }, */
       ],
     },
     {
