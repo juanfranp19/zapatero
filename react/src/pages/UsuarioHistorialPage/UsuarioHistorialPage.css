@@ -1,14 +1,14 @@
 .usuario-pagina {
     display: flex;
     height: 100vh;
-    background-color: #f9f9f9;
+    background-color: var(--blanco);
   }
 
   .usuario-sidebar {
     width: 300px;
-    background-color: #f4f4f4;
+    background-color: var(--blancoHover);
     padding: 20px;
-    border-right: 1px solid #ddd;
+    border-right: 1px solid var(--colorDropdown);
   }
 
   .usuario-main {
@@ -20,8 +20,8 @@
 
   .usuario-header {
     padding: 20px;
-    background-color: #fff;
-    border-bottom: 1px solid #eee;
+    background-color: var(--blanco);
+    border-bottom: 1px solid var(--colorDropdown);
   }
 
   .usuario-panel {
