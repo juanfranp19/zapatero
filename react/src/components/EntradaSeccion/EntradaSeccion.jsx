@@ -10,7 +10,7 @@ const EntradaSeccion = ({ title, items, icon, color }) => (
     </div>
     <div className="portlet-body">
       <div className="table-scrollable table-scrollable-borderless" style={{ minHeight: '300px' }}>
-        <table className="table table-hover table-light">
+        <table className="table table-hover">
           <thead>
             <tr className="uppercase">
               <th>Descripción</th>
