@@ -11,7 +11,7 @@ class TrabajadorObserver
     {
         if (!App::runningInConsole()) {
 
-            if (Trabajador::where('nombre', $trabajador->dni)->exists())    abort(400, 'Ya existe un trabajador con ese DNI.');
+            if (Trabajador::where('dni', $trabajador->dni)->exists())    abort(400, 'Ya existe un trabajador con ese DNI.');
 
             // si hay un archivo en el campo de imagen
             if (request()->hasFile('imagen')) {

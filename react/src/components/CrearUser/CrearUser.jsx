@@ -40,21 +40,11 @@ const CrearUser = (props) => {
             return <option disabled>Cargando...</option>;
         }
 
-        /* trabajadores.forEach(trabajador => {
-
-            para comprobar la relación de trabajadores y user
-
-            console.log(trabajador.nombre, trabajador.user_id?.toString());
-            console.log(trabajador);
-            console.log(Object.keys(trabajador));
-
-        }); */
-
         // a partir de los datos llamados de la API, genera los options del select
         return trabajadores
             .filter((trabajador) => trabajador.user === null)
             .map((trabajador) => (
-                <option key={trabajador.id} value={trabajador.imagen}>{trabajador.nombre} {trabajador.apellidos}</option>
+                <option key={trabajador.id} value={trabajador.id}>{trabajador.nombre} {trabajador.apellidos}</option>
             ));
     }
 
@@ -77,6 +67,7 @@ const CrearUser = (props) => {
         NAME: 'name',
         EMAIL: 'email',
         PASSWORD: 'password',
+        PASSWORD_CONFIRMATION: 'password_confirmation',
         ROL_ID: 'rol_id',
         TRABAJADOR: 'trabajador',
     }
@@ -86,6 +77,7 @@ const CrearUser = (props) => {
         name: '',
         email: '',
         password: '',
+        password_confirmation: '',
         rol_id: '',
         trabajador: '',
     }
@@ -172,6 +164,31 @@ const CrearUser = (props) => {
                     <span className='input-error'>{errors.password?.message}</span>
                 </div>
 
+                {/* compo password_confirmation */}
+
+                <div className="compo col-12 col-sm-6">
+
+                    <div className={watch(USER.PASSWORD) ? 'col-12' : 'd-none'}>
+                        <label className='label-titulo' htmlFor={USER.PASSWORD_CONFIRMATION}>Confirmar contraseña</label>
+                        <input id={USER.PASSWORD_CONFIRMATION} type='password' className='form-control form-filter input-sm'
+
+                            {...register(USER.PASSWORD_CONFIRMATION, {
+                                required: {
+                                    value: true,
+                                    message: 'Este campo es obligatorio',
+                                },
+                                validate: (value) => {
+                                    return value === watch(USER.PASSWORD)
+                                        ? true
+                                        : 'No coincide con la contraseña';
+                                },
+                            })}
+
+                        />
+                        <span className='input-error'>{errors.password_confirmation?.message}</span>
+                    </div>
+                </div>
+
                 {/* campo rol_id */}
 
                 <div className='campo col-12 col-md-6'>
@@ -218,7 +235,7 @@ const CrearUser = (props) => {
 
                 <div className='campo col-12'>
                     <button type='submit' className='btn btn-primary'>
-                        {props.cargando ? 'cargando' : 'Crear Trabajador'}
+                        {'Crear Usuario'}
                     </button>
                 </div>
 
@@ -231,7 +248,7 @@ const CrearUser = (props) => {
                 </div>
 
             </div>
-            {JSON.stringify(watch())}
+            {/* JSON.stringify(watch()) */}
         </form>
     );
 }

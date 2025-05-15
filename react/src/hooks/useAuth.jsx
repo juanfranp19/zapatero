@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginRequest, fetchUser, logoutRequest } from '../services/authService';
+import { loginRequest, fetchUser, logoutRequest, regiserRequest } from '../services/authService';
 
 export const useAuth = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
@@ -60,12 +60,27 @@ export const useAuth = () => {
         navigate('/');
     };
 
+    const register = async (data) => {
+
+        try {
+
+            // llama al servicio
+            const registrarUsuario = await regiserRequest(data);
+
+            // devuelve la respuesta de la API
+            return registrarUsuario;
+
+        } catch (error) {
+            console.warn('Error al llamar al API de register:', error);
+            return 0;
+        }
+    };
+
     return {
         isAuthenticated,
         user,
         login,
         logout,
+        register,
     };
 };
-
-export default useAuth;
