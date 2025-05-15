@@ -5,7 +5,7 @@ const EntradaSeccion = ({ title, items, icon, color }) => (
     <div className="portlet-title tabbable-line">
       <div className="caption caption-md">
         <i className={`bi ${icon} me-2 text-${color}`}></i>
-        <span className={`caption-subject font-${color} bold uppercase`}>{title}</span>
+        <h4 className={`caption-subject font-${color} bold uppercase`}>{title}</h4>
       </div>
     </div>
     <div className="portlet-body">
