@@ -6,13 +6,10 @@
 
 
 .page-footer {
-    background-color: #3B434C;
-    color: #BCC2CB;
+    background-color: var(--fondoMarron);
+    color: var(--colorItemsMenu);
     padding: 20px 0;
     position: relative;
     margin-top: auto;
-}
-
-.container {
-    text-align: center;
+    padding-left: 20px;
 }

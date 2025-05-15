@@ -50,7 +50,7 @@ const Login = ({ onLogin }) => {
     return (
         <div className='cuerpo'>
             <div className="container">
-                <div className="ring">
+                <div className="ring d-none d-md-block">
                     <i style={{ '--clr': '#328E6E' }}></i>
                     <i style={{ '--clr': '#67AE6E' }}></i>
                     <i style={{ '--clr': '#77b95f' }}></i>
