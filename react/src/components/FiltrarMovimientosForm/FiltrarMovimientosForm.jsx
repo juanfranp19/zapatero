@@ -1,7 +1,7 @@
-import './FiltrarPermisosForm.css';
+import './FiltrarMovimientosForm.css';
 import React, { useState } from 'react';
 
-const FiltrarPermisosForm = () => {
+const FiltrarMovimientosForm = () => {
     const [orders] = useState([
         {
             id: 1,
@@ -193,4 +193,4 @@ const FiltrarPermisosForm = () => {
     );
 };
 
-export default FiltrarPermisosForm;
+export default FiltrarMovimientosForm;
