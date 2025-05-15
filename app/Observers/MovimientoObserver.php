@@ -33,10 +33,10 @@ class MovimientoObserver
             $equipo = Equipo::where('id', $movimiento->equipo_id);
 
             // si el origen no es el mismo de donde está el equipo
-            if (! $equipo->where('sala_id', $movimiento->origen)->exists()) abort(400, 'el equipo no se encuentra en el origen');
+            if (! $equipo->where('sala_id', $movimiento->origen)->exists()) abort(400, 'El equipo no se encuentra en el origen.');
 
             // si la destino es el mismo que la sala donde mismo está
-            if ($equipo->where('sala_id', $movimiento->destino)->exists()) abort(400, 'el equipo ya está en el destino');
+            if ($equipo->where('sala_id', $movimiento->destino)->exists()) abort(400, 'El equipo ya está en el destino.');
         }
     }
 

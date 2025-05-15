@@ -1,92 +1,57 @@
-const API_URL = import.meta.env.VITE_API_URL;
+import { Notyf } from 'notyf';
 
-// variable para hacer mas facil la llamada a movimientos desde la api
+const API_URL = import.meta.env.VITE_API_URL;
 const API_URL_MOVIMIENTOS = API_URL + '/api/v1/movimientos';
 
-export const getMovimientoes = () => {
-    // Realiza una solicitud GET a movimientos
-    return fetch(API_URL_MOVIMIENTOS)
-        .then(response => {
-            // Convierte la respuesta en formato JSON
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            // Si ocurre un error, lo muestra por consola
-            console.error('Error en getMovimientoes:', error);
-            return 0;
-        });
-}
+// se inicializa para que aparezcan los mensajes arriba en el centro de la pantalla
+const notyf = new Notyf({
+    position: {
+        x: 'center',
+        y: 'top'
+    }
+});
 
-export const createMovimiento = (datosMovimiento) => {
-    // Realiza una solicitud POST para crear un nuevo movimiento con los datos proporcionados
-    return fetch(API_URL_MOVIMIENTOS, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datosMovimiento), // Los datos del movimiento que se crea
-    })
-        .then(response => {
-            // Convierte la respuesta en formato JSON
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            // Si ocurre un error, lo muestra por consola
-            console.error('Error en createMovimiento:', error);
-            return 0;
-        });
-}
+export const postMovimiento = async (data) => {
 
-export const showMovimiento = (movimientoId) => {
-    // Realiza una solicitud GET de un movimiento específico usando el movimientoId
-    return fetch(`${API_URL_MOVIMIENTOS}/${movimientoId}`)
-        .then(response => {
-            // Convierte la respuesta en formato JSON
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            // Si ocurre un error, lo muestra por consola
-            console.error('Error en showMovimiento:', error);
-            return 0;
-        });
-}
+    const token = localStorage.getItem('token');
 
-export const updateMovimiento = (movimientoId, datosMovimiento) => {
-    // Realiza una solicitud PUT para actualizar un movimiento específico usando el movimientoId
-    return fetch(`${API_URL_MOVIMIENTOS}/${movimientoId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datosMovimiento), // Los nuevos datos del movimiento
-    })
-        .then(response => {
-            // Convierte la respuesta en formato JSON
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            // Si ocurre un error, lo muestra por consola
-            console.error('Error en updateMovimiento:', error);
-            return 0;
-        });
-}
+    try {
 
-export const deleteMovimiento = (movimientoId) => {
-    // Realiza una solicitud DELETE para eliminar un movimiento específico usando el movimientoId
-    return fetch(`${API_URL_MOVIMIENTOS}/${movimientoId}`, {
-        method: 'DELETE',
-    })
-        .then(response => {
-            // Si la eliminación es exitosa, devuelve un mensaje de éxito
-            return 'Movimiento eliminado correctamente';
-        })
-        .catch(error => {
-            // Si ocurre un error, lo muestra por consola
-            console.error('Error en deleteMovimiento:', error);
-            return 0;
+        // envía a la URL de trabajadores los datos del trabajador por método POST
+        const response = await fetch(API_URL_MOVIMIENTOS, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(data),
         });
+
+        // error que sale en pantalla si no se ha podido crear el movimiento
+        if (!response.ok) {
+
+            const errorData = await response.json();
+            console.error('Error del servidor:', errorData);
+
+            //mensajes del observer
+            notyf.error(errorData.error);
+
+            return 0;
+
+        } else {
+
+            // coge la respuesta de la API
+            const data = await response.json();
+
+            notyf.success('Movimiento creado con éxito.');
+
+            console.log('movimiento creado: ', data);
+            return data;
+        }
+
+    } catch (error) {
+
+        notyf.error('Error al crear el movimiento.');
+        console.error('error al crear movimiento:', error.message);
+        throw error;
+    }
 }

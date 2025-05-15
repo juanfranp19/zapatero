@@ -6,13 +6,11 @@ export const useGetSalas = () => {
 
     const [salas, setSalas] = useState([]);
     const [cargando, setCargando] = useState(false);
-    const [error, setError] = useState(null);
 
     const obtenerSalas = async () => {
 
         // empieza a cargar
         setCargando(true);
-        setError(null);
 
         try {
 
@@ -35,5 +33,5 @@ export const useGetSalas = () => {
         obtenerSalas()
     }, []);
 
-    return ({ salas, cargando, error });
+    return ({ salas, cargando });
 }

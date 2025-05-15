@@ -11,6 +11,32 @@ const notyf = new Notyf({
     }
 });
 
+export const getEquipos = () => {
+
+    // token del local storage
+    const token = localStorage.getItem('token');
+
+    // petición a la API
+    return fetch(API_URL_EQUIPOS, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+        .then(response => {
+            // respuesta de la API
+            return response.json();
+        })
+        .then((data) => {
+            // los equipos
+            return data.data;
+        })
+        .catch(error => {
+            console.error('Error en getEquipos:', error);
+            return 0;
+        });
+}
+
 export const postEquipo = async (data) => {
 
     const token = localStorage.getItem('token');

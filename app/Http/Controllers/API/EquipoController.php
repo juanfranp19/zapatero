@@ -19,9 +19,9 @@ class EquipoController extends Controller
 
             Gate::authorize('viewAny', Equipo::class);
 
-            // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
+            // desde el recurso, saca todos los datos, ordenados por nombre
             $equipos = EquipoResource::collection(
-                Equipo::orderBy('id')->paginate(5)
+                Equipo::orderBy('nombre')->get()
             );
 
         } catch (\Exception $e) {
