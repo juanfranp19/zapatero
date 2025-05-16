@@ -9,7 +9,7 @@ import TituloPagina from "../../components/TituloPagina/TituloPagina.jsx";
 const InicioPage = () => {
     return (
         <div className='container-fluid'>
-            <div className="row col-12">
+            <div className="row">
                 <TituloPagina nombre="Inicio"/>
             </div>
             {/*<EstadisticasUso/>*/}
