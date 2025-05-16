@@ -11,7 +11,7 @@ const notyf = new Notyf({
     }
 });
 
-export const getSocios = () => {
+export const getTrabajadores = () => {
 
     // token del local storage
     const token = localStorage.getItem('token');
@@ -32,7 +32,7 @@ export const getSocios = () => {
             return data.data;
         })
         .catch(error => {
-            console.error('Error en getSocios:', error);
+            console.error('Error en getTrabajadores:', error);
             return 0;
         });
 }
@@ -87,4 +87,30 @@ export const postTrabajador = async (data) => {
         console.error('error al crear trabajador:', error.message);
         throw error;
     }
+}
+
+export const getTrabajador = (id) => {
+
+    // token del local storage
+    const token = localStorage.getItem('token');
+
+    // petición a la API
+    return fetch(`${API_URL_TRABAJADORES}/${id}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+        .then(response => {
+            // respuesta de la API
+            return response.json();
+        })
+        .then((data) => {
+            // el trabajador
+            return data.data;
+        })
+        .catch(error => {
+            console.error('Error en getSocios:', error);
+            return 0;
+        });
 }
