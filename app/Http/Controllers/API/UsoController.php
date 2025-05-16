@@ -41,7 +41,7 @@ class UsoController extends Controller
             Gate::authorize('create', Uso::class);
 
             // obtiene el contenido del json y lo transforma a array asociativo
-            $uso = json_decode($request->getContent(), true);
+            $uso = $request->all();
 
             // crea el modelo con los datos transformados
             $uso = Uso::create($uso);
