@@ -1,5 +1,7 @@
 import React from 'react';
-import './DatosUsos.css';
+import CrearUsos from '../CrearUsos/CrearUsos';
+
+import { useCrearUso } from '../../hooks/useUso';
 
 const DatosUsos = () => {
 
@@ -14,6 +16,19 @@ const DatosUsos = () => {
         { trabajador: "Alejandro Nortes", equipo: "Tractor #1", fecha: "14/02/2015 08:15" },
     ];
 
+    const { crearUso, cargando } = useCrearUso();
+
+    const manejarCrearUso = async (nuevoUso) => {
+
+        // coge la respuesta de la API
+        const respuestaCrearUso = crearUso(nuevoUso);
+
+        // si respuesta de la API, la muestra por la consola
+        if (respuestaCrearUso) {
+            console.log(respuestaCrearUso);
+        }
+    }
+
     return (
         <div className="row componente-inicio">
 
@@ -21,63 +36,10 @@ const DatosUsos = () => {
                 <h1 className="titulo-componentes-inicio">Usos</h1>
             </div>
 
-            <div className="col-12">
+            <div className="col-12 scroll-horizontal">
                 <div>
                     {/* Dropdown encima de la tabla */}
-                    <div className="dropdown-container">
-                        <button
-                            type="button"
-                            className="btn btn-primary dropdown-toggle mb-2"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Crear Usos
-                        </button>
-                        <form className="dropdown-menu p-4">
-                            <div className="mb-2">
-                                <label htmlFor="DropdownFormFechaUso" className="form-label">
-                                    Fecha Uso
-                                </label>
-                                <input
-                                    type="date"
-                                    className="form-control"
-                                    id="DropdownFormFechaUso" />
-                            </div>
-
-                            <div className="mb-2">
-                                <label htmlFor="DropdownFormHoraInicio" className="form-label">
-                                    Hora Inicio
-                                </label>
-                                <input
-                                    type="time"
-                                    className="form-control"
-                                    id="DropdownFormHoraInicio" />
-                            </div>
-
-                            <div className="mb-2">
-                                <label htmlFor="DropdownFormHoraFin" className="form-label">
-                                    Hora Fin
-                                </label>
-                                <input
-                                    type="time"
-                                    className="form-control"
-                                    id="DropdownFormHoraFin" />
-                            </div>
-
-                            <div className="mb-3">
-                                <label htmlFor="DropdownFormEquipo" className="form-label">
-                                </label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="DropdownFormEquipo"
-                                    placeholder='Equipo' />
-                            </div>
-
-                            <button type="submit" className="btn btn-primary">
-                                Crear
-                            </button>
-                        </form>
-                    </div>
+                    <CrearUsos manejarCrearUso={manejarCrearUso} cargando={cargando} />
 
                     {/* Tabla debajo del dropdown */}
                     <table className="table mb-5">

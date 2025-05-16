@@ -1,0 +1,8 @@
+.crear-usos {
+    .botones {
+        button {
+            /* separa los botones del formulario */
+            margin: 0 10px;
+        }
+    }
+}
