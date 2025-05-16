@@ -251,7 +251,7 @@ const CrearUsos = (props) => {
                         Reset
                     </button>
                 </div>
-                {JSON.stringify(watch())}
+                {/*JSON.stringify(watch())*/}
             </form>
         </div>
     );
