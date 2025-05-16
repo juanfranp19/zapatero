@@ -1,0 +1,14 @@
+.dropdown-menu {
+    max-width: 450px;
+    max-height: 450px;
+}
+
+.dropdown-menu input {
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+}
+
+.form-label{
+    color: var(--verde);
+}
