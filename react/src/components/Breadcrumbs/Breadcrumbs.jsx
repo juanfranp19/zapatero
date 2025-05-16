@@ -21,7 +21,7 @@ const Breadcrumbs = () => {
         <nav aria-label="breadcrumb">
             <ol className="col-12 breadcrumb">
                 <li className="breadcrumb-item">
-                    <Link to="/">Inicio</Link>
+                    <Link to="/inicio">Inicio</Link>
                 </li>
                 {pathnames.map((segment, index) => {
                     // Crear el path para el segmento actual
