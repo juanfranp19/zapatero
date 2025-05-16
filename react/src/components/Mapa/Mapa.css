@@ -1,0 +1,75 @@
+.mapa {
+    display: flex;
+    align-items: flex-start;
+}
+
+.mapa-popup-ventana {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* para que se superposicione y otros elementos como el foooter lo tapen */
+    max-width: 100%;
+    min-height: 80px;
+    max-height: 800px;
+    overflow: auto;
+    padding-top: 10px;
+}
+
+.mapa-boton-cerrar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+
+    /* alterna los iconos de pultado y sin pulsar */
+    .bi {
+        font-size: 40px;
+    }
+
+    .bi-x-square-fill {
+        display: none;
+    }
+
+    &:hover {
+
+        .bi-x-square {
+            display: none;
+        }
+        .bi-x-square-fill {
+            display: block;
+        }
+    }
+}
+
+.mapa-equipos {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.mapa-equipo {
+    margin-bottom: 10px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+.mapa-link {
+    display:  inline-block;
+    cursor: pointer;
+}
+
+.mapa-equipo-imagen {
+    width: 120px;
+    height: auto;
+    margin-right: 10px;
+    border-radius: 5px;
+}
