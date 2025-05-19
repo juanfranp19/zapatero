@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const DetallesMaquina = ({ id }) => {
+const DetallesMaquina = ({ id, onNombreCargado }) => {
     console.log("ID recibido en el componente:", id);  // Verificar el valor de id
 
     const [data, setData] = useState(null);
@@ -30,9 +30,11 @@ const DetallesMaquina = ({ id }) => {
                 return response.json();
             })
             .then(responseData => {
-                console.log("Respuesta de la API:", responseData);
                 setData(responseData.data);
                 setLoading(false);
+                if (onNombreCargado) {
+                    onNombreCargado(responseData.data.nombre); // Aquí pasas el nombre al padre
+                }
             })
             .catch(error => {
                 console.error('Error al obtener los detalles:', error);

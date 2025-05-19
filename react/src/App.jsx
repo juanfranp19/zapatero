@@ -53,7 +53,7 @@ const App = () => {
         { path: '/equipos/crear', element: <ProtectedRoute element={<CrearEquipos />} isAuthenticated={isAuthenticated} /> },
         { path: '/movimientos/crear', element: <ProtectedRoute element={<CrearMovimientos />} isAuthenticated={isAuthenticated} /> },
         { path: '/mapa', element: <ProtectedRoute element={<Mapa />} isAuthenticated={isAuthenticated} /> },
-        { path: '/detalles-maquina/:id', element: <ProtectedRoute element={<DetallesMaquinaPage />} isAuthenticated={isAuthenticated} /> },
+        { path: '/mapa/detalles-maquina/:id', element: <ProtectedRoute element={<DetallesMaquinaPage />} isAuthenticated={isAuthenticated} /> },
         { path: '/usuario-historial', element: <ProtectedRoute element={<UsuarioHistorialPage />} isAuthenticated={isAuthenticated} /> },
         { path: '/usuario-accesos', element: <ProtectedRoute element={<UsuarioAccesosPage />} isAuthenticated={isAuthenticated} /> },
         { path: '/usuario-editar', element: <ProtectedRoute element={<UsuarioEditarPage />} isAuthenticated={isAuthenticated} /> },
