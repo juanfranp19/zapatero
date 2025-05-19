@@ -1,12 +1,18 @@
 import { useLocation, Link } from "react-router-dom";
 
-const Breadcrumbs = () => {
+// Componente que muestra la barra de navegación tipo "breadcrumb"
+const Breadcrumbs = ({ nombreFinal }) => {
+    // Hook de React Router para obtener la ubicación actual (URL)
     const location = useLocation();
-    // Obtener los segmentos del pathname
+
+    // Separa la URL en segmentos (ej. "/equipos/19" → ["equipos", "19"])
     const pathnames = location.pathname.split('/').filter(x => x);
 
-    // Diccionario para traducir segmentos de URL a nombres legibles
+    // Diccionario que traduce segmentos de URL a nombres amigables
     const breadcrumbNameMap = {
+        inicio: 'Inicio',
+        mapa: 'Mapa',
+        'detalles-maquina': 'Detalles-maquina',
         usuarios: 'Usuarios',
         'crear-usuario': 'Crear Usuario',
         equipos: 'Equipos',
@@ -17,26 +23,46 @@ const Breadcrumbs = () => {
         incidencias: 'Incidencias',
     };
 
+    const noLinkIfFollowedById = ['detalles-maquina'];
+
     return (
         <nav aria-label="breadcrumb">
             <ol className="col-12 breadcrumb">
+                {/* Primer elemento del breadcrumb siempre es Inicio */}
                 <li className="breadcrumb-item">
                     <Link to="/inicio">Inicio</Link>
                 </li>
+
+                {/* Recorremos cada segmento de la URL */}
                 {pathnames.map((segment, index) => {
-                    // Crear el path para el segmento actual
+                    // Verificamos si es el último segmento (ej. el ID)
+                    const isLast = index === pathnames.length - 1;
+
+                    // Construimos el path hasta este segmento (para los enlaces)
                     const href = `/${pathnames.slice(0, index + 1).join('/')}`;
 
-                    // Usar el breadcrumbNameMap para obtener el nombre amigable
-                    const displayName = breadcrumbNameMap[segment] || segment.charAt(0).toUpperCase() + segment.slice(1); // Usar el nombre del diccionario o capitalizar el segmento
+                    const nextSegment = pathnames[index + 1]; // el que viene después
+                    const isNextSegmentId = nextSegment && !breadcrumbNameMap[nextSegment]; // si el próximo segmento no está en el diccionario, asumimos que es un ID
 
-                    // Si es el último segmento, no hacer link
+
+                    // Obtenemos un nombre para mostrar:
+                    // - Si es el último y hay un nombreFinal (por ejemplo, nombre de la máquina), lo usamos.
+                    // - Si el segmento está en el diccionario, usamos su valor.
+                    // - Si no, simplemente lo capitalizamos.
+                    const displayName =
+                        isLast && nombreFinal
+                            ? nombreFinal
+                            : breadcrumbNameMap[segment] || segment.charAt(0).toUpperCase() + segment.slice(1);
+
+                    // Solo desactiva el enlace si el segmento está en la lista especial y el próximo es un ID
+                    const shouldBeLink = !isLast && !(noLinkIfFollowedById.includes(segment) && isNextSegmentId);
+
                     return (
-                        <li key={segment} className={`breadcrumb-item ${index === pathnames.length - 1 ? 'active' : ''}`}>
-                            {index === pathnames.length - 1 ? (
-                                displayName // Texto sin enlace si es el último
+                        <li key={segment} className={`breadcrumb-item ${isLast ? 'active' : ''}`}>
+                            {shouldBeLink ? (
+                                <Link to={href}>{displayName}</Link>
                             ) : (
-                                <Link to={href}>{displayName}</Link> // Enlace para los otros segmentos
+                                displayName
                             )}
                         </li>
                     );

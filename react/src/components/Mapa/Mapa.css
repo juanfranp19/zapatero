@@ -1,6 +1,13 @@
 .mapa {
     display: flex;
     align-items: flex-start;
+    width: 80%;
+    height: auto;
+}
+
+.mapa img {
+    max-width: 100%;
+    height: auto;
 }
 
 .mapa-popup-ventana {

@@ -1,6 +1,16 @@
 body {
     background-color: var(--fondoPagina);
     font-family: "Open Sans", sans-serif;
+
+    height: 100%;
+    border: 5px solid var(--verde);
+
+}
+
+.formato{
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto;
 }
 
 .scroll-horizontal {
