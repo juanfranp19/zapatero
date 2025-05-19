@@ -88,3 +88,29 @@ export const postEquipo = async (data) => {
         throw error;
     }
 }
+
+export const getEquipo = (id) => {
+
+    // token del local storage
+    const token = localStorage.getItem('token');
+
+    // petición a la API
+    return fetch(`${API_URL_EQUIPOS}/${id}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+        .then(response => {
+            // respuesta de la API
+            return response.json();
+        })
+        .then((data) => {
+            // el equipo
+            return data.data;
+        })
+        .catch(error => {
+            console.error('Error en getEquipo:', error);
+            return 0;
+        });
+}

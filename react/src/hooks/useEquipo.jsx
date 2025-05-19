@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getEquipos, postEquipo } from '../services/equipoService';
+import { getEquipos, postEquipo, getEquipo } from '../services/equipoService';
 
 export const useGetEquipos = () => {
 
@@ -63,4 +63,38 @@ export const useCrearEquipo = () => {
     }
 
     return ({ crearEquipo, cargando });
+}
+
+export const useGetEquipo = (id) => {
+
+    const [equipo, setEquipo] = useState([]);
+    const [cargando, setCargando] = useState(false);
+
+    const obtenerEquipo = async (id) => {
+
+        // epieza a cargar
+        setCargando(true);
+
+        try {
+
+            // obtiene los datos del servicio
+            const data = await getEquipo(id);
+            console.log(data);
+            // mete los datos del servicio al estado
+            setEquipo(data);
+
+        } catch (error) {
+            console.error('error al obtener el equipo:', error);
+        } finally {
+            // termina de cargar
+            setCargando(false);
+        }
+    }
+
+    // ejecuta la función
+    useEffect(() => {
+        if (id) obtenerEquipo(id);
+    }, [id]);
+
+    return ({ equipo, cargando });
 }
