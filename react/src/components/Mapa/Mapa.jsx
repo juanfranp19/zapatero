@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip'
 
 import mapa from '../../assets/mapa.jpeg';
+import aseoscomunes from '../../assets/aseoscomunes.jpeg';
+import cocina from '../../assets/cocina.jpeg';
 
 import { useGetEquipos } from '../../hooks/useEquipo';
 import { useGetSalas } from '../../hooks/useSala';
@@ -26,10 +28,13 @@ const Mapa = () => {
     const [popupEquipos, setPopupEquipos] = useState([]);
 
     // Consigue todos los equipos y el estado de carga
-    const {equipos, cargando: cargandoEquipos} = useGetEquipos();
+    const { equipos, cargando: cargandoEquipos } = useGetEquipos();
 
     // Consigue todas las salas y el estado de carga
-    const {salas, cargando: cargandoSalas} = useGetSalas();
+    const { salas, cargando: cargandoSalas } = useGetSalas();
+
+    // guardamos el id de la sala seleccionada
+    const [salaIdSeleccionada, setSalaIdSeleccionada] = useState(null);
 
     const handleAreaClick = (salaId) => {
 
@@ -51,6 +56,7 @@ const Mapa = () => {
             setPopupContent(nombreSala);
             setPopupEquipos(dataEquipo);
             setShowPopup(true);
+            setSalaIdSeleccionada(salaId); // guardamos el salaId
         }
     };
 
@@ -97,24 +103,30 @@ const Mapa = () => {
                     <div className='mapa-equipos'>
 
                         {/* muestra cada equipo */}
-                        {cargandoEquipos ? 'Cargando...' : popupEquipos.map((equipo) => (
+                        {/* Verificamos si la sala seleccionada es Aseo 1*/}
+                        {salaIdSeleccionada === 8 ? ( // Aseo 1
+                            <img src={aseoscomunes} alt='Aseo 1' className='mapa-equipo-imagen' />
+                        ) : salaIdSeleccionada === 1 ? ( // Cocina
+                            <img src={cocina} alt='Cocina' className='mapa-equipo-imagen' />
+                        ) : (
+                            popupEquipos.map((equipo) => (
+                                <div key={equipo.id} className='mapa-equipo'>
+                                    <Link to={`/mapa/detalles-maquina/${equipo.id}`}
+                                        className='mapa-link'
+                                        data-tooltip-id='mapa-tooltip'
+                                        data-tooltip-content={equipo.nombre}
+                                    >
+                                        <img
+                                            src={STORAGE_URL + equipo.imagen}
+                                            alt={`Imagen ${equipo.id}`}
+                                            className='mapa-equipo-imagen'
+                                        />
+                                        <Tooltip id='mapa-tooltip' />
+                                    </Link>
+                                </div>
+                            ))
+                        )}
 
-                            <div key={equipo.id} className='mapa-equipo'>
-                                {/* Link de React que redirige a otra página al hacer clic */}
-                                <Link to={`/detalles-maquina/${equipo.id}`}
-                                    className='mapa-link'
-                                    data-tooltip-id='mapa-tooltip'
-                                    data-tooltip-content={equipo.nombre}
-                                >
-                                    <img
-                                        src={STORAGE_URL + equipo.imagen}
-                                        alt={`Imagen ${equipo.id}`}
-                                        className='mapa-equipo-imagen'
-                                    />
-                                    <Tooltip id='mapa-tooltip' />
-                                </Link>
-                            </div>
-                        ))}
                     </div>
                 </div>
             )}
