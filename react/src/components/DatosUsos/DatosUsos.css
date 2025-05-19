@@ -1,0 +1,7 @@
+.botones-crear-actualizar-uso {
+    display: flex;
+
+    button {
+        margin: 10px;
+    }
+}

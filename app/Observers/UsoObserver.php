@@ -31,15 +31,6 @@ class UsoObserver
 
             // los usuarios que usos sin terminar, no pueden crear otro
             if ($trabajadorYaUsando) abort(409, 'Tienes ya un equipo en uso');
-        }
-    }
-
-    /**
-     * Evento que se ejecuta antes de actualizar o crear un uso
-     */
-    public function saving(Uso $uso): void
-    {
-        if (!App::runningInConsole()) {
 
             // comprueba que hora_inicio no sea después de hora_fin
             if ($uso->hora_fin && $uso->hora_inicio > $uso->hora_fin) {
@@ -55,24 +46,32 @@ class UsoObserver
                         // donde hay usos sin terminar (hora_fin null)
                         ->orWhere(function ($q) use ($uso) {
                             $q->whereNull('hora_fin')
-                            ->where('hora_inicio', '<=', $uso->hora_inicio); // el uso ya empezó y aún no terminó
+                                ->where('hora_inicio', '<=', $uso->hora_inicio); // el uso ya empezó y aún no terminó
                         })
 
                         // donde coinciden horas de otros usos ya terminados
                         ->orWhere(function ($q) use ($uso) {
                             $q->whereNotNull('hora_fin')
-                            ->where(function ($q) use ($uso) {
-                                $q->where('hora_inicio', '<', $uso->hora_fin ?? $uso->hora_inicio)
-                                    ->where('hora_fin', '>', $uso->hora_inicio);
-                            });
+                                ->where(function ($q) use ($uso) {
+                                    $q->where('hora_inicio', '<', $uso->hora_fin ?? $uso->hora_inicio)
+                                        ->where('hora_fin', '>', $uso->hora_inicio);
+                                });
                         });
-
                 })->exists();
 
             // Si hay uso conflictivo, se aborta la creación
             if ($usoExistente) {
                 abort(409, 'Las horas de uso de ese equipo coinciden con otros usos');
             }
+        }
+    }
+
+    /**
+     * Evento que se ejecuta antes de actualizar o crear un uso
+     */
+    public function saving(Uso $uso): void
+    {
+        if (!App::runningInConsole()) {
 
             // asigna el trabajador_id del usuario que crea el uso
             $user = Auth::user();

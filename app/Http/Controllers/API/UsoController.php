@@ -90,8 +90,8 @@ class UsoController extends Controller
             // verifica que se encuentren los campos
             $request->validate([
                 'fecha_uso' => 'required',
-                //'hora_inicio' => 'required',
-                //'hora_fin' => 'required',
+                'hora_inicio' => 'required',
+                'hora_fin' => 'required',
                 'equipo_id' => 'required',
                 //'trabajador_id' => 'required'
             ]);

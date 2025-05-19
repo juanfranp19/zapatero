@@ -156,6 +156,7 @@ const CrearUsos = (props) => {
                 className='btn btn-primary dropdown-toggle mb-2'
                 data-bs-toggle='dropdown'
                 aria-expanded='false'
+                disabled={props.disabled}
             >
                 Crear uso
             </button>
@@ -233,7 +234,7 @@ const CrearUsos = (props) => {
                     />
                     <span className='input-error'>{errors.equipo_id?.message}</span>
                 </div>
-                <div className=" botones">
+                <div className="botones">
                     <button type='submit' className='btn btn-primary'
                         onClick={(e) => {
                             e.stopPropagation();
