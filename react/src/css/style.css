@@ -3,8 +3,30 @@ body {
     font-family: "Open Sans", sans-serif;
 
     height: 100%;
-    border: 5px solid var(--verde);
 
+    /* md */
+    @media screen and (min-width: 768px) {
+
+        border: 5px solid var(--verde);
+    }
+
+    /* lg */
+    @media screen and (min-width: 992px) {
+
+        padding: 0 10% !important;
+    }
+
+    /* xl */
+    @media screen and (min-width: 1200px) {
+
+        padding: 0 15% !important;
+    }
+
+    /* xxl */
+    @media screen and (min-width: 1400px) {
+
+        padding: 0 20% !important;
+    }
 }
 
 .formato{
