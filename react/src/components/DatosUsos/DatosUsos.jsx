@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import CrearUsos from '../CrearUsos/CrearUsos';
 import UpdateUso from '../UpdateUso/UpdateUso';
 
-import { useCrearUso, useActualizarUso } from '../../hooks/useUso';
+import { useCrearUso, useActualizarUso, useGetUsos } from '../../hooks/useUso';
 import { useAuth } from '../../hooks/useAuth';
 import { useGetTrabajador } from '../../hooks/useTrabajador';
 import { useGetUser } from '../../hooks/useUser';
@@ -18,9 +18,23 @@ const DatosUsos = () => {
 
     const { crearUso, cargando: cargandoCrearUso } = useCrearUso();
     const { actualizarUso, cargando: cargandoActualizarUso } = useActualizarUso();
+    const { usos: datosUsos, cargando: cargandoGetUsos } = useGetUsos();
 
     const [usando, setUsando] = useState(false);
     const [idUsando, setIdUsando] = useState('');
+
+    function obtenerUsosSinTerminar() {
+
+        return datosUsos
+            .filter((uso) => uso.hora_fin === null)
+            .map((uso) => (
+                <tr>
+                    <td>{uso.trabajador.nombre} {uso.trabajador.apellidos}</td>
+                    <td>{uso.equipo.nombre}</td>
+                    <td>{uso.fecha_uso} {uso.hora_inicio}</td>
+                </tr>
+            ));
+    }
 
     function encontrarTrabajadorConUso() {
 
@@ -40,17 +54,6 @@ const DatosUsos = () => {
     }
 
     useEffect(encontrarTrabajadorConUso, [trabajador]);
-
-    const usos = [
-        { trabajador: 'Raul Rodriguez', equipo: 'Tractor #1', fecha: '14/02/2015 08:15' },
-        { trabajador: 'Isidro Ibarra', equipo: 'Tractor #1', fecha: '14/02/2015 08:15' },
-        { trabajador: 'Maria Dolores', equipo: 'Tractor #1', fecha: '14/02/2015 08:15' },
-        { trabajador: 'Alejandro Nortes', equipo: 'Tractor #1', fecha: '14/02/2015 08:15' },
-        { trabajador: 'Raul Rodriguez', equipo: 'Tractor #1', fecha: '14/02/2015 08:15' },
-        { trabajador: 'Isidro Ibarra', equipo: 'Tractor #1', fecha: '14/02/2015 08:15' },
-        { trabajador: 'Maria Dolores', equipo: 'Tractor #1', fecha: '14/02/2015 08:15' },
-        { trabajador: 'Alejandro Nortes', equipo: 'Tractor #1', fecha: '14/02/2015 08:15' },
-    ];
 
     const manejarCrearUso = async (nuevoUso) => {
 
@@ -112,24 +115,20 @@ const DatosUsos = () => {
                     </div>
 
                     {/* Tabla debajo del dropdown */}
-                    <table className='table mb-5'>
-                        <thead>
-                            <tr>
-                                <th>Trabajador</th>
-                                <th>Equipo</th>
-                                <th>Fecha</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {usos.map((uso, index) => (
-                                <tr key={index}>
-                                    <td>{uso.trabajador}</td>
-                                    <td>{uso.equipo}</td>
-                                    <td>{uso.fecha}</td>
+                    <div className='tabla-wrapper'>
+                        <table className='table mb-5'>
+                            <thead>
+                                <tr>
+                                    <th>Trabajador</th>
+                                    <th>Equipo</th>
+                                    <th>Fecha</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {cargandoGetUsos ? 'cargando' : obtenerUsosSinTerminar()}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
