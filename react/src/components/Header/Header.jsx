@@ -10,7 +10,7 @@ const Header = () => {
         <nav className="row cabecera">
 
             <div className="col-12 col-sm-6 d-sm-flex justify-content-start">
-                <Link className="navbar-brand" href="#"><LogoZapatero></LogoZapatero></Link>
+                <Link className="navbar-brand" to="/inicio"><LogoZapatero></LogoZapatero></Link>
             </div>
 
             <div className="col-12 col-sm-6 d-flex justify-content-center justify-content-sm-end usuario-alertas">
@@ -43,7 +43,7 @@ const Header = () => {
                                 <Link className="nav-link" to="/movimientos">Movimientos</Link>
                             </li>
                             <li className="nav-item nav-item-menu">
-                                <Link className="nav-link" to="/historial">Historial</Link>
+                                <Link className="nav-link" to="/usos">Usos</Link>
                             </li>
                             <li className="nav-item nav-item-menu">
                                 <Link className="nav-link" to="/incidencias">Incidencias</Link>

@@ -11,7 +11,7 @@ import Inicio from './pages/Inicio/Inicio';
 import Trabajadores from './pages/Trabajadores/Trabajadores';
 import Equipos from './pages/Equipos/Equipos';
 import Movimientos from './pages/Movimientos/Movimientos';
-import Historial from './pages/Historial/Historial';
+import Usos from './pages/Usos/Usos';
 import Incidencias from './pages/Incidencias/Incidencias';
 import CrearTrabajadores from './pages/CrearTrabajadores/CrearTrabajadores';
 import CrearEquipos from './pages/CrearEquipos/CrearEquipos';
@@ -47,7 +47,7 @@ const App = () => {
         { path: '/trabajadores', element: <ProtectedRoute element={<Trabajadores />} isAuthenticated={isAuthenticated} /> },
         { path: '/equipos', element: <ProtectedRoute element={<Equipos />} isAuthenticated={isAuthenticated} /> },
         { path: '/movimientos', element: <ProtectedRoute element={<Movimientos />} isAuthenticated={isAuthenticated} /> },
-        { path: '/historial', element: <ProtectedRoute element={<Historial />} isAuthenticated={isAuthenticated} /> },
+        { path: '/usos', element: <ProtectedRoute element={<Usos />} isAuthenticated={isAuthenticated} /> },
         { path: '/incidencias', element: <ProtectedRoute element={<Incidencias />} isAuthenticated={isAuthenticated} /> },
         { path: '/trabajadores/crear', element: <ProtectedRoute element={<CrearTrabajadores />} isAuthenticated={isAuthenticated} /> },
         { path: '/equipos/crear', element: <ProtectedRoute element={<CrearEquipos />} isAuthenticated={isAuthenticated} /> },
