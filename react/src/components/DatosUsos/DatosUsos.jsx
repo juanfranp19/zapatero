@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import AjaxLoader from '../AjaxLoader/AjaxLoader'
 import CrearUsos from '../CrearUsos/CrearUsos';
 import UpdateUso from '../UpdateUso/UpdateUso';
 
@@ -117,16 +118,24 @@ const DatosUsos = () => {
                     {/* Tabla debajo del dropdown */}
                     <div className='tabla-wrapper'>
                         <table className='table mb-5'>
-                            <thead>
-                                <tr>
-                                    <th>Trabajador</th>
-                                    <th>Equipo</th>
-                                    <th>Fecha</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {cargandoGetUsos ? 'cargando' : obtenerUsosSinTerminar()}
-                            </tbody>
+                            {cargandoGetUsos
+                                ? <AjaxLoader />
+                                : (<>
+
+                                    <thead>
+                                        <tr>
+                                            <th>Trabajador</th>
+                                            <th>Equipo</th>
+                                            <th>Fecha</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {cargandoGetUsos ? '' : obtenerUsosSinTerminar()}
+                                    </tbody>
+
+                                </>)
+                            }
+
                         </table>
                     </div>
                 </div>
