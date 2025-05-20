@@ -19,6 +19,18 @@ class Movimiento extends Model
 
     // relaciones
 
+    public function equipo(): BelongsTo
+    {
+        return $this->belongsTo(Equipo::class);
+    }
+    public function sala_origen(): BelongsTo
+    {
+        return $this->belongsTo(Sala::class, 'origen');
+    }
+    public function sala_destino(): BelongsTo
+    {
+        return $this->belongsTo(Sala::class, 'destino');
+    }
     public function trabajador(): BelongsTo
     {
         return $this->belongsTo(Trabajador::class);
