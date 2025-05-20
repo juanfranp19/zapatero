@@ -1,5 +1,5 @@
 import React from 'react';
-import FiltrarUsuarios from "../../components/FiltrarUsuariosForm/FiltrarUsuariosForm.jsx";
+import FiltrarTrabajadores from "../../components/FiltrarTrabajadoresForm/FiltrarTrabajadoresForm.jsx";
 import { Link } from 'react-router-dom';  // para poner algun tipo de enlace
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs.jsx";
 import TituloPagina from "../../components/TituloPagina/TituloPagina.jsx";
@@ -16,7 +16,7 @@ const UsuariosPage = () => {
                 <span className="hidden-480"> Crear Trabajador </span>
             </Link>
 
-            <FiltrarUsuarios/>
+            <FiltrarTrabajadores/>
         </div>
     );
 };
