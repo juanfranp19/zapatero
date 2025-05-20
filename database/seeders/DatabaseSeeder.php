@@ -64,5 +64,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(MovimientosTableSeeder::class);
         $this->command->info("MovimientosTableSeeder ejecutado");
+
+        $this->call(AvisosUsersTableSeeder::class);
+        $this->command->info("AvisosUsersTableSeeder ejecutado");
     }
 }

@@ -19,6 +19,7 @@ class AvisoResource extends JsonResource
         // arrays de relaciones
         $user_array = $this->user;
         $equipo_array = $this->equipo;
+        $avisos_users_array = $this->avisos_users;
 
         // valores que sobran
         unset($avisos_array['user_id']);
@@ -27,6 +28,7 @@ class AvisoResource extends JsonResource
         return array_merge($avisos_array, [
             'user' => $user_array,
             'equipo' => $equipo_array,
+            'avisos_users' => $avisos_users_array,
         ]);
     }
 }

@@ -21,6 +21,7 @@ class UserResource extends JsonResource
         $comentarios_array = $this->comentarios;
         $trabajador_array = $this->trabajador;
         $rol_array = $this->rol;
+        $avisos_users_array = $this->avisos_users;
 
         // valores que sobran
         if (count($avisos_array) != 0)      foreach ($avisos_array as $key)         unset($key['user_id']);
@@ -35,6 +36,7 @@ class UserResource extends JsonResource
             'comentarios' => $comentarios_array,
             'trabajador' => $trabajador_array,
             'rol' => $rol_array,
+            'avisos_users' => $avisos_users_array,
         ]);
     }
 }

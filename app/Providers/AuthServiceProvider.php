@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Acceso;
+use App\Models\Aviso;
 use App\Models\Comentario;
 use App\Models\Movimiento;
 use App\Models\Rol;
@@ -12,6 +13,7 @@ use App\Models\Trabajador;
 use App\Models\User;
 use App\Models\Uso;
 use App\Policies\AccesoPolicy;
+use App\Policies\AvisoPolicy;
 use App\Policies\ComentarioPolicy;
 use App\Policies\MovimientoPolicy;
 use App\Policies\RolPolicy;
@@ -64,6 +66,7 @@ class AuthServiceProvider extends ServiceProvider
         // policies
 
         Gate::policy(Acceso::class, AccesoPolicy::class);
+        Gate::policy(Aviso::class, AvisoPolicy::class);
         Gate::policy(Comentario::class, ComentarioPolicy::class);
         Gate::policy(Movimiento::class, MovimientoPolicy::class);
         Gate::policy(Rol::class, RolPolicy::class);

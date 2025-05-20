@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Aviso extends Model
 {
-    public $timestamps = false;
-
     protected $fillable = [
+        'comentario',
         'equipo_id',
         'user_id'
     ];
@@ -24,5 +24,12 @@ class Aviso extends Model
     public function equipo(): BelongsTo
     {
         return $this->BelongsTo(Equipo::class);
+    }
+
+    public function avisos_users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'avisos_users')
+            ->withTimestamps()
+            ->withPivot('leido');
     }
 }
