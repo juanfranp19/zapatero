@@ -128,3 +128,29 @@ export const putUso = async (data, id) => {
         throw error;
     }
 }
+
+export const getUsos = () => {
+
+    // token del local storage
+    const token = localStorage.getItem('token');
+
+    // petición a la API
+    return fetch(API_URL_USOS, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+        .then(response => {
+            // respuesta de la API
+            return response.json();
+        })
+        .then((data) => {
+            // los movimientos
+            return data.data;
+        })
+        .catch(error => {
+            console.error('Error en getUsos:', error);
+            return 0;
+        });
+}

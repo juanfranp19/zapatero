@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { postUso, getUso, putUso } from '../services/usoService';
+import { postUso, getUso, putUso, getUsos } from '../services/usoService';
 
 export const useCrearUso = () => {
 
@@ -97,4 +97,38 @@ export const useActualizarUso = () => {
     }
 
     return ({ actualizarUso, cargando });
+}
+
+export const useGetUsos = () => {
+
+    const [usos, setUsos] = useState([]);
+    const [cargando, setCargando] = useState(false);
+
+    const obtenerUsos = async () => {
+
+        // epieza a cargar
+        setCargando(true);
+
+        try {
+
+            // obtiene los datos del servicio
+            const data = await getUsos();
+            console.log(data);
+            // mete los datos del servicio al estado
+            setUsos(data);
+
+        } catch (error) {
+            console.error('error al obtener los usos:', error);
+        } finally {
+            // termina de cargar
+            setCargando(false);
+        }
+    }
+
+    // ejecuta la función
+    useEffect(() => {
+        obtenerUsos()
+    }, []);
+
+    return ({ usos, cargando });
 }
