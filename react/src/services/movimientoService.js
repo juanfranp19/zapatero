@@ -55,3 +55,29 @@ export const postMovimiento = async (data) => {
         throw error;
     }
 }
+
+export const getMovimientos = () => {
+
+    // token del local storage
+    const token = localStorage.getItem('token');
+
+    // petición a la API
+    return fetch(API_URL_MOVIMIENTOS, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+        .then(response => {
+            // respuesta de la API
+            return response.json();
+        })
+        .then((data) => {
+            // los movimientos
+            return data.data;
+        })
+        .catch(error => {
+            console.error('Error en getMovimientos:', error);
+            return 0;
+        });
+}
