@@ -19,9 +19,9 @@ class UsoController extends Controller
 
             Gate::authorize('viewAny', Uso::class);
 
-            // desde el recurso, saca todos los datos, ordenados por id y de 5 en 5
+            // desde el recurso, saca todos los datos, ordenados por id
             $usos = UsoResource::collection(
-                Uso::orderBy('id')->paginate(5)
+                Uso::orderBy('id')->get()
             );
 
         } catch (\Exception $e) {
