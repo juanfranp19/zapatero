@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AccesoController;
 use App\Http\Controllers\API\AvisoController;
+use App\Http\Controllers\API\AvisoUserController;
 use App\Http\Controllers\API\ComentarioController;
 use App\Http\Controllers\API\EquipoController;
 use App\Http\Controllers\API\IncidenciaController;
@@ -50,6 +51,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         Route::get('avisos', [AvisoController::class, 'index']);
         Route::get('avisos/{id}', [AvisoController::class, 'show']);
+
+        Route::put('avisos_users/{aviso_id}', [AvisoUserController::class, 'update']);
 
         Route::get('comentarios', [ComentarioController::class, 'index']);
         Route::get('comentarios/{id}', [ComentarioController::class, 'show']);

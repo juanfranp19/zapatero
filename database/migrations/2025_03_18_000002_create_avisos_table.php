@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('avisos', function (Blueprint $table) {
             $table->id();
+            $table->text('comentario');
             $table->unsignedBigInteger('equipo_id')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable(); // nullable para que el observer pueda asignar el user_id
+            $table->timestamps();
 
-            $table->unique(['equipo_id','user_id'], 'UNQ_Aviso_0');
+            //$table->unique(['equipo_id','user_id'], 'UNQ_Aviso_0');
 
             //$table->foreign('equipo_id')->references('id')->on('equipos')->onDelete('cascade');
             //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

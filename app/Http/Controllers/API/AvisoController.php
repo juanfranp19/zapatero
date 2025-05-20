@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\AvisoResource;
 use App\Models\Aviso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AvisoController extends Controller
 {
@@ -15,6 +16,8 @@ class AvisoController extends Controller
     public function index()
     {
         try {
+
+            Gate::authorize('viewAny', Aviso::class);
 
             // desde el recurso, saca todos los datos de avisos, ordenador por id y de 5 en 5
             $avisos = AvisoResource::collection(
@@ -35,6 +38,8 @@ class AvisoController extends Controller
     {
         try {
 
+            Gate::authorize('create', Aviso::class);
+
             // obtiene el contenido del json y lo transforma a array asociativo
             $aviso = json_decode($request->getContent(), true);
 
@@ -54,6 +59,8 @@ class AvisoController extends Controller
      */
     public function show($id)
     {
+        Gate::authorize('view', Aviso::class);
+
         // encuentra el modelo
         $aviso = Aviso::findOrFail($id);
 
@@ -71,6 +78,8 @@ class AvisoController extends Controller
             // encuentra el modelo
             $aviso = Aviso::find($id);
 
+            Gate::authorize('update', [Aviso::class, $aviso]);
+
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -79,13 +88,15 @@ class AvisoController extends Controller
 
             // verifica que se encuentren los campos
             $request->validate([
-                'equipo_id' => 'required',
-                'user_id' => 'required'
+                'comentario' => 'required',
+                //'equipo_id' => 'required',
+                //'user_id' => 'required'
             ]);
 
             // los actualiza
+            $aviso->comentario = $request->input('comentario');
             $aviso->equipo_id = $request->input('equipo_id');
-            $aviso->user_id = $request->input('user_id');
+            //$ user_id lo gestiona el observer
             $aviso->save();
 
             // lo devuelve mediante el recurso
@@ -103,6 +114,8 @@ class AvisoController extends Controller
     {
         // encuentra el modelo
         $aviso = Aviso::find($id);
+
+        Gate::authorize('delete', [Aviso::class, $aviso]);
 
         if ($aviso) {
 
