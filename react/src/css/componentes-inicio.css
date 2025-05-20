@@ -42,6 +42,12 @@
     line-height: 27px;
 }
 
+.componente-inicio .tabla-wrapper {
+    /* scroll vertial en la tabla de usos */
+    max-height: 500px;
+    overflow-y: auto;
+}
+
 .componente-inicio table thead th {
     font-weight: 600;
     color: #93a2a9;
