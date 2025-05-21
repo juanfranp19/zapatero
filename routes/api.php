@@ -29,6 +29,9 @@ use Tqdev\PhpCrudApi\Config\Config;
 
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::post('accesos', [AccesoController::class, 'store']);
+Route::put('accesos', [AccesoController::class, 'update']);
+
 /**
  *  para autenticados
  */
@@ -113,8 +116,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
          */
         Route::middleware([CheckAdminGate::class])->group(function () {
 
-            Route::post('accesos', [AccesoController::class, 'store']);
-            Route::put('accesos/{id}', [AccesoController::class, 'update']);
+
             Route::delete('accesos/{id}', [AccesoController::class, 'destroy']);
 
             Route::post('avisos', [AvisoController::class, 'store']);

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AccesoResource;
 use App\Models\Acceso;
+use App\Models\Trabajador;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 
 class AccesoController extends Controller
 {
@@ -38,7 +40,7 @@ class AccesoController extends Controller
     {
         try {
 
-            Gate::authorize('create', Acceso::class);
+            //Gate::authorize('create', Acceso::class);
 
             // obtiene el contenido del json y lo transforma a array asociativo
             $acceso = json_decode($request->getContent(), true);
@@ -77,30 +79,37 @@ class AccesoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request /*, $id*/)
     {
         try {
 
-            Gate::authorize('update', Acceso::class);
+            //Gate::authorize('update', Acceso::class);
 
             // encuentra el modelo
-            $acceso = Acceso::find($id);
+            $trabajador = Trabajador::find($request->trabajador_id);
+
+            // encuentra el acceso que le falta por salir al trabajador que envia la request
+            $acceso = Acceso::where('trabajador_id', $request->trabajador_id)
+                ->whereNull('fecha_salida')
+                ->first();
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        if ($acceso) {
+        if ($trabajador && $acceso) {
 
             // verifica que se encuentren los campos
             $request->validate([
-                'fecha_entrada' => 'required',
+                //'fecha_entrada' => 'required',
                 'fecha_salida' => 'required',
                 'trabajador_id' => 'required'
             ]);
 
+            Log::info($acceso);
+
             // los actualiza
-            $acceso->fecha_entrada = $request->input('fecha_entrada');
+            //$acceso->fecha_entrada = $request->input('fecha_entrada');
             $acceso->fecha_salida = $request->input('fecha_salida');
             $acceso->trabajador_id = $request->input('trabajador_id');
             $acceso->save();
@@ -109,7 +118,7 @@ class AccesoController extends Controller
             return response()->json(new AccesoResource($acceso), 200);
 
         } else {
-            return response()->json(['message' => 'Acceso no encontrado'], 404);
+            return response()->json(['message' => 'Imposible salir sin haber entrado'], 404);
         }
     }
 

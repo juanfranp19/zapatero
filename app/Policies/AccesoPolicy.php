@@ -37,10 +37,9 @@ class AccesoPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user): bool
+    public function update(): bool
     {
-        // admins
-        return Gate::allows('isAdmin', $user);
+        return true;
     }
 
     /**
