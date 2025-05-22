@@ -12,13 +12,16 @@ const FiltrarEquiposForm = () => {
     const STORAGE_IMAGEN_URL = `${API_URL}/storage/public/equipos/imagen/`;
     const STORAGE_DESCRIPCION_URL = `${API_URL}/storage/public/equipos/descripcion/`;
 
+    // Ordenar los equipos por ID de forma ascendente
+    const equiposOrdenados = equipos.slice().sort((a, b) => a.id - b.id);
+
     // Lógica para paginación
     const indexOfLastEquipo = currentPage * itemsPerPage;
     const indexOfFirstEquipo = indexOfLastEquipo - itemsPerPage;
-    const currentEquipos = equipos.slice(indexOfFirstEquipo, indexOfLastEquipo);
+    const currentEquipos = equiposOrdenados.slice(indexOfFirstEquipo, indexOfLastEquipo);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-    const totalPages = Math.ceil(equipos.length / itemsPerPage);
+    const totalPages = Math.ceil(equiposOrdenados.length / itemsPerPage);
 
     const rangeSize = 10;
     const startPage = Math.floor((currentPage - 1) / rangeSize) * rangeSize + 1;
@@ -30,11 +33,6 @@ const FiltrarEquiposForm = () => {
                 <table className="table table-striped table-bordered table-hover dataTable no-footer" aria-describedby="datatable_orders_info">
                     <thead>
                         <tr role="row" className="heading">
-                            <th width="2%">
-                                <div className="checker">
-                                    <span><input type="checkbox" className="group-checkable" /></span>
-                                </div>
-                            </th>
                             <th width="5%">ID&nbsp;#</th>
                             <th width="15%">Nombre</th>
                             <th width="10%">Tipo</th>
@@ -58,11 +56,6 @@ const FiltrarEquiposForm = () => {
                         ) : (
                             currentEquipos.map((equipo) => (
                                 <tr key={equipo.id}>
-                                    <td>
-                                        <div className="checker">
-                                            <span><input type="checkbox" className="group-checkable" /></span>
-                                        </div>
-                                    </td>
                                     <td>{equipo.id}</td>
                                     <td>{equipo.nombre}</td>
                                     <td>{equipo.tipo?.nombre || 'N/A'}</td>

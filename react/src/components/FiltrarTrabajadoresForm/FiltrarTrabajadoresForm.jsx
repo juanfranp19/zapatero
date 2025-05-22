@@ -31,9 +31,7 @@ const FiltrarUsuariosForm = () => {
                     <table className="table table-striped table-bordered table-hover" id="datatable_orders">
                         <thead>
                             <tr className="heading">
-                                <th width="2%">
-                                    <div className="checker"><span><input type="checkbox" className="group-checkable" /></span></div>
-                                </th>
+
                                 <th width="5%">Trabajador</th>
                                 <th width="15%">Último Acceso</th>
                                 <th width="15%">Nombre</th>
@@ -47,9 +45,7 @@ const FiltrarUsuariosForm = () => {
                         <tbody>
                             {trabajadores.map((trabajador) => (
                                 <tr key={trabajador.id}>
-                                    <td>
-                                        <div className="checker"><span><input type="checkbox" /></span></div>
-                                    </td>
+
                                     <td>{trabajador.id}</td>
                                     <td>{getUltimoAcceso(trabajador.accesos)}</td>
                                     <td>{trabajador.nombre} {trabajador.apellidos}</td>

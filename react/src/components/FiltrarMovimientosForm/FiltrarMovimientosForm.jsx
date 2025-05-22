@@ -16,13 +16,6 @@ const FiltrarMovimientosForm = () => {
                 >
                     <thead>
                         <tr role="row" className="heading">
-                            <th width="2%" className="sorting_disabled" rowSpan="1" colSpan="1">
-                                <div className="checker">
-                                    <span>
-                                        <input type="checkbox" className="group-checkable" />
-                                    </span>
-                                </div>
-                            </th>
                             <th width="5%">ID</th>
                             <th width="15%">Equipo</th>
                             <th width="15%">Trabajador</th>
@@ -40,11 +33,6 @@ const FiltrarMovimientosForm = () => {
                         ) : (
                             movimientos.map((movimiento) => (
                                 <tr key={movimiento.id}>
-                                    <td>
-                                        <div className="checker">
-                                            <span><input type="checkbox" className="group-checkable" /></span>
-                                        </div>
-                                    </td>
                                     <td>{movimiento.id}</td>
                                     <td>{movimiento.equipo ? movimiento.equipo.nombre : 'N/A'}</td>
                                     <td>

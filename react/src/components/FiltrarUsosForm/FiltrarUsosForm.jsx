@@ -16,16 +16,19 @@ const FiltrarUsosForm = () => {
         uso.hora_fin !== null
     );
 
+    // Ordenar de forma descendente por ID
+    const filteredUsosSorted = filteredUsos.slice().sort((a, b) => b.id - a.id);
+
     // Lógica para paginación
     const indexOfLastUso = currentPage * itemsPerPage;
     const indexOfFirstUso = indexOfLastUso - itemsPerPage;
-    const currentUsos = filteredUsos.slice(indexOfFirstUso, indexOfLastUso);
+    const currentUsos = filteredUsosSorted.slice(indexOfFirstUso, indexOfLastUso);
 
     // Cambiar página
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     // Calcular el número total de páginas
-    const totalPages = Math.ceil(filteredUsos.length / itemsPerPage);
+    const totalPages = Math.ceil(filteredUsosSorted.length / itemsPerPage);
 
     // Lógica para el rango de botones de paginación
     const rangeSize = 10;
@@ -43,13 +46,6 @@ const FiltrarUsosForm = () => {
             <table className="table table-striped table-bordered table-hover" id="datatable_orders">
                 <thead>
                     <tr role="row" className="heading">
-                        <th width="2%">
-                            <div className="checker">
-                                <span>
-                                    <input type="checkbox" className="group-checkable" />
-                                </span>
-                            </div>
-                        </th>
                         <th width="5%">ID</th>
                         <th width="15%">Equipo</th>
                         <th width="15%">Usuario</th>
@@ -67,11 +63,6 @@ const FiltrarUsosForm = () => {
                     ) : (
                         currentUsos.map((uso) => (
                             <tr key={uso.id}>
-                                <td>
-                                    <div className="checker">
-                                        <span><input type="checkbox" className="group-checkable" /></span>
-                                    </div>
-                                </td>
                                 <td>{uso.id}</td>
                                 <td>{uso.equipo ? uso.equipo.nombre : 'N/A'}</td>
                                 <td>
