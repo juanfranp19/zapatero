@@ -1,0 +1,28 @@
+.label-warning {
+    background-color: #dfba49;
+    color: white;
+}
+
+.label-warning[href]:hover,
+.label-warning[href]:focus {
+    background-color: #c29d0b;
+}
+
+
+.label.label-icon {
+    padding: 4px 0px 4px 4px;
+    margin-right: 2px;
+    text-align: center !important;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.label.label-icon>i {
+    font-size: 12px;
+    text-align: center !important;
+}
+
+.label.label-sm {
+    font-size: 13px;
+    padding: 2px 5px 2px 5px;
+}

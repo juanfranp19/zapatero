@@ -16,11 +16,20 @@
 }
 
 .dropdownalertas {
-    text-align: right;
-}
-
-.dropdownalertas {
     margin: 0 10px;
     display: flex;
+    text-align: right;
     align-items: center;
+}
+
+.dropdownalertas li {
+    color: var(--fondoPagina);
+}
+
+.dropdown-menu {
+    padding: 10px;
+}
+
+.dropdown-menu a {
+    text-decoration: none;
 }

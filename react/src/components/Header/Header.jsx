@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import DropdownAlertas from "../DropdownAlertas/DropdownAlertas";
 import DropdownUsuario from "../DropdownUsuario/DropdownUsuario";
 import LogoZapatero from "../LogoZapatero/LogoZapatero";
@@ -10,7 +10,7 @@ const Header = () => {
         <nav className="row cabecera">
 
             <div className="col-12 col-sm-6 d-sm-flex justify-content-start">
-                <Link className="navbar-brand" to="/inicio"><LogoZapatero></LogoZapatero></Link>
+                <NavLink className="navbar-brand" to="/inicio"><LogoZapatero></LogoZapatero></NavLink>
             </div>
 
             <div className="col-12 col-sm-6 d-flex justify-content-center justify-content-sm-end usuario-alertas">
@@ -28,25 +28,25 @@ const Header = () => {
                     <div className="collapse navbar-collapse " id="collapsibleNavbar">
                         <ul className="navbar-nav">
                             <li className="nav-item nav-item-menu">
-                                <Link className="nav-link" to="/inicio">Inicio</Link>
+                                <NavLink className="nav-link" to="/inicio">Inicio</NavLink>
                             </li>
                             <li className="nav-item nav-item-menu">
-                                <Link className="nav-link" to="/mapa">Mapa</Link>
+                                <NavLink className="nav-link" to="/mapa">Mapa</NavLink>
                             </li>
                             <li className="nav-item nav-item-menu">
-                                <Link className="nav-link" to="/trabajadores">Trabajadores</Link>
+                                <NavLink className="nav-link" to="/trabajadores">Trabajadores</NavLink>
                             </li>
                             <li className="nav-item nav-item-menu">
-                                <Link className="nav-link" to="/equipos">Equipos</Link>
+                                <NavLink className="nav-link" to="/equipos">Equipos</NavLink>
                             </li>
                             <li className="nav-item nav-item-menu">
-                                <Link className="nav-link" to="/movimientos">Movimientos</Link>
+                                <NavLink className="nav-link" to="/movimientos">Movimientos</NavLink>
                             </li>
                             <li className="nav-item nav-item-menu">
-                                <Link className="nav-link" to="/usos">Usos</Link>
+                                <NavLink className="nav-link" to="/usos">Usos</NavLink>
                             </li>
                             <li className="nav-item nav-item-menu">
-                                <Link className="nav-link" to="/incidencias">Incidencias</Link>
+                                <NavLink className="nav-link" to="/incidencias">Incidencias</NavLink>
                             </li>
                         </ul>
                     </div>

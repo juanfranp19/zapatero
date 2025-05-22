@@ -80,8 +80,11 @@
         background-color: var(--colorItemsMenu);
     }
 
-    .nav-item-menu .nav-link:focus {
+
+    .nav-item-menu .nav-link:focus,
+    /* para que los estilos de NavLink no afecten */
+    .navbar-nav .nav-link.active {
         color: var(--colorItemsMenu);
-        background-color: var(--hoverMenu);
+        background-color: var(--hoverMenu) !important;
     }
 }

@@ -1,0 +1,14 @@
+.aviso-sin-leer {
+    color: var(--fondoPagina);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.aviso-sin-leer a {
+    /* para que no afecte a los estilos predefinidos de Link */
+    color: inherit;
+}
+
+.aviso-sin-leer:hover {
+    background-color: var(--azul);
+}

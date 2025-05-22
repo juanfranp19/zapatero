@@ -1,0 +1,18 @@
+.button-leido {
+    background-color: transparent;
+    border: none;
+    margin-left: 20px;
+}
+
+.button-leido i {
+    color: var(--fondoPagina);
+}
+
+.button-leido:hover {
+    border-radius: 10px;
+    background-color: var(--fondoDropdown);
+}
+
+/* .button-leido:hover i {
+    color: var(--rojo);
+} */
