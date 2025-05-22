@@ -1,9 +1,9 @@
 const AjaxLoader = () => {
 
     return (
-        <div class='d-flex justify-content-center'>
-            <div class='spinner-border text-success' role='status'>
-                <span class='visually-hidden'>Cargando...</span>
+        <div className='d-flex justify-content-center'>
+            <div className='spinner-border text-success' role='status'>
+                <span className='visually-hidden'>Cargando...</span>
             </div>
         </div>
     );

@@ -29,7 +29,7 @@ const DatosUsos = () => {
         return datosUsos
             .filter((uso) => uso.hora_fin === null)
             .map((uso) => (
-                <tr>
+                <tr key={uso.id}>
                     <td>{uso.trabajador.nombre} {uso.trabajador.apellidos}</td>
                     <td>{uso.equipo.nombre}</td>
                     <td>{uso.fecha_uso} {uso.hora_inicio}</td>
@@ -119,9 +119,15 @@ const DatosUsos = () => {
                     <div className='tabla-wrapper'>
                         <table className='table mb-5'>
                             {cargandoGetUsos
-                                ? <AjaxLoader />
-                                : (<>
-
+                                ? (
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <AjaxLoader />
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                ) : (<>
                                     <thead>
                                         <tr>
                                             <th>Trabajador</th>
@@ -132,7 +138,6 @@ const DatosUsos = () => {
                                     <tbody>
                                         {cargandoGetUsos ? '' : obtenerUsosSinTerminar()}
                                     </tbody>
-
                                 </>)
                             }
 
