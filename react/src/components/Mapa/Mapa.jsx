@@ -16,6 +16,14 @@ const API_URL = import.meta.env.VITE_API_URL;
 // Variables para llamar al storage de las imagenes
 const STORAGE_URL = API_URL + '/storage/public/equipos/imagen/';
 
+// mapa imagenes estaticas
+const imagenesEstaticasPorSala = {
+    1: cocina,
+    8: aseoscomunes,
+    // Agrega más si necesitas
+};
+
+
 const Mapa = () => {
 
     // Estado para controlar si se muestra el popup
@@ -104,10 +112,10 @@ const Mapa = () => {
 
                         {/* muestra cada equipo */}
                         {/* Verificamos si la sala seleccionada es Aseo 1*/}
-                        {(salaIdSeleccionada === 8 || salaIdSeleccionada === 1) && (
+                        {imagenesEstaticasPorSala[salaIdSeleccionada] && (
                             <img
-                                src={salaIdSeleccionada === 8 ? aseoscomunes : cocina}
-                                alt={salaIdSeleccionada === 8 ? 'Aseo 1' : 'Cocina'}
+                                src={imagenesEstaticasPorSala[salaIdSeleccionada]}
+                                alt={`Sala ${popupContent}`}
                                 className='mapa-equipo-imagen'
                             />
                         )}
@@ -128,8 +136,6 @@ const Mapa = () => {
                                 </Link>
                             </div>
                         ))}
-
-
                     </div>
                 </div>
             )}
