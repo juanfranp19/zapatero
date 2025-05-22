@@ -104,28 +104,31 @@ const Mapa = () => {
 
                         {/* muestra cada equipo */}
                         {/* Verificamos si la sala seleccionada es Aseo 1*/}
-                        {salaIdSeleccionada === 8 ? ( // Aseo 1
-                            <img src={aseoscomunes} alt='Aseo 1' className='mapa-equipo-imagen' />
-                        ) : salaIdSeleccionada === 1 ? ( // Cocina
-                            <img src={cocina} alt='Cocina' className='mapa-equipo-imagen' />
-                        ) : (
-                            popupEquipos.map((equipo) => (
-                                <div key={equipo.id} className='mapa-equipo'>
-                                    <Link to={`/mapa/detalles-maquina/${equipo.id}`}
-                                        className='mapa-link'
-                                        data-tooltip-id='mapa-tooltip'
-                                        data-tooltip-content={equipo.nombre}
-                                    >
-                                        <img
-                                            src={STORAGE_URL + equipo.imagen}
-                                            alt={`Imagen ${equipo.id}`}
-                                            className='mapa-equipo-imagen'
-                                        />
-                                        <Tooltip id='mapa-tooltip' />
-                                    </Link>
-                                </div>
-                            ))
+                        {(salaIdSeleccionada === 8 || salaIdSeleccionada === 1) && (
+                            <img
+                                src={salaIdSeleccionada === 8 ? aseoscomunes : cocina}
+                                alt={salaIdSeleccionada === 8 ? 'Aseo 1' : 'Cocina'}
+                                className='mapa-equipo-imagen'
+                            />
                         )}
+
+                        {popupEquipos.map((equipo) => (
+                            <div key={equipo.id} className='mapa-equipo'>
+                                <Link to={`/mapa/detalles-maquina/${equipo.id}`}
+                                    className='mapa-link'
+                                    data-tooltip-id='mapa-tooltip'
+                                    data-tooltip-content={equipo.nombre}
+                                >
+                                    <img
+                                        src={STORAGE_URL + equipo.imagen}
+                                        alt={`Imagen ${equipo.id}`}
+                                        className='mapa-equipo-imagen'
+                                    />
+                                    <Tooltip id='mapa-tooltip' />
+                                </Link>
+                            </div>
+                        ))}
+
 
                     </div>
                 </div>
