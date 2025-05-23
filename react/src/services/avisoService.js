@@ -1,91 +1,108 @@
-const API_URL = import.meta.env.VITE_API_URL;
+import { Notyf } from 'notyf';
 
-// variable para hacer mas facil la llamada a avisos desde la api
+const API_URL = import.meta.env.VITE_API_URL;
 const API_URL_AVISOS = API_URL + '/api/v1/avisos';
 
+// se inicializa para que aparezcan los mensajes arriba en el centro de la pantalla
+const notyf = new Notyf({
+    position: {
+        x: 'center',
+        y: 'top'
+    }
+});
+
 export const getAvisos = () => {
-    // Realiza una solicitud GET a avisos
-    return fetch(API_URL_AVISOS)
+
+    // token del local storage
+    const token = localStorage.getItem('token');
+
+    // petición a la API
+    return fetch(API_URL_AVISOS, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
         .then(response => {
-            // Convierte la respuesta en formato JSON
-            const data = response.json();
-            return data;
+            // respuesta de la API
+            return response.json();
+        })
+        .then((data) => {
+            // los avisos
+            return data.data;
         })
         .catch(error => {
-            // Si ocurre un error, lo muestra por consola
             console.error('Error en getAvisos:', error);
             return 0;
         });
 }
 
-export const createAviso = (datosAviso) => {
-    // Realiza una solicitud POST para crear un nuevo aviso con los datos
-    return fetch(API_URL_AVISOS, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datosAviso), // Los datos del aviso
-    })
-        .then(response => {
-            // Convierte la respuesta en formato JSON
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            // Si ocurre un error, lo muestra por consola
-            console.error('Error en createAviso:', error);
-            return 0;
+export const putAviso = async (data, id) => {
+
+    const token = localStorage.getItem('token');
+
+    try {
+
+        // envía a la URL de usos los datos del aviso por método PUT
+        const response = await fetch(`${API_URL_AVISOS}/${id}`, {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
         });
+
+        // error que sale en pantalla si no se ha podido actualizar el aviso
+        if (!response.ok) {
+
+            const errorData = await response.json();
+            console.error('Error del servidor:', errorData);
+
+            //mensajes del observer
+            notyf.error(errorData.error);
+
+            return 0;
+
+        } else {
+
+            // coge la respuesta de la API
+            const data = await response.json();
+
+            notyf.success('Aviso actualizado con éxito.');
+
+            console.log('aviso actualizado: ', data);
+            return data;
+        }
+
+    } catch (error) {
+
+        notyf.error('Error al actualizar el aviso.');
+        console.error('error al actualizar aviso:', error.message);
+        throw error;
+    }
 }
 
-export const showAviso = (avisoId) => {
-    // Realiza una solicitud GET de un aviso específico usando el avisoId
-    return fetch(`${API_URL_AVISOS}/${avisoId}`)
-        .then(response => {
-            // Convierte la respuesta en formato JSON
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            // Si ocurre un error, lo muestra por consola
-            console.error('Error en showAviso:', error);
-            return 0;
-        });
-}
+export const deleteAviso = (id) => {
 
-export const updateAviso = (avisoId, datosAviso) => {
-    // Realiza una solicitud PUT para actualizar un aviso específico usando el avisoId
-    return fetch(`${API_URL_AVISOS}/${avisoId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datosAviso), // Los nuevos datos del aviso
-    })
-        .then(response => {
-            // Convierte la respuesta en formato JSON
-            const data = response.json();
-            return data;
-        })
-        .catch(error => {
-            // Si ocurre un error, lo muestra por consola
-            console.error('Error en updateAviso:', error);
-            return 0;
-        });
-}
+    // token del local storage
+    const token = localStorage.getItem('token');
 
-export const deleteAviso = (avisoId) => {
-    // Realiza una solicitud DELETE para eliminar un aviso específico usando el avisoId
-    return fetch(`${API_URL_AVISOS}/${avisoId}`, {
+    // petición a la API
+    return fetch(`${API_URL_AVISOS}/${id}`, {
         method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
     })
         .then(response => {
-            // Si la eliminación es exitosa, devuelve un mensaje de éxito
-            return 'Aviso eliminado correctamente';
+            // respuesta de la API
+            notyf.success('Aviso eliminado correctamente.');
+            console.log(response);
+            return response.json();
         })
         .catch(error => {
-            // Si ocurre un error, lo muestra por consola
+            notyf.error('Error al eliminar el aviso.');
             console.error('Error en deleteAviso:', error);
             return 0;
         });
