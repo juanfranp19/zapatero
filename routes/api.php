@@ -54,6 +54,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         Route::get('avisos', [AvisoController::class, 'index']);
         Route::get('avisos/{id}', [AvisoController::class, 'show']);
+        Route::post('avisos', [AvisoController::class, 'store']);
+        Route::put('avisos/{id}', [AvisoController::class, 'update']);
+        Route::delete('avisos/{id}', [AvisoController::class, 'destroy']);
 
         Route::put('avisos_users/{aviso_id}', [AvisoUserController::class, 'update']);
 
@@ -119,9 +122,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
             Route::delete('accesos/{id}', [AccesoController::class, 'destroy']);
 
-            Route::post('avisos', [AvisoController::class, 'store']);
-            Route::put('avisos/{id}', [AvisoController::class, 'update']);
-            Route::delete('avisos/{id}', [AvisoController::class, 'destroy']);
+
 
             Route::post('comentarios', [ComentarioController::class, 'store']);
             Route::put('comentarios/{id}', [ComentarioController::class, 'update']);

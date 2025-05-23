@@ -19,9 +19,9 @@ class AvisoController extends Controller
 
             Gate::authorize('viewAny', Aviso::class);
 
-            // desde el recurso, saca todos los datos de avisos, ordenador por id y de 5 en 5
+            // desde el recurso, saca todos los datos de avisos, ordenador por id
             $avisos = AvisoResource::collection(
-                Aviso::orderBy('id')->paginate(5)
+                Aviso::orderBy('updated_at', 'desc')->get(),
             );
 
             return $avisos;
