@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('avisos', function (Blueprint $table) {
             $table->id();
             $table->text('comentario');
-            $table->unsignedBigInteger('equipo_id')->nullable();
+            $table->unsignedBigInteger('equipo_id');
             $table->unsignedBigInteger('user_id')->nullable(); // nullable para que el observer pueda asignar el user_id
             $table->timestamps();
 
