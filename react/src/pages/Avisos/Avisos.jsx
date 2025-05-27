@@ -5,6 +5,7 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.jsx';
 import TituloPagina from '../../components/TituloPagina/TituloPagina.jsx';
 
 import { useDeleteAviso, useActualizarAviso } from '../../hooks/useAviso.jsx';
+import { Link } from 'react-router-dom';
 
 const AvisosPage = () => {
 
@@ -45,6 +46,12 @@ const AvisosPage = () => {
         <div>
             <TituloPagina nombre='Avisos'/>
             <Breadcrumbs/>
+
+            {/* botón para crear aviso */}
+            <Link to="crear" className="btn btn-circle btn-default">
+                <i className="fa fa-plus"></i>
+                <span className="hidden-480"> Crear Aviso </span>
+            </Link>
 
             <FiltrarAvisosForm
                 manejarActualizarAviso={manejarActualizarAviso}

@@ -46,7 +46,7 @@ const ListaAlertasSinLeer = () => {
                     .filter((aviso) => !aviso?.pivot?.leido)
                     .map((aviso) => (
                         <li key={aviso.id} className='aviso-sin-leer'>
-                            <Link to='incidencias'>
+                            <Link to='avisos'>
                                 <IconoAvisos />
                                 {aviso.comentario}
                             </Link>
