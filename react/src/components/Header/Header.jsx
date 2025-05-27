@@ -4,7 +4,13 @@ import DropdownUsuario from "../DropdownUsuario/DropdownUsuario";
 import LogoZapatero from "../LogoZapatero/LogoZapatero";
 import "./Header.css";
 
+import { useAuth } from '../../hooks/useAuth';
+
 const Header = () => {
+
+    const { user } = useAuth();
+
+    const role = user?.rol?.nombre;
 
     return (
         <nav className="row cabecera">
@@ -34,7 +40,11 @@ const Header = () => {
                                 <NavLink className="nav-link" to="/mapa">Mapa</NavLink>
                             </li>
                             <li className="nav-item nav-item-menu">
-                                <NavLink className="nav-link" to="/trabajadores">Trabajadores</NavLink>
+                                {['admin'].includes(role) ? (
+                                    <NavLink className="nav-link disabled-link" to="/trabajadores">Trabajadores</NavLink>
+                                ) : (
+                                    <span className="nav-link" title='no tienes permisos'>Trabajadores</span>
+                                )}
                             </li>
                             <li className="nav-item nav-item-menu">
                                 <NavLink className="nav-link" to="/equipos">Equipos</NavLink>

@@ -1,15 +1,17 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
-const ProtectedRoute = ({ element, isAuthenticated, allowedRoles, userRole }) => {
+const ProtectedRoute = ({ element, allowedRoles }) => {
+    const { isAuthenticated, userRole } = useAuth();
   // Si no está autenticado, lo manda al login y puede enviar un mensaje o estado
   if (!isAuthenticated) {
-    return <Navigate to="/" replace state={{ from: 'protected', message: 'Por favor inicia sesión.' }} />;
+    return <Navigate to="/" replace />;
   }
 
   // Si se especifican roles y el rol del usuario no está permitido, también redirige
   if (allowedRoles && !allowedRoles.includes(userRole)) {
-    return <Navigate to="/inicio" replace state={{ message: 'No tienes permiso para acceder a esta página.' }} />;
+    return <Navigate to="/inicio" replace />;
   }
 
   return element;

@@ -31,8 +31,13 @@ const App = () => {
     return !!localStorage.getItem('token');
   });
 
-  const handleLogin = (status) => {
+  const [userRole, setUserRole] = useState(() => {
+    return localStorage.getItem('role') || null;
+  });
+
+  const handleLogin = (status, role) => {
     setIsAuthenticated(status);
+    setUserRole(role);
   };
 
   const router = createBrowserRouter([
@@ -44,7 +49,7 @@ const App = () => {
       element: <Layout />, // Componente que se renderiza para todas las rutas hijas
       children: [
         { path: '/inicio', element: <ProtectedRoute element={<Inicio />} isAuthenticated={isAuthenticated} /> },
-        { path: '/trabajadores', element: <ProtectedRoute element={<Trabajadores />} isAuthenticated={isAuthenticated} /> },
+        { path: '/trabajadores', element: <ProtectedRoute element={<Trabajadores />} allowedRoles={['admin']} /> },
         { path: '/equipos', element: <ProtectedRoute element={<Equipos />} isAuthenticated={isAuthenticated} /> },
         { path: '/movimientos', element: <ProtectedRoute element={<Movimientos />} isAuthenticated={isAuthenticated} /> },
         { path: '/usos', element: <ProtectedRoute element={<Usos />} isAuthenticated={isAuthenticated} /> },

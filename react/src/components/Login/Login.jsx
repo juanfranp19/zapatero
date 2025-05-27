@@ -30,7 +30,7 @@ const Login = ({ onLogin }) => {
             const result = await login(email, password);
 
             if (result.success) {
-                onLogin(true);  // Actualizamos el estado global de autenticación
+                onLogin(true, result.role);  // Actualizamos el estado global de autenticación
             } else {
                 setError(result.error);  // Aquí actualizamos el estado de error
             }
