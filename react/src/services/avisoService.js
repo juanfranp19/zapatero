@@ -37,6 +37,50 @@ export const getAvisos = () => {
         });
 }
 
+export const postAviso = async (data) => {
+
+    const token = localStorage.getItem('token');
+
+    try {
+
+        // envía a la URL de avisos los datos del aviso por método POST
+        const response = await fetch(API_URL_AVISOS, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(data),
+        });
+
+        // error que sale en pantalla si no se ha podido crear el aviso
+        if (!response.ok) {
+
+            const errorData = await response.json();
+            console.error('Error del servidor:', errorData);
+
+            notyf.error('Error al crear el aviso.');
+
+            return 0;
+
+        } else {
+
+            // coge la respuesta de la API
+            const data = await response.json();
+
+            notyf.success('Aviso creado con éxito.');
+
+            console.log('aviso creado: ', data);
+            return data;
+        }
+
+    } catch (error) {
+
+        notyf.error('Error al crear el aviso.');
+        console.error('error al crear aviso:', error.message);
+        throw error;
+    }
+}
+
 export const putAviso = async (data, id) => {
 
     const token = localStorage.getItem('token');

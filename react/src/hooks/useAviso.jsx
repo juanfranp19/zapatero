@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getAvisos, putAviso, deleteAviso } from '../services/avisoService';
+import { getAvisos, postAviso, putAviso, deleteAviso } from '../services/avisoService';
 
 export const useGetAvisos = () => {
 
@@ -33,6 +33,38 @@ export const useGetAvisos = () => {
     }, []);
 
     return ({ avisos, cargando });
+}
+
+export const useCrearAviso = () => {
+
+    const [cargando, setCargando] = useState(false);
+
+    const crearAviso = async (formData) => {
+
+        // empieza a cargar
+        setCargando(true);
+
+        try {
+
+            // recoge los datos devueltor por el servicio
+            const dataService = await postAviso(formData);
+
+            // devuelve los datos recibidos del servicio
+            return dataService;
+
+        } catch (error) {
+
+            console.error(error.message);
+            return 0;
+
+        } finally {
+
+            // termina la carga
+            setCargando(false);
+        }
+    }
+
+    return ({ crearAviso, cargando });
 }
 
 export const useActualizarAviso = () => {
