@@ -223,7 +223,7 @@ const FiltrarAvisosForm = (props) => {
                                                     // desabilitado para avisos que no ha creado el usuario auntenticado
                                                     disabled={user?.id !== aviso?.user?.id}
                                                 >
-                                                    <i class='bi bi-floppy' /> Guardar
+                                                    <i className='bi bi-floppy' /> Guardar
                                                 </button>
 
                                                 <button
@@ -252,7 +252,7 @@ const FiltrarAvisosForm = (props) => {
                                                     // desabilitado para avisos que no ha creado el usuario auntenticado y para modo editar
                                                     disabled={user?.id !== aviso?.user?.id || modoEditar}
                                                 >
-                                                    <i class='bi bi-trash3' /> Eliminar
+                                                    <i className='bi bi-trash3' /> Eliminar
                                                 </button>
 
                                             </>)
