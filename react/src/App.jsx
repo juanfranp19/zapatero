@@ -18,6 +18,7 @@ import CrearTrabajadores from './pages/CrearTrabajadores/CrearTrabajadores';
 import CrearEquipos from './pages/CrearEquipos/CrearEquipos';
 import CrearMovimientos from './pages/CrearMovimientos/CrearMovimientos';
 import Mapa from './pages/Mapa/Mapa';
+import MiPerfil from './pages/MiPerfil/MiPerfil';
 import DetallesMaquinaPage from './pages/DetallesMaquinaPage/DetallesMaquinaPage';
 import UsuarioHistorialPage from './pages/UsuarioHistorialPage/UsuarioHistorialPage';
 import UsuarioAccesosPage from './pages/UsuarioAccesosPage/UsuarioAccesosPage';
@@ -68,6 +69,7 @@ const App = () => {
                 { path: '/usuario-incidencias', element: <ProtectedRoute element={<UsuarioIncidenciasPage />} isAuthenticated={isAuthenticated} /> },
                 { path: '/usuario-movimientos', element: <ProtectedRoute element={<UsuarioMovimientosPage />} isAuthenticated={isAuthenticated} /> },
                 { path: '/usuario-usos', element: <ProtectedRoute element={<UsuarioUsosPage />} isAuthenticated={isAuthenticated} /> },
+                { path: '/mi-perfil', element: <ProtectedRoute element={<MiPerfil />} isAuthenticated={isAuthenticated} /> },
             ],
         },
         {
