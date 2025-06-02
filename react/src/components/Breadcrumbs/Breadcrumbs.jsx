@@ -23,7 +23,7 @@ const Breadcrumbs = ({ nombreFinal }) => {
         incidencias: 'Incidencias',
     };
 
-    const noLinkIfFollowedById = ['detalles-maquina'];
+    const noLinkIfFollowedById = ['detalles-maquina', 'detalles'];
 
     return (
         <nav aria-label="breadcrumb">

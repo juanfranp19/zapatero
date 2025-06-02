@@ -1,8 +1,10 @@
 import './FiltrarEquiposForm.css';
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useGetEquipos } from '../../hooks/useEquipo';
 
 const FiltrarEquiposForm = () => {
+
     const { equipos, cargando } = useGetEquipos();
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -77,9 +79,11 @@ const FiltrarEquiposForm = () => {
                                         ) : 'No hay nada'}
                                     </td>
                                     <td>
-                                        <a href="equipos-historial.html" className="btn btn-sm blue-dark btn-blue-dark">
-                                            <i className="fa fa-edit"></i> Detalles
-                                        </a>
+                                        <NavLink to={`detalles/${equipo.id}`}>
+                                            <button className="btn btn-sm blue-dark btn-blue-dark">
+                                                <i className="fa fa-edit"></i> Detalles
+                                            </button>
+                                        </NavLink>
                                     </td>
                                 </tr>
                             ))
